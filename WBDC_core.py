@@ -69,8 +69,8 @@ the SDI and SCK signals.
 The latch groups may be designated by their circuit name (LATCH1 and LATCH2)
 or their address (80 or 81).
 
-Latch Group 1
-~~~~~~~~~~~~~
+Latch Group 1 (Address 80)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 The feed switch pair is controlled by bit L1A0 (A0 on Latch 1)::
   0 for through
   1 for crossed-over
@@ -83,8 +83,8 @@ L1A5 controls the PLO switch::
   0 for 22 FHz
   1 for 24 GHz
 
-Latch Group 2
-~~~~~~~~~~~~~
+Latch Group 2 (Address 81)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 The I/Q to U/L converters are controlled by L2A0 through L2A7.  Each
 bit pair handles one converter.  So L2A0 and L2A1 control receiver 1
 pol 1 with this logic::
@@ -98,8 +98,8 @@ Monitoring
 Three latch groups are assigned to digital monitoring, that is, the program
 reads the latch states.
 
-Latch Group 2
-~~~~~~~~~~~~~
+Latch Group 2 (Address 82)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 Latch group 2 (L2A0 - L2A7) has a read address of 85. The switches directing
 signals to/from or around the I/Q->U/L hybrids have no tell-tales, so one
 simply reads the states of the control signals.
