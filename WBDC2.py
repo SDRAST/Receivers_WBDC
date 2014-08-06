@@ -10,6 +10,8 @@ from . import WBDC_base
 from .WBDC_core import WBDC_core
 from support import contains
 
+module_logger = logging.getLogger(__name__)
+
 class WBDC2(WBDC_core, Receiver):
   """
   Wideband Downconverter Mod 2
@@ -26,7 +28,7 @@ class WBDC2(WBDC_core, Receiver):
   'IF_names', the output port labels will be the above with either I1 or I2
   appended, in that order.
   """
-  bands      = [18, 20, 22, 24, 26]
+  bands      = ["18", "20", "22", "24", "26"]
 
   def __init__(self, name, inputs = None, output_names=None, active=True):
     """
@@ -44,17 +46,86 @@ class WBDC2(WBDC_core, Receiver):
     @param active : True is the FrontEnd instance is functional
     @type  active : bool
     """
-    WBDC_base.__init__(self, name, active=active, inputs=inputs,
+    WBDC_core.__init__(self, name, active=active, inputs=inputs,
                       output_names=output_names)
-    self.logger.debug("initializing %s", self)
+    self.logger = logging.getLogger(module_logger.name+".WBDC2")
+    self.logger.debug(" initializing %s", self)
     self.logger.info(" %s inputs: %s", self, str(self.inputs))
 
     self.data['bandwidth'] = 2e9 # Hz
-    self.logger.info(" %s outputs: %s", self, str(self.outputs))
+
+    # create transfer switch, which handles two pols
+    self.Xswitch = self.TransferSwitch(self, "WBDC transfer switch",
+                                       inputs=self.inputs,
+                                       output_names = WBDC_base.RF_names)
+
+    # This adds the method for actually controlling the switch
+    switchIDs = self.Xswitch.keys()
+    self.logger.debug(" Xswitch keys: %s", switchIDs)
+    for ID in switchIDs:
+      self.Xswitch[ID]._get_state = self.Xswitch.get_switch_state
+      self.logger.debug(" Xswitch %s state: %s",
+                        ID, self.Xswitch[ID].get_state())
+
+    rfs = WBDC_base.RF_names
+    rfs.sort()
+    self.rf_sec = {}
+    for rf in rfs:
+      index = rfs.index(rf)
+      rf_inputs = {}
+      outnames = []
+      for name in WBDC_base.pol_names:
+        pindex = WBDC_base.pol_names.index(name)
+        rf_inputs[rf+name] = self.Xswitch[name].outputs[rf+name]
+        for band in self.band_names:
+          outnames.append(rf+band+name)
+      self.logger.debug("WBDC_base.__init__: RF inputs is now %s", rf_inputs)
+      self.rf_sec[rf] = self.RFsection(self, rf, inputs = rf_inputs,
+                                       output_names=outnames)
+      self.logger.debug("WBDC_base.__init__: RF outputs is now %s",
+                        self.rf_sec[rf].outputs)
+                    
+    self.pol_sec = {}
+    for rf in rfs:
+      pol_inputs = OrderedDict(sorted(self.rf_sec[rf].outputs.items()))
+      self.logger.debug("WBDC_base.__init__: pol inputs is now %s",
+                          pol_inputs)
+      for band in WBDC2.bands:
+        psec_inputs = {}
+        for pol in WBDC_base.pol_names:
+          psec_inputs[rf+band+pol] = pol_inputs[rf+band+pol]
+        self.pol_sec[rf+band] = self.PolSection(self, rf+band,
+                                                inputs = psec_inputs)
+      self.logger.debug("WBDC_base.__init__: pol section %s outputs: %s",
+              self.pol_sec[rf+band].name, self.pol_sec[rf+band].outputs.keys())
+    pol_sec_names = self.pol_sec.keys()
+    self.logger.debug("WBDC_base.__init__: pol sections: %s", pol_sec_names)
+
+    self.DC = {}
+    for name in pol_sec_names:
+      for pol in WBDC_base.out_pols:
+        self.logger.debug(" making DCs for %s", name+pol)
+        self.logger.debug(" creating inputs for %s", name+pol)
+        dc_inputs = {name+pol: self.pol_sec[name].outputs[name+pol]}
+        self.DC[name+pol] = self.DownConv(self, name+pol,
+                                          inputs = dc_inputs)
+        self.DC[name+pol].set_IF_mode() # default is IQ
+        self.logger.debug(" DC %s created", self.DC[name+pol])
+    # report outputs
+    self.logger.info(" %s outputs: %s",
+                     self, str(self.outputs))
     self._update_self()
+    self.logger.debug(" initialized for %s", self.name)
+
+    # Report outputs
+    self.logger.info(" %s outputs: %s", self, str(self.outputs))
 
   def get_crossover(self):
+    """
+    Get the state of the beam cross-over switches
+    """
     keys = self.Xswitch.keys()
+    self.logger.debug("get_crossover: checking switches %s", keys)
     keys.sort()
     status = {}
     for key in keys:
@@ -67,6 +138,8 @@ class WBDC2(WBDC_core, Receiver):
     return self.get_pol_mode()
 
   def get_pol_mode(self):
+    """
+    """
     status = {}
     keys = self.pol_sec.keys()
     keys.sort()
@@ -90,8 +163,77 @@ class WBDC2(WBDC_core, Receiver):
     for key in self.DC.keys():
       modes[key] = self.DC[key].get_IF_mode()
     return modes
+    
+  class TransferSwitch(WBDC_core.TransferSwitch):
+    """
+    Beam to down-converter transfer switch
 
-  class DownConv(Receiver.DownConv):
+    There is one Switch object for each front-end polarization P1 and P2.
+
+    At some point this might become a general transfer switch class
+    """
+    def __init__(self, parent, name, inputs=None, output_names=None):
+      self.name = name
+      WBDC_core.TransferSwitch.__init__(self, parent, name, inputs=inputs,
+                                        output_names=output_names)
+      self.logger = logging.getLogger(parent.logger.name+".TransferSwitch")
+      self.logger.debug(" initializing %s", self)
+      self.logger.info(" %s inputs: %s", self, str(self.inputs))
+      self.parent = parent
+
+  class RFsection(WBDC_core.RFsection):
+    """
+    """
+    def __init__(self, parent, name, inputs=None, output_names=None,
+                 active=True):
+      self.parent = parent
+      WBDC_core.RFsection.__init__(self, parent, name, inputs=inputs,
+                                  output_names=output_names, active=True)
+      self.logger = logging.getLogger(parent.logger.name+".RFsection")
+      self.logger.debug(" initializing WBDC2 %s", self)
+      self.logger.info(" %s inputs: %s", self, str(self.inputs))
+      self.logger.info(" %s outputs: %s", self, str(self.outputs))
+
+    def hello(self):
+      print self.logger.name, "says 'Hello'"
+
+    def _update_outputs(self):
+      keys = self.outputs.keys()
+      keys.sort()
+      for key in keys:
+        # The 
+        self.outputs[key] = Port(self, key,
+                                 source=self.source,
+                                 signal=self.source.signal)
+         
+  class PolSection(WBDC_core.PolSection):
+    """
+    """
+    def __init__(self, parent, name, inputs=None, output_names=None,
+                 active=True):
+      WBDC_core.PolSection.__init__(self, parent, name, inputs=inputs,
+                                  output_names=output_names,
+                                  active=active)
+      self.logger = logging.getLogger(parent.logger.name+".PolSection")
+      self.logger.debug(" __init__: output names: %s",
+                        output_names)
+      self.logger.debug(" initializing WBDC2 %s", self)
+      self.logger.info(" %s inputs: %s", self, str(self.inputs))
+      self.logger.info(" %s outputs: %s", self, str(self.outputs))
+
+  class DownConv(WBDC_base.DownConv):
+    """
+    """
+    def __init__(self, parent, name, inputs=None, output_names=None,
+                 active=True):
+      WBDC_base.DownConv.__init__(self, parent, name, inputs=inputs,
+                                 output_names=output_names,
+                                 active=active)
+      self.logger = logging.getLogger(parent.logger.name+".DownConv")
+
+############################### no longer used ###########################
+
+  class xDownConv(WBDC_base.DownConv):
     """
     Down-converter chain in a WBDC
     """
@@ -114,7 +256,6 @@ class WBDC2(WBDC_core, Receiver):
       for pol in WBDC_base.out_pols:
         index = WBDC_base.out_pols.index(pol)
         inp = name+pol
-        # pol = chlname[2:] # self.pols[index]
         self.logger.debug(" Processing %s channel %s for pol chl %s",
                           self, inp, pol)
         # the following collects the inputs with the same polarization
