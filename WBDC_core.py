@@ -402,15 +402,20 @@ class WBDC_core(WBDC_base):
     """
     def __init__(self, parent, name, inputs=None, output_names=None):
       self.name = name
+      mylogger = logging.getLogger(module_logger.name+".TransferSwitch")
+      mylogger.debug(" initializing %s", self)
+      mylogger.debug(" %s inputs: %s", self, str(inputs))
       WBDC_base.TransferSwitch.__init__(self, parent, name, inputs=inputs,
                                         output_names=output_names)
-      self.logger = logging.getLogger(parent.logger.name+".TransferSwitch")
-      self.logger.debug(" initializing %s", self)
-      self.logger.info(" %s inputs: %s", self, str(self.inputs))
+      self.logger = mylogger
+      mylogger.debug(" %s inputs: %s", self, str(inputs))
       self.parent = parent
 
-    def get_switch_state(self, ID):
+    def get_subswitch_state(self, ID):
       """
+      This gets the state from the hardware.
+
+      This method must be equated to the Switch object method _get_state
       """
       subswitch = self.data[ID]
       self.logger.debug(" getting state for %s", subswitch)
@@ -433,7 +438,7 @@ class WBDC_core(WBDC_base):
       self.parent = parent
       WBDC_base.RFsection.__init__(self, parent, name, inputs=inputs,
                                   output_names=output_names, active=True)
-      self.logger = logging.getLogger(parent.logger.name+".RFsection")
+      self.logger = logging.getLogger(module_logger.name+".RFsection")
       self.logger.debug(" initializing WBDC_core %s", self)
       self.logger.info(" %s inputs: %s", self, str(self.inputs))
       self.logger.info("%s outputs: %s", self, str(self.outputs))
@@ -446,12 +451,21 @@ class WBDC_core(WBDC_base):
       WBDC_base.PolSection.__init__(self, parent, name, inputs=inputs,
                                   output_names=output_names,
                                   active=active)
-      self.logger = logging.getLogger(parent.logger.name+".PolSection")
+      self.logger = logging.getLogger(module_logger.name+".PolSection")
       self.logger.debug(" __init__: output names: %s",
                         output_names)
       self.logger.debug(" initializing WBDC_core %s", self)
       self.logger.info(" %s inputs: %s", self, str(self.inputs))
       self.logger.info(" %s outputs: %s", self, str(self.outputs))
+
+    def get_pol_mode(self):
+      self.logger.debug("(core) get_pol_mode: invoked")
+      mode = super(WBDC_core.PolSection,self).get_pol_mode()
+      return mode
+
+    def _get_pol_mode(self):
+      self.logger.debug("(core) _get_pol_mode: invoked")
+      return None
 
   class DownConv(WBDC_base.DownConv):
     """
@@ -461,8 +475,7 @@ class WBDC_core(WBDC_base):
       WBDC_base.DownConv.__init__(self, parent, name, inputs=inputs,
                                  output_names=output_names,
                                  active=active)
-      self.logger = logging.getLogger(parent.logger.name+".DownConv")
-
+      self.logger = logging.getLogger(module_logger.name+".DownConv")
     
 class LatchGroup():
   """

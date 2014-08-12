@@ -179,16 +179,12 @@ class WBDC_base(Receiver):
     self.pols.sort()
 
   def set_crossover(self, crossed=False):
-    keys = self.Xswitch.keys()
-    keys.sort()
-    for sw in keys:
-      self.Xswitch[sw].set_state(int(crossed))
-      for name in self.outputs.keys():
-        for prop in self.outputs[name].source.signal.keys():
-          for destination in self.outputs[name].destinations:
-            destination.signal[prop] = self.outputs[name].signal[prop]
-    self._update_self()
-    return self.get_crossover()
+    """
+    Set or unset the cross-over switch
+    """
+    self.Xswitch.set_crossover(crossed=crossed)
+    self.Xswitch._update_self()
+    return self.Xswitch.get_crossover()
 
   def _update_self(self):
     # update the transfer switch
@@ -212,16 +208,23 @@ class WBDC_base(Receiver):
     """
     Beam to down-converter transfer switch
 
-    There is one Switch object for each front-end polarization P1 and P2.
+    There is one Switch object for each front-end polarization P1 and P2. Each
+    switch is associated with 'data', which is defined in the Device super-
+    class and allows the sub-switches to be accessed by providing the
+    TransferSwitch instance with an index, 1 or 2.
 
     At some point this might become a general transfer switch class
     """
-    def __init__(self, parent, name, inputs=None, output_names=None):
+    def __init__(self, parent, name, inputs=None, output_names=None,
+                 active=True):
+      mylogger = logging.getLogger(module_logger.name+".TransferSwitch")
+      mylogger.debug(" initializing %s", self)
+      mylogger.debug(" %s inputs: %s", self, str(inputs))
       self.name = name
-      Device.__init__(self, name)
-      self.logger = logging.getLogger(parent.logger.name+".TransferSwitch")
-      self.logger.debug(" initializing %s", self)
-      self.logger.info(" %s inputs: %s", self, str(self.inputs))
+      Device.__init__(self, name, inputs=inputs,
+                      output_names=output_names, active=active)
+      self.logger = mylogger
+      self.logger.debug(" %s inputs: %s", self, str(self.inputs))
       self.parent = parent
       self.states = {}
       # This directs the polarizations to the down-converters according
@@ -242,13 +245,33 @@ class WBDC_base(Receiver):
       self.logger.info(" %s outputs: %s", self, str(self.outputs))
 
     def set_crossover(self, crossed=False):
-      self.Xswitch.set_crossover(crossed=crossed)
+      """
+      This makes path changes consistent with the switch state
+      """
+      keys = self.data.keys()
+      keys.sort()
+      for sw in keys:
+        self.data[sw].set_state(int(crossed))
+        for name in self.outputs.keys():
+          for prop in self.outputs[name].source.signal.keys():
+            for destination in self.outputs[name].destinations:
+              destination.signal[prop] = self.outputs[name].signal[prop]
       self._update_self()
-      return self.Xswitch.get_crossover()
+      return self.get_crossover()
 
-    def get_crossover(self, ID):
-      self.states[ID] = self.data[ID].get_state()
-      return self.states[ID]
+    def get_crossover(self):
+      """
+      """
+      keys = self.data.keys()
+      keys.sort()
+      for ID in keys:
+        self.states[ID] = self.data[ID].get_state()
+      if self.states[keys[0]] == self.states[keys[1]]:
+        self.state = self.states[keys[0]]
+      else:
+        raise ObservatoryError(str(self),
+                       ("%s sub-switch states do not match"))
+      return self.state
 
     def _update_self(self):
       for key in self.data.keys():
@@ -257,9 +280,6 @@ class WBDC_base(Receiver):
   class RFsection(Receiver.RFsection):
     """
     An RF section may split the signal into several sub-bands.
-
-    WBDC2 will need channels.  For now this is coded for WBDC1 which only
-    narrows the bandwidth from 17-27 GHz to 21-25 GHz.
     """
     def __init__(self, parent, name, inputs=None, output_names=None,
                  active=True):
@@ -267,12 +287,9 @@ class WBDC_base(Receiver):
       The default RF section just passes the signals through
       """
       self.parent = parent
-      if output_names == None and inputs:
-        output_names = inputs.keys()
-        output_names.sort()
       Receiver.RFsection.__init__(self, parent, name, inputs=inputs,
                                   output_names=output_names, active=True)
-      self.logger = logging.getLogger(parent.logger.name+".RFsection")
+      self.logger = logging.getLogger(module_logger.name+".RFsection")
       self.logger.debug(" initializing WBDC_base %s", self)
       self.logger.info(" %s inputs: %s", self, str(self.inputs))
       self.logger.info(" %s outputs: %s", self, str(self.outputs))
@@ -316,25 +333,24 @@ class WBDC_base(Receiver):
         self.logger.debug(
                         " _update_self: processing input port %s",
                         key)
-        self.inputs[key].signal = copy.copy(self.inputs[key].source.signal)
-        if self.parent.band_names:
-          for band in self.parent.band_names:
-            outkey = key[:2]+band+key[2:]
-            self.outputs[outkey].signal = copy.copy(self.inputs[key].signal)
-            self.logger.debug(
-                         " _update_self: output port %s signal is %s",
-                         outkey, self.outputs[outkey].signal)
-            self.outputs[outkey].signal['frequency'] = int(band) # GHz
-            self.outputs[outkey].signal['bandwidth'] = 2 # GHz
-        else:
+        self.inputs[key].signal.copy(self.inputs[key].source.signal)
+        #if self.parent.band_names:
+        #for band in WBDC2.bands:
+        #  outkey = key[:2]+band+key[2:]
+        #  self.outputs[outkey].signal = copy.copy(self.inputs[key].signal)
+        #  self.logger.debug(" _update_self: output port %s signal is %s",
+        #                    outkey, self.outputs[outkey].signal)
+        #  self.outputs[outkey].signal['frequency'] = int(band) # GHz
+        #  self.outputs[outkey].signal['bandwidth'] = 2 # GHz
+        #else:
           # It's not clear how this can best handle WBDC1.  The state of
           # the LO switch must be factored in somehow.
-          self.outputs[key].signal = copy.copy(self.inputs[key].signal)
-          self.logger.debug(
-                         " _update_self: port signal is %s",
-                         self.outputs[newkey].signal)
-          self.outputs[key].signal['frequency'] = 22 # GHz
-          self.outputs[key].signal['bandwidth'] = 2 # GHz
+          #self.outputs[key].signal = copy.copy(self.inputs[key].signal)
+          #self.logger.debug(
+          #               " _update_self: port signal is %s",
+          #               self.outputs[newkey].signal)
+          #self.outputs[key].signal['frequency'] = 22 # GHz
+          #self.outputs[key].signal['bandwidth'] = 2 # GHz
 
   class PolSection(Receiver.PolSection):
     """
@@ -344,6 +360,7 @@ class WBDC_base(Receiver):
       """
       """
       # create the output names
+      mylogger = logging.getLogger(module_logger.name+".PolSection")
       self.output_names = []
       for pname in WBDC_base.out_pols:
         self.output_names.append(name+pname)
@@ -352,72 +369,86 @@ class WBDC_base(Receiver):
       Receiver.PolSection.__init__(self, parent, name, inputs=inputs,
                                   output_names=self.output_names,
                                   active=active)
-      self.logger = logging.getLogger(parent.logger.name+".PolSection")
-      self.logger.debug("(WBDC_base) __init__: output names: %s",
+      self.logger = mylogger
+      self.logger.debug(" __init__: output names: %s",
                         self.output_names)
       self.logger.debug(" initializing WBDC_base %s", self)
       self.logger.info(" %s inputs: %s", self, str(self.inputs))
       self.set_pol_mode() # defaults to X,Y
       self.logger.info(" %s outputs: %s", self, str(self.outputs))
-      self._update_self()
-
+      
     def set_pol_mode(self,circular=False):
+      self.logger.debug(" set_pol_mode: invoked")
       self.circular = circular
       if self.circular:
         self.pols = ["L", "R"]
       else:
         self.pols = ["X", "Y"]
-      self._update_self()
+      self.get_pol_mode()
 
     def get_pol_mode(self):
+      self.logger.debug("(base) get_pol_mode: invoked")
       self.circular = self._get_pol_mode()
       return self.circular
 
     def _get_pol_mode(self):
+      self.logger.debug("(base) _get_pol_mode: invoked")
       return None
       
     def _propagate(self):
       """
+      Propagate signals from inputs to outputs.
+
+      The output port names are of the form RxFFPy where x is 1 or 2, FF is a
+      two digit frequency code, and y is A or B.  The input names are similar
+      except that y is 1 or 2.  This reflects the fact that the input
+      polarizations are X and Y but the outputs may be those or R and L. The
+      code below constructs the output names from the input names.
       """
-      for key in self.outputs.keys():
-        for rf in WBDC_base.RF_names:
-          self.outputs[key].source = []
-          for pol in WBDC_base.out_pols:
-            pindex = WBDC_base.out_pols.index(pol)
-            name = key[:4]+WBDC_base.pol_names[pindex]
-            if self.circular:
-              self.outputs[key].source.append(self.inputs[name])
-              self.inputs[name].destinations.append(self.outputs[key])
-            else:
-              self.outputs[key].source = self.inputs[name]
-              self.inputs[name].destinations = [self.outputs[key]]
+      keys = self.outputs.keys()
+      keys.sort()
+      for key in keys:
+        self.logger.debug("_propagate signal for output %s", key)
+        self.outputs[key].source = []
+        pol = key[-2:]
+        self.logger.debug("_propagate: for pol %s", pol)
+        pindex = WBDC_base.out_pols.index(pol) # 0 or 1
+        self.logger.debug("_propagate: pol index = %d", pindex)
+        name = key[:4]+WBDC_base.pol_names[pindex] # RxFFP1 or RxFFP2
+        self.logger.debug("_propagate: new name is %s", name)
+        if self.circular:
+          self.outputs[key].source.append(self.inputs[name])
+          self.inputs[name].destinations.append(self.outputs[key])
+        else:
+          self.logger.debug("_propagate: changing %s to %s",
+                              self.outputs[key].source, self.inputs[name])
+          self.outputs[key].source = self.inputs[name]
+          self.inputs[name].destinations = [self.outputs[key]]
+        self.logger.debug("_propagate: %s destinations: %s",
+                            self.inputs[name], self.inputs[name].destinations)
 
     def _update_self(self):
       """
       """
       input_keys = self.inputs.keys()
       input_keys.sort()
-      self.logger.debug("(WBDC_base) _update_self: for %s",
+      self.logger.debug(" _update_self: entered for %s",
                         self.name)
-      self.logger.debug("(WBDC_base) _update_self: pols: %s",
+      self.logger.debug(" _update_self: pols: %s",
                         self.pols)
       self._propagate()
       for key in input_keys:
         self.logger.debug(
-                   "(WBDC_base) _update_self: updating input %s", key)
-        self.inputs[key].signal = copy.copy(self.inputs[key].source.signal)
-        self.logger.debug("(WBDC_base) _update_self: signal is %s",
+                   " _update_self: updating input %s", key)
+        self.inputs[key].signal.copy(self.inputs[key].source.signal)
+        self.logger.debug(" _update_self: signal is %s",
                           self.inputs[key].signal)
         index = input_keys.index(key)
-        self.logger.debug("(WBDC_base) _update_self: name index=%d",
-                          index)
         outkey = self.output_names[index]
         self.logger.debug(
-             "(WBDC_base) _update_self: copying signal to %s", outkey)
-        self.outputs[outkey].signal = copy.copy(self.inputs[key].signal)
+             " _update_self: copying signal to %s", outkey)
+        self.outputs[outkey].signal.copy(self.inputs[key].signal)
         pol_index = int(key[-1])-1
-        self.logger.debug("(WBDC_base) _update_self: index=%d",
-                          pol_index)
         self.outputs[outkey].signal['pol'] = self.pols[pol_index]
 
   class DownConv(Receiver.DownConv):
@@ -426,17 +457,19 @@ class WBDC_base(Receiver):
     """
     def __init__(self, parent, name, inputs=None, output_names=None,
                  active=True):
-      self.logger = logging.getLogger(parent.logger.name+".DownConv")
+      mylogger = logging.getLogger(module_logger.name+".DownConv")
       self.name = name
-      self.logger.debug(" initializing %s", str(self))
+      mylogger.debug(" initializing %s", str(self))
       output_names = []
       for IF in WBDC_base.IF_names:
         ID = name+IF
         output_names.append(ID)
-      self.logger.debug("DC %s outputs are %s", name, output_names)
+      mylogger.debug("DC %s outputs are %s", name, output_names)
       Receiver.DownConv.__init__(self, parent, name, inputs=inputs,
                                  output_names=output_names,
                                  active=active)
+      self.logger = mylogger
+      self._propagate()
       for nm in output_names:
         parent.outputs[nm] = self.outputs[nm]
       self.logger.debug(" %s outputs: %s", str(self), str(self.outputs))
@@ -449,7 +482,6 @@ class WBDC_base(Receiver):
       else:
         self.IF_mode = ["I","Q"]
         self.data['bandwidth'] = 2e9
-      self._update_self()
       return self.get_IF_mode()
 
     def get_IF_mode(self):
@@ -457,13 +489,13 @@ class WBDC_base(Receiver):
 
     def _propagate(self):
       """
+      Propagate signals from inputs to outputs
+
+      Input names are of the form RxFFPy, same as the names of the pol section
+      outputs.  Output names have I1 or I2 appended.
       """
-      self.logger.debug(" _propagate: %s inputs: %s",
-                        self.name, self.inputs)
-      self.logger.debug(" _propagate: %s outputs: %s",
-                        self.name, self.outputs)
       for key in self.inputs.keys():
-        for IF in WBDC_base.IF_names:
+        for IF in WBDC_base.IF_names: # I1 or I2
           self.outputs[key+IF].source = self.inputs[key]
           self.inputs[key].destinations.append(self.outputs[key+IF])
         
@@ -476,13 +508,10 @@ class WBDC_base(Receiver):
       input_keys = self.inputs.keys()
       input_keys.sort()
       for key in input_keys:
-        self.inputs[key].signal = copy.copy(self.inputs[key].source.signal)
+        self.inputs[key].signal.copy(self.inputs[key].source.signal)
         for IF in WBDC_base.IF_names:
           index = WBDC_base.IF_names.index(IF)
-          self.outputs[key+IF].signal = copy.copy(self.inputs[key].signal)
-          for prop in self.outputs[key+IF].source.signal.keys():
-            self.outputs[key+IF].signal[prop] = \
-                                       self.outputs[key+IF].source.signal[prop]
+          self.outputs[key+IF].signal.copy(self.inputs[key].signal)
           self.outputs[key+IF].signal.name = \
                     self.outputs[key+IF].source.signal.name+self.IF_mode[index]
           self.outputs[key+IF].signal['IF'] = self.IF_mode[index]
