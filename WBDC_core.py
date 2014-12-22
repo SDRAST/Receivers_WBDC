@@ -201,8 +201,10 @@ import logging
 import u3
 
 import Math
+import MonitorControl
+from MonitorControl import ObservatoryError
 from MonitorControl.Receivers.WBDC import WBDC_base
-from Electronics.Interfaces.LabJack import LJTickDAC
+from Electronics.Interfaces.LabJack import connect_to_U3s, LJTickDAC
 
 from support import python_version
 
@@ -227,6 +229,8 @@ class WBDC_core(WBDC_base):
     """
     Initialize a physical WBDC object.
 
+    At least one Signal instance must be specified for inputs.
+
     @param name : unique identifier
     @type  name : str
 
@@ -241,10 +245,114 @@ class WBDC_core(WBDC_base):
     """
     WBDC_base.__init__(self, name, active=active, inputs=inputs,
                       output_names=output_names)
-    self.logger.debug("initializing %s", self)
+    self.logger = logging.getLogger(module_logger.name+".WBDC_core")
+    self.logger.debug(" WBDC_core initializing %s", self)
     self.logger.info(" %s inputs: %s", self, str(self.inputs))
+    self.find_labjacks()
+    self.verify_labjacks()
 
-  def set_signals(self, LJ, signal_dict):
+  def find_labjacks(self):
+    """
+    Find the LabJacks for this WBDC
+
+    WBDC1 has two LabJacks numbered 1 and 2.  WBDC has three LabJacks.
+    LabJack 1 is the motherboard controller.  LabJacks 2 and 3 control the PIN
+    diode attenuators.
+
+    WBDC1 has a LabJack 3 which is the front-end controller.
+    """
+    self.logger.info("find_labjacks: entered")
+    self.LJ = connect_to_U3s()
+    self.logger.info("find_labjacks: found %s", self.LJ.keys())
+    return self.LJ.keys()
+
+  def has_labjack(self, localID):
+    """
+    """
+    if self.LJ.has_key(localID):
+      return True
+    else:
+      self.logger.error(" %s has no LabJack %d", self.name, localID)
+      return False
+      
+  def verify_labjacks(self):
+    """
+    """
+    # Is there a motherboard controller?
+    if self.has_labjack(1):
+      # A MB controller has F bits 0-3 set for analog input
+      if self.LJ[1].configIO()['FIOAnalog'] != 15:
+        self.logger.info("Configuring LabJack 1 for MB control")
+        self.configure_MB_labjack()
+    else:
+      raise ObservatoryError("","LabJack 1 is not connected")
+    if self.has_labjack(2):
+      # A LJ with a TickDAC mounted on an FIO section has that section
+      # configured for digital output.  
+      if self.LJ[2].configU3()['EIOState']!= 255:
+        self.logger.info("Configuring LabJack 2 for attenuator control")
+        self.configure_atten_labjack(2)
+    else:
+      raise ObservatoryError("","LabJack 2 is not connected")
+    if self.name == 'WBDC-2' and self.has_labjack(3):
+      if self.LJ[3].configU3()['EIOState']!= 255:
+        self.logger.info("Configuring LabJack 3 for attenuator control")
+        self.configure_atten_labjack(3)
+    else:
+      raise ObservatoryError("","LabJack 3 is not connected")
+
+  def configure_MB_labjack(self):
+    """
+    Configure LabJack 1 for digital module control and analog monitoring
+    """
+    if self.has_labjack(1):
+      # Analog input for voltages, currents and temperatures
+      FIOanalog = int('00001111',2)
+      self.LJ[1].configIO(FIOAnalog=FIOanalog,EIOAnalog=0)
+      CIOBitDir = int('1111',2)
+      EIOBitDir = int('11111111',2)
+      FIOBitDir = int('00000000',2)
+      direction = [FIOBitDir, EIOBitDir, CIOBitDir]
+      mask = [0xff,0xff,0xff]
+      self.logger.info("LabJack %d direction=%s, write mask=%s",
+                        self.LJ[1].localID, direction, mask)
+      try:
+        status = self.LJ[1].getFeedback(u3.PortDirWrite(Direction=direction,
+                                                        WriteMask=mask))
+        self.logger.info(" configure status: %s", status)
+      except Exception, details:
+        self.logger.error(" Could not set bit direction on U3 %d",
+                          self.LJ[1].localID)
+        raise ObservatoryError("","configuring LJ 1 failed:\n"+str(details))
+    else:
+      raise ObservatoryError("","LabJack 1 is not connected")
+    
+  def configure_atten_labjack(self, ID):
+    """
+    Configure a LabJack for PIN diode attenuator control
+    """
+    if self.has_labjack(ID):
+      self.LJ[ID].configIO(EIOAnalog=0, FIOAnalog=0)
+      CIOBitDir = int('0000',2)
+      EIOBitDir = int('00000000',2)
+      FIOBitDir = int('00000000',2)
+      direction = [FIOBitDir, EIOBitDir, CIOBitDir]
+      mask = [0xff,0xff,0xff]
+      self.logger.debug(" LabJack %d direction=%s, write mask=%s",
+                        ID, direction, mask)
+      try:
+        status = self.LJ[ID].getFeedback(u3.PortDirWrite(Direction=direction,
+                                                         WriteMask=mask))
+        self.logger.info(" configure status: %s", status)
+      except Exception, details:
+        self.logger.error(" Could not set bit direction on U3 %d",
+                          self.LJ[ID].localID)
+        raise ObservatoryError("LabJack "+str(ID),
+                               "not configured:\n"+str(details))
+    else:
+      raise ObservatoryError("LabJack "+str(ID)," is not connected")
+      
+  def set_signals(self, signal_dict):
     """
     Sets signals for programming and reading data.
 
@@ -271,12 +379,12 @@ class WBDC_core(WBDC_base):
     @return: result of u3.BitStateWrite()
     """
     commands = []
-    for signal,xstate in signal_dict.items():
+    for signal,state in signal_dict.items():
       commands.append(u3.BitStateWrite(WBDCsignal[signal], state))
     commands.append(u3.PortStateRead())
     self.logger.debug("set_signals: sending %s", commands)
     try:
-      result = LJ.getFeedback(commands)
+      result = self.LJ[1].getFeedback(commands)
       self.logger.debug("set_signals: command feedback: %s", result)
       if float(python_version()[:3]) < 2.6:
         time.sleep(0.01)
@@ -284,12 +392,109 @@ class WBDC_core(WBDC_base):
       self.logger.error("set_signals: LJ commands failed:\n%s", details)
     return result[-1]
 
-class Latch():
-  """
-  """
-  def __init__(self, address, LJ):
+  class TransferSwitch(WBDC_base.TransferSwitch):
     """
-    Creates a Latch instance
+    Beam to down-converter transfer switch
+
+    There is one Switch object for each front-end polarization P1 and P2.
+
+    At some point this might become a general transfer switch class
+    """
+    def __init__(self, parent, name, inputs=None, output_names=None):
+      self.name = name
+      mylogger = logging.getLogger(module_logger.name+".TransferSwitch")
+      mylogger.debug(" initializing %s", self)
+      mylogger.debug(" %s inputs: %s", self, str(inputs))
+      WBDC_base.TransferSwitch.__init__(self, parent, name, inputs=inputs,
+                                        output_names=output_names)
+      self.logger = mylogger
+      mylogger.debug(" %s inputs: %s", self, str(inputs))
+      self.parent = parent
+
+    def get_subswitch_state(self, ID):
+      """
+      This gets the state from the hardware.
+
+      This method must be equated to the Switch object method _get_state
+      """
+      subswitch = self.data[ID]
+      self.logger.debug(" getting state for %s", subswitch)
+      devID = subswitch.name
+      rx = subswitch.parent.parent
+      lg1 = lg = LatchGroup(parent=rx, address=87)
+      status = lg1.read()
+      self.logger.debug(" Latch Group 1 data = %s",
+                        Math.decimal_to_binary(status,8))
+      test_bit = int(devID[-1])
+      subswitch.state = status & test_bit
+      self.logger.debug(" switch state = %d", subswitch.state)
+      return subswitch.state
+
+  class RFsection(WBDC_base.RFsection):
+    """
+    """
+    def __init__(self, parent, name, inputs=None, output_names=None,
+                 active=True):
+      self.parent = parent
+      WBDC_base.RFsection.__init__(self, parent, name, inputs=inputs,
+                                  output_names=output_names, active=True)
+      self.logger = logging.getLogger(module_logger.name+".RFsection")
+      self.logger.debug(" initializing WBDC_core %s", self)
+      self.logger.info(" %s inputs: %s", self, str(self.inputs))
+      self.logger.info("%s outputs: %s", self, str(self.outputs))
+
+  class PolSection(WBDC_base.PolSection):
+    """
+    """
+    def __init__(self, parent, name, inputs=None, output_names=None,
+                 active=True):
+      WBDC_base.PolSection.__init__(self, parent, name, inputs=inputs,
+                                  output_names=output_names,
+                                  active=active)
+      self.logger = logging.getLogger(module_logger.name+".PolSection")
+      self.logger.debug(" __init__: output names: %s",
+                        output_names)
+      self.logger.debug(" initializing WBDC_core %s", self)
+      self.logger.info(" %s inputs: %s", self, str(self.inputs))
+      self.logger.info(" %s outputs: %s", self, str(self.outputs))
+
+    def get_pol_mode(self):
+      self.logger.debug("(core) get_pol_mode: invoked")
+      mode = super(WBDC_core.PolSection,self).get_pol_mode()
+      return mode
+
+    def _get_pol_mode(self):
+      self.logger.debug("(core) _get_pol_mode: invoked")
+      return None
+
+  class DownConv(WBDC_base.DownConv):
+    """
+    """
+    def __init__(self, parent, name, inputs=None, output_names=None,
+                 active=True):
+      WBDC_base.DownConv.__init__(self, parent, name, inputs=inputs,
+                                 output_names=output_names,
+                                 active=active)
+      self.logger = logging.getLogger(module_logger.name+".DownConv")
+    
+class LatchGroup():
+  """
+  Class for a group of eight WBDC latches
+
+  Each WBDC digital module has four groups of eight latches.  The groups are
+  numbered 1-4.  Each group has a write address and a read address::
+           DM1         DM2
+        write read  write read
+    LG1   80   84    160   164
+    LG2   81   85    161   165
+    LG3   82   86    162   166
+    LG4   83   87    163   167
+
+    The latch groups are controlled by LabJack1.
+  """
+  def __init__(self, parent=None, address=None):
+    """
+    Creates a LatchGroup instance
     
     @type LJ : u3.U3 class instance
     @param LJ : LabJack controlling the latch
@@ -297,9 +502,17 @@ class Latch():
     @type address : int
     @param address : latch address
     """
-    self.logger = logging.getLogger(__name__+".Latch")
-    self.LJ = LJ
-    self.address = address
+    self.logger = logging.getLogger(__name__+".LatchGroup")
+    if parent == None:
+      self.logger.error("%s must have a parent", self)
+      raise ObservatoryError(":", " no receiver specified")
+    else:
+      self.parent = parent
+    if address == None:
+      self.logger.error("%s must have an address", self)
+      raise ObservatoryError(":", "no address")
+    else:
+      self.address = address
 
   def setLatchAddr(self):
     """
@@ -307,12 +520,13 @@ class Latch():
 
     @return: boolean
     """
-    states = [0,self.addr,0]
+    states = [0,self.address,0]
     mask = [0,0xff,0] # EIO port
-    self.logger.debug("setLatchAddr: writing %s to bits %s to select latch",
+    self.logger.debug("setLatchAddr: writing %s to bits %s to select latch %s",
                       states, mask, self.address)
     try:
-      self.LJ.getFeedback(u3.PortStateWrite(State = states, WriteMask = mask))
+      self.parent.LJ[1].getFeedback(
+                           u3.PortStateWrite(State = states, WriteMask = mask))
       return True
     except u3.LabJackException, details:
       self.logger.error("setLatchAddr: LabJack could not set latch %d\n%s",
@@ -325,49 +539,49 @@ class Latch():
 
     @return: byte
     """
-    self.logger.debug("read: Reading latch %d", address)
+    self.logger.debug("read: Reading latch %d", self.address)
     # Select the latch to be read
     if self.setLatchAddr():
-      port_states = self.LJ.getFeedback(u3.PortStateRead())
+      port_states = self.parent.LJ[1].getFeedback(u3.PortStateRead())
       self.logger.debug("read: port states: %s", port_states)
       latchAddr = port_states[0]['EIO']
-      self.logger.debug("read: Latch address is %d",latchAddr)
+      self.logger.debug("read: LatchGroup address is %d",latchAddr)
       if latchAddr != self.address:
         self.logger.debug("read: Requested latch %d but got %d",
                           seld.address, latchAddr)
         return None
       else:
         self.logger.debug("read: latch address set to %d", self.address)
-        portStates = set_signals(self.LJ,
+        portStates = self.parent.set_signals(
                                  {"SCK":1, "SDI":1,"NLOAD":1, "CS-BUS":1})
         # Store the information to be read from this address
-        set_signals(self.LJ, {"NLOAD":0})
-        set_signals(self.LJ, {"NLOAD":1})
+        self.parent.set_signals({"NLOAD":0})
+        self.parent.set_signals({"NLOAD":1})
         # Enable serial data transfer
-        set_signals(self.LJ, {"CS-BUS":0})
+        self.parent.set_signals({"CS-BUS":0})
         MBDATA = 0
         # Process from MS to LS bit
         for bit in range(7,-1,-1):
           try:
-            state = LJ.getFeedback(
+            state = self.parent.LJ[1].getFeedback(
                             u3.BitStateRead(IONumber = WBDCsignal["SDO"]))[0]
-            self.logger.debug("readLatch: bit %d state is %d for MBDATA = %d",
+            self.logger.debug("read: bit %d state is %d for MBDATA = %d",
                               bit, state, MBDATA)
           except Exception, details:
-            self.logger.error("readLatch: Data In failed at bit %d\n%s",
+            self.logger.error("read: Data In failed at bit %d\n%s",
                               bit, details)
             return None
           if state:
             MBDATA = Math.Bin.setbit(MBDATA, bit)
           if bit > 0:
-            set_signals(self.LJ, {"SCK":0})
-            set_signals(self.LJ, {"SCK":1})
-          set_signals(self.LJ, {"CS-BUS":1})
+            self.parent.set_signals({"SCK":0})
+            self.parent.set_signals({"SCK":1})
+          self.parent.set_signals({"CS-BUS":1})
           return MBDATA
     else:
-      self.logger.error("readLatch: Setting latch address failed")
+      self.logger.error("read: Setting latch address failed")
       return -1
-  
+
 class Attenuator(LJTickDAC):
   """
   Voltage-controlled PIN diode attenuator for WBDC
@@ -634,3 +848,8 @@ class Attenuator(LJTickDAC):
       return True
     else:
       return False
+
+def get_pol_section_state(device):
+  devID = device.name
+  module_logger.debug(" getting polarization state for %s", devID)
+  return False
