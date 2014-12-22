@@ -305,12 +305,6 @@ class Latch():
     """
     select a latch by address
 
-    @type LJ : u3.U3 class instance
-    @param LJ : LabJack which controls the latches
-
-    @type LATCHNUM : int
-    @param LATCHNUM : number of latch to be addressed
-
     @return: boolean
     """
     states = [0,self.addr,0]

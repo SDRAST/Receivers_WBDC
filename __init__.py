@@ -2,7 +2,7 @@
 WBDC - module for Wide Band Down Converter receiver classes
 
 Overview
---------
+========
 The prototype WBDC has two inputs, each producing two orthogonal linear
 polarizations.  There are two down-converter chains, each handling two
 polarizations, for a total of four signals.
@@ -14,18 +14,18 @@ IF sections.  The sections, as well as feed switching, polarization selection,
 etc. are the same.
 
 Input Switching
----------------
+===============
 The first stage of the WBDC allows the down-converter groups to be switched
 between the two feeds.
 
 Polarization Conversion
------------------------
+=======================
 After the band-selecting RF filters, the linearly polarized signals from each
 feed can be switched into a quadrature hybrid to be converted to cicular
 polarizations.
 
 Sideband Separation
--------------------
+===================
 The down-conversion produces complex outputs (i.e. a pair of signals I and
 Q).  There are switches which can direct each I/Q pair into a quadrature
 hybrid to convert them to an upper and lower sideband pair.

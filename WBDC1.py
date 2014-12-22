@@ -5,7 +5,7 @@ For a description of the generic Wide Band Down Converter see/do
 MonitorControl.Receivers.WBDC.__doc__.split('\n')
 
 WBDC1 Band Selection
---------------------
+====================
 There are two programmable local oscillators and a switch selects between
 to define the band to be down-converted.  This is a WBDC1-unique feature.
 

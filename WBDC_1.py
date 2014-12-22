@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Monitor and Control of Wideband Downconverter with LabJack
+Source of legacy code for WBDC1 and WBDC_core
 
 For more details, diagrams and test results please visit
 http://dsnra.jpl.nasa.gov/eng-wiki/index.php?title=Wideband_K-band_Downconverter
