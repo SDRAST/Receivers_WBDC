@@ -211,11 +211,11 @@ class WBDC_base(Receiver):
       keys.sort()
       for ID in keys:
         self.states[ID] = self.data[ID].get_state()
-      if self.states[keys[0]] == self.states[keys[1]]:
-        self.state = self.states[keys[0]]
-      else:
-        raise ObservatoryError(str(self),
-                       ("%s sub-switch states do not match"))
+      if self.states[keys[0]] != self.states[keys[1]]:
+        #raise ObservatoryError(str(self),
+        #                  "%s sub-switch states do not match")
+        self.logger.error("%s sub-switch states do not match",str(self))
+      self.state = self.states[keys[0]]
       self._update_self()
       self.logger.debug("WBDC_base.TransferSwitch.get_state: done")
       return self.state

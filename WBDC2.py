@@ -7,47 +7,57 @@ Overview
 For a description of the generic Wide Band Down Converter see/do
 MonitorControl.Receivers.WBDC.__doc__.split('\n')
 
-WBDC2 has two input pairs, each accepting two orthogonal linear polarizations.
-There are two down-converter chains, each handling two polarizations each, for
-a total of four complex signals.
+WBDC2 has two signal input pairs, each accepting two orthogonal linear
+polarizations. There are two down-converter chains, each handling two
+polarizations each, for a total of four complex signals.
 
 Monitor and control is done with two LabJacks. For a detailed description of
 the LabJack see/do
 MonitorControl.Electronics.Interfaces.LabJack.__doc__.split('\n')
 
 The LabJack with local ID 1 controls and reads switches and reads analog
-data (currents, voltages, temperatures). Details are described in
+data (currents, voltages, temperatures) on the motherboard. Details are
+described in
 /home/kuiper/DSN/technical/Band K/Kband-downconv/Smith-Weinreb/\
 WBDC2/DigitalBoard/ControlLogic.ods
 
 LabJacks 2 and 3 control attenuators using TickDACs to provide analog control
 voltages.
 
+Motherboard Monitor and Control
+===============================
 
-Control
-=======
-
-The switches are controlled by digital latches (logical devices which
-preserve a specified logic state). The latches are connected to serial-in
-parallel-out registers.  These registers are addressed using the EIO
+Motherboard signals are monitored and controlled with digital latches (logical
+devices which preserve a specified logic state). The latches are connected to
+serial-in/parallel-out registers.  These registers are addressed using the EIO
 out bits of LabJack 1.  The data are then clocked into the register using
-the SDI and SCK signals.
+the SDI and SCK signals.  The details are described in the module 'latchgroup'.
 
-The latch groups may be designated by their circuit name (LATCH1 and LATCH2)
-or their address (80, 81, 160, 161, 162, 163).
+WBDC2 has two digital modules (DM 1 and DM 2).  For each DM, four latch groups
+are designated by their circuit name (LG 1 through LG 4). The docstring for
+module 'latchgroup' describes the latch group addressing scheme.  Bit 2 selects
+a latch for reading if set, or writing if not set.  (In other words, the read
+address is the write address + 4.)
 
-Latch Group 1 (Address 80)
---------------------------
-The feed switches are controlled by bits L1A0, L1A1 (A0, A1 on Latch 1)::
+Feed Crossover Switch
+---------------------
+
+The feed crossover switches are controlled with DM 1 LG 1 using bits L1A0 and
+L1A1 (A0, A1 at latchgroup address 8)::
   0 for through
-  1 for crossed-over
+  1 for crossed
+The commanded state can be read at the same bits (A0, A1 at LG address 12).
+However, the actual state of the cross-over switches are read at L4A0 and
+L4A1 (LG address 15).
 
-Latch Groups 2 (Address 81) and 3 (Address 82)
-----------------------------------------------
+Polarization Hybrids
+--------------------
+
 The receiver chain 1 polarization hybrids are controlled by L2A0-L2A4.
 The receiver chain 2 polarization hybrids are controlled by L3A0-L4A4.
-Logic level 0 is for bypassing the hybrids; logic level 1 is for converting
-X and Y polarization to L and R.::
+Logic level 0 is for bypassing the hybrids, that is, linear polarization.
+Logic level 1 is for converting linear to circular, that is, X and Y
+polarization to L and R (though the sign of that needs to be verified).::
   Band  Control Bits
    18    L2A4 L3A0
    20    L2A3 L3A1
@@ -261,20 +271,14 @@ class WBDC2(WBDC_core, Receiver):
 
     self.data['bandwidth'] = 1e10 # Hz
     # Define the latch groups
-    self.lg = {'XW':    LatchGroup(parent=self, address=80),
-               'R1PW':  LatchGroup(parent=self, address=81),
-               'R2PW':  LatchGroup(parent=self, address=82),
-               'R1PR':  LatchGroup(parent=self, address=85),
-               'R2PR':  LatchGroup(parent=self, address=86),
-               'XR':    LatchGroup(parent=self, address=87),
-               'P1I1W': LatchGroup(parent=self, address=160),
-               'P1I2W': LatchGroup(parent=self, address=161),
-               'P2I1W': LatchGroup(parent=self, address=162),
-               'P2I2W': LatchGroup(parent=self, address=163),
-               'P1I1R': LatchGroup(parent=self, address=164),
-               'P1I2R': LatchGroup(parent=self, address=165),
-               'P2I1R': LatchGroup(parent=self, address=166),
-               'P2I2R': LatchGroup(parent=self, address=167)}
+    self.lg = {'X':    LatchGroup(parent=self, LG=1),        # crossover (X) switch
+               'R1P':  LatchGroup(parent=self, LG=2),        # receiver 1 pol hybrid control
+               'R2P':  LatchGroup(parent=self, LG=3),
+               'PLL':  LatchGroup(parent=self, LG=4),
+               'P1I1': LatchGroup(parent=self, DM=2, LG=1),
+               'P1I2': LatchGroup(parent=self, DM=2, LG=2),
+               'P2I1': LatchGroup(parent=self, DM=2, LG=3),
+               'P2I2': LatchGroup(parent=self, DM=2, LG=4)}
           
     # The transfer switch is created in {\tt WBDC_base}
     self.crossSwitch.get_state()
@@ -311,6 +315,7 @@ class WBDC2(WBDC_core, Receiver):
                                                 inputs = psec_inputs)
         self.pol_sec[psec_name].data['band'] = band
         self.pol_sec[psec_name].data['receiver'] = rx
+        self.pol_sec[psec_name]._get_state()
         self.logger.debug(" __init__: pol section %s outputs: %s",
                           self.pol_sec[psec_name].name,
                           self.pol_sec[psec_name].outputs.keys())
@@ -326,7 +331,11 @@ class WBDC2(WBDC_core, Receiver):
         dc_inputs = {name+pol: self.pol_sec[name].outputs[name+pol]}
         self.DC[name+pol] = self.DownConv(self, name+pol,
                                           inputs = dc_inputs)
-        self.DC[name+pol].set_IF_mode() # default is IQ
+        rx,band = name.split('-')
+        self.DC[name+pol].data['receiver'] = rx
+        self.DC[name+pol].data['band'] = band
+        self.DC[name+pol].data['pol'] = pol
+        self.DC[name+pol]._get_state()
         self.logger.debug(" DC %s created", self.DC[name+pol])
     # report outputs
     self.logger.info(" %s outputs: %s",
@@ -441,6 +450,32 @@ class WBDC2(WBDC_core, Receiver):
                                                   output_names=output_names,
                                                   active=active)
 
+      def _get_state(self):
+        """
+        Get the state from the hardware switch.
+
+        The switch is sensed by bit 0 or 1 of the latch group at address 87
+        Labjack 1. Low (value = 0) is for through and high is for crossed.
+
+        Since latch group 1 also controls the IQ hybrids we need to read their
+        states and make sure their bits remain the same.
+
+        WBDC2 is different from WBDC1 in the use of the latchgroup bits.
+
+        """
+        self.logger.debug("_get_state:  for %s", self)
+        rx = self.parent.parent # WBDC_core instance which owns the latch group
+        try:
+          status = rx.lg['PLL'].read()
+          self.logger.debug("_get_state: Latch Group XR data = %s",
+                            Math.decimal_to_binary(status,8))
+          test_bit = WBDC_base.pol_names.index(self.name)+1
+          self.state = bool(status & test_bit)
+          self.logger.debug("_get_state: switch state = %d", self.state)
+        except AttributeError, details:
+          self.logger.error("WBDC_core.TransferSwitch.Xswitch._get_state: %s", details)
+        return self.state
+
       def _set_state(self, crossover=False):
         """
         Set the RF transfer (crossover) switch
@@ -452,8 +487,8 @@ class WBDC2(WBDC_core, Receiver):
         rx = self.parent.parent # WBDC_core instance which owns the latch group
         # get the current bit states
         try:
-          status = rx.lg['XR'].read()
-          self.logger.debug("_set_state: Latch Group %s data = %s", rx.lg['XR'],
+          status = rx.lg['X'].read()
+          self.logger.debug("_set_state: Latch Group %s data = %s", rx.lg['X'],
                             Math.decimal_to_binary(status,8))
         except AttributeError, details:
           self.logger.error("_set_state: status read failed: %s", details)
@@ -465,7 +500,7 @@ class WBDC2(WBDC_core, Receiver):
         try:
           self.logger.debug("_set_state: writing %s",
                             Math.decimal_to_binary(value,8))
-          status = rx.lg['XW'].write(value)
+          status = rx.lg['X'].write(value)
           if status:
             self.logger.debug("_set_state: write succeeded")
           else:
@@ -540,6 +575,7 @@ class WBDC2(WBDC_core, Receiver):
          
   class PolSection(WBDC_core.PolSection):
     """
+    
     """
     def __init__(self, parent, name, inputs=None, output_names=None,
                  active=True):
@@ -567,22 +603,50 @@ class WBDC2(WBDC_core, Receiver):
                          signal=ComplexSignal(self.inputs[inname].signal))
       self.logger.info(" %s outputs: %s", self, str(self.outputs))
 
-    #def set_pol_mode(self,circular=False):
-    #  super(WBDC2.PolSection,self).set_pol_mode(circular)
-    #  return self.get_pol_mode()
+    def _get_state(self):
+      """
+      Returns the state of the polarization conversion section.
 
-    #def get_pol_mode(self):
-    #  """
-    #  """
-    #  self.logger.debug("(WBDC2) get_pol_mode: invoked")
-    #  mode = super(WBDC2.PolSection, self).get_pol_mode()
-    #  return mode
+      X,Y are converted to L,R if the state is 1.
+
+      The pol section needs to know what band it belongs to to know what
+      latches to use.
+      """
+      LGID = self.data['receiver']+'P'
+      LG = int(self.data['receiver'][-1])+1
+      latchbit = (int(self.data['band'])-18)/4
+      LGdata = self.parent.lg[LGID].read()
+      self.state = Math.Bin.getbit(LGdata,latchbit)
+      return self.state
+
+    def _set_state(self,state):
+      """
+      Sets the state of the polarization conversion section.
+
+      If set, X,Y are converted to L,R.
+
+      The pol section needs to know what band it belongs to to know what
+      latches to use.
+      """
+      LGID = self.data['receiver']+'P'
+      LG = int(self.data['receiver'][-1])+1
+      latchbit = (int(self.data['band'])-18)/4
+      LGdata = self.parent.lg[LGID].read()
+      self.parent.lg[LGID].write(Math.Bin.setbit(LGdata,latchbit))
+      self._get_state()
+      self._update_self()
+      return self.state
 
   class DownConv(WBDC_core.DownConv):
     """
+    Converts RF to IF
+
+    A hybrid optional converts the I and Q IFs to LSB and USB.
     """
     def __init__(self, parent, name, inputs=None, output_names=None,
-                 active=True):    
+                 active=True):
+      """
+      """
       mylogger = logging.getLogger(module_logger.name+".DownConv")
       self.name = name
       #show_signal(self, inputs)
@@ -605,8 +669,34 @@ class WBDC2(WBDC_core, Receiver):
                     signal=IF(self.outputs[key].source.signal, IF_type=IFmode))
         self.parent.outputs[key] = self.outputs[key]
 
-    def set_IF_mode(self, SB_separated=False):
-      super(WBDC_core.DownConv, self).set_IF_mode(SB_separated=SB_separated)
-      self.logger.debug(" IF mode set for SB separation is %s", SB_separated)
+    def _get_latch_info(self):
+      """
+      """
+      rxno = int(self.data['receiver'][-1])-1
+      if int(self.data['band']) < 21:
+        LGID = self.data['pol']+'I1'
+        latchbit = int(self.data['band']) - 18 + rxno
+      else:
+        LGID = self.data['pol']+'I2'
+        latchbit = int(self.data['band']) - 22 + rxno
+      return LGID, latchbit
+      
+    def _get_state(self):
+      """
+      """
+      LGID, latchbit = self._get_latch_info()
+      latchdata = self.parent.lg[LGID].read()
+      self.state = Math.Bin.getbit(latchdata, latchbit)
+      return self.state
+      
+    def _set_state(self,state):
+      """
+      """
+      LGID, latchbit = self._get_latch_info()
+      latchdata = self.parent.lg[LGID].read()
+      latchdata = Math.Bin.setbit(latchdata, latchbit)
+      self.parent.lg[LGID].write(state)
+      self._get_state()
       self._update_self()
-      return self.get_IF_mode()
+      return self.state
+      
