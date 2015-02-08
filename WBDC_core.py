@@ -134,7 +134,7 @@ class WBDC_core(WBDC_base):
     self.logger = logging.getLogger(module_logger.name+".WBDC_core")
     self.logger.debug(" WBDC_core initializing %s", self)
     if inputs:
-      self.logger.info(" %s inputs: %s", self, str(self.inputs))
+      self.logger.debug(" %s inputs: %s", self, str(self.inputs))
     LJ_keys = self.find_labjacks()
     if self.has_labjack(1):
       self.configure_MB_labjack()
@@ -151,7 +151,7 @@ class WBDC_core(WBDC_base):
 
     WBDC1 has a LabJack 3 which is the front-end controller.
     """
-    self.logger.info("find_labjacks: entered")
+    self.logger.debug("find_labjacks: entered")
     self.LJ = connect_to_U3s()
     self.logger.info("find_labjacks: found %s", self.LJ.keys())
     return self.LJ.keys()
@@ -178,12 +178,12 @@ class WBDC_core(WBDC_base):
       FIOBitDir = int('00000000',2)
       direction = [FIOBitDir, EIOBitDir, CIOBitDir]
       mask = [0xff,0xff,0xff]
-      self.logger.info("LabJack %d direction=%s, write mask=%s",
+      self.logger.debug("LabJack %d direction=%s, write mask=%s",
                         self.LJ[1].localID, direction, mask)
       try:
         status = self.LJ[1].getFeedback(u3.PortDirWrite(Direction=direction,
                                                         WriteMask=mask))
-        self.logger.info(" configure status: %s", status)
+        self.logger.debug(" configure status: %s", status)
       except Exception, details:
         self.logger.error(" Could not set bit direction on U3 %d",
                           self.LJ[1].localID)
@@ -207,7 +207,7 @@ class WBDC_core(WBDC_base):
       try:
         status = self.LJ[ID].getFeedback(u3.PortDirWrite(Direction=direction,
                                                          WriteMask=mask))
-        self.logger.info(" configure status: %s", status)
+        self.logger.debug(" configure status: %s", status)
       except Exception, details:
         self.logger.error(" Could not set bit direction on U3 %d",
                           self.LJ[ID].localID)
@@ -313,8 +313,8 @@ class WBDC_core(WBDC_base):
       self.logger.debug(" __init__: output names: %s",
                         output_names)
       self.logger.debug(" initialized WBDC_core %s", self)
-      self.logger.info(" %s inputs: %s", self, str(self.inputs))
-      self.logger.info(" %s outputs: %s", self, str(self.outputs))
+      self.logger.debug(" %s inputs: %s", self, str(self.inputs))
+      self.logger.debug(" %s outputs: %s", self, str(self.outputs))
 
     def get_mode(self):
       """

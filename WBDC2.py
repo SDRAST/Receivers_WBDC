@@ -338,13 +338,13 @@ class WBDC2(WBDC_core, Receiver):
         self.DC[name+pol]._get_state()
         self.logger.debug(" DC %s created", self.DC[name+pol])
     # report outputs
-    self.logger.info(" %s outputs: %s",
+    self.logger.debug(" %s outputs: %s",
                      self, str(self.outputs))
     self._update_self() # invokes WBDC_base._update_self()
     self.logger.debug(" initialized for %s", self.name)
 
     # Report outputs
-    self.logger.info(" %s outputs: %s", self, str(self.outputs))
+    self.logger.debug(" %s outputs: %s", self, str(self.outputs))
 
   def set_pol_modes(self, circular=False):
     """
@@ -427,7 +427,7 @@ class WBDC2(WBDC_core, Receiver):
       WBDC_core.TransferSwitch.__init__(self, parent, name, inputs=inputs,
                                         output_names=output_names)
       mylogger.debug(" initializing %s", self)
-      mylogger.info(" %s inputs: %s", self, str(self.inputs))
+      mylogger.debug(" %s inputs: %s", self, str(self.inputs))
       self.parent = parent
       self.logger = mylogger
         
@@ -467,7 +467,7 @@ class WBDC2(WBDC_core, Receiver):
         rx = self.parent.parent # WBDC_core instance which owns the latch group
         try:
           status = rx.lg['PLL'].read()
-          self.logger.debug("_get_state: Latch Group XR data = %s",
+          self.logger.debug("_get_state: Latch Group %s data = %s", rx.lg['PLL'],
                             Math.decimal_to_binary(status,8))
           test_bit = WBDC_base.pol_names.index(self.name)+1
           self.state = bool(status & test_bit)
@@ -492,6 +492,7 @@ class WBDC2(WBDC_core, Receiver):
                             Math.decimal_to_binary(status,8))
         except AttributeError, details:
           self.logger.error("_set_state: status read failed: %s", details)
+          return False
         ctrl_bit = WBDC_base.pol_names.index(self.name)
         if crossover:
           value = Math.Bin.setbit(status, ctrl_bit)
@@ -589,7 +590,7 @@ class WBDC2(WBDC_core, Receiver):
       self.logger.debug(" __init__: output names: %s",
                         output_names)
       self.logger.debug(" initializing WBDC2 %s", self)
-      self.logger.info(" %s inputs: %s", self, str(self.inputs))
+      self.logger.debug(" %s inputs: %s", self, str(self.inputs))
       keys = self.outputs.keys()
       keys.sort()
       inkeys = self.inputs.keys()
@@ -601,7 +602,7 @@ class WBDC2(WBDC_core, Receiver):
         self.outputs[key] = Port(self, key,
                                  source=self.inputs[inname],
                          signal=ComplexSignal(self.inputs[inname].signal))
-      self.logger.info(" %s outputs: %s", self, str(self.outputs))
+      self.logger.debug(" %s outputs: %s", self, str(self.outputs))
 
     def _get_state(self):
       """
@@ -614,7 +615,7 @@ class WBDC2(WBDC_core, Receiver):
       """
       LGID = self.data['receiver']+'P'
       LG = int(self.data['receiver'][-1])+1
-      latchbit = (int(self.data['band'])-18)/4
+      latchbit = (int(self.data['band'])-18)/2
       LGdata = self.parent.lg[LGID].read()
       self.state = Math.Bin.getbit(LGdata,latchbit)
       return self.state
@@ -630,7 +631,7 @@ class WBDC2(WBDC_core, Receiver):
       """
       LGID = self.data['receiver']+'P'
       LG = int(self.data['receiver'][-1])+1
-      latchbit = (int(self.data['band'])-18)/4
+      latchbit = (int(self.data['band'])-18)/2
       LGdata = self.parent.lg[LGID].read()
       self.parent.lg[LGID].write(Math.Bin.setbit(LGdata,latchbit))
       self._get_state()
@@ -672,6 +673,10 @@ class WBDC2(WBDC_core, Receiver):
     def _get_latch_info(self):
       """
       """
+      self.logger.debug("_get_latch_info: called for pol %s, band %s, rx %s",
+                        self.data['pol'],
+                        self.data['band'],
+                        self.data['receiver'])
       rxno = int(self.data['receiver'][-1])-1
       if int(self.data['band']) < 21:
         LGID = self.data['pol']+'I1'
@@ -679,13 +684,18 @@ class WBDC2(WBDC_core, Receiver):
       else:
         LGID = self.data['pol']+'I2'
         latchbit = int(self.data['band']) - 22 + rxno
+      self.logger.debug("_get_latch_info: latch bit %d on group %s selected",
+                        latchbit, LGID)
       return LGID, latchbit
       
     def _get_state(self):
       """
       """
       LGID, latchbit = self._get_latch_info()
-      latchdata = self.parent.lg[LGID].read()
+      try:
+        latchdata = self.parent.lg[LGID].read()
+      except Exception, details:
+        self.logger.error("_get_state: read failed: %s", str(details))
       self.state = Math.Bin.getbit(latchdata, latchbit)
       return self.state
       
@@ -694,8 +704,18 @@ class WBDC2(WBDC_core, Receiver):
       """
       LGID, latchbit = self._get_latch_info()
       latchdata = self.parent.lg[LGID].read()
-      latchdata = Math.Bin.setbit(latchdata, latchbit)
-      self.parent.lg[LGID].write(state)
+      self.logger.debug("_set_state: latchdata was %s",
+                        Math.decimal_to_binary(latchdata,8))
+      if state:
+        latchdata = Math.Bin.setbit(latchdata, latchbit)
+      else:
+        latchdata = Math.Bin.clrbit(latchdata, latchbit)
+      self.logger.debug("_set_state: latchdata is %s",
+                        Math.decimal_to_binary(latchdata,8))
+      try:
+        self.parent.lg[LGID].write(latchdata)
+      except Exception, details:
+        self.logger.error("_set_state: write failed: %s", str(details))
       self._get_state()
       self._update_self()
       return self.state

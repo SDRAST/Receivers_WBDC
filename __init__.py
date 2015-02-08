@@ -3,11 +3,15 @@ WBDC - module for Wide Band Down Converter receiver classes
 
 Overview
 ========
-There are two versions of the wideband down-converter. WBDC1 has two RF
-sections after the band-splitting filters, one for 22 and 24 GHz, two
-switch-selectable LOs and one IF section.  WBDC2 has five RF sections and five
-IF sections.  The sections, as well as feed switching, polarization selection,
-etc. are the same.
+There are two versions of the wideband down-converter
+
+WBDC1 has two RF sections after the band-splitting filters, one for 22 and 24
+GHz, two switch-selectable LOs and one IF section.
+
+WBDC2 has five RF sections and five IF sections.
+
+The sections, as well as feed switching, polarization selection, etc. are
+basically the same.
 
 Input Switching
 ===============
@@ -76,7 +80,7 @@ class WBDC_base(Receiver):
   WARNING!  RFsection method _rename_beam is very dependent on the naming
   convention used, specifically, the length of the names.
   """
-  pol_names  = ["X",  "Y" ]
+  pol_names  = ["E",  "H" ]
   RF_names   = ["R1", "R2"]
   out_pols   = ["P1", "P2"]
   DC_names   = ["D1", "D2"]
@@ -133,13 +137,21 @@ class WBDC_base(Receiver):
       self.pols = unique(self.pols)
       self.pols.sort()
 
-  def set_crossover(self, crossed=False):
+  def get_crossover(self):
+    """
+    Get the cross-over switch state
+    """
+    self.crossSwitch.get_state()
+    self.crossSwitch._update_self()
+    return self.crossSwitch.state
+    
+  def set_crossover(self, crossover=False):
     """
     Set or unset the cross-over switch
     """
-    self.crossSwitch.set_crossover(crossed=crossed)
+    self.crossSwitch.set_state(crossover=crossover)
     self.crossSwitch._update_self()
-    return self.crossSwitch.get_crossover()
+    return self.get_crossover()
 
   def _update_self(self):
     # update the transfer switch
@@ -200,7 +212,7 @@ class WBDC_base(Receiver):
                                       inputs = pol_inputs,
                                       output_names = [WBDC_base.RF_names[0]+pol,
                                                       WBDC_base.RF_names[1]+pol])
-      self.logger.info("__init__: %s outputs: %s", self, str(self.outputs))
+      self.logger.debug("__init__: %s outputs: %s", self, str(self.outputs))
 
     def get_state(self):
       """
@@ -288,6 +300,7 @@ class WBDC_base(Receiver):
         super(WBDC_base.TransferSwitch.Xswitch,self).set_state(state)
         self._update_signal()
         self.logger.debug("WBDC_base.TransferSwitch.Xswitch.set_state: done")
+        return self.get_state()
         
       def _set_state(self, state):
         """
@@ -364,9 +377,9 @@ class WBDC_base(Receiver):
       self.logger.debug(" __init__: output names: %s",
                         self.output_names)
       self.logger.debug(" initializing WBDC_base %s", self)
-      self.logger.info(" %s inputs: %s", self, str(self.inputs))
+      self.logger.debug(" %s inputs: %s", self, str(self.inputs))
       self.set_mode() # defaults to X,Y
-      self.logger.info(" %s outputs: %s", self, str(self.outputs))
+      self.logger.debug(" %s outputs: %s", self, str(self.outputs))
       
     def set_mode(self,convert=False):
       """
