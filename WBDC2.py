@@ -471,7 +471,7 @@ class WBDC2(WBDC_core, Receiver):
                             Math.decimal_to_binary(status,8))
           test_bit = WBDC_base.pol_names.index(self.name)+1
           self.state = bool(status & test_bit)
-          self.logger.debug("_get_state: switch state = %d", self.state)
+          self.logger.debug("_get_state: %s switch state = %d", self, self.state)
         except AttributeError, details:
           self.logger.error("WBDC_core.TransferSwitch.Xswitch._get_state: %s", details)
         return self.state

@@ -125,6 +125,7 @@ class LatchGroup():
     @type  LG : int
     """
     mylogger = logging.getLogger(__name__+".LatchGroup")
+    mylogger.setLevel(logging.INFO)
     if parent == None and labjack == None:
       mylogger.error("%s must have a labjack or a parent with a labjack", self)
       raise ObservatoryError(":", " no labjack or receiver specified")
@@ -142,6 +143,18 @@ class LatchGroup():
     self.logger = mylogger
     self.setLatchAddr()
 
+  def __str__(self):
+    return self.base()+' "'+self.name+'"'
+
+  def __repr__(self):
+    return self.base()+' "'+self.name+'"'
+
+  def base(self):
+    """
+    String representing the class instance type
+    """
+    return str(type(self)).split()[-1].strip('>').strip("'").split('.')[-1]
+  
   def getLatchAddr(self, parent=None, DM=1, LG=1, read=False):
     """
     Returns the address for the given latch group
@@ -269,10 +282,7 @@ class LatchGroup():
     except Exception, details:
       print "send_bit: Could not set SDA bit on latch: %s", details
       return False
-    #self.logger.debug("send_bit: bit %d state is %d for LATCHDATA =%s",
-    #                    EIObit,  bitvalue, Math.decimal_to_binary(LATCHDATA,8))
-    
-    
+
   def write(self, LATCHDATA):
     """
     This writes serial data out to a designated latch

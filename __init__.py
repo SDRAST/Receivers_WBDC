@@ -142,7 +142,7 @@ class WBDC_base(Receiver):
     Get the cross-over switch state
     """
     self.crossSwitch.get_state()
-    self.crossSwitch._update_self()
+    #self.crossSwitch._update_self()
     return self.crossSwitch.state
     
   def set_crossover(self, crossover=False):
@@ -218,7 +218,6 @@ class WBDC_base(Receiver):
       """
       Gets the TransferSwitch state from the Xswitch states.
       """
-      self.logger.debug("WBDC_base.TransferSwitch.get_state: entered")
       keys = self.data.keys()
       keys.sort()
       for ID in keys:
@@ -228,27 +227,30 @@ class WBDC_base(Receiver):
         #                  "%s sub-switch states do not match")
         self.logger.error("%s sub-switch states do not match",str(self))
       self.state = self.states[keys[0]]
-      self._update_self()
-      self.logger.debug("WBDC_base.TransferSwitch.get_state: done")
+      #self._update_self()
+      self.logger.debug("WBDC_base.TransferSwitch.get_state: %s state is %s",
+                        self, self.state)
       return self.state
 
     def set_state(self, crossover=False):
       """
       Set the RF transfer (crossover) switch
       """
-      self.logger.debug("WBDC_base.TransferSwitch.set_state: entered")
       self.state = crossover
       keys = self.data.keys()
       keys.sort()
       for ID in keys:
         self.states[ID] = self.data[ID].set_state(crossover)
       self.get_state()
-      self.logger.debug("WBDC_base.TransferSwitch.set_state: entered")
+      self.logger.debug("WBDC_base.TransferSwitch.set_state: %s state is %s",
+                        self, self.state)
       return self.state
      
     def _update_self(self):
       """
       Update the sub-switches
+
+      Should not be needed
       """
       for key in self.data.keys():
         self.data[key]._update_signal()
@@ -275,10 +277,12 @@ class WBDC_base(Receiver):
         """
         Stub could be replaced by more elaborate sub-class version
         """
-        self.logger.debug("WBDC_base.TransferSwitch.Xswitch.get_state: entered")
-        self.state = self._get_state()
-        self._update_signal()
-        self.logger.debug("WBDC_base.TransferSwitch.Xswitch.get_state: done")
+        #self.state = self._get_state()
+        self.state = super(WBDC_base.TransferSwitch.Xswitch, self).get_state()
+        #self._update_signal()
+        self.logger.debug(
+               "WBDC_base.TransferSwitch.Xswitch.get_state: %s signal updated",
+               self)
         return self.state
 
       def _get_state(self):
@@ -294,12 +298,13 @@ class WBDC_base(Receiver):
         to be sure that the inputs and outputs are redefined as needed.
         """
         # This actually sets the hardware switch, if defined by a subclass
-        self.logger.debug("WBDC_base.TransferSwitch.Xswitch.set_state: entered")
         self._set_state(state)
+        self.logger.debug(
+                  "WBDC_base.TransferSwitch.Xswitch.set_state: %s state is %s",
+                  self)
         # This redefines input destinations and output sources
         super(WBDC_base.TransferSwitch.Xswitch,self).set_state(state)
         self._update_signal()
-        self.logger.debug("WBDC_base.TransferSwitch.Xswitch.set_state: done")
         return self.get_state()
         
       def _set_state(self, state):
