@@ -4,11 +4,164 @@ Module WBDC.WBDC1 provides class WBDC1
 For a description of the generic Wide Band Down Converter see/do
 MonitorControl.Receivers.WBDC.__doc__.split('\n')
 
+WBDC1 has two input pairs, each accepting two orthogonal linear polarizations.
+There are two down-converter chains, each handling two polarizations each, for
+a total of four complex signals.
+
 WBDC1 Band Selection
 ====================
 There are two programmable local oscillators and a switch selects between
 to define the band to be down-converted.  This is a WBDC1-unique feature.
 
+Monitor and control is done with two LabJacks. For a detailed description of
+the LabJack see/do
+MonitorControl.Electronics.Interfaces.LabJack.__doc__.split('\n')
+
+The LabJack with local ID 1 controls and reads switches, and reads analog
+data (currents, voltages, temperatures). Details are described in
+/home/kuiper/DSN/technical/Band K/Kband-downconv/Smith-Weinreb/\
+WBDC1/DigitalBoard/ControlLogic.ods
+
+LabJack 2 controls attenuators using TickDACs to provide analog control
+voltages.
+
+
+Control
+-------
+
+The switches are controlled by digital latches (logical devices which
+preserve a specified logic state). The latches are connected to serial-in
+parallel-out registers.  These registers are addressed using the EIO
+out bits of LabJack 1.  The data are then clocked into the register using
+the SDI and SCK signals.
+
+The latch groups may be designated by their circuit name (LATCH1 and LATCH2)
+or their address (80 or 81).
+
+Latch Group 1 (Address 80)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+The feed switch pair is controlled by bit L1A0 (A0 on Latch 1)::
+  0 for through
+  1 for crossed-over
+The receiver 1 polarizer is controlled by L1A1 and L1A2::
+  01 for linear
+  10 for circular
+The receiver 2 polarizer is controlled by L1A3 and L1A4 with the same logic.
+
+L1A5 controls the PLO switch::
+  0 for 22 FHz
+  1 for 24 GHz
+
+Latch Group 2 (Address 81)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+The I/Q to U/L converters are controlled by L2A0 through L2A7.  Each
+bit pair handles one converter.  So L2A0 and L2A1 control receiver 1
+pol 1 with this logic::
+  01 for I/Q
+  10 for U/L
+and the same for the other four.
+
+Monitoring
+----------
+
+Three latch groups are assigned to digital monitoring, that is, the program
+reads the latch states.
+
+Latch Group 2 (Address 82)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+Latch group 2 (L2A0 - L2A7) has a read address of 85. The switches directing
+signals to/from or around the I/Q->U/L hybrids have no tell-tales, so one
+simply reads the states of the control signals.
+
+
+Latch group 3
+~~~~~~~~~~~~~
+The polarization switches have tell-tales and are read by latch group 3
+with an address of 86.  These switches are controlled in pairs but read
+individually. So whereas Receiver 1's polarizer is commanded with
+latches L1A1 and L1A2, the switches states are given by L3A0 thru L3A3.
+The mapping is weird.  The state of L1A1 is reflected by L3A0 and L3A3,
+whereas the state of L1A2 is reflected by L3A1 and L3A2.
+
+Latch group 4
+~~~~~~~~~~~~~
+has address 87. L4A0 and L4A1 are used monitor the receiver select switches,
+which are controlled with one signal, L1A0
+
+L4A4 monitors the state of the PLO switch.
+
+L4A2 monitors the 22 GHz PLO lock and L4A3 the 24 GHz PLO lock
+
+Latch LEDs
+~~~~~~~~~~
+The monitor bits should match the LEDs to the top right of the motherboard.
+With the hinge of the lid at the bottom the LEDs are in LSB -> MSB order
+and grouped as::
+  LATCH86 LATCH87
+  LATCH84 LATCH85
+If the box is mounted on a wall or ceiling and the lid is hanging down,
+the order is more conventional.
+
+Latch Addresses 0 and 2
+~~~~~~~~~~~~~~~~~~~~~~~
+There are a number of registers used to select analog monitoring points.
+An bit pattern sent to latch address 0 selects a current and a voltage
+to be connected to AIN0 and AIN1.  A bit pattern sent to latch address
+2 selects a thermistor to be connected to AIN2.  AIN3 is not used in this
+receiver.
+
+Attenuators
+-----------
+
+There are four RF voltage-controlled attenuators (PIN diodes) for each
+down-converter sub-band.  The four voltages are generated in LabJack
+TickDACs attached to LabJack2 (and 3 for WBDC2).
+
+LabJack Configuration
+=====================
+
+LabJack 1
+---------
+Functions::
+  FIO0-FIO3 - AIN: monitor voltages, current, temperatures
+  FIO4-FIO6 -      not used
+  FIO7      - DO:  read digital in
+  EIO0-EIO7 - DO:  select latch by address
+  CIO0-CIO3 - DO:  set WBDC signals
+
+So this is the LabJack Configuration::
+              CIOBitDir     1111
+              EIOBitDir 11111111
+              FIOBitDir 00000000
+              FIOAnalog 00001111
+
+LabJack 2 Typical Configuration
+-------------------------------
+An initial checkout might be::
+  In [2]: from Observatory import WBDC
+  In [3]: lj = connect_to_U3s()
+
+The normal state of the U3s is something like::
+          U3 local ID          1        2
+          ------------- -------- --------
+              CIOBitDir 00001111 00000000
+               CIOState 00001111 00001111
+             DAC1Enable 00000000 00000000
+              EIOAnalog 00000000 00000000
+               EIOState 01010111 11111111
+         EnableCounter0    0.000    0.000
+         EnableCounter1    0.000    0.000
+                  FAIN0    0.001
+                  FAIN1    1.455
+                  FAIN2    0.000
+                  FAIN3    0.000
+              FIOAnalog 00001111 00000000
+              FIOBitDir 00000000 00000000
+               FIOState 11110000 11111111
+  NumberOfTimersEnabled        0        0
+          Temperature  295.569  295.507
+     TimerCounterConfig       64       64
+  TimerCounterPinOffset        4        4
 """
 import copy
 import logging
