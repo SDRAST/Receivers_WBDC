@@ -330,9 +330,11 @@ class WBDC_core(WBDC_base):
                                  active=active)
       self.logger = logging.getLogger(module_logger.name+".DownConv")
 
-class Attenuator(LJTickDAC):
+
+class OldAttenuator(LJTickDAC):
   """
-  Voltage-controlled PIN diode attenuator for WBDC.
+  Voltage-controlled PIN diode attenuator for WBDC
+  to be removed
 
   The superclass is defined and described in::
     DSN-Sci-packages/Electronics/Interfaces/LabJack
