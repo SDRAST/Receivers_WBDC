@@ -111,7 +111,7 @@ class WBDC_core(WBDC_base):
   be different for the two WBDC implementations so these must be provided in
   dictionaries in the appropriate sub-classes.
   """
-  def __init__(self, name, inputs = None, output_names=None, active=True):
+  def __init__(self, name, LJIDs, inputs = None, output_names=None, active=True):
     """
     Initialize a physical WBDC object.
 
@@ -135,26 +135,7 @@ class WBDC_core(WBDC_base):
     self.logger.debug(" WBDC_core initializing %s", self)
     if inputs:
       self.logger.debug(" %s inputs: %s", self, str(self.inputs))
-    LJ_keys = self.find_labjacks()
-    if self.has_labjack(1):
-      self.configure_MB_labjack()
-    else:
-      raise WBDCerror("could not configure motherboard Labjack")
-
-  def find_labjacks(self):
-    """
-    Find the LabJacks for this WBDC
-
-    WBDC1 has two LabJacks numbered 1 and 2.  WBDC has three LabJacks.
-    LabJack 1 is the motherboard controller.  LabJacks 2 and 3 control the PIN
-    diode attenuators.
-
-    WBDC1 has a LabJack 3 which is the front-end controller.
-    """
-    self.logger.debug("find_labjacks: entered")
-    self.LJ = connect_to_U3s()
-    self.logger.info("find_labjacks: found %s", self.LJ.keys())
-    return self.LJ.keys()
+    self.LJ = connect_to_U3s(LJIDs)
 
   def has_labjack(self, localID):
     """
@@ -252,30 +233,6 @@ class WBDC_core(WBDC_base):
                                                   output_names=output_names,
                                                   active=active)
         
-     
-    #def get_crossover(self):
-    #  """
-    #  This gets the state from the hardware.
-    #
-    #  This method must be equated to the Switch object method _get_state()
-    #
-    #  The state of the switches is read at bits 0 and 1 of latch group 87.
-    #  """
-    #  subswitch = self.data[ID]
-    #  self.logger.debug(" getting state for %s", subswitch)
-    #  devID = subswitch.name
-    #  rx = subswitch.parent.parent
-    #  lg = LatchGroup(parent=rx, address=87)
-    #  status = lg.read()
-    #  self.logger.debug(" Latch Group 1 data = %s",
-    #                    Math.decimal_to_binary(status,8))
-    #  # This is a case of getting signal information from a name; bad!
-    #  #test_bit = int(devID[-1])
-    #  test_bit = WBDC_base.pol_names.index(ID)
-    #  subswitch.state = status & test_bit
-    #  self.logger.debug(" switch state = %d", subswitch.state)
-    #  return subswitch.state
-
   class RFsection(WBDC_base.RFsection):
     """
     """
@@ -375,41 +332,63 @@ class WBDC_core(WBDC_base):
 
 class Attenuator(LJTickDAC):
   """
-  Voltage-controlled PIN diode attenuator for WBDC
+  Voltage-controlled PIN diode attenuator for WBDC.
 
-  @type bias_list : list of float
-  @ivar bias_list : bias voltages for calibration
+  The superclass is defined and described in::
+    DSN-Sci-packages/Electronics/Interfaces/LabJack
+    
+  A LJTickDAC controls two voltages.
 
-  @type volts : list of float
-  @ivar volts : auto-generated control voltages for calibration (V)
+  The lower (even) number IO port provides the clock (SCK) and the odd number
+  port the serial data (SDA).
 
-  @type pwrs : list of float
-  @ivar pwrs : measured powers corresponding to 'volts' (dBm)
-
-  @type bias : float
-  @ivar bias : best bias value out of 'bias_list'
-
-  @type coefs : numpy array of float
-  @ivar coefs : polynomial coeffients for best calibration curve
-
-  @type lower : float
-  @ivar lower : lowest power measured
-
-  @type upper : float
-  @ivar upper : highest power measured
-
-  @type atten_table : dictionary
+  Attributes::
+  @ivar bias_list   : bias voltages for calibration
+  @type bias_list   : list of float
+  @ivar volts       : auto-generated control voltages for calibration (V)
+  @type volts       : list of float
+  @ivar pwrs        : measured powers corresponding to 'volts' (dBm)
+  @type pwrs        : list of float
+  @ivar bias        : best bias value out of 'bias_list'
+  @type bias        : float
+  @ivar coefs       : polynomial coeffients for best calibration curve
+  @type coefs       : numpy array of float
+  @ivar lower       : lowest power measured
+  @type lower       : float
+  @ivar upper       : highest power measured
+  @type upper       : float
   @ivar atten_table : control voltage indexed by attenuation
+  @type atten_table : dictionary
   """
-  def __init__(self,LabJack,pin):
+  def __init__(self, LabJack, SCK, channel_names):
     """
+    @param LabJack : parent device for TickDAC
+    @type  LabJack : LabJack instance
+
+    @param SCK :
     """
-    LJTickDAC.__init__(self,LabJack,pin)
+    LJTickDAC.__init__(self, LabJack, SCK)
     print "Initializing attenuator on LabJack",LabJack.localID
-    self.pwrs = {}
+    #self.pwrs = {}
     self.bias = 3.0
+    #self.get_coefs()
+    for name in channel_names:
+      chan[name] = self.Channel()
+
+    class Channel(object):
+      """
+      """
+      def __init__(self):
+        """
+        """
+        pass
+
+  def get_coefs(self):
+    """
+    This is for WBDC and K_4ch only
+    """
     # The IDs match the WBDC receiver channels
-    if pin == 0:
+    if SCK == 0:
       self.ID = 1
       self.coefs = NP.array([2.24305829e-03,  3.47608278e-02,
                              1.91564653e-01,  3.57628078e-01,
@@ -417,7 +396,7 @@ class Attenuator(LJTickDAC):
                             -4.14345128,     -8.16101008])
       self.lower = -5.0
       self.upper =  1.75
-    elif pin == 2:
+    elif SCK == 2:
       self.ID = 2
       self.coefs = NP.array([1.97246882e-03,  3.15527700e-02,
                              1.80115477e-01,  3.54211343e-01,
@@ -425,7 +404,7 @@ class Attenuator(LJTickDAC):
                             -4.14205717,     -8.34552823    ])
       self.lower = -5.0
       self.upper =  1.75
-    elif pin == 4:
+    elif SCK == 4:
       self.ID = 3
       self.coefs = NP.array([2.06521060e-03,  3.27308482e-02,
                              1.84436385e-01,  3.52212701e-01,
@@ -433,7 +412,7 @@ class Attenuator(LJTickDAC):
                             -4.05112656,      -8.39222065   ])
       self.lower = -5.0
       self.upper =  1.75
-    elif pin == 6:
+    elif SCK == 6:
       if LabJack.localID == 2:
         self.ID = 4
         self.coefs = NP.array([2.13996316e-03,  3.34458388e-02,

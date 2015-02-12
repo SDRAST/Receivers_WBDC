@@ -207,7 +207,7 @@ import Math
 from ... import ComplexSignal, IF, Port, ObservatoryError, show_port_sources
 from .. import Receiver
 from . import WBDC_base
-from .WBDC_core import LatchGroup, WBDC_core
+from .WBDC_core import Attenuator, LatchGroup, WBDC_core
 from support import contains
 
 module_logger = logging.getLogger(__name__)
@@ -238,6 +238,7 @@ class WBDC2(WBDC_core, Receiver):
   appended, in that order.
   """
   bands      = ["18", "20", "22", "24", "26"]
+  LJIDs = {320053997: 1, 320052373: 2, 320059056: 3}
 
   def __init__(self, name, inputs = None, output_names=None, active=True):
     """
@@ -260,15 +261,22 @@ class WBDC2(WBDC_core, Receiver):
     mylogger.debug("\ninitializing %s", self)
     show_port_sources(inputs, "WBDC2 inputs before superclass init:",
                         mylogger.level)
-    WBDC_core.__init__(self, name, active=active, inputs=inputs,
+    WBDC_core.__init__(self, name, WBDC2.LJIDs,
+                       active=active,
+                       inputs=inputs,
                        output_names=output_names)               
     show_port_sources(self.inputs, "WBDC2 inputs after superclass init:",
                       mylogger.level)
     show_port_sources(self.outputs, "WBDC2 outputs after superclass init:",
                         mylogger.level)
     self.logger = mylogger
-    self.verify_labjacks()
 
+    #self.check_LJ_IO()
+    if self.has_labjack(1):
+      self.configure_MB_labjack()
+    else:
+      raise WBDCerror("could not configure motherboard Labjack")
+    
     self.data['bandwidth'] = 1e10 # Hz
     # Define the latch groups
     self.lg = {'X':    LatchGroup(parent=self, LG=1),        # crossover (X) switch
@@ -345,7 +353,7 @@ class WBDC2(WBDC_core, Receiver):
 
     # Report outputs
     self.logger.debug(" %s outputs: %s", self, str(self.outputs))
-
+    
   def set_pol_modes(self, circular=False):
     """
     """
@@ -383,15 +391,21 @@ class WBDC2(WBDC_core, Receiver):
       modes[key] = self.DC[key].get_IF_mode()
     return modes
 
-  def verify_labjacks(self):
+  def check_IO_config(self):
     """
+    Check the configuration of this LabJack according ot its local ID.
+
+    The local ID should reflect its function in WBDC2:
+      1 - motherboard control
+      2 - receiver 1 attenuators
+      3 - receiver 2 attenuators
     """
     # Is there a motherboard controller?
     if self.has_labjack(1):
       # A MB controller has F bits 0-3 set for analog input
       if self.LJ[1].configIO()['FIOAnalog'] != 15:
         self.logger.info(
-                       "verify_labjacks: Configuring LabJack 1 for MB control")
+                       "check_IO_config: Configuring LabJack 1 for MB control")
         self.configure_MB_labjack()
     else:
       raise ObservatoryError("","LabJack 1 is not connected")
@@ -400,14 +414,14 @@ class WBDC2(WBDC_core, Receiver):
       # configured for digital output.
       if self.LJ[2].configU3()['EIOState']!= 255:
         self.logger.info(
-               "verify_labjacks: Configuring LabJack 2 for attenuator control")
+               "check_IO_config: Configuring LabJack 2 for attenuator control")
         self.configure_atten_labjack(2)
     else:
       raise ObservatoryError("","LabJack 2 is not connected")
     if self.has_labjack(3):
       if self.LJ[3].configU3()['EIOState']!= 255:
         self.logger.info(
-               "verify_labjacks: Configuring LabJack 3 for attenuator control")
+               "check_IO_config: Configuring LabJack 3 for attenuator control")
         self.configure_atten_labjack(3)
     else:
       raise ObservatoryError("","LabJack 3 is not connected")
@@ -576,10 +590,26 @@ class WBDC2(WBDC_core, Receiver):
          
   class PolSection(WBDC_core.PolSection):
     """
-    
+    Class for optional conversion of E,H pol tl L,R and attenuators adjustment.
+
+    The attenuator assignment is as follows. R1 uses LJ 2,  R2 uses LJ3.
+    The LJ port assignment is:::
+      PolSec  Pol DAC  Pin  Port
+      Rx-18    H   A    1   FIO0
+               E   B    2   FIO1
+      Rx-20    H   A    1   FIO2
+               E   B    2   FIO3
+      Rx-22    H   A    1   FIO4
+               E   B    2   FIO5
+      Rx-24    H   A    1   FIO6
+               E   B    2   FIO7
+      Rx-26    H   A    1   EIO0
+               E   B    2   EIO1
     """
     def __init__(self, parent, name, inputs=None, output_names=None,
                  active=True):
+      """
+      """
       mylogger = logging.getLogger(parent.logger.name+".PolSection")
       self.name = name
       mylogger.debug(" initializing %s", self)
@@ -638,6 +668,18 @@ class WBDC2(WBDC_core, Receiver):
       self._update_self()
       return self.state
 
+    class IFattenuator(Attenuator):
+      """
+      """
+      def __init__(self, LabJack, IOport):
+        Attenuator.__init__(self, LabJack, IOport)
+
+    def get_atten(self, pol):
+      """
+      Returns attenuation for `pol' inputs of pol section
+      """
+      
+      
   class DownConv(WBDC_core.DownConv):
     """
     Converts RF to IF

@@ -38,7 +38,7 @@ The digital board LabJack maps to the board's signals as follows::
 
       EI00     8     A0         Latch address LSB
       EI01     9     A1         ..
-      Ei02    10     A2         ..
+      EI02    10     A2         ..
       EI03    11     A3         ..
       EI04    12     A4         ..
       EI05    13     A5         ..
@@ -86,10 +86,13 @@ from MonitorControl import ObservatoryError
 
 module_logger = logging.getLogger(__name__)
 
-# These map the WBDC signal names into the LabJack digital IO lines.
+# These map the WBDC signal names into the LabJack digital IO lines.  Each
+# integer corresponds to a LJ IO port.  (See LabJack.LJchan.)
 WBDCsignal = {
-  'IMON':0, 'VMON':1, 'TEMP':2, 'LNA':3, 'SDO':7,
-  'A0':8, 'A1':9, 'A2':10, 'A3':11, 'A4':12, 'A5':13, 'A6':14, 'A7':15,
+  'IMON':0, 'VMON':1, 'TEMP':  2, 'LNA':    3,
+                                  'SDO':    7,
+  'A0':  8, 'A1':  9, 'A2':   10, 'A3':    11,
+  'A4': 12, 'A5': 13, 'A6':   14, 'A7':    15,
   'SCK':16, 'SDI':17, 'NLOAD':18, 'CS-BUS':19}
 
 

@@ -190,6 +190,7 @@ class WBDC1(WBDC_core, Receiver):
   """
   IF_names   = ["I1", "I2"]
   bands      = [22, 24]
+  localIDs   = {320038183: 1, 320038583: 2, 320037493: 3}
 
   def __init__(self, name, inputs = None, output_names=None, active=True):
     """
@@ -207,7 +208,8 @@ class WBDC1(WBDC_core, Receiver):
     @param active : True is the FrontEnd instance is functional
     @type  active : bool
     """
-    WBDC_base.__init__(self, name, active=active, inputs=inputs,
+    # This gets the LabJack as a 
+    WBDC_core.__init__(self, name, active=active, inputs=inputs,
                       output_names=output_names)
     self.logger.debug("initializing %s", self)
     self.logger.info(" %s inputs: %s", self, str(self.inputs))
@@ -217,6 +219,16 @@ class WBDC1(WBDC_core, Receiver):
     self.logger.info(" %s outputs: %s", self, str(self.outputs))
     self._update_self()
 
+    def assign_LJ_IDs(self):
+    
+    # This must move to the proper context, i.e., WBDC1
+    if self.serial == 320037493:
+      self.configU3(LocalID=3)
+    elif self.serial == 320038183:
+      self.configU3(LocalID=1)
+    elif self.serial == 320038583:
+      self.configU3(LocalID=2)
+  
   def set_band(self, band=22):
     assert contains(WBDC1.bands, band), \
       ("%s does not have band %d" % (self.name, band))
