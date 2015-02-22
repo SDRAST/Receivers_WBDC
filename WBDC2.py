@@ -24,8 +24,8 @@ WBDC2/DigitalBoard/ControlLogic.ods
 LabJacks 2 and 3 control attenuators using TickDACs to provide analog control
 voltages.
 
-Motherboard Monitor and Control
-===============================
+Motherboard Control
+===================
 
 Motherboard signals are monitored and controlled with digital latches (logical
 devices which preserve a specified logic state). The latches are connected to
@@ -39,8 +39,11 @@ module 'latchgroup' describes the latch group addressing scheme.  Bit 2 selects
 a latch for reading if set, or writing if not set.  (In other words, the read
 address is the write address + 4.)
 
+Digital Module 1
+----------------
+
 Feed Crossover Switch
----------------------
+~~~~~~~~~~~~~~~~~~~~~
 
 The feed crossover switches are controlled with DM 1 LG 1 using bits L1A0 and
 L1A1 (A0, A1 at latchgroup address 8)::
@@ -51,7 +54,7 @@ However, the actual state of the cross-over switches are read at L4A0 and
 L4A1 (LG address 15).
 
 Polarization Hybrids
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 The receiver chain 1 polarization hybrids are controlled by L2A0-L2A4.
 The receiver chain 2 polarization hybrids are controlled by L3A0-L4A4.
@@ -65,8 +68,11 @@ polarization to L and R (though the sign of that needs to be verified).::
    24    L2A1 L3A3
    26    L2A0 L3A4
 
+Digital Module 2
+----------------
+
 Latch Groups 1,2,3,4 (Address 160,161,162,163)
-----------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Receiver chain 1 IQ hybrids are controlled by high address latch groups 1 and 2
 Receiver chain 2 IQ hybrids are controlled by high address latch groups 3 and 4
 The two switches use opposite logic
@@ -80,15 +86,17 @@ Logic level 1,0 is for IQ; logic level 0,1 is for LU::
    26   L1A1  L1A0   L4A3  L4A4
    
 
-Monitoring
-==========
+Motherboard Monitoring
+======================
+
+Digital Module 1
+----------------
 
 Seven latch groups are assigned to digital monitoring, that is, the program
 reads the latch states.
 
-
 Low Address Latch Groups 2 (Address 85) and 3 (Address 86)
-----------------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The receiver chain 1 polarization hybrids are monitored by L2A0-L2A4.
 The receiver chain 2 polarization hybrids are monitored by L3A0-L4A4.
 Logic level 0 is the hybrids are bypassed; logic level 1 shows the hybrids are
@@ -101,7 +109,7 @@ converting X and Y polarization to L and R.::
    26    L2A0 L3A4
 
 Low Address Latch Group 4 (Address 87)
---------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This monitors the state of the transfer switches and the local oscillator
 phase-locked loops::
   Pol   Status Bit
@@ -114,8 +122,11 @@ phase-locked loops::
    24      L4A5
    26      L4A6
 
+Digital Module 2
+----------------
+
 High Address Latch Groups 1-4 (Addresses 164-168)
--------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Receiver chain 1 IQ hybrids are monitored by high address latch groups 1 and 2
 Receiver chain 2 IQ hybrids are monitores by high address latch groups 3 and 4
 The two switches use opposite logic
@@ -138,13 +149,57 @@ and grouped as::
 If the box is mounted on a wall or ceiling and the lid is hanging down,
 the order is more conventional.
 
-Latch Addresses 0 and 2
-~~~~~~~~~~~~~~~~~~~~~~~
-There are a number of registers used to select analog monitoring points.
-An bit pattern sent to latch address 0 selects a current and a voltage
-to be connected to AIN0 and AIN1.  A bit pattern sent to latch address
-2 selects a thermistor to be connected to AIN2.  AIN3 is not used in this
-receiver.
+Analog Monitoring
+-----------------
+
+Latch 1 (Address 0)
+~~~~~~~~~~~~~~~~~~~
+This latch selects voltage and current monitoring points.  Voltage points are
+selected using bits 0-2 and read at AIN1.  Currents are selected using bits
+3-6 and read at AIN0.  The addresses can be ANDed to select any voltage point
+with any current point.
+Voltages::
+ 0 ---- 000  +6 V digital *  4.0211
+ 0 ---- 001  +6 V analog  *  4.0278
+ 0 ---- 010 +16 V DC      * 10.5446
+ 0 ---- 011 +12 V DC      * 10.5827
+ 0 ---- 100 -16 V DC      *-10.5446
+The actual voltages are the data times the scale factor shown above.
+Currents::
+ 0 0000 ---  +6 V Digital MB
+ 0 0001 ---  +6 V Analog MB
+ 0 0010 --- -16 V MB
+ 0 0011 --- +16 V R1 FE
+ 0 0100 --- +16 V R2 FE
+ 0 0101 --- +16 V R1 BE
+ 0 0110 --- +16 V R2 BE
+ 0 0111 --- +16 V LDROs
+ 0 1000 --- +16 V MB
+ 0 1001 ---  +6 V R1 FE
+ 0 1010 ---  +6 V R2 FE
+ 0 1011 --- -16 V R1 FE
+ 0 1100 --- -16 V R2 FE
+ 0 1101 --- -16 V R1 BE
+ 0 1110 --- -16 V R2 BE
+The actual currents (in mA?) are (data - 0.026)*1
+
+Latch 2 (Address 1)
+~~~~~~~~~~~~~~~~~~~
+This latch selects temperatures (bits 0-2) read at AIN3 and RF detector
+voltages (bits 3-6) read at AIN2.
+
+Temperatures::
+ 0 ---- 000 R1 RF plate
+ 0 ---- 001 R2 RF plate
+ 0 ---- 010 BE plate
+The temperature in deg C is (data+0.2389275)*23.549481
+
+Detectors::
+ 0 0000 --- R1 E
+ 0 1000 --- R2 E
+ 0 0100 --- R1 H
+ 0 1100 --- R2 H
+The actual reading is (data-0.004)*2.0064
 
 Attenuators
 -----------
@@ -170,8 +225,16 @@ So this is the LabJack Configuration::
               EIOBitDir 11111111
               FIOBitDir 00000000
               FIOAnalog 00001111
+              
+Latch Addresses 0 and 2
+~~~~~~~~~~~~~~~~~~~~~~~
+There are a number of registers used to select analog monitoring points.
+bit pattern sent to latch address 0 selects a current and a voltage
+to be connected to AIN0 and AIN1.  A bit pattern sent to latch address
+2 selects a thermistor to be connected to AIN2.  AIN3 is not used in this
+receiver.
 
-LabJack 2 Typical Configuration
+LabJack 2 and 3 Typical Configuration
 -------------------------------
 An initial checkout might be::
   In [2]: from Observatory import WBDC
@@ -207,7 +270,8 @@ import Math
 from ... import ComplexSignal, IF, Port, ObservatoryError, show_port_sources
 from .. import Receiver
 from . import WBDC_base
-from .WBDC_core import Attenuator, LatchGroup, WBDC_core
+from .WBDC_core import LatchGroup, WBDC_core
+from Electronics.Instruments import Attenuator
 from support import contains
 
 module_logger = logging.getLogger(__name__)
@@ -239,6 +303,11 @@ class WBDC2(WBDC_core, Receiver):
   """
   bands      = ["18", "20", "22", "24", "26"]
   LJIDs = {320053997: 1, 320052373: 2, 320059056: 3}
+  mon_points = {1: [[0,],[2,]],
+                2: [[0,],[2,]]}
+  mon_ID = {1: ["",""],
+            2: ["",""]}
+  
 
   def __init__(self, name, inputs = None, output_names=None, active=True):
     """

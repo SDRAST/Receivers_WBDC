@@ -1,17 +1,20 @@
 """
 LabJack 1 is capable of addressing 256 X 8 bit latches on a WBDC motherboard.
-They are grouped in sets of 8 latches. The first four of the latch groups::
+They are grouped in 32 sets of 8 latches. The first four of the latch groups
+of each set, at addresses::
   (0-3, 8-11, 16-19, ..., 80-83, ..., 248-251)
-are write-to control bits. The second four of the latch groups::
+are write-to control bits. The second four of the latch groups of each set,
+at addresses::
   (4-7, 12-15, 20-23, ...,84-87, ..., 252-255)
 are read bits for status (i.e. switch position indicators).
 
-A0-A7 (also known as EIO0-EIO7) are used to address a specific 8 bit latch for
-writing or reading. The latch data are sent or read serially, MSB first.
-The latch group address encoded with the EIO bits consists of three parts::
-  EIO7-EIO3 encodes the digital module (DM) address.
+Address bits A0-A7 (ports EIO0-EIO7 on LabJack 1) are used to address a
+specific 8 bit latch for writing or reading. The latch data are sent or read
+serially, MSB first.  The latch group address encoded with the EIO bits
+consists of three parts::
+  EIO7-EIO3 encodes the motherboard digital module (DM) address.
   EIO2      indicates write if 0 and read if 1.
-  EIO1-EIO0 selects the latch group (LG) in a digital module.
+  EIO1-EIO0 along with EIO2, selects the latch group (LG) in a digital module.
 So latches in write-mode have addresses ending in 0~3.  Latches in read-mode
 have addresses ending in 4~7.  For example,DM~1 LG~1 has a EIO value (address)
 of 80 (0101~0000) in WBDC1 and 8 (0000~1000) in WBDC2. LG~2 in any DM has
