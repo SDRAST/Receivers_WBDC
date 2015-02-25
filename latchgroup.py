@@ -134,13 +134,13 @@ class LatchGroup():
     mylogger.setLevel(logging.INFO)
     if parent == None and labjack == None:
       mylogger.error("%s must have a labjack or a parent with a labjack", self)
-      raise ObservatoryError(":", " no labjack or receiver specified")
+      raise ObservatoryError("", " no labjack or receiver specified")
     elif labjack == None:
       self.parent = parent
       self.LJ = self.parent.LJ[1] # LabJack 1 is always the DM controller
     else:
       self.LJ = labjack
-    if DM == None or LG == None:
+    if DM == None and LG == None:
       mylogger.error("%s must have digital module and latch group codes", self)
       raise ObservatoryError(":", "no latch group")
     else:
@@ -165,6 +165,12 @@ class LatchGroup():
     """
     Returns the address for the given latch group
 
+    The latchgroup base address for digital monitoring is determined by the
+    digital module number and the WBDC version.
+
+    The latchgroup base address for analog monitoring is 0. It is only used
+    on the LabJack for DM 1. See thelatchgroup module docstring.
+
     @param parent : device to which the LatchGroup instance belongs
     @type  parent : Device subclass instance
 
@@ -179,6 +185,8 @@ class LatchGroup():
     """
     if parent:
       self.parent = parent
+      if DM == 0:
+        return 0
       try:
         self.baseAddress = parent.latchBaseAddr
       except AttributeError:

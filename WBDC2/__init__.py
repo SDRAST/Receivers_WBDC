@@ -264,17 +264,21 @@ The normal state of the U3s is something like::
 """
 import copy
 import logging
+import re
 from collections import OrderedDict
 
 import Math
-from ... import ComplexSignal, IF, Port, ObservatoryError, show_port_sources
-from .. import Receiver
-from . import WBDC_base
-from .WBDC_core import LatchGroup, WBDC_core
-from Electronics.Instruments import Attenuator
+from .... import ComplexSignal, IF, Port, ObservatoryError, show_port_sources
+from ... import Receiver
+from .. import WBDC_base
+from ..WBDC_core import LatchGroup, WBDC_core
+from Electronics.Instruments.PINatten import PINattenuator, get_splines
+from Electronics.Interfaces.LabJack import LJTickDAC
 from support import contains
 
 module_logger = logging.getLogger(__name__)
+package_dir = "/usr/local/lib/python2.7/DSN-Sci-packages/"
+module_subdir = "MonitorControl/Receivers/WBDC/WBDC2/"
 
 def show_signal(parent, ports):
   inkeys = ports.keys()
@@ -303,11 +307,28 @@ class WBDC2(WBDC_core, Receiver):
   """
   bands      = ["18", "20", "22", "24", "26"]
   LJIDs = {320053997: 1, 320052373: 2, 320059056: 3}
-  mon_points = {1: [[0,],[2,]],
-                2: [[0,],[2,]]}
-  mon_ID = {1: ["",""],
-            2: ["",""]}
-  
+  mon_points = {0: {1: (int('0000000', 2), " +6 V digital & MB", " +6 V"),
+                    2: (int('0001001', 2), " +6 V analog MB"   , " +6 V"),
+                    3: (int('1000010', 2), "+16 V MB"          , "+16 V"),
+                    4: (int('0000011', 2), ""                  , "+12 V"),
+                    5: (int('0010100', 2), "-16 V MB"          , "-16 V"),
+                    6: (int('0011010', 2), "+16 V R1 FE"       , "+16 V"),
+                    7: (int('0100010', 2), "+16 V R2 FE"       , "+16 V"),
+                    8: (int('0101010', 2), "+16 V R1 BE"       , "+16 V"),
+                    9: (int('0110010', 2), "+16 V R2 BE"       , "+16 V"),
+                   10: (int('0111010', 2), "+16 V LDROs"       , "+16 V"),
+                   11: (int('1001001', 2), " +6 V R1 FE"       , " +6 V"),
+                   12: (int('1010001', 2), " +6 V R2 FE"       , " +6 V"),
+                   13: (int('1011100', 2), "-16 V R1 FE"       , "-16 V"),
+                   14: (int('1100100', 2), "-16 V R2 FE"       , "-16 V"),
+                   15: (int('1101100', 2), "-16 V R1 BE"       , "-16 V"),
+                   16: (int('1110100', 2), "-16 V R2 BE"       , "-16 V")},
+               2: { 1: (int('0000000', 2), "R1 E-plane", "R1 RF plate"),
+                    2: (int('0001001', 2), "R2 E-plane", "R2 RF plate"),
+                    3: (int('0010010', 2), "R1 H-plane", "BE plate"),
+                    4: (int('0011000', 2), "R2 H-plane", "") } }
+ 
+  splines = get_splines(package_dir+module_subdir+"splines.pkl")
 
   def __init__(self, name, inputs = None, output_names=None, active=True):
     """
@@ -348,14 +369,14 @@ class WBDC2(WBDC_core, Receiver):
     
     self.data['bandwidth'] = 1e10 # Hz
     # Define the latch groups
-    self.lg = {'X':    LatchGroup(parent=self, LG=1),        # crossover (X) switch
-               'R1P':  LatchGroup(parent=self, LG=2),        # receiver 1 pol hybrid control
-               'R2P':  LatchGroup(parent=self, LG=3),
-               'PLL':  LatchGroup(parent=self, LG=4),
-               'P1I1': LatchGroup(parent=self, DM=2, LG=1),
-               'P1I2': LatchGroup(parent=self, DM=2, LG=2),
-               'P2I1': LatchGroup(parent=self, DM=2, LG=3),
-               'P2I2': LatchGroup(parent=self, DM=2, LG=4)}
+    self.lg['X'] =    LatchGroup(parent=self, LG=1)        # crossover (X) switch
+    self.lg['R1P'] =  LatchGroup(parent=self, LG=2)        # R1 pol hybrid control
+    self.lg['R2P'] =  LatchGroup(parent=self, LG=3)
+    self.lg['PLL'] =  LatchGroup(parent=self, LG=4)
+    self.lg['P1I1'] = LatchGroup(parent=self, DM=2, LG=1)
+    self.lg['P1I2'] = LatchGroup(parent=self, DM=2, LG=2)
+    self.lg['P2I1'] = LatchGroup(parent=self, DM=2, LG=3)
+    self.lg['P2I2'] = LatchGroup(parent=self, DM=2, LG=4)
           
     # The transfer switch is created in {\tt WBDC_base}
     self.crossSwitch.get_state()
@@ -418,6 +439,8 @@ class WBDC2(WBDC_core, Receiver):
     self.logger.debug(" %s outputs: %s",
                      self, str(self.outputs))
     self._update_self() # invokes WBDC_base._update_self()
+
+    self.analog_monitor = WBDC_core.AnalogMonitor(WBDC2.mon_points)
     self.logger.debug(" initialized for %s", self.name)
 
     # Report outputs
@@ -690,12 +713,23 @@ class WBDC2(WBDC_core, Receiver):
                         output_names)
       self.logger.debug(" initializing WBDC2 %s", self)
       self.logger.debug(" %s inputs: %s", self, str(self.inputs))
-      keys = self.outputs.keys()
-      keys.sort()
       inkeys = self.inputs.keys()
       inkeys.sort()
-      for key in keys:
-        indx = keys.index(key)
+      chan = int(name[3:]) - 18 # I don't like taking this from the name
+      # I don't like testing on the name but I can't think of a better way
+      if re.search('R1', name):
+          self.tdac = LJTickDAC(self.parent.LJ[2], self.name, IO_chan=chan)
+      else:
+          self.tdac = LJTickDAC(self.parent.LJ[3], self.name, IO_chan=chan)
+      self.atten = {}
+      for key in inkeys:
+        att_name = self.name+'-'+key
+        self.logger.debug("creating attenuator %s", att_name)
+        self.atten[att_name] = self.IFattenuator(self, att_name)
+      outkeys = self.outputs.keys()
+      outkeys.sort()
+      for key in outkeys:
+        indx = outkeys.index(key)
         inname = inkeys[indx]
         # A pol section does not change the signal type
         self.outputs[key] = Port(self, key,
@@ -723,7 +757,7 @@ class WBDC2(WBDC_core, Receiver):
       """
       Sets the state of the polarization conversion section.
 
-      If set, X,Y are converted to L,R.
+      If set, E,H are converted to L,R.
 
       The pol section needs to know what band it belongs to to know what
       latches to use.
@@ -737,17 +771,25 @@ class WBDC2(WBDC_core, Receiver):
       self._update_self()
       return self.state
 
-    class IFattenuator(Attenuator):
+    class IFattenuator(PINattenuator):
       """
       """
-      def __init__(self, LabJack, IOport):
-        Attenuator.__init__(self, LabJack, IOport)
-
-    def get_atten(self, pol):
-      """
-      Returns attenuation for `pol' inputs of pol section
-      """
-      
+      def __init__(self, parent, name):
+        """
+        """
+        self.parent = parent
+        self.name = name
+        mylogger = logging.getLogger(parent.logger.name+".IFattenuator")
+        mylogger.debug("initialized with %s and name %s", self, name)
+        if re.search('E', name):
+          vs = self.parent.tdac['A']
+        else:
+          vs = self.parent.tdac['B']
+        ctlV_spline =             WBDC2.splines[1][0][self.name]
+        min_gain, max_gain, ignore = WBDC2.splines[1][1][self.name]
+        PINattenuator.__init__(self, self.name, vs, ctlV_spline,
+                               min_gain, max_gain)
+        self.logger = mylogger
       
   class DownConv(WBDC_core.DownConv):
     """

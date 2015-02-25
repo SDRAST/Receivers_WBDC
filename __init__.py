@@ -341,22 +341,9 @@ class WBDC_base(Receiver):
       self.logger = mylogger
       self._update_self()
 
-    #def _rename_beam(self,key):
-    #  """
-    #  This is a very ad-hoc way to replace BxPy with DxPz
-    #
-    #  z is a capital letter designator corresponding to integer y.
-    #
-    #  WARNING!  RFsection method _rename_beam is very dependent on the naming
-    #  convention used, specifically, the length of the names.
-    #  """
-    #  key = "D"+key[1:]
-    #  key = key[:3]+chr(64+int(key[3]))
-    #  return key
-
   class PolSection(Receiver.PolSection):
     """
-    Class for optionally converting X,Y polarization to R,L polarization.
+    Class for optionally converting E,H polarization to R,L polarization.
     """
     def __init__(self, parent, name, inputs=None, output_names=None,
                  active=True):
@@ -383,7 +370,7 @@ class WBDC_base(Receiver):
                         self.output_names)
       self.logger.debug(" initializing WBDC_base %s", self)
       self.logger.debug(" %s inputs: %s", self, str(self.inputs))
-      self.set_mode() # defaults to X,Y
+      self.set_mode() # defaults to E,H
       self.logger.debug(" %s outputs: %s", self, str(self.outputs))
       
     def set_mode(self,convert=False):
@@ -395,7 +382,7 @@ class WBDC_base(Receiver):
       if self.convert:
         self.pols = ["L", "R"]
       else:
-        self.pols = ["X", "Y"]
+        self.pols = ["E", "H"]
       self.get_mode()
 
     def get_mode(self):
@@ -418,7 +405,7 @@ class WBDC_base(Receiver):
       Propagate signals from inputs to outputs.
 
       The output port names are of the form RxFFPy where x is 1 or 2, FF is a
-      two digit frequency code, and y is 1 or 2.  The input names are X and Y
+      two digit frequency code, and y is 1 or 2.  The input names are E and H
       or R and L, obtained from the prior RF sections. The code below
       constructs the output names from the input names.
       """
@@ -434,7 +421,7 @@ class WBDC_base(Receiver):
         self.logger.debug("WBDC._propagate: pol index = %d", pindex)
         # The following must be done this way because in another case the input
         # pols any be L and R.
-        name = WBDC_base.pol_names[pindex] # X|L or Y|R
+        name = WBDC_base.pol_names[pindex] # E|L or H|R
         self.logger.debug("WBDC._propagate: input name is %s", name)
         self.outputs[key].source = []
         if self.convert:

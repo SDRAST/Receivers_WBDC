@@ -137,6 +137,7 @@ class WBDC_core(WBDC_base):
     if inputs:
       self.logger.debug(" %s inputs: %s", self, str(self.inputs))
     self.LJ = connect_to_U3s(LJIDs)
+    self.lg = {'A':    LatchGroup(parent=self, DM=0)}
 
   class TransferSwitch(WBDC_base.TransferSwitch):
     """
@@ -222,7 +223,7 @@ class WBDC_core(WBDC_base):
       if self.convert:
         self.pols = ["L", "R"]
       else:
-        self.pols = ["X", "Y"]
+        self.pols = ["E", "H"]
       return self.mode
 
     def _get_mode(self):
@@ -239,10 +240,10 @@ class WBDC_core(WBDC_base):
       """
       if self.data.has_key('receiver') and self.data.has_key('band'):
         if self.data['receiver'] == 'R1':
-          LG = self.parent.lg['R1PR'] # latchAddress = 85
+          LG = self.parent.lg['R1P'] # latchAddress = 85
           bitMask = 26-int(self.data['band'])
         elif self.data['receiver'] == 'R2':
-          LG = self.parent.lg['R2PR'] # latchAddress = 86
+          LG = self.parent.lg['R2P'] # latchAddress = 86
           bitMask = int(self.data['band'])-18
         else:
           raise ObservatoryError(self.data['receiver'],
@@ -271,6 +272,28 @@ class WBDC_core(WBDC_base):
                                  active=active)
       self.logger = logging.getLogger(module_logger.name+".DownConv")
 
+  class AnalogMonitor(object):
+    """
+    """
+    def __init__(self, mon_points):
+      self.mon_points = mon_points
+
+    def read_analogs(self, latchAddress):
+      """
+      """
+      mon_data = self.mon_points[latchAddress]
+      mon_points = mon_data.keys()
+      mon_points.sort()
+      analog_data = {}
+      for point in mon_points.keys():
+        address = point[0]
+        label1 =  point[1]
+        label2 =  point[2]
+        self.lg['A'].write(laddress)
+        analog_data[label1] = self.lg['A'].LJ.getAin(latchAddress)
+        analog_data[label2] = self.lg['A'].LJ.getAin(latchAddress+1)
+      return analog_data
+ 
   # ------------------------------- WBDC_core methods -------------------------
 
   def has_labjack(self, localID):
