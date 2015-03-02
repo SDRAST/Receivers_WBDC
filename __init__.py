@@ -113,17 +113,7 @@ class WBDC_base(Receiver):
     self.crossSwitch = self.TransferSwitch(self, "WBDC transfer switch",
                                        inputs=inputs)
                                        #output_names = WBDC_base.RF_names)
-    
-    # In the next code block we:
-    # 1) create the RF sections for each pol, one for each beam
-    # 2) create two pols sections for each RF section, one per beam
-    #rfs = WBDC_base.RF_names
-    #rfs.sort()
-    #for rf in rfs:
-    #  # This part creates the RF sections
-    #  index = rfs.index(rf)
-    #  rf_inputs = {}
-    
+        
   def _create_pol_list(self,inputs):
     """
     Create sorted lists of input, beam, and polarization names

@@ -11,7 +11,7 @@ WBDC2 has two signal input pairs, each accepting two orthogonal linear
 polarizations. There are two down-converter chains, each handling two
 polarizations each, for a total of four complex signals.
 
-Monitor and control is done with two LabJacks. For a detailed description of
+Monitor and control is done with LabJacks. For a detailed description of
 the LabJack see/do
 MonitorControl.Electronics.Interfaces.LabJack.__doc__.split('\n')
 
