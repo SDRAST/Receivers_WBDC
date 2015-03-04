@@ -137,7 +137,8 @@ class WBDC_core(WBDC_base):
     if inputs:
       self.logger.debug(" %s inputs: %s", self, str(self.inputs))
     self.LJ = connect_to_U3s(LJIDs)
-    self.lg = {'A':    LatchGroup(parent=self, DM=0)}
+    self.lg = {'A1':    LatchGroup(parent=self, DM=0, LG=0),
+               'A2':    LatchGroup(parent=self, DM=0, LG=1)}
 
   class TransferSwitch(WBDC_base.TransferSwitch):
     """
@@ -275,24 +276,44 @@ class WBDC_core(WBDC_base):
   class AnalogMonitor(object):
     """
     """
-    def __init__(self, mon_points):
+    def __init__(self, parent, mon_points):
+      self.parent = parent
       self.mon_points = mon_points
+      self.logger = logging.getLogger(self.parent.logger.name+".AnalogMonitor")
 
-    def read_analogs(self, latchAddress):
+    def read_analogs(self, latchgroup=1):
       """
       """
-      mon_data = self.mon_points[latchAddress]
-      mon_points = mon_data.keys()
-      mon_points.sort()
+      self.logger.debug("read_analogs: latch group=%d", latchgroup)
+      latchAddress = latchgroup - 1
+      self.logger.debug("read_analogs: latch address=%d", latchAddress)
+      LGname = 'A'+str(latchgroup)
+      self.logger.debug("read_analogs: latch name=%s", LGname)
+      mon_data = self.mon_points[latchgroup]
+      mon_pts = mon_data.keys()
+      mon_pts.sort()
+      self.logger.debug("read_analogs: monitor points: %s", mon_pts)
       analog_data = {}
-      for point in mon_points.keys():
-        address = point[0]
-        label1 =  point[1]
-        label2 =  point[2]
-        self.lg['A'].write(laddress)
-        analog_data[label1] = self.lg['A'].LJ.getAin(latchAddress)
-        analog_data[label2] = self.lg['A'].LJ.getAin(latchAddress+1)
+      for point in mon_pts:
+        mon_pt_addr = mon_data[point][0]
+        self.logger.debug("read_analogs: sending %d", mon_pt_addr)
+        self.parent.lg[LGname].write(mon_pt_addr)
+        for dataset in [0,1]:
+          self.logger.debug('read_analogs: dataset=%d',dataset)
+          label =  mon_data[point][dataset+1].strip()
+          self.logger.debug('read_analogs: reading %s', label)
+          AINnum = latchAddress*2+dataset
+          # in the next line, LGname can be A1 or A2
+          self.logger.debug("read_analogs: reading AIN%d", AINnum)
+          analog_data[label] = self.parent.lg[LGname].LJ.getAIN(AINnum)
+          self.logger.debug("read_analogs: read %f", analog_data[label])
       return analog_data
+      
+    def convert_analog(self, ID, value):
+      """
+      The subclass must replace this.
+      """
+      pass
  
   # ------------------------------- WBDC_core methods -------------------------
 

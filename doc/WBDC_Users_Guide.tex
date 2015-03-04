@@ -108,24 +108,18 @@ object and the rest of the code assigns values to its attributes.
 \section{Hardware Overview}
 
 A Wide-Band Down-Converter processes dual-polarization K-band signals from two
-feed horns. There are two versions of the WBDC.  WBDC1 has two 
-dual-polarization radio frequency sections after the band-splitting filters, one 
-for 22 and 24~GHz, two switch-selectable local oscillators and one intermediate
-frequency section. WBDC2 has five dual-polarization RF sections and 20 IF 
-sections (2 feeds $\times$ 2 polarizations $\times$ 5 bands).
-
-Figure~\ref{fig:inside} shows the interior of WBDC2.  The motherboard is on the
-lid.   The RF enters through four SMA bulkhead feed-throughs on the left.  The
-IFs exit on the right.
-
-\begin{figure}[h!tb]
-  \begin{center}
-    \includegraphics[height=5in]{interior-half.png}
-  \end{center}
-  \caption{\label{fig:inside}Interior of WBDC2.}
-\end{figure}
+feed horns. There are two versions of the WBDC.
 The feed switching, polarization selection, and down-conversion are basically 
-the same in both WBDC designs.  All functions are controlled by a motherboard
+the same in both WBDC designs.
+
+WBDC1 has two dual-polarization RF sections, one for 22 and one for 24~GHz.
+Two switch-selectable LOs determine which band is processed by the one IF section. 
+
+WBDC2 has five dual-polarization RF sections and 20 IF 
+sections (2 feeds $\times$ 2 polarizations $\times$ 5 bands).
+The internals of WBDC2 are described in Subsection~\ref{sec:WBDC2inside}.
+
+All functions are controlled by a motherboard
 through LabJack\textsuperscript{\textregistered} general-purpose I/O 
 interfaces.
 The WBDC1 LabJacks are accessed through a USB hub by an external computer.  
@@ -135,19 +129,14 @@ via ethernet.
 \subsection{Input Switching}
 
 The first stage of the WBDC allows the two dual-polarizationdown-converters to
-be switched between the two feeds.  The switches are the two modules in the
-center to the far left in Figure~\ref{fig:inside}.
+be switched between the two feeds.  
 
 \subsection{Polarization Conversion}
 
-The four RF signals are split into five bands each. The splitters are the
-larger blue modules at the top and bottom on the far left on 
-Figure~\ref{fig:inside}.  After the band-selecting RF filters (row of modules 
-to the left of center), the linearly polarized signals from each
-feed can be switched into a quadrature hybrid (to the right of the black DB9
-connectors) to be converted to circular
-polarization.  PIN diode attenuators are provided (under the black
-connectors) to balance the signals into
+The four RF signals are split into five bands each.  After the band-selecting 
+RF filters , the linearly polarized signals from each
+feed can be switched into a quadrature hybrid  to be converted to circular
+polarization.  PIN diode attenuators are provided  to balance the signals into
 these hybrids.
 
 \subsection{Sideband Separation}
@@ -862,6 +851,40 @@ information not specific to a {\tt Telescope}, such as weather data.
 
 
 \appendix
+
+\chapter{WBDC Internals}
+
+\section{WBDC1}
+
+\begin{figure}[h!tb]
+  \begin{center}
+    \includegraphics[height=5in]{WBDC1inside.jpg}
+  \end{center}
+  \caption{\label{fig:inside}Interior of WBDC1.}
+\end{figure}
+
+\section{WBDC2}\label{sec:WBDC2inside}
+
+Figure~\ref{fig:inside} shows the interior of WBDC2.  The motherboard is on the
+lid.   The RF enters through four SMA bulkhead feed-throughs on the left.  The
+IFs exit on the right.
+\begin{figure}[h!tb]
+  \begin{center}
+    \includegraphics[height=5in]{interior-half.png}
+  \end{center}
+  \caption{\label{fig:inside}Interior of WBDC2.}
+\end{figure}
+The crossover switches are the two modules in the
+center to the far left in Figure~\ref{fig:inside}.
+The RF splitters which feed the bandpass filters (row of modules 
+to the left of center) are the
+larger blue modules at the top and bottom on the far left on 
+Figure~\ref{fig:inside}. 
+The PIN diodes ahead of the polarization sections are under the black cables 
+and DB9 connectors.
+The quadrature hybrids for polarization mode conversion ar to the right of the
+black DB9 connectors.
+
 \chapter{LabJack Configuration}
 
 \section{LabJack 1}
