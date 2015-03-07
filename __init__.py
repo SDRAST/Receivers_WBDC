@@ -360,36 +360,43 @@ class WBDC_base(Receiver):
                         self.output_names)
       self.logger.debug(" initializing WBDC_base %s", self)
       self.logger.debug(" %s inputs: %s", self, str(self.inputs))
-      self.set_mode() # defaults to E,H
+      self.set_state() # defaults to E,H
       self.logger.debug(" %s outputs: %s", self, str(self.outputs))
       
-    def set_mode(self,convert=False):
+    def set_state(self, convert=False):
       """
-      This gets replaced by the sub-class
+      This MUST get replaced by the appropriate sub-class method
+
+      For software-only testing it is kept here.
       """
-      self.logger.debug(" set_pol_mode: invoked")
-      self.convert = convert
-      if self.convert:
+      self.logger.warning(" set pol mode invoked from superclass")
+      self._set_state(convert)
+      if self.state:
         self.pols = ["L", "R"]
       else:
         self.pols = ["E", "H"]
-      self.get_mode()
 
-    def get_mode(self):
+    def get_state(self):
       """
       This gets replaced by the sub-class
       """
-      self.logger.debug("WBDC_base.get_pol_mode: invoked")
-      self.convert = self._get_mode()
-      return self.convert
+      self.logger.debug("WBDC_base.get_state: invoked")
+      self.state = self._get_state()
+      return self.state
 
-    def _get_mode(self):
+    def _set_state(self, state):
       """
       This gets replaced by the sub-class
       """
-      self.logger.debug("WBDC_base._get_pol_mode: invoked")
-      return None
+      self.state = state
       
+    def _get_state(self):
+      """
+      This gets replaced by the sub-class
+      """
+      self.logger.debug("WBDC_base._get_state: invoked")
+      return self.state
+
     def _propagate(self):
       """
       Propagate signals from inputs to outputs.
@@ -414,7 +421,7 @@ class WBDC_base(Receiver):
         name = WBDC_base.pol_names[pindex] # E|L or H|R
         self.logger.debug("WBDC._propagate: input name is %s", name)
         self.outputs[key].source = []
-        if self.convert:
+        if self.state:
           self.outputs[key].source.append(self.inputs[name])
           self.inputs[name].destinations.append(self.outputs[key])
         else:
@@ -472,19 +479,26 @@ class WBDC_base(Receiver):
         parent.outputs[nm] = self.outputs[nm]
       self.logger.debug(" %s outputs: %s", str(self), str(self.outputs))
 
-    def set_IF_mode(self, SB_separated=False):
-      self.SB_separated = SB_separated
-      if self.SB_separated:
+    def set_state(self, SB_separated=False):
+      self._set_state(SB_separated)
+
+      if self.state:
         self.IF_mode = ["L","U"]
         self.data['bandwidth'] = 1e9
       else:
         self.IF_mode = ["I","Q"]
         self.data['bandwidth'] = 2e9
-      return self.get_IF_mode()
+      return self.get_state()
 
-    def get_IF_mode(self):
-      return self.IF_mode
+    def _set_state(self, state):
+      self.state = state
+      
+    def get_state(self):
+      return self._get_state()
 
+    def _get_state(self):
+      return self.state
+      
     def _propagate(self):
       """
       Propagate signals from inputs to outputs

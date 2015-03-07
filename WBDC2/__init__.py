@@ -306,7 +306,7 @@ class WBDC2(WBDC_core, Receiver):
   appended, in that order.
   """
   bands      = ["18", "20", "22", "24", "26"]
-  LJIDs = {320053997: 1, 320052373: 2, 320059056: 3}
+  LJIDs = {320043313: 1, 320052373: 2, 320059056: 3}
   mon_points = {
     1: {1: (int('0000000', 2), " +6 V digitalMB", " +6 V dig"),
         2: (int('1000001', 2), " +6 V analog MB", " +6 V ana"),
@@ -454,7 +454,7 @@ class WBDC2(WBDC_core, Receiver):
     keys = self.pol_sec.keys()
     keys.sort()
     for key in self.pol_sec.keys():
-      status[key] = self.pol_sec[key].set_pol_mode(circular=circular)
+      status[key] = self.pol_sec[key].set_state(circular)
     return status
 
   def get_pol_modes(self):
@@ -464,24 +464,24 @@ class WBDC2(WBDC_core, Receiver):
     keys = self.pol_sec.keys()
     keys.sort()
     for key in self.pol_sec.keys():
-      status[key] = self.pol_sec[key].get_pol_mode()
+      status[key] = self.pol_sec[key].get_state()
     return status
 
-  def set_IF_mode(self, SB_separated=False):
+  def set_IF_modes(self, SB_separated=False):
     for key in self.DC.keys():
-      self.DC[key].set_IF_mode(SB_separated)
+      self.DC[key].set_IF_(SB_separated)
     if SB_separated:
       self.data['bandwidth'] = 1e9
     else:
       self.data['bandwidth'] = 2e9
     return self.get_IF_mode()
 
-  def get_IF_mode(self):
+  def get_IF_modes(self):
     modes = {}
     keys = self.DC.keys()
     keys.sort()
     for key in self.DC.keys():
-      modes[key] = self.DC[key].get_IF_mode()
+      modes[key] = self.DC[key].get_state()
     return modes
 
   def check_IO_config(self):
@@ -518,6 +518,7 @@ class WBDC2(WBDC_core, Receiver):
         self.configure_atten_labjack(3)
     else:
       raise ObservatoryError("","LabJack 3 is not connected")
+    return True
     
   class TransferSwitch(WBDC_core.TransferSwitch):
     """
@@ -745,13 +746,17 @@ class WBDC2(WBDC_core, Receiver):
       X,Y are converted to L,R if the state is 1.
 
       The pol section needs to know what band it belongs to to know what
-      latches to use.
+      latches to use.  If that isn't available, return the default.
       """
-      LGID = self.data['receiver']+'P'
-      LG = int(self.data['receiver'][-1])+1
-      latchbit = (int(self.data['band'])-18)/2
-      LGdata = self.parent.lg[LGID].read()
-      self.state = Math.Bin.getbit(LGdata,latchbit)
+      # Do this only if the subclass has been defined
+      if self.data.has_key('receiver'):
+        LGID = self.data['receiver']+'P'
+        LG = int(self.data['receiver'][-1])+1
+        latchbit = (int(self.data['band'])-18)/2
+        LGdata = self.parent.lg[LGID].read()
+        self.state = Math.Bin.getbit(LGdata,latchbit)
+      else:
+        self.state = False
       return self.state
 
     def _set_state(self,state):
@@ -763,13 +768,14 @@ class WBDC2(WBDC_core, Receiver):
       The pol section needs to know what band it belongs to to know what
       latches to use.
       """
-      LGID = self.data['receiver']+'P'
-      LG = int(self.data['receiver'][-1])+1
-      latchbit = (int(self.data['band'])-18)/2
-      LGdata = self.parent.lg[LGID].read()
-      self.parent.lg[LGID].write(Math.Bin.setbit(LGdata,latchbit))
+      if self.data.has_key('receiver'):
+        LGID = self.data['receiver']+'P'
+        LG = int(self.data['receiver'][-1])+1
+        latchbit = (int(self.data['band'])-18)/2
+        LGdata = self.parent.lg[LGID].read()
+        self.parent.lg[LGID].write(Math.Bin.setbit(LGdata,latchbit))
+        self._update_self()
       self._get_state()
-      self._update_self()
       return self.state
 
     class IFattenuator(PINattenuator):
@@ -810,14 +816,14 @@ class WBDC2(WBDC_core, Receiver):
                                  active=active)
       self.parent = parent
       self.logger = mylogger
-      super(WBDC_core.DownConv, self).set_IF_mode() # default is bypass
+      super(WBDC_core.DownConv, self).set_state() # default is bypass
       keys = self.outputs.keys()
       keys.sort()
       self.logger.debug(" outputs: %s", keys)
       for key in keys:
         IFname = key[-2:]
         index = WBDC_base.IF_names.index(IFname)
-        IFmode = self.get_IF_mode()[index] # self.IF_mode[index]
+        IFmode = self.get_state()
         self.logger.debug(" %s IF mode is %s", key, IFmode)
         self.outputs[key] = Port(self, key,
                        source=self.outputs[key].source,
@@ -845,33 +851,37 @@ class WBDC2(WBDC_core, Receiver):
     def _get_state(self):
       """
       """
-      LGID, latchbit = self._get_latch_info()
-      try:
-        latchdata = self.parent.lg[LGID].read()
-      except Exception, details:
-        self.logger.error("_get_state: read failed: %s", str(details))
-      self.state = Math.Bin.getbit(latchdata, latchbit)
+      if self.data.has_key('receiver'):
+        LGID, latchbit = self._get_latch_info()
+        try:
+          latchdata = self.parent.lg[LGID].read()
+        except Exception, details:
+          self.logger.error("_get_state: read failed: %s", str(details))
+        self.state = Math.Bin.getbit(latchdata, latchbit)
+      else:
+        self.state = False
       return self.state
       
-    def _set_state(self,state):
+    def _set_state(self, state):
       """
       """
-      LGID, latchbit = self._get_latch_info()
-      latchdata = self.parent.lg[LGID].read()
-      self.logger.debug("_set_state: latchdata was %s",
-                        Math.decimal_to_binary(latchdata,8))
-      if state:
-        latchdata = Math.Bin.setbit(latchdata, latchbit)
-      else:
-        latchdata = Math.Bin.clrbit(latchdata, latchbit)
-      self.logger.debug("_set_state: latchdata is %s",
-                        Math.decimal_to_binary(latchdata,8))
-      try:
-        self.parent.lg[LGID].write(latchdata)
-      except Exception, details:
-        self.logger.error("_set_state: write failed: %s", str(details))
+      if self.data.has_key('receiver'):
+        LGID, latchbit = self._get_latch_info()
+        latchdata = self.parent.lg[LGID].read()
+        self.logger.debug("_set_state: latchdata was %s",
+                          Math.decimal_to_binary(latchdata,8))
+        if state:
+          latchdata = Math.Bin.setbit(latchdata, latchbit)
+        else:
+          latchdata = Math.Bin.clrbit(latchdata, latchbit)
+        self.logger.debug("_set_state: latchdata is %s",
+                          Math.decimal_to_binary(latchdata,8))
+        try:
+          self.parent.lg[LGID].write(latchdata)
+        except Exception, details:
+          self.logger.error("_set_state: write failed: %s", str(details))
+        self._update_self()
       self._get_state()
-      self._update_self()
       return self.state
 
   class AnalogMonitor(WBDC_core.AnalogMonitor):

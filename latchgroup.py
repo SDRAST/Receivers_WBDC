@@ -186,7 +186,7 @@ class LatchGroup():
     if parent:
       self.parent = parent
       if DM == 0:
-        return 0
+        return  (int(read) << 2) + (LG-1)
       try:
         self.baseAddress = parent.latchBaseAddr
       except AttributeError:
