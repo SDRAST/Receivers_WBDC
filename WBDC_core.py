@@ -137,9 +137,30 @@ class WBDC_core(WBDC_base):
     if inputs:
       self.logger.debug(" %s inputs: %s", self, str(self.inputs))
     self.LJ = connect_to_U3s(LJIDs)
-    self.lg = {'A1':    LatchGroup(parent=self, DM=0, LG=0),
-               'A2':    LatchGroup(parent=self, DM=0, LG=1)}
+    self.lg = {'A1':    LatchGroup(parent=self, DM=0, LG=1),
+               'A2':    LatchGroup(parent=self, DM=0, LG=2)}
 
+  def report_analogs(self):
+    all_data = {}
+    for group in [1,2]:
+      analog_data = self.analog_monitor.get_monitor_data(group)
+      for key in analog_data.keys():
+        all_data[key] = analog_data[key]
+    return all_data
+
+  def report_LJ_IO_config(self):
+    report = {}
+    for lj in self.LJ.keys():
+      report[lj] = self.LJ[lj].configIO()
+    return report
+
+  def report_LJ_info(self):
+    report = {}
+    for lj in self.LJ.keys():
+      report[lj] = self.LJ[lj].configU3()
+    return report
+      
+      
   class TransferSwitch(WBDC_base.TransferSwitch):
     """
     Beam to down-converter transfer switch
@@ -216,53 +237,6 @@ class WBDC_core(WBDC_base):
       self.logger.debug(" %s inputs: %s", self, str(self.inputs))
       self.logger.debug(" %s outputs: %s", self, str(self.outputs))
 
-    def get_mode(self):
-      """
-      """
-      #self.logger.debug("WBDC_core.WBDC_core.get_pol_mode: invoked")
-      self.mode = self._get_mode() # super(WBDC_core.PolSection,self).get_pol_mode()
-      if self.convert:
-        self.pols = ["L", "R"]
-      else:
-        self.pols = ["E", "H"]
-      return self.mode
-
-    def _get_mode(self):
-      """
-      Report whether feed polarization is circular.
-
-      Latches 2 and 3 (addresses 85 and 86) monitor the polarizer switches.
-      Latch 2 is for receiver chain 1 (R1) and latch 3 for R2.
-      For R1, bits 0-4 control the switches for bands 26-18, in that order.
-      For R2, bits 0-4 control the switches for bands 18-26, in that order.
-      For each, a value of 0 indicates linear and 1 indicates circular.
-
-      @return: bool
-      """
-      if self.data.has_key('receiver') and self.data.has_key('band'):
-        if self.data['receiver'] == 'R1':
-          LG = self.parent.lg['R1P'] # latchAddress = 85
-          bitMask = 26-int(self.data['band'])
-        elif self.data['receiver'] == 'R2':
-          LG = self.parent.lg['R2P'] # latchAddress = 86
-          bitMask = int(self.data['band'])-18
-        else:
-          raise ObservatoryError(self.data['receiver'],
-                                'is an invalid receiver chain')
-      else:
-        return None
-      bits = LG.read() # LatchGroup(parent=self.parent, address=latchAddress).read()
-      if bits == None:
-        # There was a problem with the read
-        return None
-      self.logger.debug("  WBDC_core._get_mode: %s band %s latch bits: %s",
-                        self, self.data['band'],
-                        Math.decimal_to_binary(bits,8))
-      maskedBit = bits & bitMask
-      self.logger.debug("  WBDC_core._get_mode: masked bit: %s",
-                        Math.decimal_to_binary(maskedBit,8))
-      return bool(maskedBit)
-
   class DownConv(WBDC_base.DownConv):
     """
     """
@@ -277,6 +251,12 @@ class WBDC_core(WBDC_base):
     """
     """
     def __init__(self, parent, mon_points):
+      """
+      Initializes an analog data monitor
+      
+      @param mon_points : monitor point definitions (version specific)
+      @type  mon_points : dict of dicts of lists of (int, str, str)
+      """
       self.parent = parent
       self.mon_points = mon_points
       self.logger = logging.getLogger(self.parent.logger.name+".AnalogMonitor")
@@ -308,6 +288,16 @@ class WBDC_core(WBDC_base):
           analog_data[label] = self.parent.lg[LGname].LJ.getAIN(AINnum)
           self.logger.debug("read_analogs: read %f", analog_data[label])
       return analog_data
+
+    def get_monitor_data(self, latchgroup=1):
+      """
+      """
+      monitor_data = {}
+      analog_data = self.read_analogs(latchgroup)
+      for ID in analog_data.keys():
+        if ID:
+          monitor_data[ID] = self.convert_analog(ID, analog_data[ID])
+      return monitor_data
       
     def convert_analog(self, ID, value):
       """
@@ -377,59 +367,4 @@ class WBDC_core(WBDC_base):
     else:
       raise ObservatoryError("LabJack "+str(ID)," is not connected")
     
-  def readAnalog(self, mon_points, num_ports):
-    """
-    Read analog monitor data
 
-    The array 'mon_points' holds the latch address and latch data select
-    pair for each reading to be taken.  Then three analog ports are
-    read.
-
-    @return: list of three analog values
-    """
-    readings = []
-    num_analog_ports = num_ports
-    self.logger.debug("Reading monitor points")
-    for [latchnum,latchdata] in mon_points:
-      if (latchnum != None) and (latchdata != None):
-        self.lg['X'].write(llatchdata)
-        self.logger.debug("Latch %d programmed with %d",latchnum,latchdata)
-    for i in range(num_analog_ports):
-      try:
-        reading = self.LJ[1].getAIN(i)
-      except u3.LowlevelErrorException, details :
-        self.logger.error("Reading analog port %d failed:\n %s",i, details)
-      else:
-        readings.append(reading)
-    return readings
-
-  def get_monitor_data(self):
-    """
-    Gets the analog currents, voltages and temperatures
-
-    @type lj : dictionary
-    @param lj : u3.U3 class instances indexed by local ID
-
-    @return: dictionary
-    """
-    mon_data = {}
-    for i in range(1,9):
-      self.logger.debug("Mon group %d data:",i)
-      readings = self.readAnalog(WBDC_core.mon_points[i])
-      self.logger.debug("point %s readings: %s", WBDC_core.mon_ID[i], readings)
-      for j in range(3):
-        if j == 0 and WBDC_core.mon_ID[i][j]:
-          # calibrate current
-          mon_data[WBDC_core.mon_ID[i][j]] = readings[j] - IOFFSET
-        elif j == 1 and WBDC_core.mon_ID[i][j]:
-          #calibrate voltage
-          if i < 3:
-            # 6 V
-            mon_data[WBDC_core.mon_ID[i][j]] = readings[j] * VSCALElo
-          elif i < 6:
-            # 12or 16 V
-            mon_data[WBDC_core.mon_ID[i][j]] = readings[j] * VSCALEhi
-        elif j == 2 and WBDC_core.mon_ID[i][j]:
-          # temperature
-          mon_data[WBDC_core.mon_ID[i][j]] = (readings[j] - THERMOFFSET) * THERMSCALE
-    return mon_data
