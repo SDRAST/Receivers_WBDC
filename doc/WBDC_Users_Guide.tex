@@ -117,7 +117,7 @@ Two switch-selectable LOs determine which band is processed by the one IF sectio
 
 WBDC2 has five dual-polarization RF sections and 20 IF 
 sections (2 feeds $\times$ 2 polarizations $\times$ 5 bands).
-The internals of WBDC2 are described in Subsection~\ref{sec:WBDC2inside}.
+The internals of WBDC2 are described in Subsection~\ref{sec:WBDC2}.
 
 All functions are controlled by a motherboard
 through LabJack\textsuperscript{\textregistered} general-purpose I/O 
@@ -134,9 +134,10 @@ be switched between the two feeds.
 \subsection{Polarization Conversion}
 
 The four RF signals are split into five bands each.  After the band-selecting 
-RF filters , the linearly polarized signals from each
+RF filters, the linearly polarized signals from each
 feed can be switched into a quadrature hybrid  to be converted to circular
-polarization.  PIN diode attenuators are provided  to balance the signals into
+polarization.  This is discussed further in Appendix~\ref{app:pol} 
+PIN diode attenuators are provided  to balance the signals into
 these hybrids.
 
 \subsection{Sideband Separation}
@@ -860,26 +861,26 @@ information not specific to a {\tt Telescope}, such as weather data.
   \begin{center}
     \includegraphics[height=5in]{WBDC1inside.jpg}
   \end{center}
-  \caption{\label{fig:inside}Interior of WBDC1.}
+  \caption{\label{fig:insideWBDC1}Interior of WBDC1.}
 \end{figure}
 
-\section{WBDC2}\label{sec:WBDC2inside}
+\section{WBDC2}\label{sec:WBDC2}
 
-Figure~\ref{fig:inside} shows the interior of WBDC2.  The motherboard is on the
+Figure~\ref{fig:insideWBDC2} shows the interior of WBDC2.  The motherboard is 
+on the
 lid.   The RF enters through four SMA bulkhead feed-throughs on the left.  The
 IFs exit on the right.
 \begin{figure}[h!tb]
   \begin{center}
     \includegraphics[height=5in]{interior-half.png}
   \end{center}
-  \caption{\label{fig:inside}Interior of WBDC2.}
+  \caption{\label{fig:insideWBDC2}Interior of WBDC2.}
 \end{figure}
 The crossover switches are the two modules in the
-center to the far left in Figure~\ref{fig:inside}.
+center to the far left in Figure~\ref{fig:insideWBDC2}.
 The RF splitters which feed the bandpass filters (row of modules 
 to the left of center) are the
-larger blue modules at the top and bottom on the far left on 
-Figure~\ref{fig:inside}. 
+larger blue modules at the top and bottom on the far left. 
 The PIN diodes ahead of the polarization sections are under the black cables 
 and DB9 connectors.
 The quadrature hybrids for polarization mode conversion ar to the right of the
@@ -949,5 +950,101 @@ The normal state of the WBDC1 LabJacks is something like
      TimerCounterConfig       64       64
   TimerCounterPinOffset        4        4
 \end{verbatim}
+
+\chapter{Polarization Conversion}\label{app:pol}
+
+\section{IAU Definition of Circular Polarization}
+
+As reported in the Proceedings of the Fifteenth General Assembly \cite{IAU1974},
+the following resolution was adopted by IAU Commissions 25 (Stellar Photometry
+and Polarimetry) and 40 (Radio Astronomy):
+
+{\itshape RESOLVED, that the frame of reference for the Stokes parameters is
+that of Right Ascension and Declination with the position angle of the
+electric-vector maximum, $\theta$, starting from North and increasing through
+East. Elliptical polarization is defined in conformity with the definitions of
+the Institute of Electrical and Electronics Engineers
+(IEEE Standard 211)}\cite{IEEE1969}.
+
+{\bfseries Left-Handed (Counterclockwise) Polarized Wave} (LCP):
+An elliptically polarized electromagnetic wave in which the
+rotation of the electric field vector with time is
+counterclockwise for a stationary observer looking in the
+direction of the wave normal.
+
+{\bfseries Right-Handed (Clockwise) Polarized Wave} (RCP): 
+An elliptically polarized electromagnetic wave in which the
+rotation of the electric field vector with time is clockwise
+for a stationary observer looking in the direction of the wave
+normal.
+
+This means that the polarization of incoming radiation for which the position
+angle of the electric vector measured at a fixed point in space
+increases with time is described as right-handed and positive.
+\begin{figure}[h!tb]
+\begin{center}
+\includegraphics[width=4in]{circular.png}
+\caption[Circular Polarization]
+{\label{fig:circ_pol} A right circularly polarized wave (LCP - green) and left
+circularly polarized wave (RCP - red)
+as defined by the IAU are shown decomposed into two
+orthogonal linearly polarized waves (X - magenta, Y - blue). The thick arrows
+show the direction of propagation.}
+\end{center}
+\end{figure}
+This can be seen in the lower panel of Figure~\ref{fig:circ_pol}\footnote{To 
+view these images relax the eye muscles as if
+looking at a distant object. A person not experienced in this
+type of viewing might first look at a distant object and then
+slide the gaze down to the figure without refocusing. Another
+method is to place a sheet of cardboard with one edge down the
+middle of the figure and the other edge between the eyes. It is
+probably easier to focus first on a label above or below
+the spiral, and then slide the gaze downwards.}
+
+\section{Changing Between Linear and Circular
+Polarization}\label{sec:lin-circ}
+
+Figure~\ref{fig:circ_pol} shows that linear polarization can be converted to 
+circular polarization.  If the vertical (H-plane or Y-axis) wave lags
+behind the horizontal (E-plane or X-axis) wave by $90^{\circ}$ of
+phase delay the resulting polarization will be RCP.
+If the vertical (H-plane or Y-axis) wave leads
+the horizontal (E-plane or X-axis) wave by $90^{\circ}$ of
+phase delay the resulting polarization will be LCP.
+
+Optically, this can be accomplished
+by passing the beam through a particular thickness of material which
+has different indices of refraction for two orthogonally polarized
+components. Similarly, a waveguide section can be produced to perform the
+same function.
+
+\begin{figure}[h!tb]
+\begin{center}
+\includegraphics[width=3.5in]{quad_hybrid.eps}
+\caption[Quadrature hybrid]{\label{fig:quad-hybrid}A quadrature hybrid
+combines two input signals so that one is delayed $90^{\circ}$
+with respect to the other. There are two outputs which are
+symmetrically delayed.  The figure on the left shows a
+conventional schematic.  The one on the right is a more
+illustrative schematic.}
+\end{center}
+\end{figure}
+In the cm, mm, and submm wave domains, there exist devices which can
+separate a radio wave into two orthogonally polarized components.
+A quadrature hybrid can convert between the two modes, as shown in
+Figure \ref{fig:quad-hybrid}. If port A were receiving
+vertical polarization (H-plane or Y-axis) and B horizontal polarization 
+(E-plane or X-axis) then at the port labelled A+$\angle 90^{\circ}$B, the
+vertical polarization lags behind the horizontal and it would put out RCP.
+The port labelled B+$\angle 90^{\circ}$A would put out LCP.
+
+From this one can see that, if there is an option to bypass the hybrid, it 
+depends which way the hybrid is put in the 
+circuit which determines whether the output ports are E/L and H/R or are
+E/R and H/L.
+
+\bibliographystyle{apj}
+\bibliography{WBDC_Users_Guide}
 
 \end{document}

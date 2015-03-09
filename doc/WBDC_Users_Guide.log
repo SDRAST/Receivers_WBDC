@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.11.19)  2 MAR 2015 09:41
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.11.19)  4 MAR 2015 17:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -327,11 +327,7 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \@float@every@code=\toks19
 \c@code=\count90
 
-(./WBDC_Users_Guide.aux
-
-LaTeX Warning: Label `fig:inside' multiply defined.
-
-)
+(./WBDC_Users_Guide.aux)
 \openout1 = `WBDC_Users_Guide.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
@@ -497,7 +493,7 @@ Chapter 2.
 [3
 
 ]
-Overfull \hbox (1.93549pt too wide) in paragraph at lines 234--252
+Overfull \hbox (1.93549pt too wide) in paragraph at lines 235--253
 \T1/lmr/m/n/10.95 ar-ray with the states of all the po-lar-iza-tion sec-tions. 
 The com-mand \T1/lmtt/m/n/10.95 receiver.set_pol_modes()
  []
@@ -511,26 +507,26 @@ Chapter 3.
 [9
 
 ] [10]
-Overfull \hbox (2.46245pt too wide) in paragraph at lines 638--638
+Overfull \hbox (2.46245pt too wide) in paragraph at lines 639--639
 []\T1/lmtt/m/n/10.95 LG addr 10 or 14   LG addr 11 or 15         LG addr 18 or 
 22   LG addr 19 or 23[] 
  []
 
 
-Overfull \hbox (2.46245pt too wide) in paragraph at lines 638--638
+Overfull \hbox (2.46245pt too wide) in paragraph at lines 639--639
 []\T1/lmtt/m/n/10.95 LG addr  8 or 12   LG addr  9 or 13         LG addr 16 or 
 20   LG addr 17 or 21[] 
  []
 
 [11]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 744.
+(Font)              <10> on input line 745.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 744.
+(Font)              <7> on input line 745.
  [12] [13] [14]
 Chapter 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 789--840
+Underfull \hbox (badness 10000) in paragraph at lines 790--841
 []\T1/lmr/m/n/10.95 Configurations are stored in the \T1/lmtt/m/n/10.95 DSN-Sci
 -packages \T1/lmr/m/n/10.95 di-rec-tory un-der
  []
@@ -542,14 +538,14 @@ Appendix A.
 <WBDC1inside.jpg, id=109, 659.1024pt x 878.8032pt>
 File: WBDC1inside.jpg Graphic file (type jpg)
  <use WBDC1inside.jpg>
-Package pdftex.def Info: WBDC1inside.jpg used on input line 861.
+Package pdftex.def Info: WBDC1inside.jpg used on input line 862.
 (pdftex.def)             Requested size: 271.01817pt x 361.34999pt.
 
 <interior-half.png, id=110, 1130.2225pt x 1590.94376pt>
 File: interior-half.png Graphic file (type png)
 
 <use interior-half.png>
-Package pdftex.def Info: interior-half.png used on input line 873.
+Package pdftex.def Info: interior-half.png used on input line 875.
 (pdftex.def)             Requested size: 256.7035pt x 361.34999pt.
  [17
 
@@ -557,36 +553,68 @@ Package pdftex.def Info: interior-half.png used on input line 873.
 
 ]
 Appendix B.
-[21] [22] (./WBDC_Users_Guide.aux)
+[21] [22]
+Appendix C.
+<circular.png, id=130, 500.87125pt x 489.83pt>
+File: circular.png Graphic file (type png)
+ <use circular.png>
+Package pdftex.def Info: circular.png used on input line 986.
+(pdftex.def)             Requested size: 289.07999pt x 282.71887pt.
 
-LaTeX Warning: There were multiply-defined labels.
+Underfull \vbox (badness 7722) has occurred while \output is active []
 
- ) 
+ [23
+
+]
+Package epstopdf Info: Source file: <quad_hybrid.eps>
+(epstopdf)                    date: 2011-06-17 15:18:07
+(epstopdf)                    size: 7489 bytes
+(epstopdf)             Output file: <quad_hybrid-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-03-04 16:28:04
+(epstopdf)                    size: 6952 bytes
+(epstopdf)             Command: <repstopdf --outfile=quad_hybrid-eps-converted-
+to.pdf quad_hybrid.eps>
+(epstopdf)             \includegraphics on input line 1024.
+Package epstopdf Info: Output file is already uptodate.
+
+<quad_hybrid-eps-converted-to.pdf, id=135, 362.35374pt x 222.8325pt>
+File: quad_hybrid-eps-converted-to.pdf Graphic file (type pdf)
+
+<use quad_hybrid-eps-converted-to.pdf>
+Package pdftex.def Info: quad_hybrid-eps-converted-to.pdf used on input line 10
+24.
+(pdftex.def)             Requested size: 252.94499pt x 155.55327pt.
+ [24 <./circular.png>]
+(./WBDC_Users_Guide.bbl [25 <./quad_hybrid-eps-converted-to.pdf>] [26
+
+])
+[27] (./WBDC_Users_Guide.aux) ) 
 Here is how much of TeX's memory you used:
- 2261 strings out of 495059
- 30487 string characters out of 3182029
- 91370 words of memory out of 3000000
- 5370 multiletter control sequences out of 15000+200000
+ 2283 strings out of 495059
+ 30875 string characters out of 3182029
+ 91407 words of memory out of 3000000
+ 5386 multiletter control sequences out of 15000+200000
  89960 words of font info for 62 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  37i,9n,23p,242b,322s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dv
-ips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share
-/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm
-/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texm
-f/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi
-8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts
-/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></
-usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf/fonts/type1/pu
-blic/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/t
-exmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/l
-mro10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/
-fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.
-pfb></usr/share/texmf/fonts/type1/public/lm/lmtt8.pfb>
-Output written on WBDC_Users_Guide.pdf (34 pages, 5978635 bytes).
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{
+/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/d
+vips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/shar
+e/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/l
+m/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/tex
+mf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr1
+0.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts
+/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></u
+sr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/pub
+lic/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/
+texmf/fonts/type1/public/lm/lmro10.pfb></usr/share/texmf/fonts/type1/public/lm/
+lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/
+fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt8.
+pfb>
+Output written on WBDC_Users_Guide.pdf (39 pages, 6066509 bytes).
 PDF statistics:
- 188 PDF objects out of 1000 (max. 8388607)
- 132 compressed objects within 2 object streams
+ 219 PDF objects out of 1000 (max. 8388607)
+ 153 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

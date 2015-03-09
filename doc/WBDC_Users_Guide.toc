@@ -42,3 +42,6 @@
 \contentsline {section}{\numberline {B.1}LabJack 1}{21}
 \contentsline {section}{\numberline {B.2}LabJack 2 (and 3)}{21}
 \contentsline {section}{\numberline {B.3}Configuration Check}{21}
+\contentsline {chapter}{\numberline {C}Polarization Conversion}{23}
+\contentsline {section}{\numberline {C.1}IAU Definition of Circular Polarization}{23}
+\contentsline {section}{\numberline {C.2}Changing Between Linear and Circular Polarization}{24}
