@@ -1,3 +1,11 @@
+\contentsline {paragraph}{Chapter\nobreakspace {}1\hbox {}, Introduction,}{i}
+\contentsline {paragraph}{Chapter\nobreakspace {}2\hbox {}, Command Line,}{i}
+\contentsline {paragraph}{Chapter\nobreakspace {}3\hbox {}, Monitor and Control System,}{i}
+\contentsline {paragraph}{Chapter\nobreakspace {}4\hbox {}, Configurations,}{i}
+\contentsline {paragraph}{Appendix\nobreakspace {}A\hbox {}}{i}
+\contentsline {paragraph}{Appendix\nobreakspace {}B\hbox {}}{i}
+\contentsline {paragraph}{Appendix\nobreakspace {}C\hbox {}}{i}
+\contentsline {paragraph}{Appendix\nobreakspace {}D\hbox {}}{i}
 \contentsline {chapter}{\numberline {1}Introduction}{1}
 \contentsline {section}{\numberline {1.1}Hardware Overview}{1}
 \contentsline {subsection}{\numberline {1.1.1}Input Switching}{1}
@@ -7,38 +15,44 @@
 \contentsline {subsection}{\numberline {1.2.1}LabJack 1}{2}
 \contentsline {subsection}{\numberline {1.2.2}Labjack 2 (and 3)}{2}
 \contentsline {chapter}{\numberline {2}Command Line}{3}
-\contentsline {section}{\numberline {2.1}High-level Commands}{3}
-\contentsline {subsection}{\numberline {2.1.1}Feed Switch Control}{3}
+\contentsline {section}{\numberline {2.1}High-level Commands}{4}
+\contentsline {subsection}{\numberline {2.1.1}Feed Switch Control}{4}
 \contentsline {subsection}{\numberline {2.1.2}Polarization Mode}{4}
-\contentsline {subsection}{\numberline {2.1.3}Down-conversion Mode}{4}
+\contentsline {subsection}{\numberline {2.1.3}Down-conversion Mode}{5}
 \contentsline {subsection}{\numberline {2.1.4}Analog Monitoring}{5}
 \contentsline {subsection}{\numberline {2.1.5}Other}{5}
-\contentsline {section}{\numberline {2.2}Mid-level Commands}{5}
-\contentsline {subsection}{\numberline {2.2.1}Feed Switch Control}{5}
+\contentsline {section}{\numberline {2.2}Mid-level Commands}{6}
+\contentsline {subsection}{\numberline {2.2.1}Feed Switch Control}{6}
 \contentsline {subsection}{\numberline {2.2.2}Polarization Mode}{6}
 \contentsline {section}{\numberline {2.3}Low Level Commands}{7}
 \contentsline {subsection}{\numberline {2.3.1}LabJacks}{7}
 \contentsline {subsection}{\numberline {2.3.2}Digital Monitor and Control}{7}
 \contentsline {subsection}{\numberline {2.3.3}Attenuator Control}{8}
-\contentsline {chapter}{\numberline {3}Monitor and Control System}{9}
-\contentsline {section}{\numberline {3.1}Motherboard Control}{9}
-\contentsline {subsection}{\numberline {3.1.1}Digital Module 1}{10}
-\contentsline {subsubsection}{Feed Crossover Switch}{10}
-\contentsline {subsubsection}{Polarization Hybrids}{10}
-\contentsline {paragraph}{WBDC1}{10}
-\contentsline {paragraph}{WBDC2}{11}
-\contentsline {subsubsection}{Local Oscillator Lock}{11}
-\contentsline {subsubsection}{Latch LEDs}{11}
-\contentsline {subsection}{\numberline {3.1.2}Digital Module 2}{12}
-\contentsline {subsection}{\numberline {3.1.3}WBDC1 Analog Monitoring}{12}
-\contentsline {subsection}{\numberline {3.1.4}WBDC2 Analog Monitoring}{12}
-\contentsline {subsubsection}{Latch 1 (Address 0)}{12}
-\contentsline {subsubsection}{Latch 2 (Address 1)}{13}
-\contentsline {chapter}{\numberline {4}Configurations}{15}
-\contentsline {chapter}{\numberline {A}WBDC Internals}{17}
-\contentsline {section}{\numberline {A.1}WBDC1}{17}
-\contentsline {section}{\numberline {A.2}WBDC2}{17}
-\contentsline {chapter}{\numberline {B}LabJack Configuration}{21}
-\contentsline {section}{\numberline {B.1}LabJack 1}{21}
-\contentsline {section}{\numberline {B.2}LabJack 2 (and 3)}{21}
-\contentsline {section}{\numberline {B.3}Configuration Check}{21}
+\contentsline {chapter}{\numberline {3}Monitor and Control System}{11}
+\contentsline {section}{\numberline {3.1}Motherboard Control}{11}
+\contentsline {subsection}{\numberline {3.1.1}Digital Module 1}{12}
+\contentsline {subsubsection}{Feed Crossover Switch}{12}
+\contentsline {subsubsection}{Polarization Hybrids}{12}
+\contentsline {paragraph}{WBDC1}{12}
+\contentsline {paragraph}{WBDC2}{13}
+\contentsline {subsubsection}{Local Oscillator Lock}{13}
+\contentsline {subsubsection}{Latch LEDs}{13}
+\contentsline {subsection}{\numberline {3.1.2}Digital Module 2}{14}
+\contentsline {subsection}{\numberline {3.1.3}WBDC1 Analog Monitoring}{14}
+\contentsline {subsection}{\numberline {3.1.4}WBDC2 Analog Monitoring}{14}
+\contentsline {subsubsection}{Latch 1 (Address 0)}{14}
+\contentsline {subsubsection}{Latch 2 (Address 1)}{15}
+\contentsline {chapter}{\numberline {4}Configurations}{17}
+\contentsline {chapter}{\numberline {A}Un Soup\c {c}on de Python}{19}
+\contentsline {section}{\numberline {A.1}iPython}{19}
+\contentsline {section}{\numberline {A.2}Classes}{19}
+\contentsline {chapter}{\numberline {B}WBDC Hardware}{23}
+\contentsline {section}{\numberline {B.1}WBDC1}{23}
+\contentsline {section}{\numberline {B.2}WBDC2}{23}
+\contentsline {chapter}{\numberline {C}LabJack Configuration}{27}
+\contentsline {section}{\numberline {C.1}LabJack 1}{27}
+\contentsline {section}{\numberline {C.2}LabJack 2 (and 3)}{27}
+\contentsline {section}{\numberline {C.3}Configuration Check}{27}
+\contentsline {chapter}{\numberline {D}Polarization Conversion}{29}
+\contentsline {section}{\numberline {D.1}IAU Definition of Circular Polarization}{29}
+\contentsline {section}{\numberline {D.2}Changing Between Linear and Circular Polarization}{30}

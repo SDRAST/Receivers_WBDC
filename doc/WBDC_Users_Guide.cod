@@ -1,12 +1,15 @@
-\contentsline {code}{\numberline {0.1}{\ignorespaces Stripped-down definition of the {\tt Telescope} class.}}{ii}
-\contentsline {code}{\numberline {2.1}{\ignorespaces Sensing and controlling the transfer switch.}}{4}
-\contentsline {code}{\numberline {2.2}{\ignorespaces Sensing and controlling the polarization mode.}}{4}
-\contentsline {code}{\numberline {2.3}{\ignorespaces Sensing and controlling the down-converter mode.}}{5}
-\contentsline {code}{\numberline {2.4}{\ignorespaces Sensing and controlling the crossover switch directly.}}{6}
-\contentsline {code}{\numberline {2.5}{\ignorespaces Sensing the state of the individual crossover switches.}}{6}
-\contentsline {code}{\numberline {2.6}{\ignorespaces Control of individual polarization sections}}{6}
-\contentsline {code}{\numberline {2.7}{\ignorespaces Commands for sensing and setting a down-converter I/Q hybrid.}}{6}
-\contentsline {code}{\numberline {2.8}{\ignorespaces Setting a latch group.}}{7}
-\contentsline {code}{\numberline {2.9}{\ignorespaces Two ways of instantiating and setting a DAC.}}{8}
-\contentsline {code}{\numberline {4.1}{\ignorespaces Configuration used by {\tt wbdc2\_prompt.py}}}{16}
-\contentsline {code}{\numberline {B.1}{\ignorespaces Commands for checking the LabJack I/O configuration.}}{22}
+\contentsline {code}{\numberline {2.1}{\ignorespaces Ipython example of creating a receiver object from a {\tt WBDC2hwif} class.}}{3}
+\contentsline {code}{\numberline {2.2}{\ignorespaces Sensing and controlling the transfer switch.}}{4}
+\contentsline {code}{\numberline {2.3}{\ignorespaces Sensing and controlling the polarization mode.}}{4}
+\contentsline {code}{\numberline {2.4}{\ignorespaces Sensing and controlling the down-converter mode.}}{5}
+\contentsline {code}{\numberline {2.5}{\ignorespaces Sensing and controlling the crossover switch directly.}}{6}
+\contentsline {code}{\numberline {2.6}{\ignorespaces Sensing the state of the individual crossover switches.}}{6}
+\contentsline {code}{\numberline {2.7}{\ignorespaces Control of individual polarization sections}}{6}
+\contentsline {code}{\numberline {2.8}{\ignorespaces Commands for sensing and setting a down-converter I/Q hybrid.}}{7}
+\contentsline {code}{\numberline {2.9}{\ignorespaces Setting a latch group.}}{7}
+\contentsline {code}{\numberline {2.10}{\ignorespaces Two ways of instantiating and setting a DAC.}}{8}
+\contentsline {code}{\numberline {4.1}{\ignorespaces Configuration used by {\tt wbdc2\_prompt.py}}}{18}
+\contentsline {code}{\numberline {A.1}{\ignorespaces Creating a {\tt WBDC2} instance}}{20}
+\contentsline {code}{\numberline {A.2}{\ignorespaces Creating a {\tt PINattenuator} instance}}{20}
+\contentsline {code}{\numberline {A.3}{\ignorespaces Stripped-down definition of the {\tt Telescope} class.}}{21}
+\contentsline {code}{\numberline {C.1}{\ignorespaces Commands for checking the LabJack I/O configuration.}}{28}

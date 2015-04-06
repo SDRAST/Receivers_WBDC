@@ -4,6 +4,7 @@
 \usepackage{lmodern}
 \usepackage{float} % for floats other than tables and graphics
 \usepackage[pdftex]{graphicx}
+\usepackage{makeidx}
 
 \setlength{\textwidth}{6.25in}
 \setlength{\oddsidemargin}{0.25in}
@@ -16,68 +17,52 @@
 \newfloat{code}{h!tb}{cod}[chapter]
 \floatname{code}{Snippet}
 
+\makeindex
+
 \begin{document}
 
 \maketitle
 \frontmatter
 \chapter*{Preface}
 
-Chapter~\ref{chap:intro}, Introduction, is a quick overview of WideBand 
-DownConverter receiver class and its capabilities.
+\paragraph{Chapter~\ref{chap:intro}, Introduction,} is a quick overview of 
+WideBand DownConverter receiver class and its capabilities.
 
-Chapter~\ref{chap:cmd-line}, Command Line, gives basic commands for direct 
+\paragraph{Chapter~\ref{chap:cmd-line}, Command Line,} gives basic commands 
+for direct 
 control of the  equipment but also gives a simple, high-level view of the 
 software organization.  
 
-Chapter~\ref{chap:MandC}, Monitor and Control System, provides the details 
-of the monitor and control system, such as component addresses and 
+\paragraph{Chapter~\ref{chap:MandC}, Monitor and Control System,} provides the
+details of the monitor and control system, such as component addresses and 
 latch\footnote{A latch is an electronic logic device that retains the state
 (0 or 1) assigned to it.} logic states.
 
-Chapter~\ref{chap:config}, Configurations, explains how a WBDC is one element,
+\paragraph{Chapter~\ref{chap:config}, Configurations,} explains how a WBDC is 
+one element,
 the {\tt Receiver}, in an over-all observing system.  Configurations describe 
 how the signals flow between these elements.
 
-A convention used in this document is that if an object is shown capitalized 
-and in typewriter font, it is also a Python {\it class}\footnote{A class is a
-programming unit that serves as a template for objects that are similar to
-each other.  It has ``attributes'', such as
-variables, and ``methods'' (functions). A class is a natural way of describing
-a real-world object which has properties and can do things.}. In general,
+\paragraph{Appendix~\ref{Python}} gives a quick introduction to Python in 
+which the M\&C software is written. A convention used in this document is that 
+if an object 
+is shown capitalized ({\it e.g.} {\tt Receiver} and in typewriter font, it is
+also a Python {\it class}. A class is a programming unit that serves as a 
+template for objects that are similar to each other.  In general,
 a single word in typewriter font refers to an attribute while one followed by
 empty parentheses is a method.
 
-The most basic class is {\tt Device} which has the attributes 
-{\tt name}, {\tt inputs} and {\tt outputs} which are instance of {\tt Port}
-classes, and {\tt data} about the device, such as the location of a telescope
-or the bandwidth of a receiver.  Most classes discused here are sub-classes of 
-{\tt Device}, which means that they ``inherit'' these attributes.
+\paragraph{Appendix~\ref{hardware}} describes the WBDC subsystems, with photos
+to identify them for diagnosis and repair.
 
-In the hope that it is more enlightening than confusing, 
-Snippet~\ref{code:classTelescope} (page~\pageref{code:classTelescope}) gives an
-example of a class definition.
-\begin{code}[h!tb]
-\begin{center}
-\begin{verbatim}
-  
-class Telescope(Device):
-  def __init__(self, obs, dss=0, LO=None, active=True):
-    name = "DSS-"+str(dss)
-    Device.__init__(self, name)
-    self.inputs = {obs.name:obs}
-    self['longitude'], self['latitude'], self['elevation'], tz, name, diam = \
-            get_geodetic_coords(dss=int(dss))
-    self['geo-x'],self['geo-y'],self['geo-z'] = \
-            get_cartesian_coordinates('DSS '+str(dss))
-    self.outputs[self.name] = Port(self, self.name, signal=Beam(str(dss)))
-    self.outputs[self.name].signal['dss'] = dss\end{verbatim}
-\caption{\label{code:classTelescope}Stripped-down definition of the 
-{\tt Telescope} class.}
-\end{center}
-\end{code}
-The {\tt \_\_init\_\_()} method creates an instance of this class, which 
-inherits attributes from the class {\tt Device}. The second line creates the 
-object and the rest of the code assigns values to its attributes.
+\paragraph{Appendix~\ref{labjack}} has the details of the LabJack 
+configurations such as port functions (digital {\it vs} analog, input
+{\tt vs} output, etc.
+
+\paragraph{Appendix~\ref{app:pol}} descibes the circular polarization 
+convention used in astronomy and how two orthogonal linear polarizations can
+be converted to counter-rotating circular polarizations.
+
 
 \tableofcontents
 \listoffigures
@@ -117,7 +102,7 @@ Two switch-selectable LOs determine which band is processed by the one IF sectio
 
 WBDC2 has five dual-polarization RF sections and 20 IF 
 sections (2 feeds $\times$ 2 polarizations $\times$ 5 bands).
-The internals of WBDC2 are described in Subsection~\ref{sec:WBDC2inside}.
+The internals of WBDC2 are described in Subsection~\ref{sec:WBDC2}.
 
 All functions are controlled by a motherboard
 through LabJack\textsuperscript{\textregistered} general-purpose I/O 
@@ -128,38 +113,42 @@ via ethernet.
 
 \subsection{Input Switching}
 
-The first stage of the WBDC allows the two dual-polarizationdown-converters to
-be switched between the two feeds.  
+The first stage of the WBDC allows the two dual-polarization down-converters to
+be switched between the two feeds\index{switching!feeds}.  
 
 \subsection{Polarization Conversion}
 
-The four RF signals are split into five bands each.  After the band-selecting 
-RF filters , the linearly polarized signals from each
-feed can be switched into a quadrature hybrid  to be converted to circular
-polarization.  PIN diode attenuators are provided  to balance the signals into
+The four RF signals are split into two bands (22 and 24) in WBDC1 and five bands
+in WBDC2.\index{bands!frequency}  After the band-selecting 
+RF filters, the linearly polarized signals from each
+feed can be switched into a quadrature hybrid\index{hybrid!polarization}  to be
+converted to circular
+polarization.  This is discussed further in Appendix~\ref{app:pol} 
+PIN diode attenuators\index{attenuator!PIN diode} are provided  to balance the 
+signals into
 these hybrids.
 
 \subsection{Sideband Separation}
 
 In the closed modules on the far right are the down-converters, which have 
-complex mixers putting out two IFs
+complex mixers putting out two IFs\index{down-convertor}
 from 0 to 1000~MHz, with a 90$^{\circ}$ phase difference.
 Both IFs go from -1000~MHz to +1000~MHz but the negative and positive
 frequencies are mixed together.
 These may be considered the real and imaginary components of
-a complex signal.
+a complex signal.\index{hybrid!sideband separating}
 There are switches which can direct each I/Q pair into a quadrature
 hybrid to convert them to an upper and lower sideband pair.
 
 \section{Monitor and Control}
 
-Monitor and control is done with two or three 
+Monitor and control is done with two or three\index{LabJack} 
 LabJack\textsuperscript{\textregistered} general purpose I/O devices. 
 
 \subsection{LabJack 1}
 
 This LabJack with local ID 1 (on the center left of the motherboard) controls 
-the WBDC motherboard.   The motherboard has groups of
+the WBDC motherboard.   The motherboard has groups of\index{latch group}
 eight latches which are used to control and sense switches, and to select
 analog monitoring points.  The LabJack's ADC channels read currents, voltages, 
 and temperatures. 
@@ -167,7 +156,7 @@ and temperatures.
 \subsection{Labjack 2 (and 3)}
 
 LabJack 2 (and 3 for WBDC2), on the box walls at the ends of the row of 
-filters, control PIN diode attenuators.
+filters, control PIN diode attenuators\index{attenuator!PIN diode}.
 There are four voltage-controlled RF attenuators (PIN diodes) for each
 down-converter sub-band.  The voltages are generated in LabJack
 TickDACs attached to the terminals of LabJack 2 (and 3 for WBDC2).
@@ -178,10 +167,27 @@ TickDACs attached to the terminals of LabJack 2 (and 3 for WBDC2).
 The program {\tt wbdc2\_prompt.py}\footnote{In
 {\scriptsize \tt /usr/local/lib/python2.7/DSN-Sci-packages/MonitorControl/Receivers/WBDC/apps}.}
 provides the user with a direct Python command line interface in a terminal 
-session on the embedded Raspberry Pi.  It simply configures the hardware and 
+session on the embedded Raspberry Pi. This command line has access to all
+the equipment in the specified configuration\index{configuration}.
+It simply configures the hardware and 
 software as described in Chapter~\ref{chap:config}.
 
-The programming style used is ``object oriented'', so that a command takes the 
+To command the receiver only, the commands are simply\footnote{This example uses
+{\tt ipython}, a powerful Python command line interface, described in 
+Appendix~\ref{Python}.}
+\begin{code}[h!tb]
+\begin{center}
+\begin{verbatim}
+  
+In [1]: from MonitorControl.Receivers.WBDC.WBDC2.WBDC2hwif import WBDC2hwif
+In [2]: receiver = WBDC2hwif("WBDC-2")\end{verbatim}
+\caption{\label{code:ipython}Ipython example of creating a receiver object from
+a {\tt WBDC2hwif} class.}
+\end{center}
+\end{code}
+
+The programming style used is ``object oriented'',\index{object oriented} 
+so that a command takes the 
 form {\tt object.method()} where {\tt object} is an ``instance'' of a ``class'.
 In this implementation, classes may have private classes. Think of systems and 
 subsystems, so that a command can also have the form
@@ -201,6 +207,10 @@ will become clearer below.
 
 \section{High-level Commands}
 
+At the moment the commands described here are only implemented for 
+{\tt WBDC\_prompt}.  When using a {\tt WBDC2hwif} instance, mid-level and
+low-level commands must be used.
+
 \subsection{Feed Switch Control}\label{subsec:feed_switch}
 
 The WBDC class of receivers have two feed horns with two linear polarizations,
@@ -210,7 +220,7 @@ connect to the feeds.  In the default state (logic state 0),
 ``F1E''$\rightarrow$``R1E'' and ``F1H''$\rightarrow$``R1H''.  In the {\it set}
 state (logic state 1), ``F1E''$\rightarrow$``R2E'' and 
 ``F1H''$\rightarrow$``R2H''.  The commands for this are shown in 
-Snippet~\ref{code:crossover}.
+Snippet~\ref{code:crossover}.\index{switching!feeds}
 \begin{code}[h!tb]
 \begin{center}
   \begin{verbatim}
@@ -229,7 +239,7 @@ Each of the four receiver sections feeds five bandpass filters.
 ``Band 18'' goes from 17 to 19~GHz, ``Band 20'' from 19 to 21, and so on to
 ``Band 26'' from 25 to 27 GHz.  There are ten sections which can convert the
 linearly polarized modes ``E'' and ``H'' produced by the front end to 
-circularly polarized modes ``L'' and ``R''.  
+circularly polarized modes ``L'' and ``R''.\index{hybrid!polarization}  
 
 The command for sensing and controlling the polarization mode are given in
 Snippet~\ref{code:polsec}.
@@ -258,7 +268,8 @@ reflects the fact that the polarization is
 now ambiguous. ``P1'' can be ``E'' or ``L'' while ``P2'' can be ``H'' or ``R''
 depending on the state of the polarization section providing the signal.
 
-There are quadrature hybrids which may be used to convert the
+There are quadrature hybrids\index{hybrid!sideband separating} which may be 
+used to convert the
 in-phase and quad-phase IFs to lower sideband (-1000 to 0~MHz) and upper 
 sideband (0 to 1000~MHz) IFs.  The default state (logic 0) of these sections is
 L/U mode; the optional I/Q mode is logic state 1.  
@@ -309,9 +320,12 @@ configuration of the LabJacks.
 
 \section{Mid-level Commands}
 
+These commands which can be used with the receiver sub-systems.
+
 \subsection{Feed Switch Control}
 
 The crossover switch subsystem can be addressed directly.
+\index{switching!feeds}
 The commands to check and set the state of the cross-over switch are shown in
 Snippet~\ref{code:Xswitch}.
 \begin{code}[h!tb]
@@ -346,7 +360,7 @@ The switches can be set individually with similar {\tt set\_state()} commands.
 \subsection{Polarization Mode}
 
 The state of the individual polarization sections can be queried and set with
-the commands in Snippet~\ref{code:pol_sec}.
+the commands in Snippet~\ref{code:pol_sec}.\index{hybrid!polarization}
 \begin{code}[h!tb]
 \begin{center}
 \begin{verbatim}
@@ -364,15 +378,16 @@ The {\it set} state (logic level 1) means that the conversion is made.  The
 default state is {\tt False} (logic level 0).
 For the polarization sections to function properly, the two incoming signals
 must be balanced.  For that purpose, each polarization section has two
-attenuators which can be adjusted.  (The balancing procedure is described
-elsewhere.) 
+attenuators which can be adjusted.\index{attenuator!PIN diode} 
+(The balancing procedure is described elsewhere.)
 The attenuation can be queried with a corresponding {\tt get\_atten()}
 command but it does not read the hardware.  It only reports what the last
 {\tt set\_atten()} command did.  The attenuation specified is relative to
 the minimum attenuation of the attenuator, which is in the range of 7 to 9~dB.
 
 The state of a single down-converter hybrid can be queried and set
-with commands like those in Snippet~\ref{code:IQhybrids}.
+with commands like those in 
+Snippet~\ref{code:IQhybrids}.\index{hybrid!sideband separating}
 \begin{code}[h!tb]
 \begin{center}
 \begin{verbatim}
@@ -392,7 +407,7 @@ down-converter I/Q hybrid.}
 
 At the heart of the monitor and control subsystem are two (or three) 
 LabJacks.  (They can also provide other functions, like timers,
-which we don't use.)
+which we don't use.)\index{LabJack}
 
 There are eight I/O lines available at screw terminals on the unit. These can
 all function as digital inputs or outputs, or analog inputs, according to the
@@ -410,7 +425,7 @@ the FIO, DIO and CIO groups.
 
 All the switches described above are controlled by latches.  The latches are
 logically grouped, as shown in Table~\ref{tab:latches}, with up to eight
-latches per group.
+latches per group.\index{latch group}
 \begin{table}[h!tb]
   \begin{center}
     \caption{\label{tab:latches}Latch Groups for Digital Monitor and Control}
@@ -422,10 +437,10 @@ latches per group.
       R1P & controls the receiver 1 polarization sections \\
       R2P & controls the receiver 1 polarization sections \\
       PLL & monitors the cross-over switch state and LO phase lock \\
-      P1I1 & pol 1 IF group 1 (bands 18 and 20) \\
-      P1I2 & pol 1 IF group 2 (bands 22, 24 and 26) \\
-      P2I1 & pol 2 IF group 1 (bands 18 and 20) \\
-      P2I2 & pol 2 IF group 2 (bands 22, 24 and 26) \\
+      R1I1 & receiver 1 IF group 1 (bands 18 and 20) \\
+      R1I2 & receiver 1 IF group 2 (bands 22, 24 and 26) \\
+      R2I1 & receiver 2 IF group 1 (bands 18 and 20) \\
+      R2I2 & receiver 2 IF group 2 (bands 22, 24 and 26) \\
       \hline
     \end{tabular}
   \end{center}
@@ -452,9 +467,16 @@ corresponding {\tt write()} command which could be used in this way
 \end{verbatim}
 to set the cross-over switches.
 
+Setting an individual latch involves
+\begin{enumerate}\itemsep0pt \parskip0pt \parsep0pt
+  \item reading the byte from the latch group of interest,
+  \item changing the desired bit, and
+  \item writing the modified byte to the latch group.
+\end{enumerate}
+
 \subsection{Attenuator Control}
 
-The attenuators are PIN diodes
+The attenuators are PIN diodes\index{attenuator!PIN diode}
 controlled with a voltage (or more strictly, the current resulting from an
 applied voltage).  The voltages are supplied by dual-channel (``A'' and
 ``B'') digital-to-analog converters.  The DACs are connected to a LabJack
@@ -491,8 +513,9 @@ attenuation {\it vs} control voltage curve.  This is discussed elsewhere.
 
 \section{Motherboard Control}
 
-Motherboard signals are monitored and controlled with digital latches (logical
-devices which preserve a specified logic state). The latches are connected to
+Motherboard\index{motherboard} signals are monitored and controlled with 
+digital latches (logical devices which preserve a specified logic state). 
+The latches are connected to\index{latch group}
 serial-in/parallel-out registers.  These registers are addressed using the EIO
 out bits of LabJack 1.  The data are then clocked into the register using
 the SDI and SCK signals.  Table~\ref{tab:signals} shows how the LabJack ports 
@@ -570,11 +593,12 @@ address 16 (0001~0000).
 \subsection{Digital Module 1}\label{subsec:DM1}
 
 Seven latch groups are assigned to digital monitoring, that is, the program
-reads the latch states.
+reads the latch states.\index{digital module}
 
 \subsubsection{Feed Crossover Switch}
 
-The feed crossover switches are controlled with DM 1 LG 1 using bits L1A0 and
+The feed crossover switches\index{switching!feeds} are controlled with DM~1 
+LG~1 using bits L1A0 and
 L1A1 (A0, A1 on latchgroup 1): logic~0 for through and logic~1 for 
 crossed. The commanded state can be read at the same bits (A0, A1 at LG address
 12). However, the actual states of the cross-over switches are read at L4A0 and
@@ -637,7 +661,7 @@ LG addr 10 or 14   LG addr 11 or 15         LG addr 18 or 22   LG addr 19 or 23
 LG addr  8 or 12   LG addr  9 or 13         LG addr 16 or 20   LG addr 17 or 21
 \end{verbatim}
 
-\subsection{Digital Module 2}
+\subsection{Digital Module 2}\label{sec:DM2}
 
 This only applies to WBDC2.  Four latch groups are used to control the I/Q
 hybrids.
@@ -648,8 +672,8 @@ The two bypass switches for each hybrid are controlled with one bit.
 Logic level 1 is for IQ; logic level 0 is for LU.
 This is the bit assigment:
 \begin{verbatim}
-          Pol 1        Pol 2
-  Band  Rec1  Rec2   Rec1  Rec2
+          Rec 1        Rec 2
+  Band  Pol1  Pol2   Pol1  Pol2
    18   L1A0  L1A1   L3A0  L3A1
    20   L1A2  L1A3   L3A2  L3A3
    22   L2A0  L2A1   L4A0  L4A1
@@ -659,7 +683,7 @@ This is the bit assigment:
    
 \subsection{WBDC1 Analog Monitoring}
 
-Latch addresses 0 and 2 address the
+Latch addresses 0 and 2 address the\index{analog data}
 registers used to select analog monitoring points.
 bit pattern sent to latch address 0 selects a current and a voltage
 to be connected to AIN0 and AIN1.  A bit pattern sent to latch address
@@ -773,12 +797,14 @@ Table~\ref{tab:RF-mon-points}.
  \hline
     \end{tabular}
   \end{center}
-\end{table}
+\end{table}\footnote{The bit patterns for the detectors still need to be
+verified.}
 The actual reading is (data-0.004)*2.0064.
 
 \chapter{Configurations}\label{chap:config}
 
-A WBDC is one element of a receiving system, specifically a {\tt Receiver}.  The
+A WBDC is one element of a receiving system, specifically a {\tt Receiver}.  
+The\index{configuration}
 receiver obtains its signals from a front end and delivers signals to a 
 backend.  A configuration is a description of the signal flow from the point
 where the antenna focuses radiation on a feed to the point where data are
@@ -852,40 +878,161 @@ information not specific to a {\tt Telescope}, such as weather data.
 
 \appendix
 
-\chapter{WBDC Internals}
+\chapter{Un Soup\c{c}on de Python}\label{Python}
+
+The DSN Radio Astronomy Monitor and Control system uses the object-oriented
+features of Python.  Arguably, object-oriented program can be said to be based
+on Plato's theory of forms.  Python objects are analogous to real objects
+while classes correspond to forms or ideals, which are abstractions based on
+real objects.
+
+\section{iPython}
+
+One can simply type {\tt python} at a shell prompt to get the standard Python
+command line interface.  However, {\tt ipython} is preferable because it has
+powerful extra features.  One that is used most often is {\it tab completion}
+illustrated in Snippet~\ref{code:tab}.
+\begin{code}[h!tb]
+\begin{center}
+\begin{verbatim}
+
+In [2]: receiver
+Out[2]: WBDC2 "WBDC-2"
+In [3]: receiver.crossSwitch
+Out[3]: TransferSwitch "WBDC transfer switch"
+In [4]: receiver.crossSwitch.keys()
+Out[4]: ['H', 'E']
+In [5]: receiver.crossSwitch.Xswitch
+Out[5]: MonitorControl.Receivers.WBDC.WBDC2.Xswitch
+In [6]: receiver.crossSwitch.Xswitch.<Tab>
+receiver.crossSwitch.Xswitch.base
+receiver.crossSwitch.Xswitch.get_state
+receiver.crossSwitch.Xswitch.has_key
+receiver.crossSwitch.Xswitch.keys
+receiver.crossSwitch.Xswitch.mro
+receiver.crossSwitch.Xswitch.set_state
+receiver.crossSwitch.Xswitch.update_signals\end{verbatim}
+\caption[Creating a {\tt WBDC2} instance]{\label{code:tab}Example of creating a
+{\tt WBDC2} instance and then
+getting the classes corresponding to its {\tt crossSwitch} and
+{\tt crossSwitch.Xswitch} attributes, and then a list of the latter's 
+attributes and methods.}
+\end{center}
+\end{code}
+This is very useful if you can't remember the name of an attribute or method.
+
+One can also create an instance of a specific subsystem, as shown in
+Snippet~\ref{code:attenuator}.
+\begin{code}[h!tb]
+\begin{center}
+\begin{verbatim}
+
+In [1]: from Electronics.Instruments.PINatten import PINattenuator
+In [2]: from Electronics.Interfaces.LabJack import *
+In [3]: lj = connect_to_U3s()
+In [4]: tdac = LJTickDAC(lj[2],'R1-18')
+In [5]: vs = tdac['A']
+In [8]: att = PINattenuator('R1-18-H', vs)
+In [9]: att.<Tab>
+att.VS                    att.define_coefs          att.set_atten
+att.atten                 att.fit_calibration_data  att.useful_range
+att.base                  att.get_atten             
+att.controlVoltage        att.name    \end{verbatim}
+\caption[Creating a {\tt PINattenuator} instance]{\label{code:attenuator}
+Creating an instance of a
+{\tt PINattenuator} and discovering its attributes and methods.}
+\end{center}
+\end{code}
+
+\section{Classes}
+
+A class is a natural way 
+of describing a real-world object which has properties ({\it attributes}) and can
+do things ({\it methods} or functions). 
+The most basic class in the M\&C system is {\tt Device} which has the attributes 
+{\tt name}, {\tt inputs} and {\tt outputs}, which are instance of {\tt Port}
+classes, and {\tt data} about the device, such as the location of a telescope
+or the bandwidth of a receiver.  Most classes discused here are sub-classes of 
+{\tt Device}, which means that they ``inherit'' these attributes.
+
+In the hope that it is more enlightening than confusing, 
+Snippet~\ref{code:classTelescope} (page~\pageref{code:classTelescope}) gives an
+example of a class definition.
+\begin{code}[h!tb]
+\begin{center}
+\begin{verbatim}
+  
+class Telescope(Device):
+  def __init__(self, obs, dss=0, LO=None, active=True):
+    name = "DSS-"+str(dss)
+    Device.__init__(self, name)
+    self.inputs = {obs.name:obs}
+    self['longitude'], self['latitude'], self['elevation'], tz, name, diam = \
+            get_geodetic_coords(dss=int(dss))
+    self['geo-x'],self['geo-y'],self['geo-z'] = \
+            get_cartesian_coordinates('DSS '+str(dss))
+    self.outputs[self.name] = Port(self, self.name, signal=Beam(str(dss)))
+    self.outputs[self.name].signal['dss'] = dss\end{verbatim}
+\caption{\label{code:classTelescope}Stripped-down definition of the 
+{\tt Telescope} class.}
+\end{center}
+\end{code}
+The {\tt \_\_init\_\_()} method creates an instance of this 
+class\footnote{Creating an object from a class is called {\it instantiation},
+making an {\tt instance} of a class.}, which 
+inherits attributes from the class {\tt Device}. The second line creates the 
+object and the rest of the code assigns values to its attributes.
+
+
+
+\chapter{WBDC Hardware}\label{hardware}
 
 \section{WBDC1}
 
 \begin{figure}[h!tb]
   \begin{center}
-    \includegraphics[height=5in]{WBDC1inside.jpg}
+    \includegraphics[height=6in]{WBDC1inside.jpg}
   \end{center}
-  \caption{\label{fig:inside}Interior of WBDC1.}
+  \caption{\label{fig:insideWBDC1}Interior of WBDC1.}
 \end{figure}
 
-\section{WBDC2}\label{sec:WBDC2inside}
+\section{WBDC2}\label{sec:WBDC2}
 
-Figure~\ref{fig:inside} shows the interior of WBDC2.  The motherboard is on the
-lid.   The RF enters through four SMA bulkhead feed-throughs on the left.  The
-IFs exit on the right.
+Figure~\ref{fig:insideWBDC2} shows the interior of WBDC2. Mounted in the
+DSS-43 R\&D cone the side at the bottom of the photograph will be at the top,
+with the lid hanging down when open.
+
+The motherboard is  on the lid.   The RF enters through four SMA bulkhead 
+feed-throughs on the left.  The IFs exit on the right.
 \begin{figure}[h!tb]
   \begin{center}
-    \includegraphics[height=5in]{interior-half.png}
+    \includegraphics[height=6in]{interior-half.png}
   \end{center}
-  \caption{\label{fig:inside}Interior of WBDC2.}
+  \caption{\label{fig:insideWBDC2}Interior of WBDC2.}
 \end{figure}
 The crossover switches are the two modules in the
-center to the far left in Figure~\ref{fig:inside}.
+center to the far left in Figure~\ref{fig:insideWBDC2}.
 The RF splitters which feed the bandpass filters (row of modules 
 to the left of center) are the
-larger blue modules at the top and bottom on the far left on 
-Figure~\ref{fig:inside}. 
+larger blue modules at the top and bottom on the far left. 
 The PIN diodes ahead of the polarization sections are under the black cables 
 and DB9 connectors.
-The quadrature hybrids for polarization mode conversion ar to the right of the
+The quadrature hybrids for polarization mode conversion are to the right of the
 black DB9 connectors.
 
-\chapter{LabJack Configuration}
+Figure~\ref{fig:downconv} shows the twenty down-converter sections, each of
+which has two outputs.
+\begin{figure}[h!tb]
+  \begin{center}
+    \includegraphics[width=6in]{WBDC2downconv.jpg}
+    \caption[Down-converters in WBDC2]{\label{fig:downconv}Down-converters in 
+    WBDC2.  The labels  L{\it x}D{\it y}
+    refer to LG{\tt x} pin A{\it y} in DM~2 as discussed in 
+    section~\ref{sec:DM2}.(Photo by L. Teitelbaum)}
+  \end{center}
+\end{figure}
+
+\chapter{LabJack Configuration}\label{labjack}
 
 \section{LabJack 1}
 
@@ -949,5 +1096,104 @@ The normal state of the WBDC1 LabJacks is something like
      TimerCounterConfig       64       64
   TimerCounterPinOffset        4        4
 \end{verbatim}
+
+\chapter{Polarization Conversion}\label{app:pol}
+
+\section{IAU Definition of Circular Polarization}
+
+As reported in the Proceedings of the Fifteenth General Assembly \cite{IAU1974},
+the following resolution was adopted by IAU Commissions 25 (Stellar Photometry
+and Polarimetry) and 40 (Radio Astronomy):
+
+{\itshape RESOLVED, that the frame of reference for the Stokes parameters is
+that of Right Ascension and Declination with the position angle of the
+electric-vector maximum, $\theta$, starting from North and increasing through
+East. Elliptical polarization is defined in conformity with the definitions of
+the Institute of Electrical and Electronics Engineers
+(IEEE Standard 211)}\cite{IEEE1969}.
+
+{\bfseries Left-Handed (Counterclockwise) Polarized Wave} (LCP):
+An elliptically polarized electromagnetic wave in which the
+rotation of the electric field vector with time is
+counterclockwise for a stationary observer looking in the
+direction of the wave normal.
+
+{\bfseries Right-Handed (Clockwise) Polarized Wave} (RCP): 
+An elliptically polarized electromagnetic wave in which the
+rotation of the electric field vector with time is clockwise
+for a stationary observer looking in the direction of the wave
+normal.
+
+This means that the polarization of incoming radiation for which the position
+angle of the electric vector measured at a fixed point in space
+increases with time is described as right-handed and positive.
+\begin{figure}[h!tb]
+\begin{center}
+\includegraphics[width=4in]{circular.png}
+\caption[Circular Polarization]
+{\label{fig:circ_pol} A right circularly polarized wave (LCP - green) and left
+circularly polarized wave (RCP - red)
+as defined by the IAU are shown decomposed into two
+orthogonal linearly polarized waves (X - magenta, Y - blue). The thick arrows
+show the direction of propagation.}
+\end{center}
+\end{figure}
+This can be seen in the lower panel of Figure~\ref{fig:circ_pol}\footnote{To 
+view these images relax the eye muscles as if
+looking at a distant object. A person not experienced in this
+type of viewing might first look at a distant object and then
+slide the gaze down to the figure without refocusing. Another
+method is to place a sheet of cardboard with one edge down the
+middle of the figure and the other edge between the eyes. It is
+probably easier to focus first on a label above or below
+the spiral, and then slide the gaze downwards.}
+
+\section{Changing Between Linear and Circular
+Polarization}\label{sec:lin-circ}
+
+Figure~\ref{fig:circ_pol} shows that linear polarization can be converted to 
+circular polarization.  If the vertical (H-plane or Y-axis) wave lags
+behind the horizontal (E-plane or X-axis) wave by $90^{\circ}$ of
+phase delay the resulting polarization will be RCP.
+If the vertical (H-plane or Y-axis) wave leads
+the horizontal (E-plane or X-axis) wave by $90^{\circ}$ of
+phase delay the resulting polarization will be LCP.
+
+Optically, this can be accomplished
+by passing the beam through a particular thickness of material which
+has different indices of refraction for two orthogonally polarized
+components. Similarly, a waveguide section can be produced to perform the
+same function.
+
+\begin{figure}[h!tb]
+\begin{center}
+\includegraphics[width=3.5in]{quad_hybrid.eps}
+\caption[Quadrature hybrid]{\label{fig:quad-hybrid}A quadrature hybrid
+combines two input signals so that one is delayed $90^{\circ}$
+with respect to the other. There are two outputs which are
+symmetrically delayed.  The figure on the left shows a
+conventional schematic.  The one on the right is a more
+illustrative schematic.}
+\end{center}
+\end{figure}
+In the cm, mm, and submm wave domains, there exist devices which can
+separate a radio wave into two orthogonally polarized components.
+A quadrature hybrid can convert between the two modes, as shown in
+Figure \ref{fig:quad-hybrid}. If port A were receiving
+vertical polarization (H-plane or Y-axis) and B horizontal polarization 
+(E-plane or X-axis) then at the port labelled A+$\angle 90^{\circ}$B, the
+vertical polarization lags behind the horizontal and it would put out RCP.
+The port labelled B+$\angle 90^{\circ}$A would put out LCP.
+
+From this one can see that, if there is an option to bypass the hybrid, it 
+depends which way the hybrid is put in the 
+circuit which determines whether the output ports are E/L and H/R or are
+E/R and H/L.
+
+\bibliographystyle{apj}
+\bibliography{WBDC_Users_Guide}
+\clearpage
+
+\printindex
 
 \end{document}
