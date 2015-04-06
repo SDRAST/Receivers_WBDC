@@ -1,52 +1,5 @@
 """
-WBDC2 server
-
-When the 'wbdc2' configuration includes ROACH backends this should live
-elsewhere.
-
-Brief User Guide
-================
-
-Launching the Server
---------------------
-Suppose that the WBDCserver class is instantiated in a program 'wbdc2_server.py'.
-Then we start the manager and verify that it is running::
-  kuiper@dto:/usr/local/.../ROACH-1/DTO$ python wbdc2_server.py &
-  [2] 23013
-
-Checking on the Servers
------------------------
-If the above gives an error or you need to see if servers are running::
-  run this to try to find the Pyro server and task server::
-  kuiper@dto:/usr/local/python/Observatory/BackEnds/ROACH-1/DTO$ pyro-nsc list
-  Locator: searching Pyro Name Server...
-  Locator: retry 1
-  Locator: searching Pyro Name Server...
-  Locator: retry 1
-  Trying host dto
-  Locator: contacting Pyro Name Server...
-  Trying host localhost
-  Locator: contacting Pyro Name Server...
-  There is a problem: could not find NameServer
-If there was a Pyro nameserver but no task servers the response would be::
-  kuiper@dto:/usr/local/python/Observatory/BackEnds/ROACH-1/DTO$ pyro-nsc list
-  Locator: searching Pyro Name Server...
-  NS is at 128.149.22.108 (dto.jpl.nasa.gov) port 9090
-  :Default --> ( )
-
-Starting the Pyro nameserver
-----------------------------
-If there is no Pyroserver running we start it::
-  kuiper@dto:/usr/local/python/Observatory/BackEnds/ROACH-1/DTO$ pyro-ns &
-  [1] 22076
-  *** Pyro Name Server ***
-  Name server listening on: ('0.0.0.0', 9090)
-  Broadcast server listening on: ('255.255.255.255', 9090)
-  URI is: PYRO://128.149.22.108:9090/8095166c563c1f89e2367ee923143d4e4b
-  URI written to:
-   /usr/local/python/Observatory/BackEnds/ROACH-1/DTO/Pyro_NS_URI
-  Name Server started.
-Now the manager task can be launched.
+WBDC2 hardware monitor and control
 
 Connecting to the Server
 ------------------------
@@ -58,57 +11,31 @@ generator::
   kuiper@kuiper:~/Downloads$ ipython
   ...
   In [1]: from support.pyro import get_device_server, cleanup_tunnels
-  In [2]: mgr = get_device_server('WBDCserver-WBDC')
+  In [2]: srvr = get_device_server('WBDC2hw_server-WBDC')
 
 """
+
 import Pyro
 from Pyro.errors import NamingError
+
 import sys
 import logging
 import numpy
 
-from MonitorControl.Configurations import station_configuration
-from support.logs import init_logging, get_loglevel, set_loglevel
-
-logging.basicConfig(level=logging.INFO)
-logpath = "/tmp/" # for now
-server_host = "dto.jpl.nasa.gov"
-
-mylogger = logging.getLogger()
-init_logging(mylogger,
-             loglevel = logging.INFO,
-             consolevel = logging.DEBUG,
-             logname = logpath+"WBDC2_server.log")
-mylogger.debug(" Handlers: %s", mylogger.handlers)
-
+from MonitorControl.Receivers.WBDC.WBDC2.WBDC2hwif import WBDC2hwif
 from support.logs import set_module_loggers
+from support.logs import init_logging, get_loglevel, set_loglevel
 from support.pyro import launch_server
 from support.process import is_running
 
-class WBDCserver(Pyro.core.ObjBase):
-  def __init__(self, observatory, equipment):
+module_logger = logging.getLogger(__name__)
+
+class MCserver(Pyro.core.ObjBase):
+  def __init__(self):
     Pyro.core.ObjBase.__init__(self)
-
-    self.logger = logging.getLogger(__name__+".Manager")
+    self.logger = logging.getLogger(module_logger.name+".MCserver")
     self.logger.debug("__init__: logger is %s",self.logger.name)
-    self.observatory = observatory
     self.run = True
-
-  def get_equipment(self, equipment):
-    """
-    Obtain and intrepret a description of hardware in the configuration
-    """
-    self.sample_clk = equipment['sampling_clock']
-    self.logger.info("get_equipment: Sampler clocks: %s", self.sample_clk)
-
-    self.IFsw = equipment['IF_switch']
-    self.logger.info("get_equipment: IF switches: %s", self.IFsw)
-    self.get_switch_states()
-
-    self.roaches = equipment['Backend'].roach # dict with 2 roaches
-    self.logger.info("get_equipment: roaches: %s",self.roaches)
-
-    self.logger.debug("get_equipment: spectrometers: %s", self.spec)
 
   def sanitize(self, list_or_dict):
     """
@@ -191,11 +118,29 @@ class WBDCserver(Pyro.core.ObjBase):
     """
     self.logger.info("halt: Halting")
     self.run = False
-  
+
+class WBDC2hw_server(MCserver, WBDC2hwif):
+  def __init__(self, name):
+    self.logger = logging.getLogger(module_logger.name+".WBDC2hw_server")
+    super(WBDC2hw_server,self).__init__()
+    self.logger.debug(" superclass initialized")
+    WBDC2hwif.__init__(self, name)
+    self.logger.debug(" hardware interface instantiated")
+    self.run = True
+
+logpath = "/tmp/" # for now
+server_host = "dto.jpl.nasa.gov"
+
+mylogger = logging.getLogger()
+init_logging(mylogger,
+             loglevel = logging.INFO,
+             consolevel = logging.DEBUG,
+             logname = logpath+"WBDC2_server.log")
+mylogger.debug(" Handlers: %s", mylogger.handlers)
 
 if __name__ == "__main__":
   from socket import gethostname
-  __name__ = 'wbdc2_server-'+gethostname()
+  __name__ = 'wbdc2hw_server-'+gethostname()
 
   loggers = set_module_loggers(
     {'MonitorControl':                                'debug',
@@ -203,7 +148,7 @@ if __name__ == "__main__":
 
   from optparse import OptionParser
   p = OptionParser()
-  p.set_usage('kurtspec_server.py [options]')
+  p.set_usage(__name__+' [options]')
   p.set_description(__doc__)
 
   p.add_option('-l', '--log_level',
@@ -228,21 +173,18 @@ if __name__ == "__main__":
   # Is there a Pyro server running?
   # if is_running("pyro-ns") == False:
   locator = Pyro.naming.NameServerLocator()
-  mylogger.debug("Using locatorr %s", locator)
+  mylogger.debug("Using locator %s", locator)
   try:
     ns = locator.getNS(host='dto.jpl.nasa.gov')
   except NamingError:
     mylogger.error(
-      """Pyro nameserver task notfound. Is the terminal at least 85 chars wide?
+      """Pyro nameserver task not found.
       If pyro-ns is not running. Do 'pyro-ns &'""")
     raise RuntimeError("No Pyro nameserver")
   mylogger.info("Starting %s, please wait....", __name__)
   # Here is the hardware configuration
-  observatory, equipment = station_configuration('wbdc2')
-  telescope = equipment['Telescope']
-  receiver = equipment['Receiver']
 
-  m = WBDCserver(observatory, equipment)
+  m = WBDC2hw_server("WBDC-2")
   mylogger.info("%s started", __name__)
   launch_server(server_host, __name__, m)
   try:
