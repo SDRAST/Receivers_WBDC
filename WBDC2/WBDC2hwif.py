@@ -267,7 +267,7 @@ import u3
 import re
 
 import Math
-from .... import ObservatoryError
+from .... import MCobject, MCgroup, ObservatoryError
 from ..WBDC_core import LatchGroup
 from Electronics.Instruments.PINatten import PINattenuator, get_splines
 from Electronics.Interfaces.LabJack import connect_to_U3s, LJTickDAC
@@ -275,39 +275,6 @@ from Electronics.Interfaces.LabJack import connect_to_U3s, LJTickDAC
 module_logger = logging.getLogger(__name__)
 package_dir = "/usr/local/lib/python2.7/DSN-Sci-packages/"
 module_subdir = "MonitorControl/Receivers/WBDC/WBDC2/"
-
-class MCobject(object):
-
-  def __str__(self):
-    return self.base()+' "'+self.name+'"'
-
-  def __repr__(self):
-    return self.base()+' "'+self.name+'"'
-
-  def base(self):
-    """
-    String representing the class instance type
-    """
-    return str(type(self)).split()[-1].strip('>').strip("'").split('.')[-1]
-
-class MCgroup(MCobject):
-  def __init__(self):
-    self.data = {}
-    
-  def __setitem__(self, key, item):
-    self.data[key] = item
-
-  def __getitem__(self, key):
-    return self.data[key]
-
-  def keys(self):
-    return self.data.keys()
-
-  def has_key(self,key):
-    if self.data.has_key(key):
-      return True
-    else:
-      return False
 
 
 class WBDC2hwif(MCobject):
@@ -320,7 +287,7 @@ class WBDC2hwif(MCobject):
   DC_names   = ["D1", "D2"]
   IF_names   = ["I1", "I2"]
   bands      = ["18", "20", "22", "24", "26"]
-  LJIDs = {320043313: 1, 320052373: 2, 320059056: 3}
+  LJIDs = {320053997: 1, 320052373: 2, 320059056: 3}
   mon_points = {
     1: {1: (int('0000000', 2), " +6 V digitalMB", " +6 V dig"),
         2: (int('1000001', 2), " +6 V analog MB", " +6 V ana"),

@@ -306,7 +306,9 @@ class WBDC2(WBDC_core, Receiver):
   appended, in that order.
   """
   bands      = ["18", "20", "22", "24", "26"]
-  LJIDs = {320043313: 1, 320052373: 2, 320059056: 3}
+  LJIDs = {320053997: 1,
+           320052373: 2,
+           320059056: 3}
   mon_points = {
     1: {1: (int('0000000', 2), " +6 V digitalMB", " +6 V dig"),
         2: (int('1000001', 2), " +6 V analog MB", " +6 V ana"),
