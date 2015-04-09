@@ -387,6 +387,39 @@ class WBDC2hwif(MCobject):
     for key in self.DC.keys():
       states[key] = self.DC[key].get_state()
     return states
+
+  def process_option(self,option):
+    if option == 38:
+      # get analog data
+      monitor_data = {}
+      for latchgroup in [1,2]:
+        MD = self.analog_monitor.get_monitor_data(latchgroup)
+        for key in MD.keys():
+          monitor_data[key] = MD[key]
+      return monitor_data
+    elif option == 41:
+      # set crossover switch
+      self.crossSwitch.set_state(crossover=True)
+    elif option == 42:
+      # unset crossover switch
+      self.crossSwitch.set_state(crossover=False)
+    elif option == 43:
+      # set polarizer to circular
+      for ps in self.pol_sec.keys():
+        self.pol_sec[ps].set_state(True)
+    elif option == 44:
+      # set polarizers to linear
+      for ps in self.pol_sec.keys():
+        self.pol_sec[ps].set_state(False)
+    elif option == 45:
+      # set IQ hybrids to IQ
+      for dc in self.DC.keys():
+        self.DC[dc].set_state(False)
+    elif option == 46:
+      # set IQ hybrids to UL
+      pass
+    else:
+      return ("invalid option %d" % option)
       
   class TransferSwitch(MCobject):
     """

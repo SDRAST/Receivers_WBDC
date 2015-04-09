@@ -107,5 +107,8 @@ if __name__ == "__main__":
       """Pyro nameserver task notfound. Is the terminal at least 85 chars wide?
       If pyro-ns is not running. Do 'pyro-ns &'""")
     raise RuntimeError("No Pyro nameserver")
-  ns.unregister(__name__)
+  try:
+    ns.unregister(__name__)
+  except NamingError:
+    mylogger.debug("%s was already unregistered", __name__)
   mylogger.info("%s finished", __name__)

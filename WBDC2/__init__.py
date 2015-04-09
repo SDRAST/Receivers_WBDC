@@ -1,4 +1,4 @@
-"""
+Mon """
 Module WBDC.WBDC2 provides class WBDC2
 
 Overview
@@ -686,7 +686,7 @@ class WBDC2(WBDC_core, Receiver):
          
   class PolSection(WBDC_core.PolSection):
     """
-    Class for optional conversion of E,H pol tl L,R and attenuators adjustment.
+    Class for optional conversion of E,H pol to L,R and attenuators adjustment.
 
     The attenuator assignment is as follows. R1 uses LJ 2,  R2 uses LJ3.
     The LJ port assignment is:::
