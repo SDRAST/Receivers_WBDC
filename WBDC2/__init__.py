@@ -1,4 +1,4 @@
-Mon """
+"""
 Module WBDC.WBDC2 provides class WBDC2
 
 Overview

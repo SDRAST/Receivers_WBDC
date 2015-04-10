@@ -399,25 +399,34 @@ class WBDC2hwif(MCobject):
       return monitor_data
     elif option == 41:
       # set crossover switch
-      self.crossSwitch.set_state(crossover=True)
+      return self.crossSwitch.set_state(crossover=True)
     elif option == 42:
       # unset crossover switch
-      self.crossSwitch.set_state(crossover=False)
+      return self.crossSwitch.set_state(crossover=False)
     elif option == 43:
       # set polarizer to circular
+      states = {}
       for ps in self.pol_sec.keys():
-        self.pol_sec[ps].set_state(True)
+        states[ps] = self.pol_sec[ps].set_state(True)
+      return states
     elif option == 44:
       # set polarizers to linear
+      states = {}
       for ps in self.pol_sec.keys():
-        self.pol_sec[ps].set_state(False)
+        states[ps] = self.pol_sec[ps].set_state(False)
+      return states
     elif option == 45:
       # set IQ hybrids to IQ
+      states = {}
       for dc in self.DC.keys():
-        self.DC[dc].set_state(False)
+        states[dc] = self.DC[dc].set_state(True)
+      return states
     elif option == 46:
       # set IQ hybrids to UL
-      pass
+      states = {}
+      for dc in self.DC.keys():
+        states[dc] = self.DC[dc].set_state(False)
+      return states
     else:
       return ("invalid option %d" % option)
       
