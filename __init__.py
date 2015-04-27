@@ -112,7 +112,6 @@ class WBDC_base(Receiver):
     # The first element in a WBDC is the two-polarization feed transfer switch
     self.crossSwitch = self.TransferSwitch(self, "WBDC transfer switch",
                                        inputs=inputs)
-                                       #output_names = WBDC_base.RF_names)
         
   def _create_pol_list(self,inputs):
     """

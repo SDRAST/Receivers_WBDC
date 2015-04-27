@@ -9,8 +9,8 @@ if __name__ == "__main__":
   logging.basicConfig(level=logging.INFO)
   testlogger = logging.getLogger()
   testlogger = logs.init_logging(testlogger, loglevel=logging.DEBUG,
-                                 consolevel=logging.DEBUG)
+                                 consolevel=logging.INFO)
   
   observatory, equipment = station_configuration('wbdc2')
   receiver = equipment['Receiver']
-  receiver.set_IF_mode(SB_separated=True)
+  receiver.set_IF_modes(SB_separated=True)

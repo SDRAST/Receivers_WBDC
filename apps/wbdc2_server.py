@@ -58,8 +58,8 @@ has been opened through the firewall to the pyro server host.  Function
 generator::
   kuiper@kuiper:~/Downloads$ ipython
   ...
-  In [1]: from Observatory.pyro_support import device_server, cleanup_tunnels
-  In [2]: mgr = device_server('WBDCserver-WBDC')
+  In [1]: from support.pyro import get_device_server, cleanup_tunnels
+  In [2]: mgr = get_device_server('WBDCserver-WBDC')
 
 """
 import Pyro

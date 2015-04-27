@@ -84,7 +84,7 @@ Logic level 1,0 is for IQ; logic level 0,1 is for LU::
    22   L1A5  L1A4   L3A4  L3A5
    24   L1A3  L1A2   L4A1  L4A2
    26   L1A1  L1A0   L4A3  L4A4
-   
+
 
 Motherboard Monitoring
 ======================
@@ -225,7 +225,7 @@ So this is the LabJack Configuration::
               EIOBitDir 11111111
               FIOBitDir 00000000
               FIOAnalog 00001111
-              
+
 Latch Addresses 0 and 2
 ~~~~~~~~~~~~~~~~~~~~~~~
 There are a number of registers used to select analog monitoring points.
@@ -262,53 +262,32 @@ The normal state of the U3s is something like::
      TimerCounterConfig       64       64
   TimerCounterPinOffset        4        4
 """
-import copy
 import logging
+import u3
 import re
-from collections import OrderedDict
 
 import Math
-from .... import ComplexSignal, IF, Port, ObservatoryError, show_port_sources
-from ... import Receiver
-from .. import WBDC_base
-from ..WBDC_core import LatchGroup, WBDC_core
+from .... import MCobject, MCgroup, ObservatoryError
+from ..WBDC_core import LatchGroup
 from Electronics.Instruments.PINatten import PINattenuator, get_splines
-from Electronics.Interfaces.LabJack import LJTickDAC
-from support import contains
+from Electronics.Interfaces.LabJack import connect_to_U3s, LJTickDAC
 
 module_logger = logging.getLogger(__name__)
 package_dir = "/usr/local/lib/python2.7/DSN-Sci-packages/"
 module_subdir = "MonitorControl/Receivers/WBDC/WBDC2/"
 
-def show_signal(parent, ports):
-  inkeys = ports.keys()
-  test = ports[inkeys[0]]
-  print "\n%s %s signal is %s" % (parent, test, test.signal)
-  sigkeys = test.signal.keys()
-  for key in sigkeys:
-    print "  %s = %s," % (key, test.signal[key]),
-  print "\n"
 
-class WBDC2(WBDC_core, Receiver):
+class WBDC2hwif(MCobject):
   """
-  Wideband Downconverter Mod 2
-
-  The down-converter accepts two Beam signals (each consisting of two
-  polarization ComplexSignal signals).  It has two down-converters, each of
-  which handles one Beam.
-
-  WBDC2 monitor and control logic details are in spreadsheet ControlLogic
-  in /usr/local/python/Observatory/Receivers/WBDC/doc.
-
-  The class variable lists 'DC_names' and 'pol_names' will generate input port
-  labels D1PA, D1PB, D2PA, D2PB in that order. With the class variable list
-  'IF_names', the output port labels will be the above with either I1 or I2
-  appended, in that order.
+  Provides hardware interface to WBDC2
   """
+  pol_names  = ["E",  "H" ]
+  RF_names   = ["R1", "R2"]
+  out_pols   = ["P1", "P2"]
+  DC_names   = ["D1", "D2"]
+  IF_names   = ["I1", "I2"]
   bands      = ["18", "20", "22", "24", "26"]
-  LJIDs = {320053997: 1,
-           320052373: 2,
-           320059056: 3}
+  LJIDs = {320053997: 1, 320052373: 2, 320059056: 3}
   mon_points = {
     1: {1: (int('0000000', 2), " +6 V digitalMB", " +6 V dig"),
         2: (int('1000001', 2), " +6 V analog MB", " +6 V ana"),
@@ -330,237 +309,186 @@ class WBDC2(WBDC_core, Receiver):
         2: (int('1000001', 2), "R2 E-plane"     , "R2 RF plate"),
         3: (int('0100010', 2), "R1 H-plane"     , "BE plate"),
         4: (int('1100000', 2), "R2 H-plane"     , "") } }
- 
+
   splines = get_splines(package_dir+module_subdir+"splines.pkl")
 
-  def __init__(self, name, inputs = None, output_names=None, active=True):
+  def __init__(self, name, active=True):
     """
     Initialize a WBDC2 object.
 
     @param name : unique identifier
     @type  name : str
 
-    @param inputs : a dict with sources for different inputs
-    @type  inputs : dict of str:str
-
-    @param output_names : names of the output channels/ports
-    @type  output_names : list of str
-
     @param active : True is the FrontEnd instance is functional
     @type  active : bool
     """
     self.name = name
-    mylogger = logging.getLogger(module_logger.name+".WBDC2")
-    mylogger.debug("\ninitializing %s", self)
-    show_port_sources(inputs, "WBDC2 inputs before superclass init:",
-                        mylogger.level)
-    WBDC_core.__init__(self, name, WBDC2.LJIDs,
-                       active=active,
-                       inputs=inputs,
-                       output_names=output_names)               
-    show_port_sources(self.inputs, "WBDC2 inputs after superclass init:",
-                      mylogger.level)
-    show_port_sources(self.outputs, "WBDC2 outputs after superclass init:",
-                        mylogger.level)
-    self.logger = mylogger
+    self.logger = logging.getLogger(module_logger.name+".WBDC2hwif")
+    self.logger.debug("\ninitializing %s", self)
 
-    #self.check_LJ_IO()
+    self.LJ = connect_to_U3s(WBDC2hwif.LJIDs)
     if self.has_labjack(1):
       self.configure_MB_labjack()
     else:
       raise WBDCerror("could not configure motherboard Labjack")
-    
-    self.data['bandwidth'] = 1e10 # Hz
+
     # Define the latch groups
+    self.lg = {'A1':    LatchGroup(parent=self, DM=0, LG=1),
+               'A2':    LatchGroup(parent=self, DM=0, LG=2)}
     self.lg['X'] =    LatchGroup(parent=self, LG=1)        # crossover (X) switch
     self.lg['R1P'] =  LatchGroup(parent=self, LG=2)        # R1 pol hybrid control
     self.lg['R2P'] =  LatchGroup(parent=self, LG=3)
     self.lg['PLL'] =  LatchGroup(parent=self, LG=4)
-    self.lg['P1I1'] = LatchGroup(parent=self, DM=2, LG=1)
-    self.lg['P1I2'] = LatchGroup(parent=self, DM=2, LG=2)
-    self.lg['P2I1'] = LatchGroup(parent=self, DM=2, LG=3)
-    self.lg['P2I2'] = LatchGroup(parent=self, DM=2, LG=4)
-          
-    # The transfer switch is created in {\tt WBDC_base}
-    self.crossSwitch.get_state()
+    self.lg['R1I1'] = LatchGroup(parent=self, DM=2, LG=1)
+    self.lg['R1I2'] = LatchGroup(parent=self, DM=2, LG=2)
+    self.lg['R2I1'] = LatchGroup(parent=self, DM=2, LG=3)
+    self.lg['R2I2'] = LatchGroup(parent=self, DM=2, LG=4)
 
-    # the transfer switch outputs are the RF section inputs
-    rfs = self.crossSwitch.outputs.keys()
-    rfs.sort()
-    self.logger.debug("__init__: transfer switch outputs: %s", rfs)
-    self.rf_section = {}
-    for rf in rfs:
-      index = rfs.index(rf)
-      rf_inputs = {}
-      outnames = []
-      rf_inputs[rf] = self.crossSwitch.outputs[rf]
-      self.logger.debug(" __init__: RF %s inputs is now %s", rf, rf_inputs)
-      for band in WBDC2.bands:
-        outnames.append(rf+band)
-      self.rf_section[rf] = self.RFsection(self, rf, inputs = rf_inputs,
-                                       output_names=outnames)
-      self.logger.debug(" __init__: RF %s outputs is now %s",
-                        rf, self.rf_section[rf].outputs)
+    # The first element in a WBDC is the two-polarization feed transfer switch
+    self.crossSwitch = self.TransferSwitch(self, "WBDC transfer switch")
 
-    # The outputs from the two RFsections for each band go to a pol section
     self.pol_sec = {}
-    for band in WBDC2.bands:
-      for rx in WBDC_base.RF_names:
+    for band in WBDC2hwif.bands:
+      for rx in WBDC2hwif.RF_names:
         psec_inputs = {}
         psec_name = rx+'-'+band
-        for pol in WBDC_base.pol_names:
-          psec_inputs[pol] = self.rf_section[rx+pol].outputs[rx+pol+band]
-        self.logger.debug(" __init__: PolSection %s inputs is now %s",
-                          psec_name, psec_inputs)
-        self.pol_sec[psec_name] = self.PolSection(self, psec_name,
-                                                inputs = psec_inputs)
+        self.pol_sec[psec_name] = self.PolSection(self, psec_name)
         self.pol_sec[psec_name].data['band'] = band
         self.pol_sec[psec_name].data['receiver'] = rx
-        self.pol_sec[psec_name]._get_state()
-        self.logger.debug(" __init__: pol section %s outputs: %s",
-                          self.pol_sec[psec_name].name,
-                          self.pol_sec[psec_name].outputs.keys())
+        self.pol_sec[psec_name].get_state()
     pol_sec_names = self.pol_sec.keys()
     pol_sec_names.sort()
     self.logger.debug(" __init__: pol sections: %s", pol_sec_names)
 
     self.DC = {}
     for name in pol_sec_names:
-      for pol in WBDC_base.out_pols:
+      for pol in WBDC2hwif.out_pols:
         self.logger.debug(" making DC for %s", name+pol)
         self.logger.debug(" creating inputs for %s", name+pol)
-        dc_inputs = {name+pol: self.pol_sec[name].outputs[name+pol]}
-        self.DC[name+pol] = self.DownConv(self, name+pol,
-                                          inputs = dc_inputs)
+        self.DC[name+pol] = self.DownConv(self, name+pol)
         rx,band = name.split('-')
         self.DC[name+pol].data['receiver'] = rx
         self.DC[name+pol].data['band'] = band
         self.DC[name+pol].data['pol'] = pol
-        self.DC[name+pol]._get_state()
+        self.DC[name+pol].get_state()
         self.logger.debug(" DC %s created", self.DC[name+pol])
-    # report outputs
-    self.logger.debug(" %s outputs: %s",
-                     self, str(self.outputs))
-    self._update_self() # invokes WBDC_base._update_self()
 
-    self.analog_monitor = self.AnalogMonitor(self, WBDC2.mon_points)
+    self.analog_monitor = self.AnalogMonitor(self, WBDC2hwif.mon_points)
     self.logger.debug(" initialized for %s", self.name)
 
-    # Report outputs
-    self.logger.debug(" %s outputs: %s", self, str(self.outputs))
-    
-  def set_pol_modes(self, circular=False):
-    """
-    """
-    status = {}
-    keys = self.pol_sec.keys()
-    keys.sort()
+  def get_pol_sec_states(self):
+    states = {}
     for key in self.pol_sec.keys():
-      status[key] = self.pol_sec[key].set_state(circular)
-    return status
+      states[key] = self.pol_sec[key].get_state()
+    return states
 
-  def get_pol_modes(self):
-    """
-    """
-    status = {}
-    keys = self.pol_sec.keys()
-    keys.sort()
-    for key in self.pol_sec.keys():
-      status[key] = self.pol_sec[key].get_state()
-    return status
-
-  def set_IF_modes(self, SB_separated=False):
+  def get_DC_states(self):
+    states = {}
     for key in self.DC.keys():
-      self.DC[key].set_IF_(SB_separated)
-    if SB_separated:
-      self.data['bandwidth'] = 1e9
-    else:
-      self.data['bandwidth'] = 2e9
-    return self.get_IF_mode()
+      states[key] = self.DC[key].get_state()
+    return states
 
-  def get_IF_modes(self):
-    modes = {}
-    keys = self.DC.keys()
-    keys.sort()
-    for key in self.DC.keys():
-      modes[key] = self.DC[key].get_state()
-    return modes
-
-  def check_IO_config(self):
-    """
-    Check the configuration of this LabJack according ot its local ID.
-
-    The local ID should reflect its function in WBDC2:
-      1 - motherboard control
-      2 - receiver 1 attenuators
-      3 - receiver 2 attenuators
-    """
-    # Is there a motherboard controller?
-    if self.has_labjack(1):
-      # A MB controller has F bits 0-3 set for analog input
-      if self.LJ[1].configIO()['FIOAnalog'] != 15:
-        self.logger.info(
-                       "check_IO_config: Configuring LabJack 1 for MB control")
-        self.configure_MB_labjack()
+  def process_option(self,option):
+    if option == 38:
+      # get analog data
+      monitor_data = {}
+      for latchgroup in [1,2]:
+        MD = self.analog_monitor.get_monitor_data(latchgroup)
+        for key in MD.keys():
+          monitor_data[key] = MD[key]
+      return monitor_data
+    elif option == 41:
+      # set crossover switch
+      return self.crossSwitch.set_state(crossover=True)
+    elif option == 42:
+      # unset crossover switch
+      return self.crossSwitch.set_state(crossover=False)
+    elif option == 43:
+      # set polarizer to circular
+      states = {}
+      for ps in self.pol_sec.keys():
+        states[ps] = self.pol_sec[ps].set_state(True)
+      return states
+    elif option == 44:
+      # set polarizers to linear
+      states = {}
+      for ps in self.pol_sec.keys():
+        states[ps] = self.pol_sec[ps].set_state(False)
+      return states
+    elif option == 45:
+      # set IQ hybrids to IQ
+      states = {}
+      for dc in self.DC.keys():
+        states[dc] = self.DC[dc].set_state(True)
+      return states
+    elif option == 46:
+      # set IQ hybrids to UL
+      states = {}
+      for dc in self.DC.keys():
+        states[dc] = self.DC[dc].set_state(False)
+      return states
     else:
-      raise ObservatoryError("","LabJack 1 is not connected")
-    if self.has_labjack(2):
-      # A LJ with a TickDAC mounted on an FIO section has that section
-      # configured for digital output.
-      if self.LJ[2].configU3()['EIOState']!= 255:
-        self.logger.info(
-               "check_IO_config: Configuring LabJack 2 for attenuator control")
-        self.configure_atten_labjack(2)
-    else:
-      raise ObservatoryError("","LabJack 2 is not connected")
-    if self.has_labjack(3):
-      if self.LJ[3].configU3()['EIOState']!= 255:
-        self.logger.info(
-               "check_IO_config: Configuring LabJack 3 for attenuator control")
-        self.configure_atten_labjack(3)
-    else:
-      raise ObservatoryError("","LabJack 3 is not connected")
-    return True
-    
-  class TransferSwitch(WBDC_core.TransferSwitch):
+      return ("invalid option %d" % option)
+      
+  class TransferSwitch(MCobject):
     """
     Beam to down-converter transfer switch
 
     There is one Switch object for each front-end polarization P1 and P2.
-    
+
 
     At some point this might become a general transfer switch class
     """
-    def __init__(self, parent, name, inputs=None, output_names=None):
+    def __init__(self, parent, name):
       mylogger = logging.getLogger(parent.logger.name+".TransferSwitch")
       self.name = name
-      WBDC_core.TransferSwitch.__init__(self, parent, name, inputs=inputs,
-                                        output_names=output_names)
-      mylogger.debug(" initializing %s", self)
-      mylogger.debug(" %s inputs: %s", self, str(self.inputs))
       self.parent = parent
       self.logger = mylogger
-        
+      self.logger.debug(" initializing %s", self)
+      self.states = {}
+      self.data = {}
+      for key in [1,2]:
+        self.data[key] = self.Xswitch(self, str(key))       
+
     def get_state(self):
       """
       Get the state of the beam cross-over switches
       """
       keys = self.data.keys()
-      self.logger.debug("WBDC2.TransferSwitch.get_state: checking switches %s", keys)
-      return super(WBDC2.TransferSwitch,self).get_state()
+      self.logger.debug("get_state: checking switches %s", keys)
+      keys.sort()
+      for ID in keys:
+        self.states[ID] = self.data[ID].state
+      if self.states[keys[0]] != self.states[keys[1]]:
+        self.logger.error("%s sub-switch states do not match",str(self))
+      self.state = self.states[keys[0]]
+      self.logger.debug("get_state: %s state is %s",
+                        self, self.state)
+      return self.state
 
-    class Xswitch(WBDC_core.TransferSwitch.Xswitch):
+    def set_state(self, crossover=False):
+      """
+      Set the RF transfer (crossover) switch
+      """
+      self.state = crossover
+      keys = self.data.keys()
+      keys.sort()
+      for ID in keys:
+        self.states[ID] = self.data[ID].set_state(crossover)
+      self.get_state()
+      self.logger.debug("set_state: %s state is %s", self, self.state)
+      return self.state
+
+    class Xswitch(MCgroup):
       """
       """
-      def __init__(self, parent, name, inputs=None, output_names=None,
-                   active=True):
+      def __init__(self, parent, name, active=True):
         self.name = name
-        WBDC_core.TransferSwitch.Xswitch.__init__(self, parent, name,
-                                                  inputs=inputs,
-                                                  output_names=output_names,
-                                                  active=active)
+        self.parent = parent
+        self.logger = logging.getLogger(parent.logger.name+".Xswitch")
+        self.state = self.get_state()
 
-      def _get_state(self):
+      def get_state(self):
         """
         Get the state from the hardware switch.
 
@@ -573,120 +501,59 @@ class WBDC2(WBDC_core, Receiver):
         WBDC2 is different from WBDC1 in the use of the latchgroup bits.
 
         """
-        self.logger.debug("_get_state:  for %s", self)
+        self.logger.debug("get_state:  for %s", self)
         rx = self.parent.parent # WBDC_core instance which owns the latch group
         try:
           status = rx.lg['PLL'].read()
-          self.logger.debug("_get_state: Latch Group %s data = %s", rx.lg['PLL'],
+          self.logger.debug("get_state: Latch Group %s data = %s", rx.lg['PLL'],
                             Math.decimal_to_binary(status,8))
-          test_bit = WBDC_base.pol_names.index(self.name)+1
-          self.state = bool(status & test_bit)
-          self.logger.debug("_get_state: %s switch state = %d", self, self.state)
+          test_bit_value = int(self.name)
+          self.state = bool(status & test_bit_value)
+          self.logger.debug("get_state: %s switch state = %d", self, self.state)
         except AttributeError, details:
-          self.logger.error("WBDC_core.TransferSwitch.Xswitch._get_state: %s", details)
+          self.logger.error("WBDC_core.TransferSwitch.Xswitch.get_state: %s", details)
         return self.state
 
-      def _set_state(self, crossover=False):
+      def set_state(self, crossover=False):
         """
         Set the RF transfer (crossover) switch
 
         The switch is controlled by bits 0 and 1 of latch group 1 (address 80)
         of Labjack 1. Low (value = 0) is for crossed and high is for through.
         """
-        self.logger.debug("WBDC2.TransferSwitch.Xswitch._set_state:  for %s", self)
+        self.logger.debug("set_state:  for %s", self)
         rx = self.parent.parent # WBDC_core instance which owns the latch group
         # get the current bit states
         try:
           status = rx.lg['X'].read()
-          self.logger.debug("_set_state: Latch Group %s data = %s", rx.lg['X'],
+          self.logger.debug("set_state: Latch Group %s data = %s", rx.lg['X'],
                             Math.decimal_to_binary(status,8))
         except AttributeError, details:
-          self.logger.error("_set_state: status read failed: %s", details)
+          self.logger.error("set_state: status read failed: %s", details)
           return False
-        ctrl_bit = WBDC_base.pol_names.index(self.name)
+        ctrl_bit = int(self.name)-1
         if crossover:
           value = Math.Bin.setbit(status, ctrl_bit)
         else:
           value = Math.Bin.clrbit(status, ctrl_bit)
         try:
-          self.logger.debug("_set_state: writing %s",
+          self.logger.debug("set_state: writing %s",
                             Math.decimal_to_binary(value,8))
           status = rx.lg['X'].write(value)
           if status:
-            self.logger.debug("_set_state: write succeeded")
+            self.logger.debug("set_state: write succeeded")
           else:
-            self.logger.error("_set_state: write failed")
+            self.logger.error("set_state: write failed")
         except AttributeError, details:
-          self.logger.error("_set_state: write failed: %s", details)
+          self.logger.error("set_state: write failed: %s", details)
           return False
-        self.state = self._get_state()
-        self.logger.debug("_set_state: Xswitch state = %d", self.state)
+        self.state = self.get_state()
+        self.logger.debug("set_state: Xswitch state = %d", self.state)
         return self.state
 
-  class RFsection(WBDC_core.RFsection):
+  class PolSection(MCgroup):
     """
-    """
-    def __init__(self, parent, name, inputs=None, output_names=None,
-                 active=True):
-      self.parent = parent
-      self.name = name
-      mylogger = logging.getLogger(module_logger.name+".RFsection")
-      mylogger.debug(" initializing WBDC2 %s", self)
-      show_port_sources(inputs,
-                        "WBDC2.RFsection inputs before superclass init:",
-                        mylogger.level)
-      WBDC_core.RFsection.__init__(self, parent, name, inputs=inputs,
-                                  output_names=output_names, active=True)
-      show_port_sources(self.inputs,
-                        "WBDC_base.RFsection inputs after superclass init:",
-                        mylogger.level)
-      show_port_sources(self.outputs,
-                        "WBDC_base.RFsection outputs after superclass init:",
-                        mylogger.level)
-      self.logger = mylogger
-      self._redefine_outputs()
-      self._update_self()
-
-    def _redefine_outputs(self):
-      """
-      """
-      for key in self.outputs.keys():
-        self.logger.debug(
-                 "WBDC_core.RFsection._redefine_outputs: for %s, source is %s",
-                 key, self.outputs[key].source)
-        self.logger.debug(
-                 "WBDC_core.RFsection._redefine_outputs: source signal is %s",
-                 self.outputs[key].source.signal)
-        # The RF section does not change the signal type but makes sub-bands
-        self.outputs[key] = Port(self, key,
-                                 source=self.outputs[key].source,
-                         signal=ComplexSignal(self.outputs[key].source.signal))
-        
-    def _update_self(self):
-      """
-      Update the signals at the outputs
-      """
-      self.logger.debug("_update_self: updating %s", self.name)
-      # connect the ports
-      self._propagate()
-      # update the signals
-      outnames = self.outputs.keys()
-      outnames.sort()
-      for key in self.inputs.keys():
-        if hasattr(self.inputs[key].signal,'copy'):
-          self.logger.debug("_update_self: processing input port %s", key)
-          self.inputs[key].signal.copy(self.inputs[key].source.signal)
-          for outkey in outnames:
-            self.outputs[outkey].signal = ComplexSignal(self.inputs[key].signal)
-            self.outputs[outkey].signal.name = outkey
-            self.logger.debug(" _update_self: output port %s signal is %s",
-                              outkey, self.outputs[outkey].signal)
-            self.outputs[outkey].signal['bandwidth'] = 2 # GHz
-            self.outputs[outkey].signal['frequency'] = float(outkey[-2:])
-         
-  class PolSection(WBDC_core.PolSection):
-    """
-    Class for optional conversion of E,H pol to L,R and attenuators adjustment.
+    Class for optional conversion of E,H pol tl L,R and attenuators adjustment.
 
     The attenuator assignment is as follows. R1 uses LJ 2,  R2 uses LJ3.
     The LJ port assignment is:::
@@ -702,23 +569,14 @@ class WBDC2(WBDC_core, Receiver):
       Rx-26    H   A    1   EIO0
                E   B    2   EIO1
     """
-    def __init__(self, parent, name, inputs=None, output_names=None,
-                 active=True):
+    def __init__(self, parent, name, active=True):
       """
       """
-      mylogger = logging.getLogger(parent.logger.name+".PolSection")
+      MCgroup.__init__(self)
+      self.logger = logging.getLogger(parent.logger.name+".PolSection")
+      self.parent = parent
       self.name = name
-      mylogger.debug(" initializing %s", self)
-      WBDC_core.PolSection.__init__(self, parent, name, inputs=inputs,
-                                  output_names=output_names,
-                                  active=active)
-      self.logger = mylogger
-      self.logger.debug(" __init__: output names: %s",
-                        output_names)
-      self.logger.debug(" initializing WBDC2 %s", self)
-      self.logger.debug(" %s inputs: %s", self, str(self.inputs))
-      inkeys = self.inputs.keys()
-      inkeys.sort()
+      self.logger.debug(" initializing %s", self)
       chan = int(name[3:]) - 18 # I don't like taking this from the name
       # I don't like testing on the name but I can't think of a better way
       if re.search('R1', name):
@@ -726,22 +584,12 @@ class WBDC2(WBDC_core, Receiver):
       else:
           self.tdac = LJTickDAC(self.parent.LJ[3], self.name, IO_chan=chan)
       self.atten = {}
-      for key in inkeys:
+      for key in WBDC2hwif.pol_names:
         att_name = self.name+'-'+key
         self.logger.debug("creating attenuator %s", att_name)
         self.atten[att_name] = self.IFattenuator(self, att_name)
-      outkeys = self.outputs.keys()
-      outkeys.sort()
-      for key in outkeys:
-        indx = outkeys.index(key)
-        inname = inkeys[indx]
-        # A pol section does not change the signal type
-        self.outputs[key] = Port(self, key,
-                                 source=self.inputs[inname],
-                         signal=ComplexSignal(self.inputs[inname].signal))
-      self.logger.debug(" %s outputs: %s", self, str(self.outputs))
 
-    def _get_state(self):
+    def get_state(self):
       """
       Returns the state of the polarization conversion section.
 
@@ -751,17 +599,17 @@ class WBDC2(WBDC_core, Receiver):
       latches to use.  If that isn't available, return the default.
       """
       # Do this only if the subclass has been defined
-      if self.data.has_key('receiver'):
-        LGID = self.data['receiver']+'P'
-        LG = int(self.data['receiver'][-1])+1
-        latchbit = (int(self.data['band'])-18)/2
-        LGdata = self.parent.lg[LGID].read()
-        self.state = Math.Bin.getbit(LGdata,latchbit)
-      else:
-        self.state = False
+      LGID = self.data['receiver']+'P'
+      LGdata = self.parent.lg[LGID].read()
+      self.logger.debug("get_state: LG %s returned %s", LGID,
+                        Math.decimal_to_binary(LGdata,8))
+      latchbit = (int(self.data['band'])-18)/2
+      self.logger.debug("get_state: test bit is %d", latchbit)
+      self.state = Math.Bin.getbit(LGdata,latchbit)
+      self.logger.debug("get_state: state is %d", self.state)
       return self.state
 
-    def _set_state(self,state):
+    def set_state(self,state):
       """
       Sets the state of the polarization conversion section.
 
@@ -770,14 +618,19 @@ class WBDC2(WBDC_core, Receiver):
       The pol section needs to know what band it belongs to to know what
       latches to use.
       """
-      if self.data.has_key('receiver'):
-        LGID = self.data['receiver']+'P'
-        LG = int(self.data['receiver'][-1])+1
-        latchbit = (int(self.data['band'])-18)/2
-        LGdata = self.parent.lg[LGID].read()
-        self.parent.lg[LGID].write(Math.Bin.setbit(LGdata,latchbit))
-        self._update_self()
-      self._get_state()
+      LGID = self.data['receiver']+'P'
+      latchbit = (int(self.data['band'])-18)/2
+      LGdata = self.parent.lg[LGID].read()
+      self.logger.debug("set_state: LG %s returned %s", LGID,
+                        Math.decimal_to_binary(LGdata,8))
+      if state:
+        newdata = Math.Bin.setbit(LGdata,latchbit)
+      else:
+        newdata = Math.Bin.clrbit(LGdata,latchbit)
+      self.logger.debug("set_state: new data is %s",
+                        Math.decimal_to_binary(newdata,8))
+      self.parent.lg[LGID].write(newdata)
+      self.get_state()
       return self.state
 
     class IFattenuator(PINattenuator):
@@ -794,43 +647,27 @@ class WBDC2(WBDC_core, Receiver):
           vs = self.parent.tdac['A']
         else:
           vs = self.parent.tdac['B']
-        ctlV_spline =             WBDC2.splines[1][0][self.name]
-        min_gain, max_gain, ignore = WBDC2.splines[1][1][self.name]
+        ctlV_spline =                WBDC2hwif.splines[1][0][self.name]
+        min_gain, max_gain, ignore = WBDC2hwif.splines[1][1][self.name]
         PINattenuator.__init__(self, self.name, vs, ctlV_spline,
                                min_gain, max_gain)
         self.logger = mylogger
-      
-  class DownConv(WBDC_core.DownConv):
+
+  class DownConv(MCgroup):
     """
     Converts RF to IF
 
     A hybrid optional converts the I and Q IFs to LSB and USB.
     """
-    def __init__(self, parent, name, inputs=None, output_names=None,
-                 active=True):
+    def __init__(self, parent, name, active=True):
       """
       """
-      mylogger = logging.getLogger(module_logger.name+".DownConv")
+      MCgroup.__init__(self)
+      self.logger = logging.getLogger(parent.logger.name+".DownConv")
       self.name = name
-      #show_signal(self, inputs)
-      WBDC_core.DownConv.__init__(self, parent, name, inputs=inputs,
-                                 output_names=output_names,
-                                 active=active)
       self.parent = parent
-      self.logger = mylogger
-      super(WBDC_core.DownConv, self).set_state() # default is bypass
-      keys = self.outputs.keys()
-      keys.sort()
-      self.logger.debug(" outputs: %s", keys)
-      for key in keys:
-        IFname = key[-2:]
-        index = WBDC_base.IF_names.index(IFname)
-        IFmode = self.get_state()
-        self.logger.debug(" %s IF mode is %s", key, IFmode)
-        self.outputs[key] = Port(self, key,
-                       source=self.outputs[key].source,
-                    signal=IF(self.outputs[key].source.signal, IF_type=IFmode))
-        self.parent.outputs[key] = self.outputs[key]
+      self.state = self.get_state()
+      self.logger.debug(" %s IF mode is %s", self, self.state)
 
     def _get_latch_info(self):
       """
@@ -839,18 +676,19 @@ class WBDC2(WBDC_core, Receiver):
                         self.data['pol'],
                         self.data['band'],
                         self.data['receiver'])
-      rxno = int(self.data['receiver'][-1])-1
+      polno = int(self.data['pol'][-1])-1
+      self.logger.debug("_get_latch_info: pol number %d", polno)
       if int(self.data['band']) < 21:
-        LGID = self.data['pol']+'I1'
-        latchbit = int(self.data['band']) - 18 + rxno
+        LGID = self.data['receiver']+'I1'
+        latchbit = int(self.data['band']) - 18 + polno
       else:
-        LGID = self.data['pol']+'I2'
-        latchbit = int(self.data['band']) - 22 + rxno
+        LGID = self.data['receiver']+'I2'
+        latchbit = int(self.data['band']) - 22 + polno
       self.logger.debug("_get_latch_info: latch bit %d on group %s selected",
                         latchbit, LGID)
       return LGID, latchbit
-      
-    def _get_state(self):
+
+    def get_state(self):
       """
       """
       if self.data.has_key('receiver'):
@@ -863,8 +701,8 @@ class WBDC2(WBDC_core, Receiver):
       else:
         self.state = False
       return self.state
-      
-    def _set_state(self, state):
+
+    def set_state(self, state):
       """
       """
       if self.data.has_key('receiver'):
@@ -882,20 +720,55 @@ class WBDC2(WBDC_core, Receiver):
           self.parent.lg[LGID].write(latchdata)
         except Exception, details:
           self.logger.error("_set_state: write failed: %s", str(details))
-        self._update_self()
-      self._get_state()
+      self.get_state()
       return self.state
 
-  class AnalogMonitor(WBDC_core.AnalogMonitor):
+  class AnalogMonitor(MCobject):
     """
     """
     def __init__(self, parent, mon_points):
       """
       """
       self.parent=parent
-      mylogger = logging.getLogger(self.parent.logger.name+".AnalogMonitor")
-      WBDC_core.AnalogMonitor.__init__(self, parent, mon_points)
-      self.logger = mylogger
+      self.logger = logging.getLogger(self.parent.logger.name+".AnalogMonitor")
+
+    def read_analogs(self, latchgroup=1):
+      """
+      """
+      self.logger.debug("read_analogs: latch group=%d", latchgroup)
+      latchAddress = latchgroup - 1
+      self.logger.debug("read_analogs: latch address=%d", latchAddress)
+      LGname = 'A'+str(latchgroup)
+      self.logger.debug("read_analogs: latch name=%s", LGname)
+      mon_data = WBDC2hwif.mon_points[latchgroup]
+      mon_pts = mon_data.keys()
+      mon_pts.sort()
+      self.logger.debug("read_analogs: monitor points: %s", mon_pts)
+      analog_data = {}
+      for point in mon_pts:
+        mon_pt_addr = mon_data[point][0]
+        self.logger.debug("read_analogs: sending %d", mon_pt_addr)
+        self.parent.lg[LGname].write(mon_pt_addr)
+        for dataset in [0,1]:
+          self.logger.debug('read_analogs: dataset=%d',dataset)
+          label =  mon_data[point][dataset+1].strip()
+          self.logger.debug('read_analogs: reading %s', label)
+          AINnum = latchAddress*2+dataset
+          # in the next line, LGname can be A1 or A2
+          self.logger.debug("read_analogs: reading AIN%d", AINnum)
+          analog_data[label] = self.parent.lg[LGname].LJ.getAIN(AINnum)
+          self.logger.debug("read_analogs: read %f", analog_data[label])
+      return analog_data
+
+    def get_monitor_data(self, latchgroup=1):
+      """
+      """
+      monitor_data = {}
+      analog_data = self.read_analogs(latchgroup)
+      for ID in analog_data.keys():
+        if ID:
+          monitor_data[ID] = self.convert_analog(ID, analog_data[ID])
+      return monitor_data
 
     def convert_analog(self, ID, value):
       """
@@ -923,5 +796,67 @@ class WBDC2(WBDC_core, Receiver):
         return (value+0.2389275)*23.549481
       else:
         self.logger.error("convert_analogs: unknown ID: %s", ID)
-      
-        
+
+       
+  # ------------------------------- WBDC2hwif methods -------------------------
+
+  def has_labjack(self, localID):
+    """
+    """
+    if self.LJ.has_key(localID):
+      return True
+    else:
+      self.logger.error(" %s has no LabJack %d", self.name, localID)
+      return False
+
+  def configure_MB_labjack(self):
+    """
+    Configure LabJack 1 for digital module control and analog monitoring
+    """
+    if self.has_labjack(1):
+      # Analog input for voltages, currents and temperatures
+      FIOanalog = int('00001111',2)
+      self.LJ[1].configIO(FIOAnalog=FIOanalog,EIOAnalog=0)
+      CIOBitDir = int('1111',2)
+      EIOBitDir = int('11111111',2)
+      FIOBitDir = int('00000000',2)
+      direction = [FIOBitDir, EIOBitDir, CIOBitDir]
+      mask = [0xff,0xff,0xff]
+      self.logger.debug("LabJack %d direction=%s, write mask=%s",
+                        self.LJ[1].localID, direction, mask)
+      try:
+        status = self.LJ[1].getFeedback(u3.PortDirWrite(Direction=direction,
+                                                        WriteMask=mask))
+        self.logger.debug(" configure status: %s", status)
+      except Exception, details:
+        self.logger.error(" Could not set bit direction on U3 %d",
+                          self.LJ[1].localID)
+        raise ObservatoryError("","configuring LJ 1 failed:\n"+str(details))
+    else:
+      raise ObservatoryError("","LabJack 1 is not connected")
+
+  def configure_atten_labjack(self, ID):
+    """
+    Configure a LabJack for PIN diode attenuator control
+    """
+    if self.has_labjack(ID):
+      self.LJ[ID].configIO(EIOAnalog=0, FIOAnalog=0)
+      CIOBitDir = int('0000',2)
+      EIOBitDir = int('00000000',2)
+      FIOBitDir = int('00000000',2)
+      direction = [FIOBitDir, EIOBitDir, CIOBitDir]
+      mask = [0xff,0xff,0xff]
+      self.logger.debug(" LabJack %d direction=%s, write mask=%s",
+                        ID, direction, mask)
+      try:
+        status = self.LJ[ID].getFeedback(u3.PortDirWrite(Direction=direction,
+                                                         WriteMask=mask))
+        self.logger.debug(" configure status: %s", status)
+      except Exception, details:
+        self.logger.error(" Could not set bit direction on U3 %d",
+                          self.LJ[ID].localID)
+        raise ObservatoryError("LabJack "+str(ID),
+                               "not configured:\n"+str(details))
+    else:
+      raise ObservatoryError("LabJack "+str(ID)," is not connected")
+

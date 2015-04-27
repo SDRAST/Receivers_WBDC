@@ -5,6 +5,8 @@
 *~
 *.bak
 
+*Pyro_log
+
 # C extensions
 *.so
 

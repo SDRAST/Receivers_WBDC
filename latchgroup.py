@@ -130,10 +130,9 @@ class LatchGroup():
     @param LG : latch group number
     @type  LG : int
     """
-    mylogger = logging.getLogger(__name__+".LatchGroup")
-    mylogger.setLevel(logging.INFO)
+    self.logger = logging.getLogger(parent.logger.name+".LatchGroup")
     if parent == None and labjack == None:
-      mylogger.error("%s must have a labjack or a parent with a labjack", self)
+      self.logger.error("%s must have a labjack or a parent with a labjack", self)
       raise ObservatoryError("", " no labjack or receiver specified")
     elif labjack == None:
       self.parent = parent
@@ -141,12 +140,11 @@ class LatchGroup():
     else:
       self.LJ = labjack
     if DM == None and LG == None:
-      mylogger.error("%s must have digital module and latch group codes", self)
+      self.logger.error("%s must have digital module and latch group codes", self)
       raise ObservatoryError(":", "no latch group")
     else:
       self.address = self.getLatchAddr(parent, DM=DM, LG=LG)
     self.name = str(self.address)
-    self.logger = mylogger
     self.setLatchAddr()
 
   def __str__(self):
@@ -169,7 +167,7 @@ class LatchGroup():
     digital module number and the WBDC version.
 
     The latchgroup base address for analog monitoring is 0. It is only used
-    on the LabJack for DM 1. See thelatchgroup module docstring.
+    on the LabJack for DM 1. See the latchgroup module docstring.
 
     @param parent : device to which the LatchGroup instance belongs
     @type  parent : Device subclass instance
@@ -190,12 +188,18 @@ class LatchGroup():
       try:
         self.baseAddress = parent.latchBaseAddr
       except AttributeError:
-        if str(parent).split()[0] == 'WBDC2':
+        parent_type = str(parent).split()[0]
+        self.logger.debug("getLatchAddr: parent type is %s", parent_type)
+        if parent_type == 'WBDC2':
           self.baseAddress = 8
-        elif str(parent).split()[0] == 'WBDC1':
+        elif parent_type == 'WBDC2hwif':
+          self.baseAddress = 8
+        elif parent_type == 'WBDC2hw_server':
+          self.baseAddress = 8
+        elif parent_type == 'WBDC1':
           self.baseAddress = 80
         else:
-          raise ObservatoryError(parent,"is not a known WBDC class")        
+          raise ObservatoryError(str(parent),"is not a known WBDC class")
     else:
       self.baseAddress = 8
     return self.baseAddress + ((DM-1) << 3) + (int(read) << 2) + (LG-1)
@@ -367,10 +371,10 @@ class LatchGroup():
     for signal,state in signal_dict.items():
       commands.append(u3.BitStateWrite(WBDCsignal[signal], state))
     commands.append(u3.PortStateRead())
-    self.logger.debug("  set_signals: sending %s", commands)
+    #self.logger.debug("  set_signals: sending %s", commands)
     try:
       result = self.LJ.getFeedback(commands)
-      self.logger.debug("  set_signals: command feedback: %s", result)
+      #self.logger.debug("  set_signals: command feedback: %s", result)
       #if float(python_version()[:3]) < 2.6:
       time.sleep(0.01)
     except Exception, details:
