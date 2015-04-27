@@ -49,10 +49,11 @@
 \contentsline {chapter}{\numberline {B}WBDC Hardware}{23}
 \contentsline {section}{\numberline {B.1}WBDC1}{23}
 \contentsline {section}{\numberline {B.2}WBDC2}{23}
-\contentsline {chapter}{\numberline {C}LabJack Configuration}{27}
-\contentsline {section}{\numberline {C.1}LabJack 1}{27}
-\contentsline {section}{\numberline {C.2}LabJack 2 (and 3)}{27}
-\contentsline {section}{\numberline {C.3}Configuration Check}{27}
-\contentsline {chapter}{\numberline {D}Polarization Conversion}{29}
-\contentsline {section}{\numberline {D.1}IAU Definition of Circular Polarization}{29}
-\contentsline {section}{\numberline {D.2}Changing Between Linear and Circular Polarization}{30}
+\contentsline {chapter}{\numberline {C}LabJack Configuration}{29}
+\contentsline {section}{\numberline {C.1}LabJack 1}{29}
+\contentsline {section}{\numberline {C.2}LabJack 2 (and 3)}{29}
+\contentsline {section}{\numberline {C.3}Configuration Check}{29}
+\contentsline {chapter}{\numberline {D}Polarization Conversion}{31}
+\contentsline {section}{\numberline {D.1}IAU Definition of Circular Polarization}{31}
+\contentsline {section}{\numberline {D.2}Changing Between Linear and Circular Polarization}{32}
+\contentsline {chapter}{\numberline {E}Sideband Separation}{35}

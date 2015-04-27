@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.11.19)  11 MAR 2015 11:05
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.11.19)  10 APR 2015 18:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -562,22 +562,38 @@ File: WBDC2downconv.jpg Graphic file (type jpg)
 <use WBDC2downconv.jpg>
 Package pdftex.def Info: WBDC2downconv.jpg used on input line 1027.
 (pdftex.def)             Requested size: 433.62pt x 325.21861pt.
- [23] [24 <./WBDC1inside.jpg>] [25 <./interior-half.png>] [26 <./WBDC2downconv.
-jpg>]
-Appendix C.
-[27
+ <WBDC2_outputs.png, id=133, 1638.12pt x 549.05125pt>
+File: WBDC2_outputs.png Graphic file (type png)
 
-] [28]
+<use WBDC2_outputs.png>
+Package pdftex.def Info: WBDC2_outputs.png used on input line 1038.
+(pdftex.def)             Requested size: 433.62pt x 145.3387pt.
+
+<WBDC_output_signals.jpg, id=135, 427.8384pt x 175.3752pt>
+File: WBDC_output_signals.jpg Graphic file (type jpg)
+
+<use WBDC_output_signals.jpg>
+Package pdftex.def Info: WBDC_output_signals.jpg used on input line 1076.
+(pdftex.def)             Requested size: 433.62pt x 177.75374pt.
+ [23]
+Underfull \vbox (badness 6157) has occurred while \output is active []
+
+ [24 <./WBDC1inside.jpg>] [25 <./interior-half.png>] [26 <./WBDC2downconv.jpg>]
+ [27 <./WBDC2_outputs.png> <./WBDC_output_signals.jpg>] [28
+
+]
+Appendix C.
+[29] [30]
 Appendix D.
-<circular.png, id=152, 500.87125pt x 489.83pt>
+<circular.png, id=162, 500.87125pt x 489.83pt>
 File: circular.png Graphic file (type png)
  <use circular.png>
-Package pdftex.def Info: circular.png used on input line 1132.
+Package pdftex.def Info: circular.png used on input line 1183.
 (pdftex.def)             Requested size: 289.07999pt x 282.71887pt.
 
 Underfull \vbox (badness 7722) has occurred while \output is active []
 
- [29
+ [31
 
 ]
 Package epstopdf Info: Source file: <quad_hybrid.eps>
@@ -588,52 +604,62 @@ Package epstopdf Info: Source file: <quad_hybrid.eps>
 (epstopdf)                    size: 6952 bytes
 (epstopdf)             Command: <repstopdf --outfile=quad_hybrid-eps-converted-
 to.pdf quad_hybrid.eps>
-(epstopdf)             \includegraphics on input line 1170.
+(epstopdf)             \includegraphics on input line 1221.
 Package epstopdf Info: Output file is already uptodate.
 
-<quad_hybrid-eps-converted-to.pdf, id=157, 362.35374pt x 222.8325pt>
+<quad_hybrid-eps-converted-to.pdf, id=167, 362.35374pt x 222.8325pt>
 File: quad_hybrid-eps-converted-to.pdf Graphic file (type pdf)
 
 <use quad_hybrid-eps-converted-to.pdf>
-Package pdftex.def Info: quad_hybrid-eps-converted-to.pdf used on input line 11
-70.
+Package pdftex.def Info: quad_hybrid-eps-converted-to.pdf used on input line 12
+21.
 (pdftex.def)             Requested size: 252.94499pt x 155.55327pt.
- [30 <./circular.png>]
-(./WBDC_Users_Guide.bbl [31 <./quad_hybrid-eps-converted-to.pdf>] [32
+ [32 <./circular.png>] [33 <./quad_hybrid-eps-converted-to.pdf>] [34
 
-])
-[33] (./WBDC_Users_Guide.ind [34
+]
+Appendix E.
+<hybrid-delay.png, id=187, 578.16pt x 433.62pt>
+File: hybrid-delay.png Graphic file (type png)
+ <use hybrid-delay.png>
+Package pdftex.def Info: hybrid-delay.png used on input line 1284.
+(pdftex.def)             Requested size: 361.34999pt x 271.01183pt.
+ [35]
+[36 <./hybrid-delay.png>] (./WBDC_Users_Guide.bbl [37] [38
+
+]) [39]
+(./WBDC_Users_Guide.ind [40
 
 
 
 ]) (./WBDC_Users_Guide.aux) ) 
 Here is how much of TeX's memory you used:
- 2315 strings out of 495059
- 31362 string characters out of 3182029
- 91546 words of memory out of 3000000
- 5408 multiletter control sequences out of 15000+200000
+ 2342 strings out of 495059
+ 31859 string characters out of 3182029
+ 91678 words of memory out of 3000000
+ 5432 multiletter control sequences out of 15000+200000
  94542 words of font info for 64 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 37i,9n,23p,248b,322s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/u
-sr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/l
-m/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/
-texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/
-lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf
-/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.
-pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/t
-ype1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr
-/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/publi
-c/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/te
-xmf/fonts/type1/public/lm/lmri9.pfb></usr/share/texmf/fonts/type1/public/lm/lmr
-o10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fo
-nts/type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pf
-b></usr/share/texmf/fonts/type1/public/lm/lmtt8.pfb></usr/share/texmf/fonts/typ
-e1/public/lm/lmtt9.pfb>
-Output written on WBDC_Users_Guide.pdf (46 pages, 6683682 bytes).
+ 37i,13n,23p,248b,322s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc
+}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvi
+ps/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/
+texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm/
+lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf
+/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi1
+0.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts
+/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></
+usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/p
+ublic/lm/lmr6.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/
+texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lm
+ri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmri9.pfb></usr/share/texmf/fo
+nts/type1/public/lm/lmro10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.p
+fb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/ty
+pe1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt8.pfb></us
+r/share/texmf/fonts/type1/public/lm/lmtt9.pfb>
+Output written on WBDC_Users_Guide.pdf (52 pages, 8199007 bytes).
 PDF statistics:
- 250 PDF objects out of 1000 (max. 8388607)
- 174 compressed objects within 2 object streams
+ 279 PDF objects out of 1000 (max. 8388607)
+ 191 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
