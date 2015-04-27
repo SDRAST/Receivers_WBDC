@@ -41,7 +41,7 @@ class WBDC2hw_server(MCserver, WBDC2hwif):
     self.run = True
 
 logpath = "/tmp/" # for now
-server_host = "crux"
+nameserver_host = "crux"
 
 mylogger = logging.getLogger()
 init_logging(mylogger,
@@ -86,22 +86,24 @@ if __name__ == "__main__":
   # if is_running("pyro-ns") == False:
   locator = Pyro.naming.NameServerLocator()
   mylogger.debug("Using locator %s", locator)
+  # is this necessary?
   try:
-    ns = locator.getNS(host=server_host)
+    ns = locator.getNS(host=nameserver_host)
   except NamingError:
     mylogger.error(
       """Pyro nameserver task not found.
       If pyro-ns is not running. Do 'pyro-ns &'""")
     raise RuntimeError("No Pyro nameserver")
+  # where is 'ns' used?
   mylogger.info("Starting %s, please wait....", __name__)
   # Here is the hardware configuration
 
   m = WBDC2hw_server("WBDC-2")
   mylogger.info("%s starting", __name__)
-  launch_server(server_host, __name__, m)
+  launch_server(nameserver_host, __name__, m)
   mylogger.info("%s ending", __name__)
   try:
-    ns = locator.getNS(host=server_host)
+    ns = locator.getNS(host=nameserver_host)
   except NamingError:
     mylogger.error(
       """Pyro nameserver task notfound. Is the terminal at least 85 chars wide?
