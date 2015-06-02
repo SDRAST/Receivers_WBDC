@@ -42,7 +42,7 @@ class WBDC2hw_server(MCserver, WBDC2hwif):
 
 logpath = "/tmp/" # for now
 server_host = "crux"
-
+logging.basicConfig(level=logging.DEBUG)
 mylogger = logging.getLogger()
 init_logging(mylogger,
              loglevel = logging.INFO,

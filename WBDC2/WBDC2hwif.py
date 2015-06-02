@@ -375,20 +375,26 @@ class WBDC2hwif(MCobject):
 
     self.analog_monitor = self.AnalogMonitor(self, WBDC2hwif.mon_points)
     self.logger.debug(" initialized for %s", self.name)
-
+    
+  def get_Xswitch_state(self):
+    return self.crossSwitch.get_state()
+    
   def get_pol_sec_states(self):
     states = {}
     for key in self.pol_sec.keys():
       states[key] = self.pol_sec[key].get_state()
     return states
 
+  def set_atten_volts(self, dcID, attenID, volts):
+    self.DC[dcID].atten[attenID].set_voltage()
+    
   def get_DC_states(self):
     states = {}
     for key in self.DC.keys():
       states[key] = self.DC[key].get_state()
     return states
 
-  def process_option(self,option):
+  def set_WBDC(self,option):
     if option == 38:
       # get analog data
       monitor_data = {}
