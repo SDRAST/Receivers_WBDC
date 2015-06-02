@@ -24,7 +24,8 @@ If the above gives an error or you need to see if servers are running::
   Locator: searching Pyro Name Server...
   Locator: retry 1
   Trying host dto
-  Locator: contacting Pyro Name Server...
+  Locator: contacting Pyro Name Server...  __name__ = 'wbdc2_server-'+gethostname()
+
   Trying host localhost
   Locator: contacting Pyro Name Server...
   There is a problem: could not find NameServer

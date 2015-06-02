@@ -1032,6 +1032,57 @@ which has two outputs.
   \end{center}
 \end{figure}
 
+The outputs and their labels are shown in Figure~\ref{fig:WBDCout}.
+\begin{figure}[h!tb]
+  \begin{center}
+    \includegraphics[width=6in]{WBDC2_outputs.png}
+    \caption[WBDC2 outputs]{\label{fig:WBDCout}Outputs of WBDC2.}
+  \end{center}
+\end{figure}
+The polarizations are labeled ``H'' and ``E'' which refers to the native 
+polarization of the orthomode outputs.  These are the polarizations of the
+outputs if the polarization hybrids are bypassed.  Since the polarizations
+could also be ``L'' and ``R'', the labels ``P1'' and ``P2'' are also used
+in other contexts.
+\begin{center}
+\begin{tabular}{|c|cc|}
+\hline
+hybrid state: & 0 & 1 \\
+\hline
+P1            & E & L \\
+P2            & H & R \\
+\hline
+\end{tabular}
+  \begin{tabular}{|c|cc|}
+    \hline
+hybrid state: & 1 & 0 \\
+\hline
+IF1            & I & U \\
+IF2            & Q & L \\
+\hline
+  \end{tabular}
+\end{center}
+The ports are also labeled
+``Q/L'' and ``I/U'' which refers to the types of IF which depend on the states
+of the down-converter quadrature hybrids. Since the IF type depends on the state
+of the down-converter hybrids, the terms ``IF1'' and ``IF2'' also also used.
+Note that the logic is intentionally inverted so that the default state is
+L/U, that is, the signals go through the hybrids.
+
+These outputs are routed to an IF distribution panel shown in 
+Figure~\ref{fig:WBDCpatch}.
+\begin{figure}[h!tb]
+  \begin{center}
+    \includegraphics[width=6in]{WBDC_output_signals.jpg}
+    \caption[WBDC2 output patch panel]{\label{fig:WBDCpatch}WBDC2 IF patch 
+    panel. 16 of the
+    40 outputs can be routed via optic fibers to the control room.}
+  \end{center}
+\end{figure}
+This panel uses the P1/2 and IF1/2 notation.
+
+
+
 \chapter{LabJack Configuration}\label{labjack}
 
 \section{LabJack 1}
@@ -1189,6 +1240,114 @@ From this one can see that, if there is an option to bypass the hybrid, it
 depends which way the hybrid is put in the 
 circuit which determines whether the output ports are E/L and H/R or are
 E/R and H/L.
+
+\chapter{Sideband Separation}
+
+If the LO is in the middle of the RF band, then the mixing products will have
+both positive frequencies from the upper sideband and negative frequencies from
+the lower sideband. Both are present in the IF.  A complex mixer puts out
+two IFs which are separated 90$^{\circ}$ in phase.  These two IFs can be
+considered the real and imaginary parts of a complex signal. The upper and
+lower sidebands can be recovered from a complex signal.
+
+The outputs from a complex mixer can be phased together to separate
+the upper and lower sidebands.  This is done with a $90^{\circ}$ hybrid,
+shown in Figure~\ref{fig:quad-hybrid},
+which re-combines the two quadrature phase mixing products.
+To see this, consider the outputs of the two mixers to be the sum of
+the USB and the LSB part of the down-converted spectrum with the
+frequencies explicitly positive and negative,
+{\itshape i.e.},
+\begin{eqnarray}
+V_R &=&   \frac{V_{U}}{\sqrt{2}} \cos( \omega_{U} t + \Delta \phi_{U})
+        + \frac{V_{L}}{\sqrt{2}} \cos(-\omega_{L} t + \Delta \phi_{L}),
+          \label{eq:V_real-1} \\
+    &=&   \frac{V_{U}}{\sqrt{2}} \cos(\omega_{U} t + \Delta \phi_{U})
+        + \frac{V_{L}}{\sqrt{2}} \cos(\omega_{L} t - \Delta \phi_{L}),
+          \label{eq:V_real-2} \\
+V_I &=&   \frac{V_{U}}{\sqrt{2}} \sin( \omega_{U} t + \Delta \phi_{U})
+        + \frac{V_{L}}{\sqrt{2}} \sin(-\omega_{L} t + \Delta \phi_{L}),
+          \label{eq:V_imag-1} \\
+    &=&   \frac{V_{U}}{\sqrt{2}} \sin(\omega_{U} t + \Delta \phi_{U})
+        - \frac{V_{L}}{\sqrt{2}} \sin(\omega_{L} t - \Delta \phi_{L})
+      \label{eq:V_imag-2}
+\end{eqnarray}
+where $U$ refers to the upper sideband and $L$ the lower sideband.
+Then if these signals are combined in a quadrature hybrid, the effect
+along the paths with the $\pi/2$ delay is that the delayed signal at
+the summation point is that which entered the delay section $t - \pi/2\omega$
+earlier.  This means that we subtract $\pi/2$ from the angular terms in 
+Equations~\ref{eq:V_real-1} and~\ref{eq:V_imag-1} as illustrated
+in Figure~\ref{fig:phase-delay}.
+\begin{figure}[h!tb]
+\begin{center}
+\includegraphics[width=5in]{hybrid-delay.png}
+\caption[Phase delay]{\label{fig:phase-delay}The angular term for the green line
+in the lower panel is $\pi/2$ smaller than in the upper panel, showing that the
+effect is to delay the signal. (The dotted
+lines show a slighly earlier time for a positive frequency signal; so
+the signal moves left with time.)}
+\end{center}
+\end{figure}
+
+Subtracting $\pi/2$ from the angular terms is equivalent to 
+subtracting $\pi/2$ from the phases associated with the positive 
+frequency terms and adding $\pi/2$ to the phases associated with the 
+negative frequency terms in Equations~\ref{eq:V_real-2} and~\ref{eq:V_imag-2}.
+The outputs from the hybrid will then be
+\begin{eqnarray}
+\frac{V_R}{\sqrt{2}} + \frac{V_I \angle 90^{\circ}}{\sqrt{2}} \label{eq:sum_usb}
+&=&
+   \frac{V_{U}}{\sqrt{2}} \cos(\omega_{U} t + \phi_{U})
+ + \frac{V_{L}}{\sqrt{2}} \cos(\omega_{L} t - \phi_{L}) \nonumber \\
+& &
+  + \frac{V_{U}}{\sqrt{2}} \sin(\omega_{U} t + \phi_{U} - \frac{\pi}{2})
+  - \frac{V_{L}}{\sqrt{2}} \sin(\omega_{L} t - \phi_{L} - \frac{\pi}{2})
+     \nonumber \\
+&=&
+\;\;  \frac{V_{U}}{\sqrt{2}} \cos(\omega_{U} t + \phi_{U})
+    + \frac{V_{L}}{\sqrt{2}} \cos(\omega_{L} t - \phi_{L})
+\nonumber \\
+& & - \frac{V_{U}}{\sqrt{2}} \cos(\omega_{U} t + \phi_{U})
+    + \frac{V_{L}}{\sqrt{2}} \cos(\omega_{L} t - \phi_{L})
+\nonumber \\
+&=& \;\;   \sqrt{2}V_{L} \cos(\omega_{L} t + \phi_{L}) \label{eq:nu_usb}\\
+\frac{V_R \angle 90^{\circ}}{\sqrt{2}} + \frac{V_I}{\sqrt{2}} \label{eq:sum_lsb}
+&=&
+   \frac{V_{U}}{\sqrt{2}} \cos(\omega_{U} t + \phi_{U} - \frac{\pi}{2})
+ + \frac{V_{L}}{\sqrt{2}} \cos(\omega_{L} t - \phi_{L} - \frac{\pi}{2}) \nonumber \\
+& &
+ + \frac{V_{U}}{\sqrt{2}} \sin(\omega_{U} t + \phi_{U})
+ - \frac{V_{L}}{\sqrt{2}} \sin(\omega_{L} t - \phi_{L})
+     \nonumber \\
+&=&
+  \frac{V_{U}}{\sqrt{2}} \sin(\omega_{U} t + \phi_{U})
+ + \frac{V_{L}}{\sqrt{2}} \sin(\omega_{U} t - \phi_{L})
+\nonumber \\
+& &    + \frac{V_{U}}{\sqrt{2}} \sin(\omega_{U} t + \phi_{U})
+       - \frac{V_{L}}{\sqrt{2}} \sin(\omega_{U} t - \phi_{L})
+\nonumber \\
+&=& \!    \sqrt{2}V_{U} \sin(\omega_{U} t + \phi_{U})
+\end{eqnarray}
+Note that adding $\pi/2$ to the image band terms in
+Equations~\ref{eq:V_real-1} and~\ref{eq:V_imag-1} is like subtracting
+$\pi/2$ from the image band terms in
+Equations~\ref{eq:V_real-2} and~\ref{eq:V_imag-2},
+{\itshape i.e.} the sign of the $\pi/2$ added is the same as the sign
+of the frequency.
+
+The time-averaged power in each band is
+\begin{eqnarray}
+P_{USB} &=& V^2_{USB} \nonumber \\
+        &=& 2 V^2_{U}
+\left \langle\cos^2(\omega_{IF} t + \phi_{U}) \right \rangle
+\nonumber \\
+        &=& V^2_{U} \label{eq:usb_power}\\
+P_{LSB} &=& V^2_{L} \label{eq:lsb_power}
+\end{eqnarray}
+Equations \ref{eq:usb_power} and \ref{eq:lsb_power},
+when added together, give the power in both sidebands.
+
 
 \bibliographystyle{apj}
 \bibliography{WBDC_Users_Guide}
