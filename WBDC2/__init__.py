@@ -789,14 +789,14 @@ class WBDC2(WBDC_core, Receiver):
         self.parent = parent
         self.name = name
         mylogger = logging.getLogger(parent.logger.name+".IFattenuator")
-        mylogger.debug("initialized with %s and name %s", self, name)
+        mylogger.debug("initializing with %s and parent %s", self, parent)
         if re.search('E', name):
           vs = self.parent.tdac['A']
         else:
           vs = self.parent.tdac['B']
         ctlV_spline =             WBDC2.splines[1][0][self.name]
         min_gain, max_gain, ignore = WBDC2.splines[1][1][self.name]
-        PINattenuator.__init__(self, self.name, vs, ctlV_spline,
+        PINattenuator.__init__(self, parent, self.name, vs, ctlV_spline,
                                min_gain, max_gain)
         self.logger = mylogger
       
