@@ -311,6 +311,7 @@ class WBDC2hwif(MCobject):
         4: (int('1100000', 2), "R2 H-plane"     , "") } }
 
   splines = get_splines(package_dir+module_subdir+"splines.pkl")
+  splines_lab = get_splines(package_dir+module_subdir+"splines-lab.pkl")
 
   def __init__(self, name, active=True):
     """
@@ -657,8 +658,13 @@ class WBDC2hwif(MCobject):
           vs = self.parent.tdac['A']
         else:
           vs = self.parent.tdac['B']
-        ctlV_spline =                WBDC2hwif.splines[1][0][self.name]
-        min_gain, max_gain, ignore = WBDC2hwif.splines[1][1][self.name]
+        if WBDC2hwif.splines[1][0].has_key(self.name):
+          ctlV_spline =                WBDC2hwif.splines[1][0][self.name]
+          min_gain, max_gain, ignore = WBDC2hwif.splines[1][1][self.name]
+        else:
+          key = self.name.replace("-"," ")
+          ctlV_spline =                WBDC2hwif.splines_lab[1][0][key]
+          min_gain, max_gain, ignore = WBDC2hwif.splines_lab[1][1][key]
         PINattenuator.__init__(self, parent, name, vs, ctlV_spline,
                                min_gain, max_gain)
         self.logger = mylogger
