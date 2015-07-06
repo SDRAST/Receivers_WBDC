@@ -61,7 +61,7 @@ CS-BUS is the global enable. The normal state is high. Set to this to low when
 programming latches or reading data. Then set high when done.
 
 Latch LEDs
-~~~~~~~~~~
+==========
 The monitor bits should match the LEDs in the digital module(s) near the top of
 the motherboard (right on WBDC1, left on WBDC2) with the hinge of the lid at the
 bottom.  The LEDs are in LSB -> MSB order and grouped as::
@@ -71,7 +71,7 @@ In this orientation, the LED rows read backwards.  If the box is mounted on a
 wall or ceiling and the lid is hanging down, the order is more conventional.
 
 Latch Addresses 0 and 2
-~~~~~~~~~~~~~~~~~~~~~~~
+=======================
 There are a number of registers used to select analog monitoring points.
 bit pattern sent to latch address 0 selects a current and a voltage
 to be connected to AIN0 and AIN1.  A bit pattern sent to latch address

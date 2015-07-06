@@ -244,9 +244,7 @@ class WBDC1(WBDC_core, Receiver):
     self.logger.info(" %s outputs: %s", self, str(self.outputs))
     self._update_self()
 
-    def assign_LJ_IDs(self):
-    
-    # This must move to the proper context, i.e., WBDC1
+  def assign_LJ_IDs(self):
     if self.serial == 320037493:
       self.configU3(LocalID=3)
     elif self.serial == 320038183:
@@ -378,6 +376,7 @@ class WBDC1(WBDC_core, Receiver):
       elif self.ID == 4:
         self.setVoltages([3.0,-0.724])
       elif self.ID == 5:
+        pass
         
   class DownConv(Receiver.DownConv):
     """

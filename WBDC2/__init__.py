@@ -490,7 +490,7 @@ class WBDC2(WBDC_core, Receiver):
     """
     Check the configuration of this LabJack according ot its local ID.
 
-    The local ID should reflect its function in WBDC2:
+    The local ID should reflect its function in WBDC2::
       1 - motherboard control
       2 - receiver 1 attenuators
       3 - receiver 2 attenuators
