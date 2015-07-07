@@ -265,6 +265,7 @@ The normal state of the U3s is something like::
 import logging
 import u3
 import re
+import os.path
 
 import Math
 from .... import MCobject, MCgroup, ObservatoryError
@@ -310,8 +311,12 @@ class WBDC2hwif(MCobject):
         3: (int('0100010', 2), "R1 H-plane"     , "BE plate"),
         4: (int('1100000', 2), "R2 H-plane"     , "") } }
 
-  splines = get_splines(package_dir+module_subdir+"splines.pkl")
   splines_lab = get_splines(package_dir+module_subdir+"splines-lab.pkl")
+  splines_file = package_dir+module_subdir+"splines.pkl"
+  if os.path.exists(splines_file):
+    splines = get_splines(splines_file)
+  else:
+    splines = splines_lab
 
   def __init__(self, name, active=True):
     """
@@ -658,6 +663,7 @@ class WBDC2hwif(MCobject):
           vs = self.parent.tdac['A']
         else:
           vs = self.parent.tdac['B']
+          
         if WBDC2hwif.splines[1][0].has_key(self.name):
           ctlV_spline =                WBDC2hwif.splines[1][0][self.name]
           min_gain, max_gain, ignore = WBDC2hwif.splines[1][1][self.name]
