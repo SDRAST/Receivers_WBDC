@@ -380,13 +380,17 @@ class WBDC2hwif(MCobject):
     return self.crossSwitch.get_state()
     
   def get_pol_sec_states(self):
+    """
+    """
     states = {}
     for key in self.pol_sec.keys():
       states[key] = self.pol_sec[key].get_state()
     return states
 
-  def set_atten_volts(self, dcID, attenID, volts):
-    self.DC[dcID].atten[attenID].set_voltage()
+  def set_atten_volts(self, ID, attenID, volts):
+    """
+    """
+    self.pol_sec[ID].atten[attenID].set_voltage()
     
   def get_DC_states(self):
     states = {}
@@ -592,8 +596,8 @@ class WBDC2hwif(MCobject):
       self.atten = {}
       for key in WBDC2hwif.pol_names:
         att_name = self.name+'-'+key
-        self.logger.debug("creating attenuator %s", att_name)
         self.atten[att_name] = self.IFattenuator(self, att_name)
+        self.logger.debug("created attenuator %s", self.atten[att_name])
 
     def get_state(self):
       """
@@ -648,14 +652,14 @@ class WBDC2hwif(MCobject):
         self.parent = parent
         self.name = name
         mylogger = logging.getLogger(parent.logger.name+".IFattenuator")
-        mylogger.debug("initialized with %s and name %s", self, name)
+        mylogger.debug("initializing %s with parent %s", self, self.parent)
         if re.search('E', name):
           vs = self.parent.tdac['A']
         else:
           vs = self.parent.tdac['B']
         ctlV_spline =                WBDC2hwif.splines[1][0][self.name]
         min_gain, max_gain, ignore = WBDC2hwif.splines[1][1][self.name]
-        PINattenuator.__init__(self, self.name, vs, ctlV_spline,
+        PINattenuator.__init__(self, parent, name, vs, ctlV_spline,
                                min_gain, max_gain)
         self.logger = mylogger
 

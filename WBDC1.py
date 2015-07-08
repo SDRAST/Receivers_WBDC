@@ -172,6 +172,7 @@ from ... import IF, Port
 from .. import Receiver
 from . import WBDC_base
 from .WBDC_core import WBDC_core
+from Electronics.Instruments.PINatten import PINattenuator
 from support import contains
 
 class WBDC1(WBDC_core, Receiver):
@@ -245,6 +246,7 @@ class WBDC1(WBDC_core, Receiver):
     self._update_self()
 
   def assign_LJ_IDs(self):
+    # This must move to the proper context, i.e., WBDC1
     if self.serial == 320037493:
       self.configU3(LocalID=3)
     elif self.serial == 320038183:
@@ -517,7 +519,7 @@ class WBDC1(WBDC_core, Receiver):
             index = outkeys.index(key)
             self.outputs[key].signal.name = \
                        self.outputs[key].source.signal.name+self.IF_mode[index]
-            self.outputs[key].signal['IF'] = self.IF_mode[index]
+            self.outputs[key].signal['IF'] = se250lf.IF_mode[index]
             self.outputs[key].signal['pol'] = self.pol
 
 def get_calibration_data(Pinatten, pm,
