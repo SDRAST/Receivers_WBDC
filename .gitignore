@@ -5,7 +5,11 @@
 *~
 *.bak
 
+# logs
 *Pyro_log
+
+# Pickle, cPickle and dill files
+*.pkl
 
 # C extensions
 *.so
