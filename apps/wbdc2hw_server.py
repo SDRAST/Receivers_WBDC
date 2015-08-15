@@ -32,7 +32,11 @@ from support.process import is_running
 module_logger = logging.getLogger(__name__)
 
 class WBDC2hw_server(MCserver, WBDC2hwif):
+  """
+  """
   def __init__(self, name):
+    """
+    """
     self.logger = logging.getLogger(module_logger.name+".WBDC2hw_server")
     super(WBDC2hw_server,self).__init__()
     self.logger.debug(" superclass initialized")
@@ -40,23 +44,81 @@ class WBDC2hw_server(MCserver, WBDC2hwif):
     self.logger.debug(" hardware interface instantiated")
     self.run = True
 
-logpath = "/tmp/" # for now
-nameserver_host = "crux"
-
-logging.basicConfig(level=logging.INFO)
-mylogger = logging.getLogger()
-init_logging(mylogger,
-             loglevel = logging.INFO,
-             consolevel = logging.DEBUG,
-             logname = logpath+"WBDC2_server.log")
-mylogger.debug(" Handlers: %s", mylogger.handlers)
-
+  def set_WBDC(self,option):
+    """
+    Emulate old WBDC1 server
+    """
+    if option == 38:
+      # get analog data
+      monitor_data = {}
+      for latchgroup in [1,2]:
+        MD = self.analog_monitor.get_monitor_data(latchgroup)
+        for key in MD.keys():
+          monitor_data[key] = MD[key]
+      return monitor_data
+    elif option == 41:
+      # set crossover switch
+      return self.crossSwitch.set_state(crossover=True)
+    elif option == 42:
+      # unset crossover switch
+      return self.crossSwitch.set_state(crossover=False)
+    elif option == 43:
+      # set polarizer to circular
+      states = {}
+      for ps in self.pol_sec.keys():
+        states[ps] = self.pol_sec[ps].set_state(True)
+      return states
+    elif option == 44:
+      # set polarizers to linear
+      states = {}
+      for ps in self.pol_sec.keys():
+        states[ps] = self.pol_sec[ps].set_state(False)
+      return states
+    elif option == 45:
+      # set IQ hybrids to IQ
+      states = {}
+      for dc in self.DC.keys():
+        states[dc] = self.DC[dc].set_state(True)
+      return states
+    elif option == 46:
+      # set IQ hybrids to UL
+      states = {}
+      for dc in self.DC.keys():
+        states[dc] = self.DC[dc].set_state(False)
+      return states
+    elif option == 47:
+      # report the attenuator settings
+      pass
+    else:
+      return ("invalid option %d" % option)
+  
+  def set_atten(self, ID, dB):
+    """
+    """
+    pol_id = ID[:5]
+    self.logger.debug("set_atten: pol section is %s", pol_id)
+    self.pol_sec[pol_id].atten[ID].set_atten(dB)
+  
+  def get_atten(self, ID):
+    pass
+    
+  
 if __name__ == "__main__":
+  logpath = "/usr/local/logs/"
+  nameserver_host = "crux"
   from socket import gethostname
   __name__ = 'wbdc2hw_server-'+gethostname()
 
+  logging.basicConfig(level=logging.INFO)
+  mylogger = logging.getLogger()
+  mylogger = init_logging(mylogger,
+               loglevel = logging.DEBUG,
+               consolevel = logging.DEBUG,
+               logname = logpath+__name__+".log")
+  mylogger.debug(" Handlers: %s", mylogger.handlers)
   loggers = set_module_loggers(
     {'MonitorControl':                                'debug',
+     'MonitorControl.Receivers.WBDC.WBDC2.WBDC2hwif': 'debug',
      'support':                                       'debug'})
 
   from optparse import OptionParser

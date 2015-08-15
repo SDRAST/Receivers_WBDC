@@ -162,71 +162,37 @@ def column_marker(column):
     marker = 'd'
   return marker
 
-def rezero_data(V, P, refs):
-  """
-  Plot measured data
-  """
-  att = {}
-  keys = V.keys()
-  keys.sort()
-  for key in keys:
-    index = keys.index(key)
-    att[key] = []
-    for pwr in P[key]:
-      att[key].append(pwr - float(refs[index]))
-    att[key] = NP.array(att[key])
-  return att
-
-def plot_data(V, P, refs):
+def plot_data(A, P):
   """
   Plot measured data
   """
   grid()
-  xlim(-13,1)
-  xlabel('Control Volts (V)')
-  ylabel('Insertion Loss (dB)')
+  xlabel('Attenuation (dB)')
+  ylabel('Power (dBm)')
   title("Attenuation Curves")
-  keys = V.keys()
+  keys = P.keys()
   keys.sort()
   for key in keys:
     index = keys.index(key)
-    plot(V[key], att[key], ls='-', marker=column_marker(index),
+    plot(A, P[key], ls='-', marker=column_marker(index),
          label=key)
   legend(loc='lower left', numpoints=1)
-  
-def plot_fit(V, att, v, db, labels, keys, Vstep=0.1, toplabel=""):
-  # plot data
-  allkeys = V.keys()
-  allkeys.sort()
-  for key in keys:
-    index = allkeys.index(key)
-    plot(V[key], att[key], color=colors[index % 7],
-         marker=column_marker(index), ls='', label=key)
-  # plot fits
-  for key in keys:
-    index = allkeys.index(key)
-    plot(v[key], db[key],  color=colors[index % 7], ls='-')
-  grid()
-  legend(numpoints=1)
-  xlabel('Control Volts (V)')
-  ylabel('Insertion Loss (dB)')
-  title(toplabel) # title('Cubic spline interpolation on dB')                                        #!
 
-def plot_gradients(v, gradient, keys):
+def plot_fit(A, P):
   """
+  Plot measured data
   """
-  allkeys = v.keys()
-  allkeys.sort()
-  for key in keys:
-    index = allkeys.index(key)
-    plot(v[key][1:], gradient[key], color=colors[index % 7],
-         marker=column_marker(index), ls='-', label=key)
   grid()
-  xlabel('Control Volts (V)')
-  ylabel('Insertion Loss Gradient (dB/V)')
-  title('Attenuation interpolation')
-  legend(loc='lower left')
-
+  xlabel('Attenuation (dB)')
+  ylabel('Actual - Requested Atten. (dB)')
+  title("Attenuation Error Curves")
+  keys = P.keys()
+  keys.sort()
+  for key in keys:
+    index = keys.index(key)
+    plot(A, P[key][0]-P[key]-A, ls='-', marker=column_marker(index),
+         label=key)
+  legend(loc='lower left', numpoints=1)
 
  
 if __name__ == "__main__":
@@ -237,10 +203,10 @@ if __name__ == "__main__":
   
   # need this for the power meters
   fe = get_device_server("FE_server-krx43", "crux")
-  print "Feed 1 load is:",fe.set_WBDC(13) # set feed 1 to sky
-  print "Feed 2 load is:",fe.set_WBDC(15) # set feed 2 to sky
-  #print fe.set_WBDC(14) # set feed 1 to load
-  #print fe.set_WBDC(16) # set feed 2 to load
+  #print "Feed 1 load is:",fe.set_WBDC(13) # set feed 1 to sky
+  #print "Feed 2 load is:",fe.set_WBDC(15) # set feed 2 to sky
+  print "Feed 1 load is:", fe.set_WBDC(14) # set feed 1 to load
+  print "Feed 2 load is:", fe.set_WBDC(16) # set feed 2 to load
   for pm in ['PM1', 'PM2', 'PM3', 'PM4']:
     # set PMs to dBm
     print fe.set_WBDC(400+int(pm[-1]))
@@ -263,15 +229,18 @@ if __name__ == "__main__":
   mylogger.debug(" attenuator keys: %s", akeys)
   
   powers  = {} # dict of lists of measured powers keyed on attenuator
+  min_gain = -90
   for atn in akeys:
+    min_gain = max(min_gain, attenuators[atn].min_gain)
     powers[atn] = []
-  for attenuation in range(0,20):
+  attenuations = arange(0, -min_gain, 0.5)
+  for attenuation in attenuations:
     for atn in akeys:
-	    attenuators[atn].set_atten(attenuation)
+      mylogger.debug(" setting attenuator %s to %f dB", atn, attenuation)
+      attenuators[atn].set_atten(attenuation)
     time.sleep(0.5)
     # read all the power meters
     response = fe.read_pms()
-    data =  []
     for index in range(len(response)):
 	    powers[akeys[index]].append(response[index][2])
   print powers
@@ -279,53 +248,15 @@ if __name__ == "__main__":
   for pm in ['PM1', 'PM2', 'PM3', 'PM4']:
     # set PMs to W
     print fe.set_WBDC(390+int(pm[-1]))
-"""
-  cv = {}
-  pkeys = powers.keys()
-  pkeys.sort()
-  refs = []
-  for key in pkeys:
-    cv[key] = NP.array(ctl_volts)
-    refs.append(powers[key][0])
-  ID = get_atten_IDs('wbdc2_data.csv')
-
-  # re-zero the data
-  att = rezero_data(cv, powers, refs)
-
-  # Now do the fitting:
-  att_spline,  V_sample_range   = get_splines(cv, att, pkeys)
-  ctlV_spline, att_sample_range = get_splines(att, cv, pkeys)
-
-  # verify the fits
-  v, dB    = interpolate(att_spline,  pkeys, V_sample_range)
-  db, ctlV = interpolate(ctlV_spline, pkeys, att_sample_range)
-
-  # save the data
-  module_path = "/usr/local/lib/python2.7/DSN-Sci-packages/MonitorControl/Receivers/WBDC/WBDC2/"
-  splfile = open(module_path+"splines.pkl","wb")
-  pickle.dump(((att_spline, V_sample_range),
-               (ctlV_spline,att_sample_range)), splfile)
-  splfile.close()
 
   # plot the data
   figure(1)
-  plot_data(cv, powers, refs)
-  xlim(-10,+1)
+  plot_data(attenuations, powers)
 
   # plot the fits
   figure(2)
-  plot_fit(cv, att, v, dB, pkeys, pkeys,
-           toplabel='Cubic spline interpolation on dB')
-  figure(3)
-  plot_fit(cv, att, ctlV, db, pkeys, pkeys,
-           toplabel='Cubic spline interpolation on V')
-
-  # get the slopes
-  att_gradient = get_derivative(dB, pkeys)
-  # analyze the slopes
-  figure(4)
-  plot_gradients(v, att_gradient, pkeys)
-
+  plot_fit(attenuations, powers)
+  
   show()
-"""  
+
   

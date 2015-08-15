@@ -277,7 +277,6 @@ module_logger = logging.getLogger(__name__)
 package_dir = "/usr/local/lib/python2.7/DSN-Sci-packages/"
 module_subdir = "MonitorControl/Receivers/WBDC/WBDC2/"
 
-
 class WBDC2hwif(MCobject):
   """
   Provides hardware interface to WBDC2
@@ -403,48 +402,6 @@ class WBDC2hwif(MCobject):
     for key in self.DC.keys():
       states[key] = self.DC[key].get_state()
     return states
-
-  def set_WBDC(self,option):
-    if option == 38:
-      # get analog data
-      monitor_data = {}
-      for latchgroup in [1,2]:
-        MD = self.analog_monitor.get_monitor_data(latchgroup)
-        for key in MD.keys():
-          monitor_data[key] = MD[key]
-      return monitor_data
-    elif option == 41:
-      # set crossover switch
-      return self.crossSwitch.set_state(crossover=True)
-    elif option == 42:
-      # unset crossover switch
-      return self.crossSwitch.set_state(crossover=False)
-    elif option == 43:
-      # set polarizer to circular
-      states = {}
-      for ps in self.pol_sec.keys():
-        states[ps] = self.pol_sec[ps].set_state(True)
-      return states
-    elif option == 44:
-      # set polarizers to linear
-      states = {}
-      for ps in self.pol_sec.keys():
-        states[ps] = self.pol_sec[ps].set_state(False)
-      return states
-    elif option == 45:
-      # set IQ hybrids to IQ
-      states = {}
-      for dc in self.DC.keys():
-        states[dc] = self.DC[dc].set_state(True)
-      return states
-    elif option == 46:
-      # set IQ hybrids to UL
-      states = {}
-      for dc in self.DC.keys():
-        states[dc] = self.DC[dc].set_state(False)
-      return states
-    else:
-      return ("invalid option %d" % option)
       
   class TransferSwitch(MCobject):
     """
@@ -668,9 +625,8 @@ class WBDC2hwif(MCobject):
           ctlV_spline =                WBDC2hwif.splines[1][0][self.name]
           min_gain, max_gain, ignore = WBDC2hwif.splines[1][1][self.name]
         else:
-          key = self.name.replace("-"," ")
-          ctlV_spline =                WBDC2hwif.splines_lab[1][0][key]
-          min_gain, max_gain, ignore = WBDC2hwif.splines_lab[1][1][key]
+          ctlV_spline =                WBDC2hwif.splines_lab[1][0][self.name]
+          min_gain, max_gain, ignore = WBDC2hwif.splines_lab[1][1][self.name]
         PINattenuator.__init__(self, parent, name, vs, ctlV_spline,
                                min_gain, max_gain)
         self.logger = mylogger
