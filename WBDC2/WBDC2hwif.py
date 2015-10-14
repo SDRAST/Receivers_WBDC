@@ -265,6 +265,7 @@ The normal state of the U3s is something like::
 import logging
 import u3
 import re
+import os.path
 
 import Math
 from .... import MCobject, MCgroup, ObservatoryError
@@ -275,7 +276,6 @@ from Electronics.Interfaces.LabJack import connect_to_U3s, LJTickDAC
 module_logger = logging.getLogger(__name__)
 package_dir = "/usr/local/lib/python2.7/DSN-Sci-packages/"
 module_subdir = "MonitorControl/Receivers/WBDC/WBDC2/"
-
 
 class WBDC2hwif(MCobject):
   """
@@ -310,7 +310,12 @@ class WBDC2hwif(MCobject):
         3: (int('0100010', 2), "R1 H-plane"     , "BE plate"),
         4: (int('1100000', 2), "R2 H-plane"     , "") } }
 
-  splines = get_splines(package_dir+module_subdir+"splines.pkl")
+  splines_lab = get_splines(package_dir+module_subdir+"splines-lab.pkl")
+  splines_file = package_dir+module_subdir+"splines.pkl"
+  if os.path.exists(splines_file):
+    splines = get_splines(splines_file)
+  else:
+    splines = splines_lab
 
   def __init__(self, name, active=True):
     """
@@ -397,48 +402,6 @@ class WBDC2hwif(MCobject):
     for key in self.DC.keys():
       states[key] = self.DC[key].get_state()
     return states
-
-  def set_WBDC(self,option):
-    if option == 38:
-      # get analog data
-      monitor_data = {}
-      for latchgroup in [1,2]:
-        MD = self.analog_monitor.get_monitor_data(latchgroup)
-        for key in MD.keys():
-          monitor_data[key] = MD[key]
-      return monitor_data
-    elif option == 41:
-      # set crossover switch
-      return self.crossSwitch.set_state(crossover=True)
-    elif option == 42:
-      # unset crossover switch
-      return self.crossSwitch.set_state(crossover=False)
-    elif option == 43:
-      # set polarizer to circular
-      states = {}
-      for ps in self.pol_sec.keys():
-        states[ps] = self.pol_sec[ps].set_state(True)
-      return states
-    elif option == 44:
-      # set polarizers to linear
-      states = {}
-      for ps in self.pol_sec.keys():
-        states[ps] = self.pol_sec[ps].set_state(False)
-      return states
-    elif option == 45:
-      # set IQ hybrids to IQ
-      states = {}
-      for dc in self.DC.keys():
-        states[dc] = self.DC[dc].set_state(True)
-      return states
-    elif option == 46:
-      # set IQ hybrids to UL
-      states = {}
-      for dc in self.DC.keys():
-        states[dc] = self.DC[dc].set_state(False)
-      return states
-    else:
-      return ("invalid option %d" % option)
       
   class TransferSwitch(MCobject):
     """
@@ -657,8 +620,13 @@ class WBDC2hwif(MCobject):
           vs = self.parent.tdac['A']
         else:
           vs = self.parent.tdac['B']
-        ctlV_spline =                WBDC2hwif.splines[1][0][self.name]
-        min_gain, max_gain, ignore = WBDC2hwif.splines[1][1][self.name]
+          
+        if WBDC2hwif.splines[1][0].has_key(self.name):
+          ctlV_spline =                WBDC2hwif.splines[1][0][self.name]
+          min_gain, max_gain, ignore = WBDC2hwif.splines[1][1][self.name]
+        else:
+          ctlV_spline =                WBDC2hwif.splines_lab[1][0][self.name]
+          min_gain, max_gain, ignore = WBDC2hwif.splines_lab[1][1][self.name]
         PINattenuator.__init__(self, parent, name, vs, ctlV_spline,
                                min_gain, max_gain)
         self.logger = mylogger

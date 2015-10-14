@@ -111,6 +111,51 @@ class WBDCserver(Pyro.core.ObjBase):
 
     self.logger.debug("get_equipment: spectrometers: %s", self.spec)
 
+  def set_WBDC(self,option):
+    """
+    Emulate old WBDC1 server
+    """
+    if option == 38:
+      # get analog data
+      monitor_data = {}
+      for latchgroup in [1,2]:
+        MD = self.analog_monitor.get_monitor_data(latchgroup)
+        for key in MD.keys():
+          monitor_data[key] = MD[key]
+      return monitor_data
+    elif option == 41:
+      # set crossover switch
+      return self.crossSwitch.set_state(crossover=True)
+    elif option == 42:
+      # unset crossover switch
+      return self.crossSwitch.set_state(crossover=False)
+    elif option == 43:
+      # set polarizer to circular
+      states = {}
+      for ps in self.pol_sec.keys():
+        states[ps] = self.pol_sec[ps].set_state(True)
+      return states
+    elif option == 44:
+      # set polarizers to linear
+      states = {}
+      for ps in self.pol_sec.keys():
+        states[ps] = self.pol_sec[ps].set_state(False)
+      return states
+    elif option == 45:
+      # set IQ hybrids to IQ
+      states = {}
+      for dc in self.DC.keys():
+        states[dc] = self.DC[dc].set_state(True)
+      return states
+    elif option == 46:
+      # set IQ hybrids to UL
+      states = {}
+      for dc in self.DC.keys():
+        states[dc] = self.DC[dc].set_state(False)
+      return states
+    else:
+      return ("invalid option %d" % option)
+
   def sanitize(self, list_or_dict):
     """
     Pyro cannot return objects whose class is not known by the client.

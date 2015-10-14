@@ -266,6 +266,7 @@ import copy
 import logging
 import re
 from collections import OrderedDict
+import os.path
 
 import Math
 from .... import ComplexSignal, IF, Port, ObservatoryError, show_port_sources
@@ -331,7 +332,11 @@ class WBDC2(WBDC_core, Receiver):
         3: (int('0100010', 2), "R1 H-plane"     , "BE plate"),
         4: (int('1100000', 2), "R2 H-plane"     , "") } }
  
-  splines = get_splines(package_dir+module_subdir+"splines.pkl")
+  splines_file = package_dir+module_subdir+"splines.pkl"
+  if os.path.exists(splines_file):
+    splines = get_splines(splines_file)
+  else:
+    splines = get_splines(package_dir+module_subdir+"splines-lab.pkl")
 
   def __init__(self, name, inputs = None, output_names=None, active=True):
     """
