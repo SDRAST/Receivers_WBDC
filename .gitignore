@@ -4,6 +4,7 @@
 # No backups
 *~
 *.bak
+*.backup
 
 # logs
 *Pyro_log
