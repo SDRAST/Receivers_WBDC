@@ -174,7 +174,7 @@ def plot_data(A, P):
   keys.sort()
   for key in keys:
     index = keys.index(key)
-    plot(A, P[key], ls='-', marker=column_marker(index),
+    plot(A[key], P[key], ls='-', marker=column_marker(index),
          label=key)
   legend(loc='lower left', numpoints=1)
 
@@ -190,7 +190,7 @@ def plot_fit(A, P):
   keys.sort()
   for key in keys:
     index = keys.index(key)
-    plot(A, P[key][0]-P[key]-A, ls='-', marker=column_marker(index),
+    plot(A[key], P[key][0]-P[key]-A[key], ls='-', marker=column_marker(index),
          label=key)
   legend(loc='lower left', numpoints=1)
 
@@ -229,12 +229,16 @@ if __name__ == "__main__":
   mylogger.debug(" attenuator keys: %s", akeys)
   
   powers  = {} # dict of lists of measured powers keyed on attenuator
-  min_gain = -90
+  atts = {}
+  min_gain = -90 # minimum for all attenuators (maximum attenuation)
   for atn in akeys:
     min_gain = max(min_gain, attenuators[atn].min_gain)
     powers[atn] = []
   attenuations = arange(0, -min_gain, 0.5)
+  for atn in akeys:
+    atts[atn] = list(attenuations)
   for attenuation in attenuations:
+    # Set the attenuation
     for atn in akeys:
       mylogger.debug(" setting attenuator %s to %f dB", atn, attenuation)
       attenuators[atn].set_atten(attenuation)
@@ -242,7 +246,12 @@ if __name__ == "__main__":
     # read all the power meters
     response = fe.read_pms()
     for index in range(len(response)):
-	    powers[akeys[index]].append(response[index][2])
+      reading = response[index][2]
+      if reading < 8e40:
+        powers[akeys[index]].append(reading)
+      else:
+	      # ignore this point
+	      atts[akeys[index]].remove(attenuation)
   print powers
  
   for pm in ['PM1', 'PM2', 'PM3', 'PM4']:
@@ -251,11 +260,11 @@ if __name__ == "__main__":
 
   # plot the data
   figure(1)
-  plot_data(attenuations, powers)
+  plot_data(atts, powers)
 
   # plot the fits
   figure(2)
-  plot_fit(attenuations, powers)
+  plot_fit(atts, powers)
   
   show()
 
