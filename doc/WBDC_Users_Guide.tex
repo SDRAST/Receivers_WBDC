@@ -43,6 +43,9 @@ one element,
 the {\tt Receiver}, in an over-all observing system.  Configurations describe 
 how the signals flow between these elements.
 
+\paragraph{Chapter~\ref{chap:servers}, Servers and Clients,} describes the
+over-all monitor and control software architecture and how be be a client.
+
 \paragraph{Appendix~\ref{Python}} gives a quick introduction to Python in 
 which the M\&C software is written. A convention used in this document is that 
 if an object 
@@ -488,7 +491,7 @@ an instance of a DAC is created and the A side is set to -2~V.
 \begin{center}
 \begin{verbatim}
 
-  from Receiver.Interfaces.LabJack import LJTickDAC
+  from Electronics.Interfaces.LabJack import LJTickDAC
   
   LJTickDAC(receiver.LJ[2],'R1-18')['A'].setVoltage(-2)
   
@@ -874,6 +877,111 @@ devices which depend on the observatory, rather than a particular telescope.
 The {\tt Telescope} object has one output which provides the signal to one or
 more input ports of the {\tt FrontEnd}.  The {\tt Observatory} object has
 information not specific to a {\tt Telescope}, such as weather data.
+
+The above configuration description does not yet contain any back-ends, since
+no back-end servers have yet been implemented at CDSCC.  However, the
+distribution of IF signals from WBDC2 to down-stream devives has been
+implemented through a manually controlled patch panel.  The description of the
+patching is maintained in a spreadsheet, which can be interrogated this way:
+\begin{code}[h!tb]
+  \begin{center}
+  \begin{verbatim}
+  
+In [6]: from MonitorControl.Configurations.CDSCC.FO_patching import \
+        DistributionAssembly
+In [7]: da = DistributionAssembly()
+In [8]: da.report_patching()
+Out[8]:
+  { 1: 'R1-18P1IF1',  2: 'R1-18P1IF2',  3: 'R1-20P1IF1',  4: 'R1-20P1IF2',
+    5: 'R1-22P1IF1',  6: 'R1-22P1IF2',  7: 'R1-22P2IF1',  8: 'R1-22P2IF2',
+    9: 'R2-22P1IF1', 10: 'R2-22P1IF2', 11: 'R2-22P2IF1', 12: 'R2-22P2IF2',
+   13: 'R1-24P1IF1', 14: 'R1-24P1IF2', 15: 'R1-26P1IF1', 16: 'R1-26P1IF2'}
+\end{verbatim}
+\end{center}
+\end{code}
+
+\chapter{Servers and Clients}\label{chap:servers}
+
+The entire system described in the previous chapter is operated through a
+collection of servers. Our goal is to have each device controlled by a servers
+and to control the entire system through a top server which controls all the
+others.  The top server should ``know'' the state of the entire system at all
+times.
+
+All servers and clients communicate using the Pyro package.  This package must
+also be installed on any client.  A local object which provides the remote
+server functionality is obtained with this function:
+\begin{verbatim}
+In [2]: from support.pyro import get_device_server
+\end{verbatim}
+
+\section{K-band System Server}
+
+\section{Front-end Server}
+
+\begin{verbatim}
+In [1]: from support.pyro import get_device_server
+In [2]: K2 = get_device_server("K2_Server-crux", "crux")
+
+In [9]: K2.set_WBDC(14)   # set front end in loads
+In [10]: K2.set_WBDC(16)
+
+In [11]: K2.read_pms()
+Out[11]:
+  [(1, 'Tue Jul 21 20:11:05 2015', -40.347999999999999),
+   (2, 'Tue Jul 21 20:11:05 2015', -39.119999999999997),
+   (3, 'Tue Jul 21 20:11:05 2015', -40.502000000000002),
+   (4, 'Tue Jul 21 20:11:05 2015', -40.573999999999998)]
+  
+  In [12]: K2.set_WBDC(13)  # set front ends in sky
+  In [13]: K2.set_WBDC(15)
+  
+  In [14]: K2.read_pms()
+  Out[14]:
+    [(1, 'Tue Jul 21 20:11:52 2015', -45.186999999999998),
+     (2, 'Tue Jul 21 20:11:52 2015', -43.600999999999999),
+     (3, 'Tue Jul 21 20:11:52 2015', -45.0),
+     (4, 'Tue Jul 21 20:11:52 2015', -45.392000000000003)] 
+\end{verbatim}
+
+
+\section{WBDC1 Server}
+
+\section{WBDC2 Server}
+
+A local object corresponding to the remote WBDC2 controller is obtained this
+way:
+\begin{verbatim}
+In [3]: wbdc = get_device_server("wbdc2hw_server-dss43wbdc2","crux")
+\end{verbatim}
+{\ttfamily wbdc2hw\_server-dss43wbdc2} is the host name of the Raspberry Pi
+inside WBDC2.  {\ttfamily crux} is the host running the Pyro server.
+           
+
+\subsection{Examples}
+
+\subsubsection{Polarization Sections}
+
+\begin{verbatim}
+In [6]: wbdc.get_pol_sec_states()
+Out[6]:
+  {'R1-18': 0, 'R1-20': 0, 'R1-22': 0, 'R1-24': 0, 'R1-26': 0,
+   'R2-18': 0, 'R2-20': 0, 'R2-22': 0, 'R2-24': 0, 'R2-26': 0}
+\end{verbatim}
+
+\subsubsection{Down-converter (Mixer) Sections}
+
+\begin{verbatim}
+In [7]: wbdc.get_DC_states()
+Out[7]:
+  {'R1-18P1': 0, 'R1-18P2': 0, 'R1-20P1': 0, 'R1-20P2': 0, 'R1-22P1': 0,
+   'R1-22P2': 0, 'R1-24P1': 0, 'R1-24P2': 0, 'R1-26P1': 0, 'R1-26P2': 0,
+   'R2-18P1': 0, 'R2-18P2': 0, 'R2-20P1': 0, 'R2-20P2': 0, 'R2-22P1': 0,
+   'R2-22P2': 0, 'R2-24P1': 0, 'R2-24P2': 0, 'R2-26P1': 0, 'R2-26P2': 0}
+\end{verbatim}
+
+
+\section{Radiometer Server}
 
 
 \appendix

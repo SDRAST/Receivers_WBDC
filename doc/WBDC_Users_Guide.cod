@@ -9,7 +9,7 @@
 \contentsline {code}{\numberline {2.9}{\ignorespaces Setting a latch group.}}{7}
 \contentsline {code}{\numberline {2.10}{\ignorespaces Two ways of instantiating and setting a DAC.}}{8}
 \contentsline {code}{\numberline {4.1}{\ignorespaces Configuration used by {\tt wbdc2\_prompt.py}}}{18}
-\contentsline {code}{\numberline {A.1}{\ignorespaces Creating a {\tt WBDC2} instance}}{20}
-\contentsline {code}{\numberline {A.2}{\ignorespaces Creating a {\tt PINattenuator} instance}}{20}
-\contentsline {code}{\numberline {A.3}{\ignorespaces Stripped-down definition of the {\tt Telescope} class.}}{21}
-\contentsline {code}{\numberline {C.1}{\ignorespaces Commands for checking the LabJack I/O configuration.}}{30}
+\contentsline {code}{\numberline {A.1}{\ignorespaces Creating a {\tt WBDC2} instance}}{24}
+\contentsline {code}{\numberline {A.2}{\ignorespaces Creating a {\tt PINattenuator} instance}}{24}
+\contentsline {code}{\numberline {A.3}{\ignorespaces Stripped-down definition of the {\tt Telescope} class.}}{25}
+\contentsline {code}{\numberline {C.1}{\ignorespaces Commands for checking the LabJack I/O configuration.}}{34}

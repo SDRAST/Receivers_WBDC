@@ -2,10 +2,11 @@
 \contentsline {paragraph}{Chapter\nobreakspace {}2\hbox {}, Command Line,}{i}
 \contentsline {paragraph}{Chapter\nobreakspace {}3\hbox {}, Monitor and Control System,}{i}
 \contentsline {paragraph}{Chapter\nobreakspace {}4\hbox {}, Configurations,}{i}
+\contentsline {paragraph}{Chapter\nobreakspace {}5\hbox {}, Servers and Clients,}{i}
 \contentsline {paragraph}{Appendix\nobreakspace {}A\hbox {}}{i}
 \contentsline {paragraph}{Appendix\nobreakspace {}B\hbox {}}{i}
 \contentsline {paragraph}{Appendix\nobreakspace {}C\hbox {}}{i}
-\contentsline {paragraph}{Appendix\nobreakspace {}D\hbox {}}{i}
+\contentsline {paragraph}{Appendix\nobreakspace {}D\hbox {}}{ii}
 \contentsline {chapter}{\numberline {1}Introduction}{1}
 \contentsline {section}{\numberline {1.1}Hardware Overview}{1}
 \contentsline {subsection}{\numberline {1.1.1}Input Switching}{1}
@@ -43,17 +44,26 @@
 \contentsline {subsubsection}{Latch 1 (Address 0)}{14}
 \contentsline {subsubsection}{Latch 2 (Address 1)}{15}
 \contentsline {chapter}{\numberline {4}Configurations}{17}
-\contentsline {chapter}{\numberline {A}Un Soup\c {c}on de Python}{19}
-\contentsline {section}{\numberline {A.1}iPython}{19}
-\contentsline {section}{\numberline {A.2}Classes}{19}
-\contentsline {chapter}{\numberline {B}WBDC Hardware}{23}
-\contentsline {section}{\numberline {B.1}WBDC1}{23}
-\contentsline {section}{\numberline {B.2}WBDC2}{23}
-\contentsline {chapter}{\numberline {C}LabJack Configuration}{29}
-\contentsline {section}{\numberline {C.1}LabJack 1}{29}
-\contentsline {section}{\numberline {C.2}LabJack 2 (and 3)}{29}
-\contentsline {section}{\numberline {C.3}Configuration Check}{29}
-\contentsline {chapter}{\numberline {D}Polarization Conversion}{31}
-\contentsline {section}{\numberline {D.1}IAU Definition of Circular Polarization}{31}
-\contentsline {section}{\numberline {D.2}Changing Between Linear and Circular Polarization}{32}
-\contentsline {chapter}{\numberline {E}Sideband Separation}{35}
+\contentsline {chapter}{\numberline {5}Servers and Clients}{21}
+\contentsline {section}{\numberline {5.1}K-band System Server}{21}
+\contentsline {section}{\numberline {5.2}Front-end Server}{21}
+\contentsline {section}{\numberline {5.3}WBDC1 Server}{22}
+\contentsline {section}{\numberline {5.4}WBDC2 Server}{22}
+\contentsline {subsection}{\numberline {5.4.1}Examples}{22}
+\contentsline {subsubsection}{Polarization Sections}{22}
+\contentsline {subsubsection}{Down-converter (Mixer) Sections}{22}
+\contentsline {section}{\numberline {5.5}Radiometer Server}{22}
+\contentsline {chapter}{\numberline {A}Un Soup\c {c}on de Python}{23}
+\contentsline {section}{\numberline {A.1}iPython}{23}
+\contentsline {section}{\numberline {A.2}Classes}{23}
+\contentsline {chapter}{\numberline {B}WBDC Hardware}{27}
+\contentsline {section}{\numberline {B.1}WBDC1}{27}
+\contentsline {section}{\numberline {B.2}WBDC2}{27}
+\contentsline {chapter}{\numberline {C}LabJack Configuration}{33}
+\contentsline {section}{\numberline {C.1}LabJack 1}{33}
+\contentsline {section}{\numberline {C.2}LabJack 2 (and 3)}{33}
+\contentsline {section}{\numberline {C.3}Configuration Check}{33}
+\contentsline {chapter}{\numberline {D}Polarization Conversion}{35}
+\contentsline {section}{\numberline {D.1}IAU Definition of Circular Polarization}{35}
+\contentsline {section}{\numberline {D.2}Changing Between Linear and Circular Polarization}{36}
+\contentsline {chapter}{\numberline {E}Sideband Separation}{39}
