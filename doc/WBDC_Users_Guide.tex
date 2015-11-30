@@ -43,7 +43,7 @@ one element,
 the {\tt Receiver}, in an over-all observing system.  Configurations describe 
 how the signals flow between these elements.
 
-\paragraph{Chapter~\ref{chap:servers}, Servers and Clients}, describes the
+\paragraph{Chapter~\ref{chap:servers}, Servers and Clients,} describes the
 over-all monitor and control software architecture and how be be a client.
 
 \paragraph{Appendix~\ref{Python}} gives a quick introduction to Python in 
@@ -491,7 +491,7 @@ an instance of a DAC is created and the A side is set to -2~V.
 \begin{center}
 \begin{verbatim}
 
-  from Receiver.Interfaces.LabJack import LJTickDAC
+  from Electronics.Interfaces.LabJack import LJTickDAC
   
   LJTickDAC(receiver.LJ[2],'R1-18')['A'].setVoltage(-2)
   
@@ -900,7 +900,7 @@ Out[8]:
 \end{center}
 \end{code}
 
-\chapter{Servers and Clients}
+\chapter{Servers and Clients}\label{chap:servers}
 
 The entire system described in the previous chapter is operated through a
 collection of servers. Our goal is to have each device controlled by a servers
