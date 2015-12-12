@@ -591,18 +591,22 @@ class WBDC2hwif(MCobject):
       The pol section needs to know what band it belongs to to know what
       latches to use.
       """
+      # First get the current state of the latches
       LGID = self.data['receiver']+'P'
       latchbit = (int(self.data['band'])-18)/2
       LGdata = self.parent.lg[LGID].read()
       self.logger.debug("set_state: LG %s returned %s", LGID,
                         Math.decimal_to_binary(LGdata,8))
+      # Now change the appropriate bit
       if state:
         newdata = Math.Bin.setbit(LGdata,latchbit)
       else:
         newdata = Math.Bin.clrbit(LGdata,latchbit)
       self.logger.debug("set_state: new data is %s",
                         Math.decimal_to_binary(newdata,8))
+      # Write the new control word
       self.parent.lg[LGID].write(newdata)
+      # Check it
       self.get_state()
       return self.state
 

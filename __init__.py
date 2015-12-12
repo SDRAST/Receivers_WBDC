@@ -40,7 +40,7 @@ from collections import OrderedDict
 from MonitorControl import Device, Switch, Port, IF,  ObservatoryError
 from MonitorControl import show_port_sources
 from MonitorControl.Receivers import Receiver
-from support import unique
+from support.lists import unique
 
 module_logger = logging.getLogger(__name__)
 

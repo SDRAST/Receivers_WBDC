@@ -9,7 +9,7 @@ if __name__ == "__main__":
   logging.basicConfig(level=logging.INFO)
   testlogger = logging.getLogger()
   testlogger = logs.init_logging(testlogger, loglevel=logging.DEBUG,
-                                 consolevel=logging.INFO)
+                                 consolevel=logging.DEBUG)
   
   observatory, equipment = station_configuration('wbdc2')
   receiver = equipment['Receiver']
