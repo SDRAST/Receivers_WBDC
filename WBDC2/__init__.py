@@ -275,7 +275,7 @@ from .. import WBDC_base
 from ..WBDC_core import LatchGroup, WBDC_core
 from Electronics.Instruments.PINatten import PINattenuator, get_splines
 from Electronics.Interfaces.LabJack import LJTickDAC
-from support import contains
+from support.lists import contains
 
 module_logger = logging.getLogger(__name__)
 package_dir = "/usr/local/lib/python2.7/DSN-Sci-packages/"
