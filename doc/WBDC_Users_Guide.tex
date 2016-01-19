@@ -917,8 +917,89 @@ In [2]: from support.pyro import get_device_server
 
 \section{K-band System Server}
 
+Although all the equipment servers described in the following sections can be
+used independently, there is an overall system server which is a client of the
+equipment servers.  The intent, not yet implemented for DSS-43 K2, is that the
+server ``knows'' the complete state of the system.  For example, it knows the
+source of the signal entering SAO spectrometer 0 (ROACH 1).
+
+The name by which it is known to the Pyro nameserver is 
+{\ttfamily K2\_Server-crux}.  What really identifies it is {\ttfamily K2\_Server}
+with {\ttfamily -crux} indicating the host on which it is running.  In
+retrospect, this is inconsistent with the design of Pyro, which is that the
+client should not need to know where the server is running.  So this will be
+changed.
+
+For historical reasons the code for this server is in 
+{\ttfamily crux:/home/ops/SpecCtrl}.  Emulation of the K1 monitor and control
+is, for compatibility with {\ttfamily observatoryCtrl}, provided by the K1 
+{\ttfamily set\_WBDC} command.  The recognized options are shown in 
+Table~\ref{tab:WBDCoptions}.
+\begin{table}[h!tb]
+ \begin{center}
+  \caption{\label{tab:WBDCoptions}{\ttfamily set\_WBDC} Options}
+  \begin{tabular}{|c|c|l|}
+   \hline
+   {\bfseries Number} & {\bfseries Subsystem} & {\bfseries action} \\
+   \hline
+     12 & FE   & check load states \\
+     13 & FE   & feed 1 to sky \\
+     14 & FE   & feed 1 to load \\
+     15 & FE   & feed 2 to sky \\
+     16 & FE   & feed 2 to load \\
+     18 & FE   & compute Y-factors with all four power meters \\
+     22 & FE   & report noise diode state\\
+     23 & FE   & set noise diode on\\
+     24 & FE   & set noise diode off\\
+     25 & FE   & feed 1 pre-amps bias on\\
+     26 & FE   & feed 1 pre-amps bias off\\
+     27 & FE   & feed 2 pre-amps bias on\\
+     28 & FE   & feed 2 pre-amps bias off\\
+     29 & FE   & do minicals with all four power meters\\
+     31 & FE   & report front end temperatures\\
+     32 & FE   & compute system temperatures from Y-factors (do 18 first!)\\
+     38 & WBDC & report analog data \\
+     41 & WBDC & set crossover switch\\
+     42 & WBDC & unset crossover switch\\
+     43 & WBDC & set polarizers to circular\\
+     44 & WBDC & set polarizers to linear\\
+     45 & WBDC & set IF hybrids to IQ\\
+     46 & WBDC & set IF hybrids to LU\\
+     391 & FE   & set PM1 to W\\
+     392 & FE   & set PM2 to W\\
+     393 & FE   & set PM3 to W\\
+     394 & FE   & set PM4 to W\\
+     401 & FE   & set PM1 to dB\\
+     402 & FE   & set PM2 to dB\\
+     403 & FE   & set PM3 to dB\\
+     404 & FE   & set PM4 to dB   \\
+     \hline
+  \end{tabular}
+ \end{center}
+\end{table}
+The plan is to replace all the numbered options with methods which can be
+invoked by the clients.  Commands which are already implemented are
+\begin{description}\itemsep0pt \parskip0pt \parsep0pt
+\item[report\_WBDC\_state()] (FE, WBDC) Returns a report with the time, the load 
+positions, the cross-switch state, the states of the polarization hybrids, and
+the states of the IF hybrids. (It also returns dummy valaues for the K1 band
+switch and the local oscillator lock.)
+\item[set\_atten(atten\_id, value)] (WBDC) Set PIN diode attenuator for IF
+channel.
+\item[set\_atten\_defaults()] (WBDC) Sets all four attenuators to 5 dB.
+\item[get\_atten(atten\_id)] (WBDC) Get PIN diode attenuator for IF channel
+\item[init\_pms()] (FE) Initializes the Hewlett Packard (Agilent) power meters
+\item[set\_pm\_mode(atten\_id, mode)] (FE) Sets the modes of the Hewlett Packard 
+(Agilent) power meters
+\item[read\_pms()] (FE) Read power meters. The power meters are read in the
+order 1, 2, 3, 4.  The corresponding receiver outputs are specified by private
+method {\ttfamily \_pm\_sources()}.
+\end{description}
+The subsystems involved are shown in parentheses.
+
 \section{Front-end Server}
 
+These examples use the K2 system server described in the previous section.
 \begin{verbatim}
 In [1]: from support.pyro import get_device_server
 In [2]: K2 = get_device_server("K2_Server-crux", "crux")
@@ -947,6 +1028,8 @@ Out[11]:
 
 \section{WBDC1 Server}
 
+To be added later when WBDC1 is adapted for use at Goldstone.
+
 \section{WBDC2 Server}
 
 A local object corresponding to the remote WBDC2 controller is obtained this
@@ -956,21 +1039,72 @@ In [3]: wbdc = get_device_server("wbdc2hw_server-dss43wbdc2","crux")
 \end{verbatim}
 {\ttfamily wbdc2hw\_server-dss43wbdc2} is the host name of the Raspberry Pi
 inside WBDC2.  {\ttfamily crux} is the host running the Pyro server.
+
+See the previous section for commands that are currently available through the
+K2 server.
            
 
 \subsection{Examples}
 
+These are examples of how to monitor and control the receiver through its
+server.  Note that {\ttfamily WBDC2hw\_server} is a subclass of
+{\ttfamily WBDC2hwif} so some of the commands below are redundant but
+convenient.
+
+\subsubsection{Crossover Switch}
+
+{\ttfamily False} or state 0 indicates that receiver 1 gets its signals from
+feed 1 and likewise for 2.  {\ttfamily True} or state 1 means that receiver
+1 is connected to feed 2 and {\itshape vice versa}.
+\begin{verbatim}
+In [4]: wbdc.get_crossover()
+Out[4]: False
+In [6]: wbdc.set_crossover(True)
+Out[6]: True
+In [7]: wbdc.set_crossover(False)
+Out[7]: False\end{verbatim}
+The corresponding {\ttfamily WBDC2hwif} command, which can also be used,
+is {\ttfamily get\_Xswitch\_state()}.
+
 \subsubsection{Polarization Sections}
 
+A polarization section state is 0 if it passes the native E/H polarizations to
+the down-converter sections, and 1 if it converts then to L/R.
 \begin{verbatim}
-In [6]: wbdc.get_pol_sec_states()
+In [6]: wbdc.get_polarizers()
 Out[6]:
   {'R1-18': 0, 'R1-20': 0, 'R1-22': 0, 'R1-24': 0, 'R1-26': 0,
    'R2-18': 0, 'R2-20': 0, 'R2-22': 0, 'R2-24': 0, 'R2-26': 0}
 \end{verbatim}
+The corresponding {\ttfamily WBDC2hwif} command is 
+{\ttfamily get\_pol\_sec\_states()}.
+
+There is also a {\ttfamily set\_polarizers} command (redundant with
+{\ttfamily set\_pol\_sec(state)}) where
+{\ttfamily state} is True or False. 
+
+For the conversion to work properly, the inputs to the quadrature hybrids
+must be balanced.  The PIN diode attenuators can be controlled by specifying
+a control voltage or an attenuation:
+\begin{verbatim}
+In [33]: wbdc.set_atten('R1-18-E', 3)
+Out[33]: 3
+In [34]: wbdc.get_atten('R1-18-E')
+Out[34]: 3
+In [35]: wbdc.get_atten_volts('R1-18-E')
+Out[35]: array(-5.13863062061853)
+In [36]: wbdc.set_atten_volts('R1-18-E', -3)\end{verbatim}
+When you query and attenuation or voltage, you only get back what was sent to
+the receiver in the previous command.  The hardware itself cannot be queried for
+those data.
+
+There is an equivalent command, {\ttfamily set\_atten\_volts(ID, attenID, volts)},
+for {\ttfamily WBDC2hwif} but it is a little more clumsy.
 
 \subsubsection{Down-converter (Mixer) Sections}
 
+The state of the hybrid is 0 (False) to convert I/Q to L/U.  This is the
+default state on power-up.  True means the hybrids are bypassed.
 \begin{verbatim}
 In [7]: wbdc.get_DC_states()
 Out[7]:
@@ -979,10 +1113,69 @@ Out[7]:
    'R2-18P1': 0, 'R2-18P2': 0, 'R2-20P1': 0, 'R2-20P2': 0, 'R2-22P1': 0,
    'R2-22P2': 0, 'R2-24P1': 0, 'R2-24P2': 0, 'R2-26P1': 0, 'R2-26P2': 0}
 \end{verbatim}
+This is a command implemented in {\ttfamily WBDC2hwif}.  The equivalent server
+command is\linebreak {\ttfamily get\_IF\_hybrids()}.  The hybrids are all set
+to the same state with
+\begin{verbatim}
+In [3]: wbdc.sideband_separation(True)
+Out[3]: 
+  {'R1-18P1': 0, 'R1-18P2': 0, 'R1-20P1': 0, 'R1-20P2': 0, 'R1-22P1': 0,
+   'R1-22P2': 0, 'R1-24P1': 0, 'R1-24P2': 0, 'R1-26P1': 0, 'R1-26P2': 0,
+   'R2-18P1': 0, 'R2-18P2': 0, 'R2-20P1': 0, 'R2-20P2': 0, 'R2-22P1': 0,
+   'R2-22P2': 0, 'R2-24P1': 0, 'R2-24P2': 0, 'R2-26P1': 0, 'R2-26P2': 0}
+  In [4]: wbdc.sideband_separation(False)
+  Out[4]: 
+    {'R1-18P1': 1, 'R1-18P2': 1, 'R1-20P1': 1, 'R1-20P2': 1, 'R1-22P1': 1,
+     'R1-22P2': 1, 'R1-24P1': 1, 'R1-24P2': 1, 'R1-26P1': 1, 'R1-26P2': 1,
+     'R2-18P1': 1, 'R2-18P2': 1, 'R2-20P1': 1, 'R2-20P2': 1, 'R2-22P1': 1,
+     'R2-22P2': 1, 'R2-24P1': 1, 'R2-24P2': 1, 'R2-26P1': 1, 'R2-26P2': 1}\end{verbatim}
+\noindent To make this command more intuitive, the value of the argument
+represents what we want the hybrid to do, not the value of the signal which
+controls the hybrids.
+
+\subsubsection{Analog Monitor Data}
+
+A label beginning with a number and ending with ``V'' or with ``V~ana'' or
+``V~dig'' is a voltage reading.
+A label beginning with a number and ending with anything else is a current
+in A. A label ending in ``plate'' is a temperature in $^{\odot}$~Celsius.
+The labels ending in ``plane'' will be detector readings when implemented.
+
+\begin{verbatim}
+In [5]: wbdc.get_monitor_data()
+Out[5]: 
+  {'+12 V': 10.281053705059923,
+   '+16 V': 14.41627693150975,
+   '+16 V LDROs': 0.773359617754817,
+   '+16 V MB': 0.017870924040675164,
+   '+16 V R1 BE': 2.413439503476024,
+   '+16 V R1 FE': 0.0011354150027036679,
+   '+16 V R2 BE': 2.4457151280492546,
+   '+16 V R2 FE': 0.0029285052567720425,
+   '+6 V R1 FE': 0.13442179055511952,
+   '+6 V R2 FE': 0.13083561004698277,
+   '+6 V ana': 5.12150901873149,
+   '+6 V analog MB': 0.4326724694818258,
+   '+6 V dig': 5.949372345981188,
+   '+6 V digitalMB': 0.04835345835983754,
+   '-16 V': -15.235598442875222,
+   '-16 V MB': -5.9978500008581875e-05,
+   '-16 V R1 BE': 0.11170931400358677,
+   '-16 V R1 FE': -5.9978500008581875e-05,
+   '-16 V R2 BE': 0.11888167501986027,
+   '-16 V R2 FE': -5.9978500008581875e-05,
+   'BE plate': 55.37488264485249,
+   'R1 E-plane': 0.04402045913758278,
+   'R1 H-plane': 0.04402045913758278,
+   'R1 RF plate': 43.28407256389471,
+   'R2 E-plane': 0.04402045913758278,
+   'R2 H-plane': 0.04402045913758278,
+   'R2 RF plate': 44.6353155997177}\end{verbatim}
 
 
 \section{Radiometer Server}
 
+To be completed.
 
 \appendix
 
