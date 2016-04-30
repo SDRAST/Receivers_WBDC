@@ -382,6 +382,11 @@ class WBDC2hwif(MCobject):
     self.logger.debug(" initialized for %s", self.name)
     
   def get_Xswitch_state(self):
+    """
+    Returns the state of the cros-over switches
+    
+    Response is a dict with the state of the switch for each pol
+    """
     return self.crossSwitch.get_state()
     
   def get_pol_sec_states(self):
