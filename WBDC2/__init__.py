@@ -254,6 +254,8 @@ class WBDC2(WBDC_base, Receiver):
     self.analog_monitor = self.AnalogMonitor(self)
     self.logger.debug(" initialized for %s", self.name)
   
+  # cross-over switch
+  
   def set_crossover(self, crossover):
     """
     Set or unset the crossover switch
@@ -273,7 +275,9 @@ class WBDC2(WBDC_base, Receiver):
       return self.hardware.get_crossover(crossover)
     else:
       return self.crossSwitch.state
-    
+  
+  # polarization sections
+  
   def set_pol_modes(self, circular=False):
     """
     Set all polarization sections to the specified mode; default: linear
@@ -295,29 +299,8 @@ class WBDC2(WBDC_base, Receiver):
     for key in self.pol_sec.keys():
       status[key] = self.pol_sec[key].get_state()
     return status
-
-  def set_IF_modes(self, SB_separated=False):
-    """
-    Set the IF mode of all the down-converters
-    """
-    for key in self.DC.keys():
-      self.DC[key].set_IF_(SB_separated)
-    if SB_separated:
-      self.data['bandwidth'] = 1e9
-    else:
-      self.data['bandwidth'] = 2e9
-    return self.get_IF_mode()
-
-  def get_IF_modes(self):
-    """
-    Get the IF mode of all the down-converters
-    """
-    modes = {}
-    keys = self.DC.keys()
-    keys.sort()
-    for key in self.DC.keys():
-      modes[key] = self.DC[key].get_state()
-    return modes
+  
+  # polarizer section attenuators
   
   def get_atten_IDs(self):
     """
@@ -370,6 +353,31 @@ class WBDC2(WBDC_base, Receiver):
       return self.hardware.get_atten(ID)
     else:
       return -20
+
+  # down-converter sections
+  
+  def set_IF_modes(self, SB_separated=False):
+    """
+    Set the IF mode of all the down-converters
+    """
+    for key in self.DC.keys():
+      self.DC[key].set_IF_(SB_separated)
+    if SB_separated:
+      self.data['bandwidth'] = 1e9
+    else:
+      self.data['bandwidth'] = 2e9
+    return self.get_IF_mode()
+
+  def get_IF_modes(self):
+    """
+    Get the IF mode of all the down-converters
+    """
+    modes = {}
+    keys = self.DC.keys()
+    keys.sort()
+    for key in self.DC.keys():
+      modes[key] = self.DC[key].get_state()
+    return modes
 
   def get_monitor_data(self):
     """
@@ -503,19 +511,7 @@ class WBDC2(WBDC_base, Receiver):
         """
         self.logger.debug("_get_state:  for %s", self)
         if self.hardware:
-          self.state = self.hardware.get_crossover()
-        return self.state
-
-      def _set_state(self, crossover=False):
-        """
-        Set the RF transfer (crossover) switch
-        """
-        self.logger.debug("_set_state:  for %s",
-                          self)
-        if self.hardware:
-          self.hardware.set_crossover()
-        self.state = self._get_state()
-        self.logger.debug("_set_state: Xswitch state = %d", self.state)
+          self.state = self.hardware.get_Xswitch_state(self.name)
         return self.state
 
   class RFsection(WBDC_base.RFsection):
@@ -544,21 +540,6 @@ class WBDC2(WBDC_base, Receiver):
                         mylogger.level)
       self.logger = mylogger
       self._update_signals()
-
-    def _redefine_outputs(self):
-      """
-      """
-      for key in self.outputs.keys():
-        self.logger.debug(
-                 "_redefine_outputs: for %s, source is %s",
-                 key, self.outputs[key].source)
-        self.logger.debug(
-                 "_redefine_outputs: source signal is %s",
-                 self.outputs[key].source.signal)
-        # The RF section does not change the signal type but makes sub-bands
-        self.outputs[key] = Port(self, key,
-                                 source=self.outputs[key].source,
-                         signal=ComplexSignal(self.outputs[key].source.signal))
         
     def _update_signals(self):
       """
@@ -643,7 +624,7 @@ class WBDC2(WBDC_base, Receiver):
       latches to use.  If that isn't available, return the default.
       """
       if self.hardware:
-        self.hardware.get_polarizers()
+        self.hardware.get_polarizer(self.name)
       return self.state
 
     def _set_state(self,state):
@@ -656,7 +637,7 @@ class WBDC2(WBDC_base, Receiver):
       latches to use.
       """
       if self.hardware:
-        self.hardware.set_polarizers(state)
+        self.hardware.set_polarizer(self.name, state)
       else:
         self.state = state
       try:
@@ -674,10 +655,57 @@ class WBDC2(WBDC_base, Receiver):
         """
         self.parent = parent
         self.name = name
+        self.hardware = self.parent.hardware
         mylogger = logging.getLogger(
                                    logger.name+"WBDC2.PolSection.IFattenuator")
         mylogger.debug("__init__: for %s and parent %s", self, parent)
         self.logger = mylogger
+        
+      def set_atten_volts(self, ID, V):
+        """
+        Sets the designated attenuator voltage
+        """
+        if self.hardware:
+          self.hardware.set_atten_volts(ID, V)
+        return self.get_atten_volts(ID)
+        
+      def get_atten_volts(ID):
+        """
+        Gets the designated attenuator voltage
+        """
+        if self.hardware:
+          return self.hardware.get_atten_volts(ID)
+        else:
+          return 0.0
+    
+      def set_atten(self, ID, dB):
+        """
+        Sets pol section quad hybrid input attentuator
+      
+        @param ID : attenuator identifier
+        @type  ID : str
+    
+        @param atten : requested attenuation
+        @type  atten : float
+        """
+        if self.hardware:
+          self.hardware.set_atten(ID, dB)
+        self.get_atten(ID)
+    
+      def get_atten(self, ID):
+        """
+        Gets pol section quad hybrid input attentuator
+      
+        @param ID : attenuator identifier
+        @type  ID : str
+    
+        @param atten : requested attenuation
+        @type  atten : float
+        """
+        if self.hardware:
+          self.hardware.get_atten(ID)
+        else:
+          return -20
       
   class DownConv(WBDC_base.DownConv):
     """
@@ -719,14 +747,14 @@ class WBDC2(WBDC_base, Receiver):
       """
       """
       if self.hardware:
-        self.state = self.hardware.get_DC_state()
+        self.state = self.hardware.get_IF_hybrid_state()
       return self.state
       
     def _set_state(self, state):
       """
       """
       if self.hardware:
-        self.set_remote_state()
+        self.hardware.set_IF_hybrid_state(state)
       else:
         self.state = state
       try:
