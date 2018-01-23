@@ -39,7 +39,7 @@ from collections import OrderedDict
 
 from MonitorControl import Device, Switch, Port, IF,  ObservatoryError
 from MonitorControl import show_port_sources
-from MonitorControl.FrontEnds.K_band import plane
+from MonitorControl.FrontEnds.Kband import plane
 from MonitorControl.Receivers import Receiver
 from support.lists import unique
 
@@ -55,7 +55,7 @@ class WBDC_base(Receiver):
           | |      | |        ---                | |
           | |--P2--| |--D1P2--| |== 5 sub-bands==| |==D1PB
           ---      | |        ---                ---
-                   | |   
+                   | |
           ---      | |        ---                ---
           | |--P1--| |--D2P1--| |== 5 sub-bands==| |==D2PA
           | |      | |        ---                | |
@@ -65,9 +65,9 @@ class WBDC_base(Receiver):
           ---      ---        ---                ---
           OMT     Xswitch  RFsection       pol_section X 5
    <---K_4ch-->  <-----------------WBDC2----------------->
-    
+
   The DSN K-band WBDC systems have two dual polarization feeds. The feeds can
-  be interchanged with a pair of transfer switches. 
+  be interchanged with a pair of transfer switches.
 
   The signals from each feed and pol enter an RF section which splits the full
   band into five RF sub-bands and also measures the power coming in to the
@@ -86,7 +86,7 @@ class WBDC_base(Receiver):
   out_pols   = ["P1", "P2"]
   DC_names   = ["D1", "D2"]
   IF_names   = ["I1", "I2"]
-  
+
   def __init__(self, name, inputs=None, output_names=None,active=True):
     """
     Initialize a physical WBDC object.
@@ -122,7 +122,7 @@ class WBDC_base(Receiver):
     """
     self.crossSwitch.get_state()
     return self.crossSwitch.state
-    
+
   def set_crossover(self, crossover=False):
     """
     Set or unset the cross-over switch
@@ -134,7 +134,7 @@ class WBDC_base(Receiver):
   def _update_signals(self):
     """
     Updates the signals in all the sub-components of a WBDC
-    
+
     This replaces the superclass Device generic method
     """
     # update the transfer switch
@@ -151,11 +151,11 @@ class WBDC_base(Receiver):
       self.pol_sec[key]._update_signals()
     for key in self.DC.keys():
       self.DC[key]._update_signals()
-        
+
   def _create_pol_list(self,inputs):
     """
     Create sorted lists of input, beam, and polarization names
-    
+
     This is used by the WBDC2 sub-class
     """
     if inputs:
@@ -239,7 +239,7 @@ class WBDC_base(Receiver):
       self.logger.debug("set_state: %s state is %s",
                         self, self.state)
       return self.state
-     
+
     def _update_signals(self):
       """
       Update the sub-switches
@@ -297,14 +297,14 @@ class WBDC_base(Receiver):
         super(WBDC_base.TransferSwitch.Xswitch,self).set_state(state)
         self._update_signal()
         return self.get_state()
-        
+
       def _set_state(self, state):
         """
         Subclass must provide actual method for getting state, replacing this.
         """
         self.state = state
         return self.state
-        
+
   class RFsection(Receiver.RFsection):
     """
     An RF section may split the signal into several sub-bands.
@@ -331,11 +331,11 @@ class WBDC_base(Receiver):
          mylogger.level)
       self.logger = mylogger
       self._update_signals()
-    
+
     def _connect_ports(self):
       """
       Connect output ports to input ports
-      
+
       RF section output names are RnPFF where n is the receiver number 1 or 2,
       P is the polarization code E or H and FF is the frequency code.
       """
@@ -343,7 +343,7 @@ class WBDC_base(Receiver):
       for key in self.outputs.keys():
         inputname = key[:-2]
         self.outputs[key].source = self.inputs[inputname]
-      
+
   class PolSection(Receiver.PolSection):
     """
     Class for optionally converting E,H polarization to R,L polarization.
@@ -479,13 +479,13 @@ class WBDC_base(Receiver):
       """
       """
       self.state = state
-      
+
     def get_state(self):
       return self._get_state()
 
     def _get_state(self):
       return self.state
-      
+
     def _connect_ports(self):
       """
       Propagate signals from inputs to outputs
@@ -494,7 +494,7 @@ class WBDC_base(Receiver):
         for IF in WBDC_base.IF_names: # I1 or I2
           self.outputs[key+IF].source = self.inputs[key]
           self.inputs[key].destinations.append(self.outputs[key+IF])
-        
+
     def _update_signals(self):
       """
       Adds the 'IF' signal property as well as copy signals
