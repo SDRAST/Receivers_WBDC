@@ -42,6 +42,7 @@ from MonitorControl import show_port_sources
 from MonitorControl.FrontEnds.Kband import plane
 from MonitorControl.Receivers import Receiver
 from support.lists import unique
+from support.test import auto_test
 
 logger = logging.getLogger(__name__)
 
@@ -109,8 +110,9 @@ class WBDC_base(Receiver):
                       output_names=output_names)
     self.name =  name
     self.logger = mylogger
-    self.logger.debug("__init__: inputs for %s after Receiver.__init__: %s",
-                      self, self.inputs)
+    if inputs is not None:
+        self.logger.debug("__init__: inputs for %s after Receiver.__init__: %s",
+                        self, self.inputs)
     self._create_pol_list(inputs)
     # The first element in a WBDC is the two-polarization feed transfer switch
     self.crossSwitch = self.TransferSwitch(self, "WBDC transfer switch",
@@ -192,7 +194,8 @@ class WBDC_base(Receiver):
       Device.__init__(self, name, inputs=inputs,
                       output_names=output_names, active=active)
       self.logger = mylogger
-      self.logger.debug("__init__: %s inputs: %s", self, str(self.inputs))
+      if hasattr(self, "inputs"):
+          self.logger.debug("__init__: %s inputs: %s", self, str(self.inputs))
       self.parent = parent
       self.states = {}
       # This directs the polarizations to the down-converters according
