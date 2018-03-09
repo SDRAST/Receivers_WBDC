@@ -22,6 +22,7 @@ import sys
 import logging
 import numpy
 
+from local_dirs import log_dir
 from MonitorControl import MCserver
 from MonitorControl.Receivers.WBDC.WBDC2.WBDC2hwif import WBDC2hwif
 from support.logs import set_module_loggers
@@ -212,7 +213,7 @@ class WBDC2hw_server(MCserver, WBDC2hwif):
     return states
           
 if __name__ == "__main__":
-  logpath = "/usr/local/logs/"
+  #logpath = "/usr/local/logs/"
   nameserver_host = "crux"
   from socket import gethostname
   __name__ = 'wbdc2hw_server-'+gethostname()
@@ -222,7 +223,7 @@ if __name__ == "__main__":
   mylogger = init_logging(mylogger,
                loglevel = logging.DEBUG,
                consolevel = logging.DEBUG,
-               logname = logpath+__name__+".log")
+               logname = log_dir+__name__+".log")
   mylogger.debug(" Handlers: %s", mylogger.handlers)
   loggers = set_module_loggers(
     {'MonitorControl':                                'debug',

@@ -109,7 +109,6 @@ from MonitorControl import show_port_sources
 from MonitorControl.Receivers import Receiver
 from MonitorControl.Receivers.WBDC import WBDC_base
 from support.lists import contains
-from support.pyro import get_device_server, pyro_server_request
 
 logger = logging.getLogger(__name__)
 package_dir = "/usr/local/lib/python2.7/DSN-Sci-packages/"
@@ -163,6 +162,7 @@ class WBDC2(WBDC_base, Receiver):
     """
     self.name = name
     if hardware:
+      from support.pyro import get_device_server, pyro_server_request
       self.hardware = get_device_server("wbdc2hw_server-dss43wbdc2",
                                         pyro_ns="crux")
       self.atten_keys = pyro_server_request(self.hardware.get_atten_IDs)

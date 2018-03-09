@@ -21,9 +21,9 @@ import os
 
 import Pyro4
 
-from pyro_support import Pyro4Server, config
-
+from local_dirs import log_dir
 from MonitorControl.Receivers.WBDC.WBDC2.WBDC2hwif import WBDC2hwif
+from pyro_support import Pyro4Server, config
 
 module_logger = logging.getLogger(__name__)
 
@@ -304,9 +304,9 @@ if __name__ == "__main__":
     else:
         loglevel = logging.INFO
 
-    logpath = "/usr/local/logs"
+    #logpath = "/usr/local/logs"
     timestamp = datetime.datetime.utcnow().strftime("%j-%Hh%Mm")
-    logfile = os.path.join(logpath,"{}_{}.log".format(name, timestamp))
+    logfile = os.path.join(log_dir,"{}_{}.log".format(name, timestamp))
 
     setup_logging(logfile, loglevel)
     logger = logging.getLogger(name)
