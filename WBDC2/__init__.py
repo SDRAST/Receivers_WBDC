@@ -47,7 +47,7 @@ Latch 1
 ~~~~~~~
 This latch selects voltage and current monitoring points.  Voltage points are
 selected using bits 0-2 and read at AIN1.  Currents are selected using bits
-3-6 and read at AIN0.  
+3-6 and read at AIN0.
 
 The voltages which can be monitored are::
  0 ---- 000  +6 V digital
@@ -110,6 +110,7 @@ from MonitorControl.Receivers import Receiver
 from MonitorControl.Receivers.WBDC import WBDC_base
 from support.lists import contains
 from support.pyro import get_device_server, pyro_server_request
+from support.test import auto_test
 
 logger = logging.getLogger(__name__)
 package_dir = "/usr/local/lib/python2.7/DSN-Sci-packages/"
@@ -143,8 +144,8 @@ class WBDC2(WBDC_base, Receiver):
   appended, in that order.
   """
   bands      = ["18", "20", "22", "24", "26"]
- 
-  def __init__(self, name, inputs = None, output_names=None, active=True,
+
+  def __init__(self, name, inputs=None, output_names=None, active=True,
                hardware=None):
     """
     Initialize a WBDC2 object.
@@ -163,6 +164,7 @@ class WBDC2(WBDC_base, Receiver):
     """
     self.name = name
     if hardware:
+      from support.pyro import get_device_server, pyro_server_request
       self.hardware = get_device_server("wbdc2hw_server-dss43wbdc2",
                                         pyro_ns="crux")
       self.atten_keys = pyro_server_request(self.hardware.get_atten_IDs)
@@ -175,15 +177,17 @@ class WBDC2(WBDC_base, Receiver):
     WBDC_base.__init__(self, name,
                        active=active,
                        inputs=inputs,
-                       output_names=output_names)               
-    show_port_sources(self.inputs, "WBDC2.__init__: inputs after WBDC_base init:",
-                      mylogger.level)
+                       output_names=output_names)
+    if inputs is not None:
+        show_port_sources(self.inputs, "WBDC2.__init__: inputs after WBDC_base init:",
+                        mylogger.level)
+
     show_port_sources(self.outputs, "WBDC2.__init__: outputs after WBDC_base init:",
                         mylogger.level)
     self.logger = mylogger
-    
+
     self.data['bandwidth'] = 1e10 # Hz
-          
+
     # The transfer switch is created in WBDC_base
     if self.hardware:
       self.crossSwitch.get_state()
@@ -253,9 +257,9 @@ class WBDC2(WBDC_base, Receiver):
 
     self.analog_monitor = self.AnalogMonitor(self)
     self.logger.debug(" initialized for %s", self.name)
-  
+
   # cross-over switch
-  
+  @auto_test()
   def set_crossover(self, crossover):
     """
     Set or unset the crossover switch
@@ -266,7 +270,8 @@ class WBDC2(WBDC_base, Receiver):
       response = crossover
     self.crossSwitch.state = self.get_crossSwitch.state
     return self.crosssSwitch.state
-  
+
+  @auto_test()
   def get_crossover(self):
     """
     Set or unset the crossover switch
@@ -275,9 +280,10 @@ class WBDC2(WBDC_base, Receiver):
       return self.hardware.get_crossover(crossover)
     else:
       return self.crossSwitch.state
-  
+
   # polarization sections
-  
+
+  @auto_test()
   def set_pol_modes(self, circular=False):
     """
     Set all polarization sections to the specified mode; default: linear
@@ -289,6 +295,7 @@ class WBDC2(WBDC_base, Receiver):
       status[key] = self.pol_sec[key].set_state(circular)
     return status
 
+  @auto_test()
   def get_pol_modes(self):
     """
     Get the modes of all the polarization sections
@@ -299,13 +306,14 @@ class WBDC2(WBDC_base, Receiver):
     for key in self.pol_sec.keys():
       status[key] = self.pol_sec[key].get_state()
     return status
-  
+
   # polarizer section attenuators
-  
+
+  @auto_test()
   def get_atten_IDs(self):
     """
     Returns the names of all the RF attenuators in the pol sections
-    
+
     Should not be needed as this is done when the remote object is initialized.
     """
     if self.hardware:
@@ -314,6 +322,7 @@ class WBDC2(WBDC_base, Receiver):
       self.atten_keys = []
     return self.atten_keys
 
+  @auto_test()
   def set_atten_volts(self, ID, V):
     """
     Set the control voltage of a specified attenuator
@@ -323,6 +332,7 @@ class WBDC2(WBDC_base, Receiver):
     else:
       return False
 
+  @auto_test()
   def get_atten_volts(self, ID):
     """
     Get the control voltage of a specified attenuator
@@ -332,6 +342,7 @@ class WBDC2(WBDC_base, Receiver):
     else:
       return 0.0
 
+  @auto_test()
   def set_atten(self, ID, dB):
     """
     Sets pol section quad hybrid input attentuator
@@ -341,10 +352,11 @@ class WBDC2(WBDC_base, Receiver):
     else:
       return -20
 
+  @auto_test()
   def get_atten(self, ID):
     """
     Returns the attenuation to which the specified attenuator is set.
-    
+
     This does not query the hardware.  The attenuator simply remembers the last
     requested attenuation.  If 'set_atten' has not been used, it rteurns a
     blank.
@@ -355,7 +367,8 @@ class WBDC2(WBDC_base, Receiver):
       return -20
 
   # down-converter sections
-  
+
+  @auto_test()
   def set_IF_modes(self, SB_separated=False):
     """
     Set the IF mode of all the down-converters
@@ -368,6 +381,7 @@ class WBDC2(WBDC_base, Receiver):
       self.data['bandwidth'] = 2e9
     return self.get_IF_mode()
 
+  @auto_test()
   def get_IF_modes(self):
     """
     Get the IF mode of all the down-converters
@@ -379,6 +393,7 @@ class WBDC2(WBDC_base, Receiver):
       modes[key] = self.DC[key].get_state()
     return modes
 
+  @auto_test()
   def get_monitor_data(self):
     """
     Returns the analog voltages, currents and temperatures
@@ -388,10 +403,11 @@ class WBDC2(WBDC_base, Receiver):
     else:
       return {}
 
+  @auto_test()
   def set_polarizers(self, state):
     """
     Set all polarizers to the specified state
-    
+
     True for E/H to L/R conversion.  Flase for bypass.
     """
     if self.hardware:
@@ -402,10 +418,11 @@ class WBDC2(WBDC_base, Receiver):
         self.pol_sec[key].state = state
       return self.get_polarizers()
 
+  @auto_test()
   def get_polarizers(self):
     """
     Set all polarizers to the specified state
-    
+
     True for E/H to L/R conversion.  Flase for bypass.
     """
     if self.hardware:
@@ -416,25 +433,27 @@ class WBDC2(WBDC_base, Receiver):
         response[key] = self.pol_sec[key].state
       return response
 
+  @auto_test()
   def sideband_separation(self, state):
     """
     Convert I/Q to LSB/USB
-    
+
     When a hybrid state is 1 or True, the hybdrids are bypassed.  This is the
     default (on power up) state.  When the state is 0 or False, the hybrid is
     engaged to convert the complex IF (I and Q) to lower and upper sidebands.
-    
+
     To make this function more intuitive, the logic is inverted here, that is,
     True means that the sidebands are separated.
     """
     if self.hardware:
       states = self.hardware.sideband_separation(state)
     return self.get_IF_hybrids()
-    
+
+  @auto_test()
   def get_IF_hybrids(self):
     """
     Returns the state of the IQ-to-LU hybrids.
-    
+
     True means that the hybrid is bypassed, False that it is engaged.
     """
     if self.hardware:
@@ -451,7 +470,7 @@ class WBDC2(WBDC_base, Receiver):
     Beam to down-converter transfer switch
 
     There is one Switch object for each front-end polarization P1 and P2.
-    
+
 
     At some point this might become a general transfer switch class
     """
@@ -463,10 +482,11 @@ class WBDC2(WBDC_base, Receiver):
       WBDC_base.TransferSwitch.__init__(self, parent, name, inputs=inputs,
                                         output_names=output_names)
       mylogger.debug("__init__: for %s", self)
-      mylogger.debug("__init__: %s inputs: %s", self, str(self.inputs))
+      if hasattr(self, "inputs"):
+          mylogger.debug("__init__: %s inputs: %s", self, str(self.inputs))
       self.logger = mylogger
       self.logger.debug("__init__: %s outputs: %s\n", self, str(self.outputs))
-        
+
     def set_state(self, state):
       """
       Set the state of the beam cross-over switches
@@ -479,7 +499,7 @@ class WBDC2(WBDC_base, Receiver):
       else:
         self.state = state
       return self.get_state()
-        
+
     def get_state(self):
       """
       Get the state of the beam cross-over switches
@@ -540,7 +560,7 @@ class WBDC2(WBDC_base, Receiver):
                         mylogger.level)
       self.logger = mylogger
       self._update_signals()
-        
+
     def _update_signals(self):
       """
       Update the signals at the outputs
@@ -562,7 +582,7 @@ class WBDC2(WBDC_base, Receiver):
                               outkey, self.outputs[outkey].signal)
             self.outputs[outkey].signal['bandwidth'] = 2 # GHz
             self.outputs[outkey].signal['frequency'] = float(outkey[-2:])
-         
+
   class PolSection(WBDC_base.PolSection):
     """
     Class for optional conversion of E,H pol to L,R and attenuators adjustment.
@@ -660,7 +680,7 @@ class WBDC2(WBDC_base, Receiver):
                                    logger.name+"WBDC2.PolSection.IFattenuator")
         mylogger.debug("__init__: for %s and parent %s", self, parent)
         self.logger = mylogger
-        
+
       def set_atten_volts(self, ID, V):
         """
         Sets the designated attenuator voltage
@@ -668,7 +688,7 @@ class WBDC2(WBDC_base, Receiver):
         if self.hardware:
           self.hardware.set_atten_volts(ID, V)
         return self.get_atten_volts(ID)
-        
+
       def get_atten_volts(ID):
         """
         Gets the designated attenuator voltage
@@ -677,28 +697,28 @@ class WBDC2(WBDC_base, Receiver):
           return self.hardware.get_atten_volts(ID)
         else:
           return 0.0
-    
+
       def set_atten(self, ID, dB):
         """
         Sets pol section quad hybrid input attentuator
-      
+
         @param ID : attenuator identifier
         @type  ID : str
-    
+
         @param atten : requested attenuation
         @type  atten : float
         """
         if self.hardware:
           self.hardware.set_atten(ID, dB)
         self.get_atten(ID)
-    
+
       def get_atten(self, ID):
         """
         Gets pol section quad hybrid input attentuator
-      
+
         @param ID : attenuator identifier
         @type  ID : str
-    
+
         @param atten : requested attenuation
         @type  atten : float
         """
@@ -706,7 +726,7 @@ class WBDC2(WBDC_base, Receiver):
           self.hardware.get_atten(ID)
         else:
           return -20
-      
+
   class DownConv(WBDC_base.DownConv):
     """
     Converts RF to IF
@@ -742,14 +762,14 @@ class WBDC2(WBDC_base, Receiver):
                        source=self.outputs[key].source,
                     signal=IF(self.outputs[key].source.signal, IF_type=IFmode))
         self.parent.outputs[key] = self.outputs[key]
-      
+
     def _get_state(self):
       """
       """
       if self.hardware:
         self.state = self.hardware.get_IF_hybrid_state()
       return self.state
-      
+
     def _set_state(self, state):
       """
       """
@@ -782,13 +802,12 @@ if __name__ == "__main__":
   from MonitorControl.Configurations import station_configuration
   from MonitorControl.Configurations.CDSCC.WBDC2_K2 import IFswitch
   from MonitorControl.config_test import show_signal_path
-  
+
   testlogger = logging.getLogger()
   testlogger.setLevel(logging.DEBUG)
-  
+
   lab,equipment = station_configuration("WBDC2_K2")
   show_signal_path([equipment['FrontEnd'],
                     equipment['Receiver'],
                     equipment['IF_switch'],
                     equipment['Backend']])
-  
