@@ -258,6 +258,13 @@ class WBDC2(WBDC_base, Receiver):
     self.analog_monitor = self.AnalogMonitor(self)
     self.logger.debug(" initialized for %s", self.name)
 
+
+  def start_recording(self, interval=None):
+    pass
+
+  def stop_recording(self):
+    pass
+
   # cross-over switch
   @auto_test()
   def set_crossover(self, crossover):
