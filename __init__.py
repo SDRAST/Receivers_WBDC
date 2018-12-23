@@ -39,7 +39,7 @@ from collections import OrderedDict
 
 from MonitorControl import Device, Switch, Port, IF,  ObservatoryError
 from MonitorControl import show_port_sources
-from MonitorControl.FrontEnds.Kband import plane
+from MonitorControl.FrontEnds.K_band import plane
 from MonitorControl.Receivers import Receiver
 from support.lists import unique
 from support.test import auto_test
