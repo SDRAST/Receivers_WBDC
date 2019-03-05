@@ -161,6 +161,9 @@ class WBDC2(WBDC_base, Receiver):
 
     @param active : True is the FrontEnd instance is functional
     @type  active : bool
+    
+    @param hardware : True if this client connects to the hardware server
+    @type  hardware : dict keyed with generic hardware names
     """
     self.name = name
     if hardware:
