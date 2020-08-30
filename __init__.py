@@ -49,23 +49,24 @@ logger = logging.getLogger(__name__)
 class WBDC_base(Receiver):
   """
   Base class for a DSN K-band wideband down-converter::
-          ---      ---        ---                ---
-          | |--P1--| |--D1P1--| |== 5 sub-bands==| |==D1PA
-          | |      | |        ---                | |
-   >--B1--| |      | |                           | |
-          | |      | |        ---                | |
-          | |--P2--| |--D1P2--| |== 5 sub-bands==| |==D1PB
-          ---      | |        ---                ---
+  
+           ---      ---        ---                ---
+           | |--P1--| |--D1P1--| |== 5 sub-bands==| |==D1PA
+           | |      | |        ---                | |
+    >--B1--| |      | |                           | |
+           | |      | |        ---                | |
+           | |--P2--| |--D1P2--| |== 5 sub-bands==| |==D1PB
+           ---      | |        ---                ---
                    | |
-          ---      | |        ---                ---
-          | |--P1--| |--D2P1--| |== 5 sub-bands==| |==D2PA
-          | |      | |        ---                | |
-   >--B2--| |      | |                           | |
-          | |      | |        ---                | |
-          | |--P2--| |--D2P2--| |== 5 sub-bands==| |==D2PB
-          ---      ---        ---                ---
-          OMT     Xswitch  RFsection       pol_section X 5
-   <---K_4ch-->  <-----------------WBDC2----------------->
+           ---      | |        ---                ---
+           | |--P1--| |--D2P1--| |== 5 sub-bands==| |==D2PA
+           | |      | |        ---                | |
+    >--B2--| |      | |                           | |
+           | |      | |        ---                | |
+           | |--P2--| |--D2P2--| |== 5 sub-bands==| |==D2PB
+           ---      ---        ---                ---
+           OMT     Xswitch  RFsection       pol_section X 5
+    <---K_4ch-->  <-----------------WBDC2----------------->
 
   The DSN K-band WBDC systems have two dual polarization feeds. The feeds can
   be interchanged with a pair of transfer switches.
