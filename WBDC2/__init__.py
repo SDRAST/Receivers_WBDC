@@ -104,12 +104,11 @@ from collections import OrderedDict
 import os.path
 
 import Math
-from MonitorControl import ComplexSignal, Device, IF, Port, ObservatoryError
+from MonitorControl import ComplexSignal, Device, IF, Port
 from MonitorControl import show_port_sources
 from MonitorControl.Receivers import Receiver
 from MonitorControl.Receivers.WBDC import WBDC_base
 from support.lists import contains
-from support.pyro import get_device_server, pyro_server_request
 from support.test import auto_test
 
 logger = logging.getLogger(__name__)
@@ -120,10 +119,10 @@ def show_signal(parent, ports):
   """
   Diagnostic tool
   """
-  inkeys = ports.keys()
+  inkeys = list(ports.keys())
   test = ports[inkeys[0]]
   logger.debug("show_signal: %s %s signal is %s",parent, test, test.signal)
-  sigkeys = test.signal.keys()
+  sigkeys = list(test.signal.keys())
   for key in sigkeys:
     logger.debug("show_signal:  %s = %s", key, test.signal[key])
 
@@ -166,6 +165,8 @@ class WBDC2(WBDC_base, Receiver):
     @type  hardware : dict keyed with generic hardware names
     """
     self.name = name
+
+
     if hardware:
       from support.pyro import get_device_server, pyro_server_request
       self.hardware = get_device_server("wbdc2hw_server-dss43wbdc2",
@@ -177,6 +178,20 @@ class WBDC2(WBDC_base, Receiver):
     mylogger.debug("__init__: for %s", self)
     show_port_sources(inputs, "WBDC2.__init__: inputs before WBDC_base init:",
                         mylogger.level)
+    if hardware:
+      uri = Pyro5.api.URI("PYRO:Spec@localhost:50003")
+      self.hardware = Pyro5.api.Proxy(uri)
+      try:
+        self.hardware.__get_state__()
+      except Pyro5.errors.CommunicationError as details:
+        mylogger.error("__init__: %s", details)
+        raise Pyro5.errors.CommunicationError("is the SAO spec server running?")
+      except AttributeError:
+        # no __get_state__ because we have a connection
+        pass
+    else:
+            # use the simulator
+            self.hardware = None
     WBDC_base.__init__(self, name,
                        active=active,
                        inputs=inputs,
@@ -198,7 +213,7 @@ class WBDC2(WBDC_base, Receiver):
       self.crossSwitch.set_state(False)
 
     # the four transfer switch outputs (2 feeds, 2 pols) are RF section inputs
-    rfs = self.crossSwitch.outputs.keys()
+    rfs = list(self.crossSwitch.outputs.keys())
     rfs.sort()
     self.logger.debug("__init__: transfer switch outputs: %s", rfs)
     self.rf_section = {}
@@ -232,8 +247,8 @@ class WBDC2(WBDC_base, Receiver):
         self.pol_sec[psec_name]._get_state()
         self.logger.debug(" __init__: pol section %s outputs: %s",
                           self.pol_sec[psec_name].name,
-                          self.pol_sec[psec_name].outputs.keys())
-    pol_sec_names = self.pol_sec.keys()
+                          list(self.pol_sec[psec_name].outputs.keys()))
+    pol_sec_names = list(self.pol_sec.keys())
     pol_sec_names.sort()
     self.logger.debug(" __init__: pol sections: %s\n", pol_sec_names)
 
@@ -299,9 +314,9 @@ class WBDC2(WBDC_base, Receiver):
     Set all polarization sections to the specified mode; default: linear
     """
     status = {}
-    keys = self.pol_sec.keys()
+    keys = list(self.pol_sec.keys())
     keys.sort()
-    for key in self.pol_sec.keys():
+    for key in list(self.pol_sec.keys()):
       status[key] = self.pol_sec[key].set_state(circular)
     return status
 
@@ -311,9 +326,9 @@ class WBDC2(WBDC_base, Receiver):
     Get the modes of all the polarization sections
     """
     status = {}
-    keys = self.pol_sec.keys()
+    keys = list(self.pol_sec.keys())
     keys.sort()
-    for key in self.pol_sec.keys():
+    for key in list(self.pol_sec.keys()):
       status[key] = self.pol_sec[key].get_state()
     return status
 
@@ -383,7 +398,7 @@ class WBDC2(WBDC_base, Receiver):
     """
     Set the IF mode of all the down-converters
     """
-    for key in self.DC.keys():
+    for key in list(self.DC.keys()):
       self.DC[key].set_IF_(SB_separated)
     if SB_separated:
       self.data['bandwidth'] = 1e9
@@ -397,9 +412,9 @@ class WBDC2(WBDC_base, Receiver):
     Get the IF mode of all the down-converters
     """
     modes = {}
-    keys = self.DC.keys()
+    keys = list(self.DC.keys())
     keys.sort()
-    for key in self.DC.keys():
+    for key in list(self.DC.keys()):
       modes[key] = self.DC[key].get_state()
     return modes
 
@@ -424,7 +439,7 @@ class WBDC2(WBDC_base, Receiver):
       self.hardware.set_polarizers(state)
       return self.hardware.get_polarizers()
     else:
-      for key in self.pol_sec.keys():
+      for key in list(self.pol_sec.keys()):
         self.pol_sec[key].state = state
       return self.get_polarizers()
 
@@ -439,7 +454,7 @@ class WBDC2(WBDC_base, Receiver):
       return self.hardware.get_polarizers()
     else:
       response = {}
-      for key in self.pol_sec.keys():
+      for key in list(self.pol_sec.keys()):
         response[key] = self.pol_sec[key].state
       return response
 
@@ -470,7 +485,7 @@ class WBDC2(WBDC_base, Receiver):
       states = self.hardware.get_IF_hybrids()
     else:
       states = {}
-      for key in self.DC.keys():
+      for key in list(self.DC.keys()):
         states[key] = self.DC[key].get_state()
     return states
 
@@ -501,7 +516,7 @@ class WBDC2(WBDC_base, Receiver):
       """
       Set the state of the beam cross-over switches
       """
-      keys = self.data.keys()
+      keys = list(self.data.keys())
       self.logger.debug(
                   "get_state: checking switches %s", keys)
       if self.hardware:
@@ -514,7 +529,7 @@ class WBDC2(WBDC_base, Receiver):
       """
       Get the state of the beam cross-over switches
       """
-      keys = self.data.keys()
+      keys = list(self.data.keys())
       self.logger.debug(
                   "get_state: checking switches %s", keys)
       if self.hardware:
@@ -579,9 +594,9 @@ class WBDC2(WBDC_base, Receiver):
       # connect the ports
       self._connect_ports()
       # update the signals
-      outnames = self.outputs.keys()
+      outnames = list(self.outputs.keys())
       outnames.sort()
-      for key in self.inputs.keys():
+      for key in list(self.inputs.keys()):
         if hasattr(self.inputs[key].signal,'copy'):
           self.logger.debug("_update_signals: processing input port %s", key)
           self.inputs[key].signal.copy(self.inputs[key].source.signal)
@@ -625,14 +640,14 @@ class WBDC2(WBDC_base, Receiver):
       self.logger = mylogger
       self.logger.debug("__init__: %s inputs: %s", self, str(self.inputs))
       self.logger.debug("__init__: %s output names: %s", self, output_names)
-      inkeys = self.inputs.keys()
+      inkeys = list(self.inputs.keys())
       inkeys.sort()
       self.atten = {}
       for key in inkeys:
         att_name = self.name+'-'+key
         self.logger.debug("__init__: creating attenuator %s", att_name)
         self.atten[att_name] = self.IFattenuator(self, att_name)
-      outkeys = self.outputs.keys()
+      outkeys = list(self.outputs.keys())
       outkeys.sort()
       for key in outkeys:
         indx = outkeys.index(key)
@@ -760,7 +775,7 @@ class WBDC2(WBDC_base, Receiver):
         self.hardware.set_DC_state(default)
       super(WBDC_base.DownConv, self).set_state() # default is bypass
       self.logger = mylogger
-      keys = self.outputs.keys()
+      keys = list(self.outputs.keys())
       keys.sort()
       self.logger.debug("__init__: outputs: %s", keys)
       for key in keys:

@@ -1,0 +1,71 @@
+
+S/C ID:                   99
+S/C Name:                 RSTS
+Pass:                     999
+DSS:                      43
+Year:                     2013
+DOY:                      280
+Voice Cct:                None
+Contact:                  
+Team:                     A
+Weather:                  FINE
+BOT:                      
+EOT:                      
+RTLT:                     
+Pass Cat:                 
+Horizon Rise:             
+Horizon Set:              
+
+*** ANT INFORMATION ***
+
+Pointing mode:            AC2
+Pointing Model:           def43.ac2
+SRC Position:             339
+Az cable wrap AOS:        ---
+Az cable wrap LOS:        ---
+SRC Operational:          Yes
+
+*** UGC INFORMATION ***
+
+Uplink Polarisation:      RCP
+2nd Upl Polarisation:     ---
+Downlink Polarisation:    ---
+Downlink:                 ---------
+LNA:                      --
+Dichroic mirror:          In Place
+2nd Dnl Polarisation:     ---
+2nd LNA:                  --
+2nd Downlink:             ---------
+
+*** DTT INFORMATION ***
+
+DCC ID'(s):               
+IF switch:                
+IF source:                
+Config table:             
+TLM pred received:        
+TLM pred enabled:         
+Sky SNT:                  
+Ranging on DCC:           
+Ranging calibration (ru): 
+
+*** UPL INFORMATION ***
+
+Transmitter band:         X
+Transmitter strength:     Low
+Transmitter TSF:          7162312500.000000
+Transmitter Pwr:          
+Transmitter Pwr (units):  kW
+Command validation:       ----------
+2nd Transmitter band:     -
+2nd Transmitter strength: ----
+2nd Transmitter TSF:      
+2nd Transmitter Pwr:      
+2nd Txr Pwr (units):      --
+2nd Command validation:   ----------
+
+*** OTHER INFORMATION ***
+
+OPD's, NAD's, CAD's etc:  
+Other Comments:           
+

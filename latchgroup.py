@@ -224,7 +224,7 @@ class LatchGroup():
     try:
       self.LJ.getFeedback(u3.PortStateWrite(State = states, WriteMask = mask))
       return True
-    except u3.LabJackException, details:
+    except u3.LabJackException as details:
       self.logger.error("  setLatchAddr: LabJack could not set latch %d\n%s",
                         address, str(details))
       return False
@@ -270,7 +270,7 @@ class LatchGroup():
                             u3.BitStateRead(IONumber = WBDCsignal["SDO"]))[0]
             #self.logger.debug("  read: bit %d state is %d for MBDATA = %d",
             #                  bit, state, MBDATA)
-          except Exception, details:
+          except Exception as details:
             self.logger.error("  read: Data In failed at bit %d\n%s",
                               bit, details)
             return None
@@ -297,8 +297,8 @@ class LatchGroup():
       self.set_signals({"SCK":0})
       self.set_signals({"SCK":1})
       return True
-    except Exception, details:
-      print "send_bit: Could not set SDA bit on latch: %s", details
+    except Exception as details:
+      print("send_bit: Could not set SDA bit on latch: %s", details)
       return False
 
   def write(self, LATCHDATA):
@@ -368,7 +368,7 @@ class LatchGroup():
     @return: result of u3.BitStateWrite()
     """
     commands = []
-    for signal,state in signal_dict.items():
+    for signal,state in list(signal_dict.items()):
       commands.append(u3.BitStateWrite(WBDCsignal[signal], state))
     commands.append(u3.PortStateRead())
     #self.logger.debug("  set_signals: sending %s", commands)
@@ -377,6 +377,6 @@ class LatchGroup():
       #self.logger.debug("  set_signals: command feedback: %s", result)
       #if float(python_version()[:3]) < 2.6:
       time.sleep(0.01)
-    except Exception, details:
+    except Exception as details:
       self.logger.error("  set_signals: LJ commands failed:\n%s", details)
     return result[-1]

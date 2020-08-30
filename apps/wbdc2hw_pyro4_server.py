@@ -19,15 +19,15 @@ import logging
 import sys
 import os
 
-import Pyro4
+import Pyro5
 
 from local_dirs import log_dir
 from MonitorControl.Receivers.WBDC.WBDC2.WBDC2hwif import WBDC2hwif
-from pyro_support import Pyro4Server, config
+from supprt.pyro.pyro5_support import Pyro5Server
 
 module_logger = logging.getLogger(__name__)
 
-@config.expose
+@Pyro5.api.expose
 class WBDC2hwServer(Pyro4Server):
     """
     Server for interfacing with the Wide Band Down Converter2
@@ -37,7 +37,7 @@ class WBDC2hwServer(Pyro4Server):
         """
         if not logger:
             logger = logging.getLogger(module_logger.name + ".WBDC2hw_server")
-        Pyro4Server.__init__(self, name=name, logger=logger, **kwargs)
+        Pyro5Server.__init__(self, name=name, logger=logger, **kwargs)
         self.logger.debug("Pyro4Server superclass initialized")
         self.wbdc = WBDC2hwif(name)
         self.logger.debug("hardware interface superclass instantiated")
@@ -240,31 +240,60 @@ def simple_parse_args():
     """
     parser = argparse.ArgumentParser(description="Start WBDC-2 Pyro4 server")
 
-    parser.add_argument('--remote_server_name', '-rsn', dest='remote_server_name',
-                        action='store', default='localhost', type=str, required=False,
-                        help="""Specify the name of the remote host. If you're trying to access a Pyro nameserver that
-                             is running locally, then use localhost. If you supply a value other than 'localhost'
-                             then make sure to give other remote login information.""")
+    parser.add_argument('--remote_server_name', '-rsn',
+                        dest='remote_server_name',
+                        action='store', 
+                        default='localhost', 
+                        type=str, 
+                        required=False,
+                        help="Specify the name of the remote host. If you're"+
+                        " trying to access a Pyro nameserver that is running"+
+                        " locally, then use localhost. If you supply a value"+
+                        " other than 'localhost'then make sure to give other"+
+                        " remote login information.")
 
-    parser.add_argument('--remote_port', '-rp', dest='remote_port',
-                        action='store', type=int, required=False, default=None,
+    parser.add_argument('--remote_port', '-rp', 
+                        dest='remote_port',
+                        action='store', 
+                        type=int, 
+                        required=False, 
+                        default=None,
                         help="""Specify the remote port.""")
 
-    parser.add_argument("--ns_host", "-nsn", dest='ns_host', action='store', default='localhost',
-                        help="Specify a host name for the Pyro name server. Default is localhost")
+    parser.add_argument("--ns_host", "-nsn", 
+                        dest='ns_host', 
+                        action='store', 
+                        default='localhost',
+                        help="Specify a host name for the Pyro name server."+
+                        " Default is localhost")
 
-    parser.add_argument("--ns_port", "-nsp", dest='ns_port', action='store',default=50000,type=int,
-                        help="Specify a port number for the Pyro name server. Default is 50000.")
+    parser.add_argument("--ns_port", "-nsp",
+                        dest='ns_port', 
+                        action='store',
+                        default=50000,
+                        type=int,
+                        help="Specify a port number for the Pyro name server."+
+                        " Default is 50000.")
 
-    parser.add_argument("--simulated", "-s", dest='simulated', action='store_true', default=False,
-                        help="Specify whether or not the server is running in simulator mode.")
+    parser.add_argument("--simulated", "-s",
+                        dest='simulated', 
+                        action='store_true', 
+                        default=False,
+                        help="Specify whether or not the server is running in"+
+                        " simulator mode.")
 
-    parser.add_argument("--local", "-l", dest='local', action='store_true', default=False,
-                        help="Specify whether or not the server is running locally or on a remote server.")
+    parser.add_argument("--local", "-l",
+                        dest='local', 
+                        action='store_true', 
+                        default=False,
+                        help="Specify whether or not the server is running"+
+                        " locally or on a remote server.")
 
-    parser.add_argument("--verbose", "-v", dest="verbose", action='store_true', default=False,
+    parser.add_argument("--verbose", "-v",
+                        dest="verbose", 
+                        action='store_true', 
+                        default=False,
                         help="Specify whether not the loglevel should be DEBUG")
-
     return parser
 
 def setup_logging(logfile, level):
@@ -277,7 +306,8 @@ def setup_logging(logfile, level):
     """
     logging.basicConfig(level=level)
     s_formatter = logging.Formatter('%(levelname)s:%(name)s:%(message)s')
-    f_formatter = logging.Formatter('%(levelname)s:%(asctime)s:%(name)s:%(message)s')
+    f_formatter = logging.Formatter(
+                               '%(levelname)s:%(asctime)s:%(name)s:%(message)s')
 
     fh = logging.FileHandler(logfile)
     fh.setLevel(logging.DEBUG)
@@ -316,4 +346,9 @@ if __name__ == "__main__":
     m.launch_server(remote_server_name=parsed.remote_server_name,
                     local=parsed.local,
                     ns_host=parsed.ns_host,
-                    ns_port=parsed.ns_port)
+                    ns_port=parsed.ns_port,
+                    objectId=equipment["Antenna"].name,
+                    objectPort=50003, 
+                    ns=False, 
+                    threaded=False, 
+                    local=True)

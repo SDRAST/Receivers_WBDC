@@ -37,7 +37,7 @@ import logging
 import copy
 from collections import OrderedDict
 
-from MonitorControl import Device, Switch, Port, IF,  ObservatoryError
+from MonitorControl import Device, Switch, Port, IF,  MonitorControlError
 from MonitorControl import show_port_sources
 from MonitorControl.FrontEnds.K_band import plane
 from MonitorControl.Receivers import Receiver
@@ -144,14 +144,14 @@ class WBDC_base(Receiver):
     self.crossSwitch._update_signals()
     # update the RF sections:
     try:
-      for key in self.rf_section.keys():
+      for key in list(self.rf_section.keys()):
         self.rf_section[key]._update_signals()
-    except Exception, details:
-      raise Exception, "Could not update RF section; "+str(details)
+    except Exception as details:
+      raise Exception("Could not update RF section; "+str(details))
     # update the pol sections:
-    for key in self.pol_sec.keys():
+    for key in list(self.pol_sec.keys()):
       self.pol_sec[key]._update_signals()
-    for key in self.DC.keys():
+    for key in list(self.DC.keys()):
       self.DC[key]._update_signals()
 
   def _create_pol_list(self,inputs):
@@ -161,7 +161,7 @@ class WBDC_base(Receiver):
     This is used by the WBDC2 sub-class
     """
     if inputs:
-      self.inkeys = inputs.keys()
+      self.inkeys = list(inputs.keys())
       self.inkeys.sort()
       self.pols = []
       for key in self.inkeys:
@@ -216,7 +216,7 @@ class WBDC_base(Receiver):
       """
       Gets the TransferSwitch state from the Xswitch states.
       """
-      keys = self.data.keys()
+      keys = list(self.data.keys())
       keys.sort()
       for ID in keys:
         self.states[ID] = self.data[ID].get_state()
@@ -234,7 +234,7 @@ class WBDC_base(Receiver):
       Set the RF transfer (crossover) switch
       """
       self.state = crossover
-      keys = self.data.keys()
+      keys = list(self.data.keys())
       keys.sort()
       for ID in keys:
         self.states[ID] = self.data[ID].set_state(crossover)
@@ -249,7 +249,7 @@ class WBDC_base(Receiver):
 
       Should not be needed
       """
-      for key in self.data.keys():
+      for key in list(self.data.keys()):
         self.data[key]._update_signal()
 
     class Xswitch(Switch):
@@ -343,7 +343,7 @@ class WBDC_base(Receiver):
       P is the polarization code E or H and FF is the frequency code.
       """
       self.logger.debug("_connect_ports called")
-      for key in self.outputs.keys():
+      for key in list(self.outputs.keys()):
         inputname = key[:-2]
         self.outputs[key].source = self.inputs[inputname]
 
@@ -387,7 +387,7 @@ class WBDC_base(Receiver):
       or R and L, obtained from the prior RF sections. The code below
       constructs the output names from the input names.
       """
-      keys = self.outputs.keys()
+      keys = list(self.outputs.keys())
       keys.sort()
       for key in keys:
         self.logger.debug("_connect_ports: processing output %s", key)
@@ -417,7 +417,7 @@ class WBDC_base(Receiver):
       """
       Set 'pol' property of output signals in addition to the superclass method
       """
-      input_keys = self.inputs.keys()
+      input_keys = list(self.inputs.keys())
       input_keys.sort()
       self.logger.debug(" _update_signals: entered for %s",
                         self.name)
@@ -493,7 +493,7 @@ class WBDC_base(Receiver):
       """
       Propagate signals from inputs to outputs
       """
-      for key in self.inputs.keys():
+      for key in list(self.inputs.keys()):
         for IF in WBDC_base.IF_names: # I1 or I2
           self.outputs[key+IF].source = self.inputs[key]
           self.inputs[key].destinations.append(self.outputs[key+IF])
@@ -504,7 +504,7 @@ class WBDC_base(Receiver):
       """
       self.logger.debug(" _update_signals: for %s outputs", self)
       self._connect_ports()
-      input_keys = self.inputs.keys()
+      input_keys = list(self.inputs.keys())
       input_keys.sort()
       for key in input_keys:
         self.logger.debug(

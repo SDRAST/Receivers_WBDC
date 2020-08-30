@@ -361,7 +361,7 @@ class WBDC2hwif(MCobject):
         self.pol_sec[psec_name].data['band'] = band
         self.pol_sec[psec_name].data['receiver'] = rx
         self.pol_sec[psec_name].get_state()
-    pol_sec_names = self.pol_sec.keys()
+    pol_sec_names = list(self.pol_sec.keys())
     pol_sec_names.sort()
     self.logger.debug(" __init__: pol sections: %s", pol_sec_names)
 
@@ -393,7 +393,7 @@ class WBDC2hwif(MCobject):
     """
     """
     states = {}
-    for key in self.pol_sec.keys():
+    for key in list(self.pol_sec.keys()):
       states[key] = self.pol_sec[key].get_state()
     return states
 
@@ -404,7 +404,7 @@ class WBDC2hwif(MCobject):
     
   def get_DC_states(self):
     states = {}
-    for key in self.DC.keys():
+    for key in list(self.DC.keys()):
       states[key] = self.DC[key].get_state()
     return states
       
@@ -432,7 +432,7 @@ class WBDC2hwif(MCobject):
       """
       Get the state of the beam cross-over switches
       """
-      keys = self.data.keys()
+      keys = list(self.data.keys())
       self.logger.debug("get_state: checking switches %s", keys)
       keys.sort()
       for ID in keys:
@@ -449,7 +449,7 @@ class WBDC2hwif(MCobject):
       Set the RF transfer (crossover) switch
       """
       self.state = crossover
-      keys = self.data.keys()
+      keys = list(self.data.keys())
       keys.sort()
       for ID in keys:
         self.states[ID] = self.data[ID].set_state(crossover)
@@ -488,7 +488,7 @@ class WBDC2hwif(MCobject):
           test_bit_value = int(self.name)
           self.state = bool(status & test_bit_value)
           self.logger.debug("get_state: %s switch state = %d", self, self.state)
-        except AttributeError, details:
+        except AttributeError as details:
           self.logger.error("WBDC_core.TransferSwitch.Xswitch.get_state: %s", details)
         return self.state
 
@@ -506,7 +506,7 @@ class WBDC2hwif(MCobject):
           status = rx.lg['X'].read()
           self.logger.debug("set_state: Latch Group %s data = %s", rx.lg['X'],
                             Math.decimal_to_binary(status,8))
-        except AttributeError, details:
+        except AttributeError as details:
           self.logger.error("set_state: status read failed: %s", details)
           return False
         ctrl_bit = int(self.name)-1
@@ -522,7 +522,7 @@ class WBDC2hwif(MCobject):
             self.logger.debug("set_state: write succeeded")
           else:
             self.logger.error("set_state: write failed")
-        except AttributeError, details:
+        except AttributeError as details:
           self.logger.error("set_state: write failed: %s", details)
           return False
         self.state = self.get_state()
@@ -630,7 +630,7 @@ class WBDC2hwif(MCobject):
         else:
           vs = self.parent.tdac['B']
           
-        if WBDC2hwif.splines[1][0].has_key(self.name):
+        if self.name in WBDC2hwif.splines[1][0]:
           ctlV_spline =                WBDC2hwif.splines[1][0][self.name]
           min_gain, max_gain, ignore = WBDC2hwif.splines[1][1][self.name]
         else:
@@ -678,11 +678,11 @@ class WBDC2hwif(MCobject):
     def get_state(self):
       """
       """
-      if self.data.has_key('receiver'):
+      if 'receiver' in self.data:
         LGID, latchbit = self._get_latch_info()
         try:
           latchdata = self.parent.lg[LGID].read()
-        except Exception, details:
+        except Exception as details:
           self.logger.error("_get_state: read failed: %s", str(details))
         self.state = Math.Bin.getbit(latchdata, latchbit)
       else:
@@ -692,7 +692,7 @@ class WBDC2hwif(MCobject):
     def set_state(self, state):
       """
       """
-      if self.data.has_key('receiver'):
+      if 'receiver' in self.data:
         LGID, latchbit = self._get_latch_info()
         latchdata = self.parent.lg[LGID].read()
         self.logger.debug("_set_state: latchdata was %s",
@@ -705,7 +705,7 @@ class WBDC2hwif(MCobject):
                           Math.decimal_to_binary(latchdata,8))
         try:
           self.parent.lg[LGID].write(latchdata)
-        except Exception, details:
+        except Exception as details:
           self.logger.error("_set_state: write failed: %s", str(details))
       self.get_state()
       return self.state
@@ -728,7 +728,7 @@ class WBDC2hwif(MCobject):
       LGname = 'A'+str(latchgroup)
       self.logger.debug("read_analogs: latch name=%s", LGname)
       mon_data = WBDC2hwif.mon_points[latchgroup]
-      mon_pts = mon_data.keys()
+      mon_pts = list(mon_data.keys())
       mon_pts.sort()
       self.logger.debug("read_analogs: monitor points: %s", mon_pts)
       analog_data = {}
@@ -752,7 +752,7 @@ class WBDC2hwif(MCobject):
       """
       monitor_data = {}
       analog_data = self.read_analogs(latchgroup)
-      for ID in analog_data.keys():
+      for ID in list(analog_data.keys()):
         if ID:
           monitor_data[ID] = self.convert_analog(ID, analog_data[ID])
       return monitor_data
@@ -790,7 +790,7 @@ class WBDC2hwif(MCobject):
   def has_labjack(self, localID):
     """
     """
-    if self.LJ.has_key(localID):
+    if localID in self.LJ:
       return True
     else:
       self.logger.error(" %s has no LabJack %d", self.name, localID)
@@ -815,7 +815,7 @@ class WBDC2hwif(MCobject):
         status = self.LJ[1].getFeedback(u3.PortDirWrite(Direction=direction,
                                                         WriteMask=mask))
         self.logger.debug(" configure status: %s", status)
-      except Exception, details:
+      except Exception as details:
         self.logger.error(" Could not set bit direction on U3 %d",
                           self.LJ[1].localID)
         raise ObservatoryError("","configuring LJ 1 failed:\n"+str(details))
@@ -839,7 +839,7 @@ class WBDC2hwif(MCobject):
         status = self.LJ[ID].getFeedback(u3.PortDirWrite(Direction=direction,
                                                          WriteMask=mask))
         self.logger.debug(" configure status: %s", status)
-      except Exception, details:
+      except Exception as details:
         self.logger.error(" Could not set bit direction on U3 %d",
                           self.LJ[ID].localID)
         raise ObservatoryError("LabJack "+str(ID),

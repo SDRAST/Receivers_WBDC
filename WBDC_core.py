@@ -144,19 +144,19 @@ class WBDC_core(WBDC_base):
     all_data = {}
     for group in [1,2]:
       analog_data = self.analog_monitor.get_monitor_data(group)
-      for key in analog_data.keys():
+      for key in list(analog_data.keys()):
         all_data[key] = analog_data[key]
     return all_data
 
   def report_LJ_IO_config(self):
     report = {}
-    for lj in self.LJ.keys():
+    for lj in list(self.LJ.keys()):
       report[lj] = self.LJ[lj].configIO()
     return report
 
   def report_LJ_info(self):
     report = {}
-    for lj in self.LJ.keys():
+    for lj in list(self.LJ.keys()):
       report[lj] = self.LJ[lj].configU3()
     return report
       
@@ -270,7 +270,7 @@ class WBDC_core(WBDC_base):
       LGname = 'A'+str(latchgroup)
       self.logger.debug("read_analogs: latch name=%s", LGname)
       mon_data = self.mon_points[latchgroup]
-      mon_pts = mon_data.keys()
+      mon_pts = list(mon_data.keys())
       mon_pts.sort()
       self.logger.debug("read_analogs: monitor points: %s", mon_pts)
       analog_data = {}
@@ -294,7 +294,7 @@ class WBDC_core(WBDC_base):
       """
       monitor_data = {}
       analog_data = self.read_analogs(latchgroup)
-      for ID in analog_data.keys():
+      for ID in list(analog_data.keys()):
         if ID:
           monitor_data[ID] = self.convert_analog(ID, analog_data[ID])
       return monitor_data
@@ -310,7 +310,7 @@ class WBDC_core(WBDC_base):
   def has_labjack(self, localID):
     """
     """
-    if self.LJ.has_key(localID):
+    if localID in self.LJ:
       return True
     else:
       self.logger.error(" %s has no LabJack %d", self.name, localID)
@@ -335,7 +335,7 @@ class WBDC_core(WBDC_base):
         status = self.LJ[1].getFeedback(u3.PortDirWrite(Direction=direction,
                                                         WriteMask=mask))
         self.logger.debug(" configure status: %s", status)
-      except Exception, details:
+      except Exception as details:
         self.logger.error(" Could not set bit direction on U3 %d",
                           self.LJ[1].localID)
         raise ObservatoryError("","configuring LJ 1 failed:\n"+str(details))
@@ -359,7 +359,7 @@ class WBDC_core(WBDC_base):
         status = self.LJ[ID].getFeedback(u3.PortDirWrite(Direction=direction,
                                                          WriteMask=mask))
         self.logger.debug(" configure status: %s", status)
-      except Exception, details:
+      except Exception as details:
         self.logger.error(" Could not set bit direction on U3 %d",
                           self.LJ[ID].localID)
         raise ObservatoryError("LabJack "+str(ID),

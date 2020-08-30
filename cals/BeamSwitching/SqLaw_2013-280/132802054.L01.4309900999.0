@@ -1,0 +1,1664 @@
+1      20:54:52  PA  con1-ce          con1-ce          52002  Opened connection log file with package ID 0: 132802054.L01.4309900999.0
+2      20:54:52  EQ  con1-ce          con1-ce          1      EQUIPMENT:  AP43 U43 US43
+3      20:54:52  W!  con1-ce          con1-ce          20004  FAILED TO SEND SUPPORT DATA DIST REQUEST: SC99 FRANZCODE NOT PRESENT
+4      20:54:52  W!  tdn-147382       con1-ce          406    Retreiving PGMID for UWV1 is failed
+5      20:54:53  LO  US43             con1-ce/US43     6000   UWV is UWV-6222-OP CV3.1.0, Build B1 of May 20 2008 11:54:24.
+6      20:54:53  PA  con1-ce          con1-ce          50005  US43 IS ASSIGNED
+7      20:54:53  PA  US43             con1-ce/US43     4002   Maintenance disabled. Control Mode = NMC.
+8      20:54:53  LO  U43              con1-ce/U43      6001   UPL on dss43upa1 is UPL-6167-OP JV10.7.1, Build 10.7.1 of Aug  1 2013 10:39:55.
+9      20:54:53  PA  con1-ce          con1-ce          50005  AP43 IS ASSIGNED
+10     20:54:53  C!  U43              con1-ce/U43      1030   Invalid table in catalog: test_sc.rngcfg
+11     20:54:53  C!  U43              con1-ce/U43      1031   Table error: File name does not conform with MON-2 syntax.
+12     20:54:53  W!  U43              con1-ce/U43      22520  Unable to find a predict set for scn/pass 99/999. Do PRED.
+13     20:54:53  CA  U43              con1-ce/U43      5046   ETX configured for activity: In Service.
+14     20:54:53  CA  U43              con1-ce/U43      5046   RNG configured for activity: In Service.
+15     20:54:53  C!  AP43             con1-ce/AP43     361    Cannot read file def9940.sdf
+16     20:54:53  PA  AP43             con1-ce/AP43     1361   Normal: read file default.sdf
+17     20:54:53  LO  AP43             con1-ce/AP43     9884   APC is now in ASSIGNED mode
+18     20:54:53  PR  AP43             con1-ce/AP43     9905   No predicts. Specify predicts, then enter TRK
+19     20:54:54  PA  con1-ce          con1-ce          50005  U43 IS ASSIGNED
+20     20:54:54  PA  US43             con1-ce/US43     4001   Auto configuration in progress for SC 99
+21     20:54:55  W!  US43             con1-ce/US43     2010   Auto configuration ignored. No support data found.
+22     20:54:56  LO  U43              con1-ce/U43      16369  CLTU production status now 'Configured'
+23     20:54:56  CA  U43              con1-ce/U43      25001  Auto-Configuration of ETX is finished, SCN = 99 PASS = 999.
+24     20:54:56  LO  U43              con1-ce/U43      16032  CMG 1 is prime.
+25     20:54:56  CA  U43              con1-ce/U43      5046   CMD configured for activity: In Service.
+26     20:55:00  PA  U43              con1-ce/U43      24508  Uplink PRECAL started with a frequency of 7162312500.000000 Hz.
+27     20:55:01  CA  U43              con1-ce/U43      25700  Syn reinitialized. Range phase invalid.
+28     20:55:03  PA  U43              con1-ce/U43      24011  DCD Uplink Carrier Phase Data publication for SCN 99 started at 20:55:03.
+29     20:55:10  CA  U43              con1-ce/U43      25500  Uplink frequency setup completed.
+30     20:55:17  DA  AP43             con1-ce/AP43     6053   EL drive point 1 pressure transducer calibration fault
+31     20:55:21  C!  con1-ce          WSS-nmc-ws11     11003  LOST CONTACT WITH WORKSTATION nmc-ws11 BECAUSE:  Did not receive Timestamp from WS
+32     20:55:25  OD  cdscc/nmc-ws1    dss43-aca        88     ap d sr 2
+33     20:55:25  DR  AP43             cdscc/nmc-ws1    88     Processing. Sending request to workstation cdscc/nmc-ws1.
+34     20:55:25  DR  AP43             cdscc/nmc-ws1    88     Completed. Display started on workstation cdscc/nmc-ws1
+35     20:55:30  PA  con1-ce          con1-ce          50003  SUPPORT DATA DIST TO MCP1 STARTED
+36     20:55:32  W!  AP43             con1-ce/AP43     2533   SRDC health is bad
+37     20:55:57  OD  cdscc/nmc-ws1    dss43-aca        90     ap move r p1r
+38     20:55:57  DR  AP43             cdscc/nmc-ws1    90     RESP_STARTED: move r p1r
+39     20:55:59  PA  AP43             con1-ce/AP43     6569   SR index pin retracted
+40     20:56:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001       0.0014    -0.0032   -0.0029   240
+41     20:56:17  LO  AP43             con1-ce/AP43     9886   PRE 314.1200     12.4934 MOF   0.0000     0.0000
+42     20:56:17  LO  AP43             con1-ce/AP43     9886   REF   0.0765 SQ  -0.0001
+43     20:56:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0444      0.0114 TIME  205617 280 2013
+44     20:56:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+45     20:56:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+46     20:56:17  LO  AP43             con1-ce/AP43     9886   T     6.3889 P  940.4277 H    92.7188 WS  0.0000 WD 128.0000
+47     20:56:17  LO  AP43             con1-ce/AP43     9886   TD    5.2778 PA   0.0000 PR    0.0000
+48     20:56:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+49     20:56:21  LO  con1-ce          con1-ce          6110   con1-ce:C!:11003, repeated 16 time(s) in 60 seconds.
+50     20:56:23  OD  cdscc/nmc-ws1    dss43-aca        91     ap trk sr
+51     20:56:23  DR  AP43             cdscc/nmc-ws1    91     RESP_REJECTED: ILLEGAL COMMAND WHILE MOVING
+52     20:57:10  W!  AP43             con1-ce/AP43     2514   MOVE failed to complete  for R AXIS
+53     20:57:12  PA  AP43             con1-ce/AP43     6570   SR index pin inserted
+54     20:57:49  OD  cdscc/nmc-ws1    dss43-aca        92     ap move r p1r
+55     20:57:50  DR  AP43             cdscc/nmc-ws1    92     RESP_STARTED: move r p1r
+56     20:57:52  PA  AP43             con1-ce/AP43     6569   SR index pin retracted
+57     20:58:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001       0.0011    -0.0034   -0.0030   240
+58     20:58:17  LO  AP43             con1-ce/AP43     9886   PRE 313.8966     12.3659 MOF   0.0000     0.0000
+59     20:58:17  LO  AP43             con1-ce/AP43     9886   REF   0.0773 SQ  -0.0001
+60     20:58:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0444      0.0115 TIME  205817 280 2013
+61     20:58:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+62     20:58:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+63     20:58:17  LO  AP43             con1-ce/AP43     9886   T     6.5556 P  940.4277 H    92.3763 WS  0.0000 WD 127.0000
+64     20:58:17  LO  AP43             con1-ce/AP43     9886   TD    5.3889 PA   0.0000 PR    0.0000
+65     20:58:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+66     20:59:03  W!  AP43             con1-ce/AP43     2514   MOVE failed to complete  for R AXIS
+67     20:59:05  PA  AP43             con1-ce/AP43     6570   SR index pin inserted
+68     20:59:14  PA  con1-ce          con1-ce          50003  SUPPORT DATA DIST TO MCP2 STARTED
+69     21:00:10  OD  cdscc/nmc-ws1    dss43-aca        93     ap stop sr
+70     21:00:11  DR  AP43             cdscc/nmc-ws1    93     RESP_STARTED: stop sr
+71     21:00:12  CA  AP43             con1-ce/AP43     8080   STOP SR completed
+72     21:00:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001       0.0011    -0.0030   -0.0031   240
+73     21:00:17  LO  AP43             con1-ce/AP43     9886   PRE 313.6739     12.2385 MOF   0.0000     0.0000
+74     21:00:17  LO  AP43             con1-ce/AP43     9886   REF   0.0780 SQ  -0.0001
+75     21:00:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0443      0.0115 TIME  210017 280 2013
+76     21:00:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+77     21:00:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+78     21:00:17  LO  AP43             con1-ce/AP43     9886   T     6.5556 P  940.4615 H    91.6781 WS  0.0000 WD 127.0000
+79     21:00:17  LO  AP43             con1-ce/AP43     9886   TD    5.2778 PA   0.0000 PR    0.0000
+80     21:00:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+81     21:00:20  OD  cdscc/nmc-ws1    dss43-aca        94     ap move r p1r
+82     21:00:20  DR  AP43             cdscc/nmc-ws1    94     RESP_STARTED: move r p1r
+83     21:00:23  PA  AP43             con1-ce/AP43     6569   SR index pin retracted
+84     21:01:33  W!  AP43             con1-ce/AP43     2514   MOVE failed to complete  for R AXIS
+85     21:01:36  PA  AP43             con1-ce/AP43     6570   SR index pin inserted
+86     21:01:46  OD  cdscc/nmc-ws1    dss43-aca        95     ap reset sr
+87     21:01:46  DR  AP43             cdscc/nmc-ws1    95     RESP_REJECTED: Illegal parameter for this antenna
+88     21:01:50  OD  cdscc/nmc-ws1    dss43-aca        96     ap reset ant
+89     21:01:50  DR  AP43             cdscc/nmc-ws1    96     RESP_STARTED: reset ant
+90     21:01:51  CA  AP43             con1-ce/AP43     8035   RESET ANT completed
+91     21:01:52  PA  AP43             con1-ce/AP43     7053   EL drive point 1 pressure transducer calibration OK
+92     21:01:58  OD  cdscc/nmc-ws1    dss43-aca        97     ap move r p4
+93     21:01:58  DR  AP43             cdscc/nmc-ws1    97     RESP_STARTED: move r p4
+94     21:02:01  PA  AP43             con1-ce/AP43     6569   SR index pin retracted
+95     21:02:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001       0.0010    -0.0035   -0.0032   240
+96     21:02:17  LO  AP43             con1-ce/AP43     9886   PRE 313.4517     12.1115 MOF   0.0000     0.0000
+97     21:02:17  LO  AP43             con1-ce/AP43     9886   REF   0.0789 SQ  -0.0001
+98     21:02:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0443      0.0116 TIME  210217 280 2013
+99     21:02:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+100    21:02:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+101    21:02:17  LO  AP43             con1-ce/AP43     9886   T     6.8889 P  940.4277 H    91.3505 WS  0.0000 WD 100.0000
+102    21:02:17  LO  AP43             con1-ce/AP43     9886   TD    5.5556 PA   0.0000 PR    0.0000
+103    21:02:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+104    21:03:00  W!  AP43             con1-ce/AP43     2514   MOVE failed to complete  for R AXIS
+105    21:03:03  PA  AP43             con1-ce/AP43     6570   SR index pin inserted
+106    21:04:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001       0.0010    -0.0035   -0.0032   240
+107    21:04:17  LO  AP43             con1-ce/AP43     9886   PRE 313.2303     11.9846 MOF   0.0000     0.0000
+108    21:04:17  LO  AP43             con1-ce/AP43     9886   REF   0.0798 SQ  -0.0001
+109    21:04:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0443      0.0116 TIME  210417 280 2013
+110    21:04:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+111    21:04:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+112    21:04:17  LO  AP43             con1-ce/AP43     9886   T     7.1667 P  940.4615 H    91.0221 WS  0.0000 WD 100.0000
+113    21:04:17  LO  AP43             con1-ce/AP43     9886   TD    5.7778 PA   0.0000 PR    0.0000
+114    21:04:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+115    21:06:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001       0.0011    -0.0030   -0.0031   240
+116    21:06:17  LO  AP43             con1-ce/AP43     9886   PRE 313.0094     11.8580 MOF   0.0000     0.0000
+117    21:06:17  LO  AP43             con1-ce/AP43     9886   REF   0.0805 SQ  -0.0001
+118    21:06:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0443      0.0117 TIME  210617 280 2013
+119    21:06:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+120    21:06:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+121    21:06:17  LO  AP43             con1-ce/AP43     9886   T     7.2778 P  940.4954 H    89.6624 WS  0.0000 WD 100.0000
+122    21:06:17  LO  AP43             con1-ce/AP43     9886   TD    5.6667 PA   0.0000 PR    0.0000
+123    21:06:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+124    21:08:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001       0.0010    -0.0029   -0.0031   240
+125    21:08:17  LO  AP43             con1-ce/AP43     9886   PRE 312.7892     11.7316 MOF   0.0000     0.0000
+126    21:08:17  LO  AP43             con1-ce/AP43     9886   REF   0.0812 SQ  -0.0001
+127    21:08:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0442      0.0117 TIME  210817 280 2013
+128    21:08:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+129    21:08:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+130    21:08:17  LO  AP43             con1-ce/AP43     9886   T     7.3889 P  940.5292 H    88.3230 WS  0.0000 WD 100.0000
+131    21:08:17  LO  AP43             con1-ce/AP43     9886   TD    5.5556 PA   0.0000 PR    0.0000
+132    21:08:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+133    21:10:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001       0.0012    -0.0028   -0.0030   240
+134    21:10:17  LO  AP43             con1-ce/AP43     9886   PRE 312.5696     11.6055 MOF   0.0000     0.0000
+135    21:10:17  LO  AP43             con1-ce/AP43     9886   REF   0.0822 SQ  -0.0001
+136    21:10:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0442      0.0118 TIME  211017 280 2013
+137    21:10:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+138    21:10:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+139    21:10:17  LO  AP43             con1-ce/AP43     9886   T     7.6667 P  940.5631 H    88.0114 WS  0.0000 WD 100.0000
+140    21:10:17  LO  AP43             con1-ce/AP43     9886   TD    5.7778 PA   0.0000 PR    0.0000
+141    21:10:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+142    21:11:50  OD  cdscc/nmc-ws1    dss43-usc        98     us d xmap
+143    21:11:50  DR  US43             cdscc/nmc-ws1    98     Processing. Sending request to workstation cdscc/nmc-ws1.
+144    21:11:50  DR  US43             cdscc/nmc-ws1    98     Completed. Display started on workstation cdscc/nmc-ws1
+145    21:12:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0002    -0.0020   -0.0035   240
+146    21:12:17  LO  AP43             con1-ce/AP43     9886   PRE 312.3505     11.4797 MOF   0.0000     0.0000
+147    21:12:17  LO  AP43             con1-ce/AP43     9886   REF   0.0829 SQ  -0.0001
+148    21:12:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0442      0.0119 TIME  211217 280 2013
+149    21:12:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+150    21:12:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+151    21:12:17  LO  AP43             con1-ce/AP43     9886   T     7.8889 P  940.5631 H    86.0552 WS  0.0000 WD 100.0000
+152    21:12:17  LO  AP43             con1-ce/AP43     9886   TD    5.6667 PA   0.0000 PR    0.0000
+153    21:12:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+154    21:13:26  OD  cdscc/nmc-ws1    dss43-aca        100    ap move r p4
+155    21:13:26  DR  AP43             cdscc/nmc-ws1    100    RESP_STARTED: move r p4
+156    21:13:28  PA  AP43             con1-ce/AP43     6569   SR index pin retracted
+157    21:14:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0008    -0.0002   -0.0039   240
+158    21:14:17  LO  AP43             con1-ce/AP43     9886   PRE 312.1321     11.3541 MOF   0.0000     0.0000
+159    21:14:17  LO  AP43             con1-ce/AP43     9886   REF   0.0840 SQ  -0.0000
+160    21:14:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0442      0.0119 TIME  211417 280 2013
+161    21:14:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+162    21:14:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+163    21:14:17  LO  AP43             con1-ce/AP43     9886   T     8.3889 P  940.5969 H    86.1013 WS  0.0000 WD 100.0000
+164    21:14:17  LO  AP43             con1-ce/AP43     9886   TD    6.1667 PA   0.0000 PR    0.0000
+165    21:14:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+166    21:14:28  W!  AP43             con1-ce/AP43     2514   MOVE failed to complete  for R AXIS
+167    21:14:30  PA  AP43             con1-ce/AP43     6570   SR index pin inserted
+168    21:16:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0005    -0.0017   -0.0040   240
+169    21:16:17  LO  AP43             con1-ce/AP43     9886   PRE 311.9143     11.2289 MOF   0.0000     0.0000
+170    21:16:17  LO  AP43             con1-ce/AP43     9886   REF   0.0847 SQ  -0.0001
+171    21:16:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0442      0.0120 TIME  211617 280 2013
+172    21:16:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+173    21:16:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+174    21:16:17  LO  AP43             con1-ce/AP43     9886   T     8.1667 P  940.6309 H    85.1104 WS  0.0000 WD 100.0000
+175    21:16:17  LO  AP43             con1-ce/AP43     9886   TD    5.7778 PA   0.0000 PR    0.0000
+176    21:16:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+177    21:18:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0009    -0.0019   -0.0041   240
+178    21:18:17  LO  AP43             con1-ce/AP43     9886   PRE 311.6970     11.1039 MOF   0.0000     0.0000
+179    21:18:17  LO  AP43             con1-ce/AP43     9886   REF   0.0854 SQ  -0.0001
+180    21:18:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0441      0.0120 TIME  211817 280 2013
+181    21:18:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+182    21:18:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+183    21:18:17  LO  AP43             con1-ce/AP43     9886   T     8.1667 P  940.6647 H    83.8317 WS  0.0000 WD 100.0000
+184    21:18:17  LO  AP43             con1-ce/AP43     9886   TD    5.5556 PA   0.0000 PR    0.0000
+185    21:18:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+186    21:19:18  W!  AP43             con1-ce/AP43     2179   Servo main pump 1 120v AC not available
+187    21:19:50  W!  AP43             con1-ce/AP43     2180   Servo main pump 2 120v AC not available
+188    21:20:06  LO  AP43             con1-ce/AP43     9837   COMPLETED: ANT-6146-OP-DV4.0.4 072209
+189    21:20:12  C!  AP43             con1-ce/AP43     359    NMC control disabled. Local control only
+190    21:20:12  C!  US43             con1-ce/US43     1025   Interlock Open: SFLOW. Check S-Band coolant flow.
+191    21:20:12  C!  US43             con1-ce/US43     1025   Interlock Open: XFLOW. Check X-Band coolant flow.
+192    21:20:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0011    -0.0019   -0.0043   240
+193    21:20:17  LO  AP43             con1-ce/AP43     9886   PRE 311.4802     10.9792 MOF   0.0000     0.0000
+194    21:20:17  LO  AP43             con1-ce/AP43     9886   REF   0.0865 SQ  -0.0001
+195    21:20:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0441      0.0121 TIME  212017 280 2013
+196    21:20:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+197    21:20:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+198    21:20:17  LO  AP43             con1-ce/AP43     9886   T     8.3889 P  940.7324 H    83.8552 WS  0.0000 WD  95.0000
+199    21:20:17  LO  AP43             con1-ce/AP43     9886   TD    5.7778 PA   0.0000 PR    0.0000
+200    21:20:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+201    21:20:28  CA  AP43             con1-ce/AP43     8035   RESET ANT completed
+202    21:20:47  W!  AP43             con1-ce/AP43     2253   SR keyswitch in manual
+203    21:20:50  W!  AP43             con1-ce/AP43     2180   Servo main pump 2 120v AC not available
+204    21:20:52  PA  AP43             con1-ce/AP43     6569   SR index pin retracted
+205    21:21:36  PA  AP43             con1-ce/AP43     6550   SR drive power off
+206    21:21:36  PA  AP43             con1-ce/AP43     3253   SR keyswitch in auto
+207    21:21:37  W!  AP43             con1-ce/AP43     2257   SR drive cabinet power supply failed: +24V
+208    21:21:41  PA  AP43             con1-ce/AP43     6551   SR drive power on
+209    21:21:41  PA  AP43             con1-ce/AP43     3257   SR drive cabinet power supply OK: +24V
+210    21:21:46  W!  AP43             con1-ce/AP43     2253   SR keyswitch in manual
+211    21:22:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0013    -0.0018   -0.0046   240
+212    21:22:17  LO  AP43             con1-ce/AP43     9886   PRE 311.2641     10.8549 MOF   0.0000     0.0000
+213    21:22:17  LO  AP43             con1-ce/AP43     9886   REF   0.0874 SQ  -0.0001
+214    21:22:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0441      0.0121 TIME  212217 280 2013
+215    21:22:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+216    21:22:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+217    21:22:17  LO  AP43             con1-ce/AP43     9886   T     8.3889 P  940.6985 H    83.8552 WS  0.0000 WD  90.0000
+218    21:22:17  LO  AP43             con1-ce/AP43     9886   TD    5.7778 PA   0.0000 PR    0.0000
+219    21:22:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+220    21:23:22  C!  US43             con1-ce/US43     1025   Interlock Open: DHATCH. Close Dish hatch.
+221    21:23:33  PA  con1-ce          con1-ce          50003  SUPPORT DATA DIST TO MCP1 STARTED
+222    21:24:12  W!  AP43             con1-ce/AP43     2532   SR PLC is not responding
+223    21:24:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+224    21:24:17  LO  AP43             con1-ce/AP43     9886   PRE 311.0485     10.7309 MOF   0.0000     0.0000
+225    21:24:17  LO  AP43             con1-ce/AP43     9886   REF   0.0886 SQ  -0.0000
+226    21:24:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0441      0.0122 TIME  212417 280 2013
+227    21:24:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+228    21:24:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+229    21:24:17  LO  AP43             con1-ce/AP43     9886   T     8.5556 P  940.6647 H    84.5084 WS  0.0000 WD  34.0000
+230    21:24:17  LO  AP43             con1-ce/AP43     9886   TD    6.0556 PA   0.0000 PR    0.0000
+231    21:24:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+232    21:26:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+233    21:26:17  LO  AP43             con1-ce/AP43     9886   PRE 310.8334     10.6072 MOF   0.0000     0.0000
+234    21:26:17  LO  AP43             con1-ce/AP43     9886   REF   0.0894 SQ  -0.0000
+235    21:26:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0440      0.0122 TIME  212617 280 2013
+236    21:26:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+237    21:26:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+238    21:26:17  LO  AP43             con1-ce/AP43     9886   T     8.8889 P  940.6309 H    82.3402 WS  0.0000 WD  34.0000
+239    21:26:17  LO  AP43             con1-ce/AP43     9886   TD    6.0000 PA   0.0000 PR    0.0000
+240    21:26:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+241    21:27:18  PA  con1-ce          con1-ce          50003  SUPPORT DATA DIST TO MCP2 STARTED
+242    21:28:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+243    21:28:17  LO  AP43             con1-ce/AP43     9886   PRE 310.6188     10.4839 MOF   0.0000     0.0000
+244    21:28:17  LO  AP43             con1-ce/AP43     9886   REF   0.0902 SQ  -0.0000
+245    21:28:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0440      0.0123 TIME  212817 280 2013
+246    21:28:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+247    21:28:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+248    21:28:17  LO  AP43             con1-ce/AP43     9886   T     8.8889 P  940.5631 H    81.1051 WS  1.8532 WD  37.0000
+249    21:28:17  LO  AP43             con1-ce/AP43     9886   TD    5.7778 PA   0.0000 PR    0.0000
+250    21:28:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+251    21:30:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+252    21:30:17  LO  AP43             con1-ce/AP43     9886   PRE 310.4048     10.3609 MOF   0.0000     0.0000
+253    21:30:17  LO  AP43             con1-ce/AP43     9886   REF   0.0913 SQ  -0.0000
+254    21:30:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0440      0.0124 TIME  213017 280 2013
+255    21:30:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+256    21:30:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+257    21:30:17  LO  AP43             con1-ce/AP43     9886   T     9.0556 P  940.5969 H    81.4322 WS  1.2355 WD  41.0000
+258    21:30:17  LO  AP43             con1-ce/AP43     9886   TD    6.0000 PA   0.0000 PR    0.0000
+259    21:30:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+260    21:32:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+261    21:32:17  LO  AP43             con1-ce/AP43     9886   PRE 310.1912     10.2383 MOF   0.0000     0.0000
+262    21:32:17  LO  AP43             con1-ce/AP43     9886   REF   0.0923 SQ  -0.0000
+263    21:32:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0440      0.0124 TIME  213217 280 2013
+264    21:32:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+265    21:32:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+266    21:32:17  LO  AP43             con1-ce/AP43     9886   T     9.0000 P  940.6309 H    81.1185 WS  0.0000 WD  42.0000
+267    21:32:17  LO  AP43             con1-ce/AP43     9886   TD    5.8889 PA   0.0000 PR    0.0000
+268    21:32:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+269    21:34:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+270    21:34:17  LO  AP43             con1-ce/AP43     9886   PRE 309.9782     10.1160 MOF   0.0000     0.0000
+271    21:34:17  LO  AP43             con1-ce/AP43     9886   REF   0.0932 SQ  -0.0000
+272    21:34:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0440      0.0125 TIME  213417 280 2013
+273    21:34:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+274    21:34:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+275    21:34:17  LO  AP43             con1-ce/AP43     9886   T     9.3889 P  940.6647 H    79.0498 WS  0.0000 WD  43.0000
+276    21:34:17  LO  AP43             con1-ce/AP43     9886   TD    5.8889 PA   0.0000 PR    0.0000
+277    21:34:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+278    21:35:46  OD  cdscc/nmc-ws1    dss43-aca        101    ap band x
+279    21:35:46  DR  AP43             cdscc/nmc-ws1    101    RESP_REJECTED: Only local access permitted
+280    21:36:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+281    21:36:17  LO  AP43             con1-ce/AP43     9886   PRE 309.7656      9.9942 MOF   0.0000     0.0000
+282    21:36:17  LO  AP43             con1-ce/AP43     9886   REF   0.0941 SQ  -0.0000
+283    21:36:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0439      0.0125 TIME  213617 280 2013
+284    21:36:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+285    21:36:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+286    21:36:17  LO  AP43             con1-ce/AP43     9886   T     9.5556 P  940.6985 H    77.5923 WS  0.0000 WD  43.0000
+287    21:36:17  LO  AP43             con1-ce/AP43     9886   TD    5.7778 PA   0.0000 PR    0.0000
+288    21:36:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+289    21:38:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+290    21:38:17  LO  AP43             con1-ce/AP43     9886   PRE 309.5536      9.8727 MOF   0.0000     0.0000
+291    21:38:17  LO  AP43             con1-ce/AP43     9886   REF   0.0952 SQ  -0.0000
+292    21:38:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0439      0.0126 TIME  213817 280 2013
+293    21:38:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+294    21:38:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+295    21:38:17  LO  AP43             con1-ce/AP43     9886   T     9.5556 P  940.7324 H    77.5923 WS  0.0000 WD  43.0000
+296    21:38:17  LO  AP43             con1-ce/AP43     9886   TD    5.7778 PA   0.0000 PR    0.0000
+297    21:38:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+298    21:40:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+299    21:40:17  LO  AP43             con1-ce/AP43     9886   PRE 309.3420      9.7516 MOF   0.0000     0.0000
+300    21:40:17  LO  AP43             con1-ce/AP43     9886   REF   0.0961 SQ  -0.0000
+301    21:40:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0439      0.0126 TIME  214017 280 2013
+302    21:40:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+303    21:40:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+304    21:40:17  LO  AP43             con1-ce/AP43     9886   T     9.5000 P  940.7324 H    76.7085 WS  0.0000 WD  42.0000
+305    21:40:17  LO  AP43             con1-ce/AP43     9886   TD    5.5556 PA   0.0000 PR    0.0000
+306    21:40:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+307    21:42:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+308    21:42:17  LO  AP43             con1-ce/AP43     9886   PRE 309.1309      9.6309 MOF   0.0000     0.0000
+309    21:42:17  LO  AP43             con1-ce/AP43     9886   REF   0.0976 SQ  -0.0000
+310    21:42:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0439      0.0127 TIME  214217 280 2013
+311    21:42:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+312    21:42:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+313    21:42:17  LO  AP43             con1-ce/AP43     9886   T     9.5556 P  940.6985 H    78.1811 WS  0.0000 WD 287.0000
+314    21:42:17  LO  AP43             con1-ce/AP43     9886   TD    5.8889 PA   0.0000 PR    0.0000
+315    21:42:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+316    21:44:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+317    21:44:17  LO  AP43             con1-ce/AP43     9886   PRE 308.9202      9.5107 MOF   0.0000     0.0000
+318    21:44:17  LO  AP43             con1-ce/AP43     9886   REF   0.0990 SQ  -0.0000
+319    21:44:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0439      0.0127 TIME  214417 280 2013
+320    21:44:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+321    21:44:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+322    21:44:17  LO  AP43             con1-ce/AP43     9886   T     9.7778 P  940.7663 H    79.1012 WS  1.8532 WD 269.0000
+323    21:44:17  LO  AP43             con1-ce/AP43     9886   TD    6.2778 PA   0.0000 PR    0.0000
+324    21:44:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+325    21:46:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+326    21:46:17  LO  AP43             con1-ce/AP43     9886   PRE 308.7100      9.3908 MOF   0.0000     0.0000
+327    21:46:17  LO  AP43             con1-ce/AP43     9886   REF   0.1001 SQ  -0.0000
+328    21:46:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0439      0.0128 TIME  214617 280 2013
+329    21:46:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+330    21:46:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+331    21:46:17  LO  AP43             con1-ce/AP43     9886   T     9.8889 P  940.8001 H    77.9324 WS  1.8532 WD 270.0000
+332    21:46:17  LO  AP43             con1-ce/AP43     9886   TD    6.1667 PA   0.0000 PR    0.0000
+333    21:46:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+334    21:48:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+335    21:48:17  LO  AP43             con1-ce/AP43     9886   PRE 308.5002      9.2714 MOF   0.0000     0.0000
+336    21:48:17  LO  AP43             con1-ce/AP43     9886   REF   0.1011 SQ  -0.0000
+337    21:48:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0438      0.0128 TIME  214817 280 2013
+338    21:48:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+339    21:48:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+340    21:48:17  LO  AP43             con1-ce/AP43     9886   T    10.0000 P  940.8001 H    76.7808 WS  3.0887 WD 281.0000
+341    21:48:17  LO  AP43             con1-ce/AP43     9886   TD    6.0556 PA   0.0000 PR    0.0000
+342    21:48:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+343    21:50:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+344    21:50:17  LO  AP43             con1-ce/AP43     9886   PRE 308.2908      9.1524 MOF   0.0000     0.0000
+345    21:50:17  LO  AP43             con1-ce/AP43     9886   REF   0.1023 SQ  -0.0000
+346    21:50:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0438      0.0129 TIME  215017 280 2013
+347    21:50:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+348    21:50:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+349    21:50:17  LO  AP43             con1-ce/AP43     9886   T    10.1667 P  940.8339 H    75.9407 WS  1.8532 WD 282.0000
+350    21:50:17  LO  AP43             con1-ce/AP43     9886   TD    6.0556 PA   0.0000 PR    0.0000
+351    21:50:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+352    21:52:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+353    21:52:17  LO  AP43             con1-ce/AP43     9886   PRE 308.0819      9.0339 MOF   0.0000     0.0000
+354    21:52:17  LO  AP43             con1-ce/AP43     9886   REF   0.1035 SQ  -0.0000
+355    21:52:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0438      0.0130 TIME  215217 280 2013
+356    21:52:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+357    21:52:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+358    21:52:17  LO  AP43             con1-ce/AP43     9886   T    10.2778 P  940.8679 H    75.3863 WS  1.8532 WD 270.0000
+359    21:52:17  LO  AP43             con1-ce/AP43     9886   TD    6.0556 PA   0.0000 PR    0.0000
+360    21:52:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+361    21:54:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+362    21:54:17  LO  AP43             con1-ce/AP43     9886   PRE 307.8734      8.9158 MOF   0.0000     0.0000
+363    21:54:17  LO  AP43             con1-ce/AP43     9886   REF   0.1049 SQ  -0.0000
+364    21:54:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0438      0.0130 TIME  215417 280 2013
+365    21:54:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+366    21:54:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+367    21:54:17  LO  AP43             con1-ce/AP43     9886   T    10.5000 P  940.9355 H    75.4199 WS  0.0000 WD 264.0000
+368    21:54:17  LO  AP43             con1-ce/AP43     9886   TD    6.2778 PA   0.0000 PR    0.0000
+369    21:54:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+370    21:56:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+371    21:56:17  LO  AP43             con1-ce/AP43     9886   PRE 307.6653      8.7982 MOF   0.0000     0.0000
+372    21:56:17  LO  AP43             con1-ce/AP43     9886   REF   0.1062 SQ  -0.0000
+373    21:56:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0438      0.0131 TIME  215617 280 2013
+374    21:56:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+375    21:56:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+376    21:56:17  LO  AP43             con1-ce/AP43     9886   T    10.7778 P  940.9694 H    74.6148 WS  0.0000 WD 274.0000
+377    21:56:17  LO  AP43             con1-ce/AP43     9886   TD    6.3889 PA   0.0000 PR    0.0000
+378    21:56:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+379    21:58:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+380    21:58:17  LO  AP43             con1-ce/AP43     9886   PRE 307.4575      8.6810 MOF   0.0000     0.0000
+381    21:58:17  LO  AP43             con1-ce/AP43     9886   REF   0.1068 SQ  -0.0000
+382    21:58:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0438      0.0131 TIME  215817 280 2013
+383    21:58:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+384    21:58:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+385    21:58:17  LO  AP43             con1-ce/AP43     9886   T    10.8889 P  940.9694 H    71.0610 WS  0.0000 WD 274.0000
+386    21:58:17  LO  AP43             con1-ce/AP43     9886   TD    5.7778 PA   0.0000 PR    0.0000
+387    21:58:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+388    22:00:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+389    22:00:17  LO  AP43             con1-ce/AP43     9886   PRE 307.2502      8.5644 MOF   0.0000     0.0000
+390    22:00:17  LO  AP43             con1-ce/AP43     9886   REF   0.1077 SQ  -0.0000
+391    22:00:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0437      0.0132 TIME  220017 280 2013
+392    22:00:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+393    22:00:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+394    22:00:17  LO  AP43             con1-ce/AP43     9886   T    11.0000 P  940.9355 H    68.6994 WS  0.0000 WD 274.0000
+395    22:00:17  LO  AP43             con1-ce/AP43     9886   TD    5.3889 PA   0.0000 PR    0.0000
+396    22:00:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+397    22:02:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+398    22:02:17  LO  AP43             con1-ce/AP43     9886   PRE 307.0432      8.4482 MOF   0.0000     0.0000
+399    22:02:17  LO  AP43             con1-ce/AP43     9886   REF   0.1091 SQ  -0.0000
+400    22:02:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0437      0.0132 TIME  220217 280 2013
+401    22:02:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+402    22:02:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+403    22:02:17  LO  AP43             con1-ce/AP43     9886   T    11.1667 P  941.0033 H    68.4701 WS  0.0000 WD 287.0000
+404    22:02:17  LO  AP43             con1-ce/AP43     9886   TD    5.5000 PA   0.0000 PR    0.0000
+405    22:02:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+406    22:03:38  PA  con1-ce          con1-ce          50003  SUPPORT DATA DIST TO MCP1 STARTED
+407    22:04:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+408    22:04:17  LO  AP43             con1-ce/AP43     9886   PRE 306.8366      8.3325 MOF   0.0000     0.0000
+409    22:04:17  LO  AP43             con1-ce/AP43     9886   REF   0.1106 SQ  -0.0000
+410    22:04:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0437      0.0133 TIME  220417 280 2013
+411    22:04:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+412    22:04:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+413    22:04:17  LO  AP43             con1-ce/AP43     9886   T    11.2778 P  941.0371 H    68.7503 WS  0.0000 WD 230.0000
+414    22:04:17  LO  AP43             con1-ce/AP43     9886   TD    5.6667 PA   0.0000 PR    0.0000
+415    22:04:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+416    22:06:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+417    22:06:17  LO  AP43             con1-ce/AP43     9886   PRE 306.6304      8.2173 MOF   0.0000     0.0000
+418    22:06:17  LO  AP43             con1-ce/AP43     9886   REF   0.1109 SQ  -0.0000
+419    22:06:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0437      0.0133 TIME  220617 280 2013
+420    22:06:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+421    22:06:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+422    22:06:17  LO  AP43             con1-ce/AP43     9886   T    11.2778 P  941.0371 H    64.2073 WS  6.1773 WD 173.0000
+423    22:06:17  LO  AP43             con1-ce/AP43     9886   TD    4.6667 PA   0.0000 PR    0.0000
+424    22:06:17  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+425    22:07:23  PA  con1-ce          con1-ce          50003  SUPPORT DATA DIST TO MCP2 STARTED
+426    22:08:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+427    22:08:17  LO  AP43             con1-ce/AP43     9886   PRE 306.4245      8.1026 MOF   0.0000     0.0000
+428    22:08:17  LO  AP43             con1-ce/AP43     9886   REF   0.1125 SQ  -0.0000
+429    22:08:17  LO  AP43             con1-ce/AP43     9886   SYS  -0.0437      0.0134 TIME  220817 280 2013
+430    22:08:17  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+431    22:08:17  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+432    22:08:17  LO  AP43             con1-ce/AP43     9886   T    11.5000 P  941.0371 H    64.2522 WS  6.7951 WD 184.0000
+433    22:08:18  LO  AP43             con1-ce/AP43     9886   TD    4.8889 PA   0.0000 PR    0.0000
+434    22:08:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+435    22:10:17  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+436    22:10:17  LO  AP43             con1-ce/AP43     9886   PRE 306.2190      7.9885 MOF   0.0000     0.0000
+437    22:10:18  LO  AP43             con1-ce/AP43     9886   REF   0.1137 SQ  -0.0000
+438    22:10:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0437      0.0134 TIME  221018 280 2013
+439    22:10:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+440    22:10:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+441    22:10:18  LO  AP43             con1-ce/AP43     9886   T    11.5556 P  941.0371 H    63.0514 WS  1.2355 WD 171.0000
+442    22:10:18  LO  AP43             con1-ce/AP43     9886   TD    4.6667 PA   0.0000 PR    0.0000
+443    22:10:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+444    22:12:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+445    22:12:18  LO  AP43             con1-ce/AP43     9886   PRE 306.0137      7.8748 MOF   0.0000     0.0000
+446    22:12:18  LO  AP43             con1-ce/AP43     9886   REF   0.1152 SQ  -0.0000
+447    22:12:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0437      0.0135 TIME  221218 280 2013
+448    22:12:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+449    22:12:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+450    22:12:18  LO  AP43             con1-ce/AP43     9886   T    11.7778 P  941.0710 H    62.6187 WS  4.9419 WD 148.0000
+451    22:12:18  LO  AP43             con1-ce/AP43     9886   TD    4.7778 PA   0.0000 PR    0.0000
+452    22:12:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+453    22:14:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+454    22:14:18  LO  AP43             con1-ce/AP43     9886   PRE 305.8088      7.7616 MOF   0.0000     0.0000
+455    22:14:18  LO  AP43             con1-ce/AP43     9886   REF   0.1164 SQ  -0.0000
+456    22:14:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0436      0.0135 TIME  221418 280 2013
+457    22:14:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+458    22:14:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+459    22:14:18  LO  AP43             con1-ce/AP43     9886   T    11.8889 P  941.1049 H    60.9929 WS  1.8532 WD 148.0000
+460    22:14:18  LO  AP43             con1-ce/AP43     9886   TD    4.5000 PA   0.0000 PR    0.0000
+461    22:14:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+462    22:14:59  C!  AP43             con1-ce/AP43     380    Invalid wind speed. If wind speed becomes high, STOW
+463    22:16:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+464    22:16:18  LO  AP43             con1-ce/AP43     9886   PRE 305.6043      7.6491 MOF   0.0000     0.0000
+465    22:16:18  LO  AP43             con1-ce/AP43     9886   REF   0.1185 SQ  -0.0000
+466    22:16:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0436      0.0136 TIME  221618 280 2013
+467    22:16:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+468    22:16:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+469    22:16:18  LO  AP43             con1-ce/AP43     9886   T    11.7778 P  941.1049 H    63.5792 WS  1.8532 WD 148.0000
+470    22:16:18  LO  AP43             con1-ce/AP43     9886   TD    5.0000 PA   0.0000 PR    0.0000
+471    22:16:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+472    22:16:55  PA  AP43             con1-ce/AP43     1380   Wind speed OK
+473    22:18:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+474    22:18:18  LO  AP43             con1-ce/AP43     9886   PRE 305.4001      7.5372 MOF   0.0000     0.0000
+475    22:18:18  LO  AP43             con1-ce/AP43     9886   REF   0.1196 SQ  -0.0000
+476    22:18:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0436      0.0136 TIME  221818 280 2013
+477    22:18:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+478    22:18:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+479    22:18:18  LO  AP43             con1-ce/AP43     9886   T    12.0000 P  941.1049 H    61.2498 WS  3.0887 WD  78.0000
+480    22:18:18  LO  AP43             con1-ce/AP43     9886   TD    4.6667 PA   0.0000 PR    0.0000
+481    22:18:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+482    22:20:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+483    22:20:18  LO  AP43             con1-ce/AP43     9886   PRE 305.1963      7.4260 MOF   0.0000     0.0000
+484    22:20:18  LO  AP43             con1-ce/AP43     9886   REF   0.1215 SQ  -0.0000
+485    22:20:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0436      0.0137 TIME  222018 280 2013
+486    22:20:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+487    22:20:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+488    22:20:18  LO  AP43             con1-ce/AP43     9886   T    12.2778 P  941.1049 H    61.5426 WS  1.8532 WD  90.0000
+489    22:20:18  LO  AP43             con1-ce/AP43     9886   TD    5.0000 PA   0.0000 PR    0.0000
+490    22:20:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+491    22:22:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+492    22:22:18  LO  AP43             con1-ce/AP43     9886   PRE 304.9929      7.3154 MOF   0.0000     0.0000
+493    22:22:18  LO  AP43             con1-ce/AP43     9886   REF   0.1230 SQ  -0.0000
+494    22:22:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0436      0.0137 TIME  222218 280 2013
+495    22:22:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+496    22:22:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+497    22:22:18  LO  AP43             con1-ce/AP43     9886   T    12.2778 P  941.1387 H    61.0761 WS  4.9419 WD 123.0000
+498    22:22:18  LO  AP43             con1-ce/AP43     9886   TD    4.8889 PA   0.0000 PR    0.0000
+499    22:22:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+500    22:24:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+501    22:24:18  LO  AP43             con1-ce/AP43     9886   PRE 304.7880      7.2045 MOF   0.0000     0.0000
+502    22:24:18  LO  AP43             con1-ce/AP43     9886   REF   0.1251 SQ  -0.0000
+503    22:24:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0436      0.0138 TIME  222418 280 2013
+504    22:24:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+505    22:24:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+506    22:24:18  LO  AP43             con1-ce/AP43     9886   T    12.3889 P  941.1387 H    62.2715 WS  4.9419 WD 116.0000
+507    22:24:18  LO  AP43             con1-ce/AP43     9886   TD    5.2778 PA   0.0000 PR    0.0000
+508    22:24:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+509    22:25:40  PA  con1-ce          con1-ce          50003  SUPPORT DATA DIST TO MCP1 STARTED
+510    22:26:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+511    22:26:18  LO  AP43             con1-ce/AP43     9886   PRE 304.5851      7.0951 MOF   0.0000     0.0000
+512    22:26:18  LO  AP43             con1-ce/AP43     9886   REF   0.1264 SQ  -0.0000
+513    22:26:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0436      0.0139 TIME  222618 280 2013
+514    22:26:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+515    22:26:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+516    22:26:18  LO  AP43             con1-ce/AP43     9886   T    12.1667 P  941.1725 H    61.5190 WS  4.9419 WD  91.0000
+517    22:26:18  LO  AP43             con1-ce/AP43     9886   TD    4.8889 PA   0.0000 PR    0.0000
+518    22:26:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+519    22:26:44  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+520    22:28:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+521    22:28:18  LO  AP43             con1-ce/AP43     9886   PRE 304.3824      6.9861 MOF   0.0000     0.0000
+522    22:28:18  LO  AP43             con1-ce/AP43     9886   REF   0.1279 SQ  -0.0000
+523    22:28:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0436      0.0139 TIME  222818 280 2013
+524    22:28:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+525    22:28:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+526    22:28:18  LO  AP43             con1-ce/AP43     9886   T    11.7778 P  941.2065 H    61.4364 WS  4.9419 WD  86.0000
+527    22:28:18  LO  AP43             con1-ce/AP43     9886   TD    4.5000 PA   0.0000 PR    0.0000
+528    22:28:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+529    22:29:25  PA  con1-ce          con1-ce          50003  SUPPORT DATA DIST TO MCP2 STARTED
+530    22:29:59  PA  con1-ce          con1-ce          50003  SUPPORT DATA DIST TO MCP1 STARTED
+531    22:30:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+532    22:30:18  LO  AP43             con1-ce/AP43     9886   PRE 304.1798      6.8776 MOF   0.0000     0.0000
+533    22:30:18  LO  AP43             con1-ce/AP43     9886   REF   0.1299 SQ  -0.0000
+534    22:30:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0436      0.0140 TIME  223018 280 2013
+535    22:30:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+536    22:30:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+537    22:30:18  LO  AP43             con1-ce/AP43     9886   T    12.0556 P  941.2403 H    61.4954 WS  1.8532 WD  87.0000
+538    22:30:18  LO  AP43             con1-ce/AP43     9886   TD    4.7778 PA   0.0000 PR    0.0000
+539    22:30:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+540    22:32:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+541    22:32:18  LO  AP43             con1-ce/AP43     9886   PRE 303.9774      6.7694 MOF   0.0000     0.0000
+542    22:32:18  LO  AP43             con1-ce/AP43     9886   REF   0.1322 SQ  -0.0000
+543    22:32:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0140 TIME  223218 280 2013
+544    22:32:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+545    22:32:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+546    22:32:18  LO  AP43             con1-ce/AP43     9886   T    12.2778 P  941.2742 H    62.7227 WS  4.3241 WD 209.0000
+547    22:32:18  LO  AP43             con1-ce/AP43     9886   TD    5.2778 PA   0.0000 PR    0.0000
+548    22:32:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+549    22:33:43  PA  con1-ce          con1-ce          50003  SUPPORT DATA DIST TO MCP2 STARTED
+550    22:34:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+551    22:34:18  LO  AP43             con1-ce/AP43     9886   PRE 303.7751      6.6617 MOF   0.0000     0.0000
+552    22:34:18  LO  AP43             con1-ce/AP43     9886   REF   0.1347 SQ  -0.0000
+553    22:34:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0141 TIME  223418 280 2013
+554    22:34:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+555    22:34:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+556    22:34:18  LO  AP43             con1-ce/AP43     9886   T    11.7778 P  941.3419 H    65.7888 WS  1.2355 WD 217.0000
+557    22:34:18  LO  AP43             con1-ce/AP43     9886   TD    5.5000 PA   0.0000 PR    0.0000
+558    22:34:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+559    22:36:12  C!  US43             con1-ce/US43     1006   Switch S09 has unexpectedly moved.
+560    22:36:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+561    22:36:18  LO  AP43             con1-ce/AP43     9886   PRE 303.5730      6.5545 MOF   0.0000     0.0000
+562    22:36:18  LO  AP43             con1-ce/AP43     9886   REF   0.1365 SQ  -0.0000
+563    22:36:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0141 TIME  223618 280 2013
+564    22:36:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+565    22:36:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+566    22:36:18  LO  AP43             con1-ce/AP43     9886   T    11.5000 P  941.3757 H    65.9844 WS  1.2355 WD 221.0000
+567    22:36:18  LO  AP43             con1-ce/AP43     9886   TD    5.2778 PA   0.0000 PR    0.0000
+568    22:36:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+569    22:36:58  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+570    22:36:59  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+571    22:37:00  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+572    22:37:46  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+573    22:37:48  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+574    22:38:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+575    22:38:18  LO  AP43             con1-ce/AP43     9886   PRE 303.3711      6.4478 MOF   0.0000     0.0000
+576    22:38:18  LO  AP43             con1-ce/AP43     9886   REF   0.1384 SQ  -0.0000
+577    22:38:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0142 TIME  223818 280 2013
+578    22:38:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+579    22:38:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+580    22:38:18  LO  AP43             con1-ce/AP43     9886   T    11.5556 P  941.4096 H    65.7453 WS  0.0000 WD 228.0000
+581    22:38:18  LO  AP43             con1-ce/AP43     9886   TD    5.2778 PA   0.0000 PR    0.0000
+582    22:38:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+583    22:39:15  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+584    22:40:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+585    22:40:18  LO  AP43             con1-ce/AP43     9886   PRE 303.1695      6.3418 MOF   0.0000     0.0000
+586    22:40:18  LO  AP43             con1-ce/AP43     9886   REF   0.1400 SQ  -0.0000
+587    22:40:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0142 TIME  224018 280 2013
+588    22:40:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+589    22:40:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+590    22:40:18  LO  AP43             con1-ce/AP43     9886   T    11.6667 P  941.4096 H    64.2858 WS  0.0000 WD 243.0000
+591    22:40:18  LO  AP43             con1-ce/AP43     9886   TD    5.0556 PA   0.0000 PR    0.0000
+592    22:40:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+593    22:41:22  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+594    22:41:29  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+595    22:42:04  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+596    22:42:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+597    22:42:18  LO  AP43             con1-ce/AP43     9886   PRE 302.9681      6.2366 MOF   0.0000     0.0000
+598    22:42:18  LO  AP43             con1-ce/AP43     9886   REF   0.1419 SQ  -0.0000
+599    22:42:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0143 TIME  224218 280 2013
+600    22:42:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+601    22:42:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+602    22:42:18  LO  AP43             con1-ce/AP43     9886   T    11.5556 P  941.4096 H    64.0194 WS  0.0000 WD 238.0000
+603    22:42:18  LO  AP43             con1-ce/AP43     9886   TD    4.8889 PA   0.0000 PR    0.0000
+604    22:42:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+605    22:42:34  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+606    22:43:49  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+607    22:44:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+608    22:44:18  LO  AP43             con1-ce/AP43     9886   PRE 302.7670      6.1321 MOF   0.0000     0.0000
+609    22:44:18  LO  AP43             con1-ce/AP43     9886   REF   0.1437 SQ  -0.0000
+610    22:44:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0143 TIME  224418 280 2013
+611    22:44:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+612    22:44:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+613    22:44:18  LO  AP43             con1-ce/AP43     9886   T    12.2778 P  941.4096 H    61.5426 WS  0.6177 WD 126.0000
+614    22:44:18  LO  AP43             con1-ce/AP43     9886   TD    5.0000 PA   0.0000 PR    0.0000
+615    22:44:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+616    22:45:27  OD  cdscc/nmc-ws4    dss43-usc        135    us d smap 1
+617    22:45:27  DR  US43             cdscc/nmc-ws4    135    Processing. Sending request to workstation cdscc/nmc-ws4.
+618    22:45:27  DR  US43             cdscc/nmc-ws4    135    Completed. Display started on workstation cdscc/nmc-ws4
+619    22:45:40  OD  cdscc/nmc-ws4    dss43-usc        3      MOD 09 A FROM MapDisplay
+620    22:45:42  DR  US43             cdscc/nmc-ws4    3      RESP_PROCESSING: UWV is processing OD.
+621    22:45:43  DR  US43             cdscc/nmc-ws4    3      COMPLETED. Switch S09 is now at position A
+622    22:45:46  OD  cdscc/nmc-ws4    con1-ce          136    D LOG
+623    22:45:46  DR  con1-ce          cdscc/nmc-ws4    136    Processing. Sending request to workstation cdscc/nmc-ws4.
+624    22:45:46  DR  cdscc/nmc-ws4    cdscc/nmc-ws4    136    Completed. Display started on workstation cdscc/nmc-ws4
+625    22:45:56  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+626    22:45:57  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+627    22:46:00  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+628    22:46:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+629    22:46:18  LO  AP43             con1-ce/AP43     9886   PRE 302.5662      6.0283 MOF   0.0000     0.0000
+630    22:46:18  LO  AP43             con1-ce/AP43     9886   REF   0.1458 SQ  -0.0000
+631    22:46:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0144 TIME  224618 280 2013
+632    22:46:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+633    22:46:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+634    22:46:18  LO  AP43             con1-ce/AP43     9886   T    12.0556 P  941.3757 H    61.9655 WS  7.4128 WD 123.0000
+635    22:46:18  LO  AP43             con1-ce/AP43     9886   TD    4.8889 PA   0.0000 PR    0.0000
+636    22:46:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+637    22:47:25  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+638    22:47:31  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+639    22:47:32  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+640    22:47:37  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+641    22:47:39  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+642    22:47:42  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+643    22:48:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+644    22:48:18  LO  AP43             con1-ce/AP43     9886   PRE 302.3655      5.9253 MOF   0.0000     0.0000
+645    22:48:18  LO  AP43             con1-ce/AP43     9886   REF   0.1478 SQ  -0.0000
+646    22:48:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0144 TIME  224818 280 2013
+647    22:48:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+648    22:48:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+649    22:48:18  LO  AP43             con1-ce/AP43     9886   T    12.0000 P  941.3757 H    61.7183 WS  8.6483 WD 128.0000
+650    22:48:18  LO  AP43             con1-ce/AP43     9886   TD    4.7778 PA   0.0000 PR    0.0000
+651    22:48:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+652    22:49:24  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+653    22:49:29  PR  AP43             con1-ce/AP43     9906   Current time after last predict point. Enter STOW
+654    22:49:31  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+655    22:50:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+656    22:50:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+657    22:50:18  LO  AP43             con1-ce/AP43     9886   REF   0.1491 SQ  -0.0000
+658    22:50:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0145 TIME  225018 280 2013
+659    22:50:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+660    22:50:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+661    22:50:18  LO  AP43             con1-ce/AP43     9886   T    12.0000 P  941.4096 H    61.7183 WS  7.4128 WD 113.0000
+662    22:50:18  LO  AP43             con1-ce/AP43     9886   TD    4.7778 PA   0.0000 PR    0.0000
+663    22:50:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+664    22:51:56  DA  US43             con1-ce/US43     3001   Interlock Closed: DHATCH.
+665    22:52:14  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+666    22:52:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+667    22:52:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+668    22:52:18  LO  AP43             con1-ce/AP43     9886   REF   0.1491 SQ  -0.0000
+669    22:52:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0145 TIME  225218 280 2013
+670    22:52:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+671    22:52:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+672    22:52:18  LO  AP43             con1-ce/AP43     9886   T    12.1667 P  941.4096 H    61.5190 WS  6.7951 WD 131.0000
+673    22:52:18  LO  AP43             con1-ce/AP43     9886   TD    4.8889 PA   0.0000 PR    0.0000
+674    22:52:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+675    22:52:18  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+676    22:52:19  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+677    22:52:22  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+678    22:52:40  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+679    22:52:43  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+680    22:52:44  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+681    22:53:19  OD  cdscc/nmc-ws4    dss43-usc        5      MOD 09 B FROM MapDisplay
+682    22:53:20  DR  US43             cdscc/nmc-ws4    5      RESP_PROCESSING: UWV is processing OD.
+683    22:53:21  DR  US43             cdscc/nmc-ws4    5      COMPLETED. Switch S09 is now at position B
+684    22:53:55  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+685    22:54:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+686    22:54:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+687    22:54:18  LO  AP43             con1-ce/AP43     9886   REF   0.1491 SQ  -0.0000
+688    22:54:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0145 TIME  225418 280 2013
+689    22:54:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+690    22:54:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+691    22:54:18  LO  AP43             con1-ce/AP43     9886   T    12.2778 P  941.4435 H    61.0761 WS  3.7064 WD 149.0000
+692    22:54:18  LO  AP43             con1-ce/AP43     9886   TD    4.8889 PA   0.0000 PR    0.0000
+693    22:54:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+694    22:54:35  C!  US43             con1-ce/US43     1025   Interlock Open: DHATCH. Close Dish hatch.
+695    22:54:49  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+696    22:54:55  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+697    22:55:52  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+698    22:56:02  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+699    22:56:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+700    22:56:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+701    22:56:18  LO  AP43             con1-ce/AP43     9886   REF   0.1487 SQ  -0.0000
+702    22:56:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0145 TIME  225618 280 2013
+703    22:56:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+704    22:56:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+705    22:56:18  LO  AP43             con1-ce/AP43     9886   T    12.2778 P  941.4774 H    60.1527 WS  9.2660 WD 123.0000
+706    22:56:18  LO  AP43             con1-ce/AP43     9886   TD    4.6667 PA   0.0000 PR    0.0000
+707    22:56:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+708    22:57:05  DA  US43             con1-ce/US43     3001   Interlock Closed: DHATCH.
+709    22:58:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+710    22:58:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+711    22:58:18  LO  AP43             con1-ce/AP43     9886   REF   0.1485 SQ  -0.0000
+712    22:58:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0145 TIME  225818 280 2013
+713    22:58:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+714    22:58:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+715    22:58:18  LO  AP43             con1-ce/AP43     9886   T    12.0556 P  941.4435 H    59.8753 WS  2.4709 WD 117.0000
+716    22:58:18  LO  AP43             con1-ce/AP43     9886   TD    4.3889 PA   0.0000 PR    0.0000
+717    22:58:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+718    23:00:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+719    23:00:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+720    23:00:18  LO  AP43             con1-ce/AP43     9886   REF   0.1483 SQ  -0.0000
+721    23:00:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0145 TIME  230018 280 2013
+722    23:00:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+723    23:00:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+724    23:00:18  LO  AP43             con1-ce/AP43     9886   T    12.0000 P  941.4096 H    59.6349 WS  8.6483 WD 142.0000
+725    23:00:18  LO  AP43             con1-ce/AP43     9886   TD    4.2778 PA   0.0000 PR    0.0000
+726    23:00:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+727    23:02:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+728    23:02:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+729    23:02:18  LO  AP43             con1-ce/AP43     9886   REF   0.1482 SQ  -0.0000
+730    23:02:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0145 TIME  230218 280 2013
+731    23:02:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+732    23:02:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+733    23:02:18  LO  AP43             con1-ce/AP43     9886   T    12.0000 P  941.4096 H    59.1805 WS  1.8532 WD 164.0000
+734    23:02:18  LO  AP43             con1-ce/AP43     9886   TD    4.1667 PA   0.0000 PR    0.0000
+735    23:02:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+736    23:04:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+737    23:04:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+738    23:04:18  LO  AP43             con1-ce/AP43     9886   REF   0.1479 SQ  -0.0000
+739    23:04:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0145 TIME  230418 280 2013
+740    23:04:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+741    23:04:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+742    23:04:18  LO  AP43             con1-ce/AP43     9886   T    12.0556 P  941.4435 H    58.2936 WS  1.8532 WD 162.0000
+743    23:04:18  LO  AP43             con1-ce/AP43     9886   TD    4.0000 PA   0.0000 PR    0.0000
+744    23:04:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+745    23:05:54  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+746    23:06:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+747    23:06:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+748    23:06:18  LO  AP43             con1-ce/AP43     9886   REF   0.1475 SQ  -0.0000
+749    23:06:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0145 TIME  230618 280 2013
+750    23:06:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+751    23:06:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+752    23:06:18  LO  AP43             con1-ce/AP43     9886   T    12.0556 P  941.4774 H    56.9676 WS  1.2355 WD 178.0000
+753    23:06:18  LO  AP43             con1-ce/AP43     9886   TD    3.6667 PA   0.0000 PR    0.0000
+754    23:06:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+755    23:07:56  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+756    23:08:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+757    23:08:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+758    23:08:18  LO  AP43             con1-ce/AP43     9886   REF   0.1478 SQ  -0.0000
+759    23:08:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0145 TIME  230818 280 2013
+760    23:08:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+761    23:08:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+762    23:08:18  LO  AP43             con1-ce/AP43     9886   T    12.0556 P  941.4774 H    57.8485 WS  1.8532 WD 182.0000
+763    23:08:18  LO  AP43             con1-ce/AP43     9886   TD    3.8889 PA   0.0000 PR    0.0000
+764    23:08:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+765    23:08:19  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+766    23:10:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+767    23:10:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+768    23:10:18  LO  AP43             con1-ce/AP43     9886   REF   0.1477 SQ  -0.0000
+769    23:10:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0145 TIME  231018 280 2013
+770    23:10:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+771    23:10:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+772    23:10:18  LO  AP43             con1-ce/AP43     9886   T    12.1667 P  941.5112 H    57.4318 WS  4.3241 WD 192.0000
+773    23:10:18  LO  AP43             con1-ce/AP43     9886   TD    3.8889 PA   0.0000 PR    0.0000
+774    23:10:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+775    23:12:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+776    23:12:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+777    23:12:18  LO  AP43             con1-ce/AP43     9886   REF   0.1481 SQ  -0.0000
+778    23:12:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0145 TIME  231218 280 2013
+779    23:12:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+780    23:12:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+781    23:12:18  LO  AP43             con1-ce/AP43     9886   T    12.3889 P  941.5112 H    58.1454 WS  0.0000 WD 160.0000
+782    23:12:18  LO  AP43             con1-ce/AP43     9886   TD    4.2778 PA   0.0000 PR    0.0000
+783    23:12:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+784    23:14:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+785    23:14:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+786    23:14:18  LO  AP43             con1-ce/AP43     9886   REF   0.1488 SQ  -0.0000
+787    23:14:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0145 TIME  231418 280 2013
+788    23:14:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+789    23:14:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+790    23:14:18  LO  AP43             con1-ce/AP43     9886   T    13.0556 P  941.5112 H    58.7395 WS  2.4709 WD 207.0000
+791    23:14:18  LO  AP43             con1-ce/AP43     9886   TD    5.0556 PA   0.0000 PR    0.0000
+792    23:14:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+793    23:15:42  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+794    23:15:43  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+795    23:15:44  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+796    23:16:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+797    23:16:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+798    23:16:18  LO  AP43             con1-ce/AP43     9886   REF   0.1481 SQ  -0.0000
+799    23:16:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0145 TIME  231618 280 2013
+800    23:16:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+801    23:16:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+802    23:16:18  LO  AP43             con1-ce/AP43     9886   T    13.0556 P  941.5450 H    56.7605 WS  6.7951 WD 135.0000
+803    23:16:18  LO  AP43             con1-ce/AP43     9886   TD    4.5556 PA   0.0000 PR    0.0000
+804    23:16:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+805    23:16:25  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+806    23:16:58  PA  US43             con1-ce/US43     4004   Switch SUBRFTR has moved to position B.
+807    23:17:01  C!  US43             con1-ce/US43     1025   Interlock Open: DHATCH. Close Dish hatch.
+808    23:17:01  C!  con1-ce          WSS-nmc-ws12     11003  LOST CONTACT WITH WORKSTATION nmc-ws12 BECAUSE:  Did not receive Timestamp from WS
+809    23:18:01  LO  con1-ce          con1-ce          6110   con1-ce:C!:11003, repeated 13 time(s) in 60 seconds.
+810    23:18:07  LO  AP43             con1-ce/AP43     9837   COMPLETED: ANT-6146-OP-DV4.0.4 072209
+811    23:18:09  C!  con1-ce          WSS-nmc-ws13     11003  LOST CONTACT WITH WORKSTATION nmc-ws13 BECAUSE:  Did not receive Timestamp from WS
+812    23:18:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+813    23:18:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+814    23:18:18  LO  AP43             con1-ce/AP43     9886   REF   0.1481 SQ  -0.0000
+815    23:18:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0435      0.0145 TIME  231818 280 2013
+816    23:18:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+817    23:18:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+818    23:18:18  LO  AP43             con1-ce/AP43     9886   T    12.8889 P  941.5450 H    57.1572 WS  6.1773 WD 136.0000
+819    23:18:18  LO  AP43             con1-ce/AP43     9886   TD    4.5000 PA   0.0000 PR    0.0000
+820    23:18:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+821    23:18:23  CA  AP43             con1-ce/AP43     8028   REL SR completed
+822    23:18:34  DA  US43             con1-ce/US43     3001   Interlock Closed: DHATCH.
+823    23:18:37  CA  AP43             con1-ce/AP43     8046   SET SR completed
+824    23:18:37  PR  AP43             con1-ce/AP43     9905   No predicts. Specify predicts, then enter TRK
+825    23:18:38  W!  AP43             con1-ce/AP43     2576   No autocollimator acquisition: #2
+826    23:19:09  LO  con1-ce          con1-ce          6110   con1-ce:C!:11003, repeated 11 time(s) in 60 seconds.
+827    23:19:12  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+828    23:20:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+829    23:20:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+830    23:20:18  LO  AP43             con1-ce/AP43     9886   REF   0.1481 SQ  -0.0000
+831    23:20:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  232018 280 2013
+832    23:20:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+833    23:20:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+834    23:20:18  LO  AP43             con1-ce/AP43     9886   T    12.6667 P  941.5450 H    57.5449 WS  7.4128 WD 132.0000
+835    23:20:18  LO  AP43             con1-ce/AP43     9886   TD    4.3889 PA   0.0000 PR    0.0000
+836    23:20:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+837    23:22:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+838    23:22:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+839    23:22:18  LO  AP43             con1-ce/AP43     9886   REF   0.1486 SQ  -0.0000
+840    23:22:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  232218 280 2013
+841    23:22:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+842    23:22:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+843    23:22:18  LO  AP43             con1-ce/AP43     9886   T    12.7778 P  941.5450 H    58.6779 WS  6.7951 WD 146.0000
+844    23:22:18  LO  AP43             con1-ce/AP43     9886   TD    4.7778 PA   0.0000 PR    0.0000
+845    23:22:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+846    23:24:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+847    23:24:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+848    23:24:18  LO  AP43             con1-ce/AP43     9886   REF   0.1482 SQ  -0.0000
+849    23:24:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  232418 280 2013
+850    23:24:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+851    23:24:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+852    23:24:18  LO  AP43             con1-ce/AP43     9886   T    12.8889 P  941.5450 H    57.3758 WS  1.8532 WD 143.0000
+853    23:24:18  LO  AP43             con1-ce/AP43     9886   TD    4.5556 PA   0.0000 PR    0.0000
+854    23:24:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+855    23:24:25  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+856    23:24:29  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+857    23:24:31  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+858    23:24:36  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+859    23:24:45  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+860    23:24:46  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+861    23:24:47  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+862    23:25:19  OD  cdscc/nmc-ws1    dss43-aca        106    ap move r p4
+863    23:25:19  DR  AP43             cdscc/nmc-ws1    106    RESP_REJECTED: Only local access permitted
+864    23:25:55  OD  cdscc/nmc-ws1    dss43-aca        107    ap ctrl nmc
+865    23:25:56  DR  AP43             cdscc/nmc-ws1    107    COMPLETED. ctrl nmc
+866    23:25:56  PA  AP43             con1-ce/AP43     1359   NMC control enabled
+867    23:25:58  OD  cdscc/nmc-ws1    dss43-aca        108    ap move r p4
+868    23:25:58  DR  AP43             cdscc/nmc-ws1    108    RESP_STARTED: move r p4
+869    23:26:05  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+870    23:26:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+871    23:26:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+872    23:26:18  LO  AP43             con1-ce/AP43     9886   REF   0.1488 SQ  -0.0000
+873    23:26:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  232618 280 2013
+874    23:26:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+875    23:26:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+876    23:26:18  LO  AP43             con1-ce/AP43     9886   T    13.0556 P  941.5450 H    58.5166 WS  3.7064 WD 115.0000
+877    23:26:18  LO  AP43             con1-ce/AP43     9886   TD    5.0000 PA   0.0000 PR    0.0000
+878    23:26:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+879    23:27:00  W!  AP43             con1-ce/AP43     2514   MOVE failed to complete  for R AXIS
+880    23:27:32  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+881    23:28:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+882    23:28:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+883    23:28:18  LO  AP43             con1-ce/AP43     9886   REF   0.1480 SQ  -0.0000
+884    23:28:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  232818 280 2013
+885    23:28:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+886    23:28:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+887    23:28:18  LO  AP43             con1-ce/AP43     9886   T    13.1667 P  941.5789 H    56.1398 WS  0.6177 WD 101.0000
+888    23:28:18  LO  AP43             con1-ce/AP43     9886   TD    4.5000 PA   0.0000 PR    0.0000
+889    23:28:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+890    23:29:50  OD  cdscc/nmc-ws1    dss43-aca        110    ap move r p4
+891    23:29:50  DR  AP43             cdscc/nmc-ws1    110    RESP_STARTED: move r p4
+892    23:30:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0017    -0.0010   -0.0046   240
+893    23:30:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+894    23:30:18  LO  AP43             con1-ce/AP43     9886   REF   0.1481 SQ  -0.0000
+895    23:30:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  233018 280 2013
+896    23:30:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+897    23:30:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+898    23:30:18  LO  AP43             con1-ce/AP43     9886   T    13.3889 P  941.6127 H    55.9771 WS  5.5596 WD 136.0000
+899    23:30:18  LO  AP43             con1-ce/AP43     9886   TD    4.6667 PA   0.0000 PR    0.0000
+900    23:30:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+901    23:30:44  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+902    23:30:52  W!  AP43             con1-ce/AP43     2514   MOVE failed to complete  for R AXIS
+903    23:30:52  PA  AP43             con1-ce/AP43     3253   SR keyswitch in auto
+904    23:30:54  PA  AP43             con1-ce/AP43     3532   SR PLC is responding
+905    23:30:54  PA  AP43             con1-ce/AP43     6570   SR index pin inserted
+906    23:31:05  OD  cdscc/nmc-ws1    dss43-aca        111    ap move r p4
+907    23:31:05  DR  AP43             cdscc/nmc-ws1    111    RESP_STARTED: move r p4
+908    23:31:07  PA  AP43             con1-ce/AP43     6569   SR index pin retracted
+909    23:31:08  PA  AP43             con1-ce/AP43     6548   Rotation brake released
+910    23:31:28  PA  US43             con1-ce/US43     4004   Switch SUBRFTR has moved to position E.
+911    23:31:34  PA  US43             con1-ce/US43     4004   Switch SUBRFTR has moved to position E.
+912    23:31:39  PA  US43             con1-ce/US43     4004   Switch SUBRFTR has moved to position E.
+913    23:31:39  PA  AP43             con1-ce/AP43     6568   R axis at SR index pin position
+914    23:31:56  PA  AP43             con1-ce/AP43     6570   SR index pin inserted
+915    23:31:56  PA  AP43             con1-ce/AP43     6549   Rotation brake set
+916    23:31:57  CA  AP43             con1-ce/AP43     8014   MOVE R  completed
+917    23:31:57  W!  AP43             con1-ce/AP43     2509   Unable to read sem file for autocollimator 2 mode. Using def43.ac2.
+918    23:32:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001       0.3089     0.1905   -0.5608   300
+919    23:32:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+920    23:32:18  LO  AP43             con1-ce/AP43     9886   REF   0.1480 SQ   0.0065
+921    23:32:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  233218 280 2013
+922    23:32:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+923    23:32:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+924    23:32:18  LO  AP43             con1-ce/AP43     9886   T    13.1667 P  941.6466 H    56.1398 WS  1.2355 WD 132.0000
+925    23:32:18  LO  AP43             con1-ce/AP43     9886   TD    4.5000 PA   0.0000 PR    0.0000
+926    23:32:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+927    23:32:23  OD  cdscc/nmc-ws1    dss43-aca        114    ap move r p1r
+928    23:32:23  DR  AP43             cdscc/nmc-ws1    114    RESP_STARTED: move r p1r
+929    23:32:25  PA  AP43             con1-ce/AP43     6569   SR index pin retracted
+930    23:32:26  PA  AP43             con1-ce/AP43     6548   Rotation brake released
+931    23:32:39  PA  US43             con1-ce/US43     4004   Switch SUBRFTR has moved to position A.
+932    23:32:40  PA  AP43             con1-ce/AP43     6568   R axis at SR index pin position
+933    23:32:47  PA  AP43             con1-ce/AP43     3533   SRDC health is OK
+934    23:32:48  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+935    23:32:56  PA  AP43             con1-ce/AP43     6570   SR index pin inserted
+936    23:32:56  PA  AP43             con1-ce/AP43     6549   Rotation brake set
+937    23:32:57  CA  AP43             con1-ce/AP43     8014   MOVE R  completed
+938    23:32:57  W!  AP43             con1-ce/AP43     2509   Unable to read sem file for autocollimator 2 mode. Using def43.ac2.
+939    23:33:39  OD  cdscc/nmc-ws1    dss43-aca        115    ap move r 339.029
+940    23:33:39  DR  AP43             cdscc/nmc-ws1    115    RESP_STARTED: move r 339.029
+941    23:33:42  PA  AP43             con1-ce/AP43     6569   SR index pin retracted
+942    23:33:47  PA  AP43             con1-ce/AP43     6548   Rotation brake released
+943    23:33:58  CA  AP43             con1-ce/AP43     8014   MOVE R 339.0290 completed
+944    23:33:58  W!  AP43             con1-ce/AP43     2509   Unable to read sem file for autocollimator 2 mode. Using def43.ac2.
+945    23:34:13  PA  con1-ce          con1-ce          50003  SUPPORT DATA DIST TO MCP1 STARTED
+946    23:34:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001       0.3092     0.9802   -0.5607   339
+947    23:34:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+948    23:34:18  LO  AP43             con1-ce/AP43     9886   REF   0.1479 SQ   0.0335
+949    23:34:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  233418 280 2013
+950    23:34:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+951    23:34:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+952    23:34:18  LO  AP43             con1-ce/AP43     9886   T    13.0556 P  941.6466 H    56.1142 WS  0.0000 WD 132.0000
+953    23:34:18  LO  AP43             con1-ce/AP43     9886   TD    4.3889 PA   0.0000 PR    0.0000
+954    23:34:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+955    23:34:29  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+956    23:34:57  C!  US43             con1-ce/US43     1014   Fuse Burned, Cable Disconnected or Switch SUBRFTR is malfunctioning.
+957    23:35:01  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+958    23:36:17  OD  cdscc/nmc-ws1    dss43-aca        116    ap trk sr
+959    23:36:17  DR  AP43             cdscc/nmc-ws1    116    RESP_REJECTED: No predicts. Specify predicts, then enter TRK
+960    23:36:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001       0.3094     0.9798   -0.5607   339
+961    23:36:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+962    23:36:18  LO  AP43             con1-ce/AP43     9886   REF   0.1478 SQ   0.0335
+963    23:36:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  233618 280 2013
+964    23:36:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+965    23:36:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+966    23:36:18  LO  AP43             con1-ce/AP43     9886   T    12.8889 P  941.6466 H    56.2907 WS  0.0000 WD 133.0000
+967    23:36:18  LO  AP43             con1-ce/AP43     9886   TD    4.2778 PA   0.0000 PR    0.0000
+968    23:36:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+969    23:37:58  PA  con1-ce          con1-ce          50003  SUPPORT DATA DIST TO MCP2 STARTED
+970    23:38:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001       0.3097     0.9797   -0.5606   339
+971    23:38:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+972    23:38:18  LO  AP43             con1-ce/AP43     9886   REF   0.1481 SQ   0.0335
+973    23:38:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  233818 280 2013
+974    23:38:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+975    23:38:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+976    23:38:18  LO  AP43             con1-ce/AP43     9886   T    13.0000 P  941.6127 H    56.7478 WS  0.0000 WD 165.0000
+977    23:38:18  LO  AP43             con1-ce/AP43     9886   TD    4.5000 PA   0.0000 PR    0.0000
+978    23:38:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+979    23:38:35  OD  cdscc/nmc-ws1    dss43-aca        117    ap move y -3.3396
+980    23:38:36  DR  AP43             cdscc/nmc-ws1    117    RESP_STARTED: move y -3.3396
+981    23:38:37  PA  AP43             con1-ce/AP43     6556   Y2 brake released
+982    23:38:37  PA  AP43             con1-ce/AP43     6555   Y1 brake released
+983    23:38:37  PA  AP43             con1-ce/AP43     6552   X brake released
+984    23:38:37  PA  AP43             con1-ce/AP43     6566   Z3 brake released
+985    23:38:37  PA  AP43             con1-ce/AP43     6564   Z2 brake released
+986    23:38:37  PA  AP43             con1-ce/AP43     6562   Z1 brake released
+987    23:38:56  OD  cdscc/nmc-ws1    dss43-aca        118    ap move z 0.357
+988    23:38:57  DR  AP43             cdscc/nmc-ws1    118    RESP_STARTED: move z 0.357
+989    23:39:51  OD  cdscc/nmc-ws1    dss43-aca        119    ap trk sr
+990    23:39:51  DR  AP43             cdscc/nmc-ws1    119    RESP_REJECTED: ILLEGAL COMMAND WHILE MOVING
+991    23:40:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001       0.1650    -1.3294    0.1835   339
+992    23:40:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+993    23:40:18  LO  AP43             con1-ce/AP43     9886   REF   0.1479 SQ  -0.0455
+994    23:40:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  234018 280 2013
+995    23:40:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+996    23:40:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+997    23:40:18  LO  AP43             con1-ce/AP43     9886   T    13.0556 P  941.6466 H    56.1142 WS  1.8532 WD 231.0000
+998    23:40:18  LO  AP43             con1-ce/AP43     9886   TD    4.3889 PA   0.0000 PR    0.0000
+999    23:40:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1000   23:41:12  CA  AP43             con1-ce/AP43     8017   MOVE Z 0.3570 completed
+1001   23:41:16  CA  AP43             con1-ce/AP43     8016   MOVE Y -3.3396 completed
+1002   23:42:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0002    -3.3389    0.3568   339
+1003   23:42:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1004   23:42:18  LO  AP43             con1-ce/AP43     9886   REF   0.1481 SQ  -0.1142
+1005   23:42:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  234218 280 2013
+1006   23:42:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1007   23:42:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1008   23:42:18  LO  AP43             con1-ce/AP43     9886   T    13.1667 P  941.6466 H    56.3544 WS  4.3241 WD 231.0000
+1009   23:42:18  LO  AP43             con1-ce/AP43     9886   TD    4.5556 PA   0.0000 PR    0.0000
+1010   23:42:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9994 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1011   23:43:43  PA  con1-ce          con1-ce          50003  SUPPORT DATA DIST TO MCP1 STARTED
+1012   23:44:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0001    -3.3397    0.3569   339
+1013   23:44:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1014   23:44:18  LO  AP43             con1-ce/AP43     9886   REF   0.1485 SQ  -0.1142
+1015   23:44:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  234418 280 2013
+1016   23:44:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1017   23:44:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1018   23:44:18  LO  AP43             con1-ce/AP43     9886   T    13.5556 P  941.6805 H    56.6585 WS  1.8532 WD 161.0000
+1019   23:44:18  LO  AP43             con1-ce/AP43     9886   TD    5.0000 PA   0.0000 PR    0.0000
+1020   23:44:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1021   23:46:16  C!  con1-ce          WSS-nmc-ws13     11003  LOST CONTACT WITH WORKSTATION nmc-ws13 BECAUSE:  Did not receive Timestamp from WS
+1022   23:46:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0007    -3.3396    0.3569   339
+1023   23:46:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1024   23:46:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  234618 280 2013
+1025   23:46:18  LO  AP43             con1-ce/AP43     9886   REF   0.1477 SQ  -0.1142
+1026   23:46:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1027   23:46:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1028   23:46:18  LO  AP43             con1-ce/AP43     9886   T    13.5556 P  941.6805 H    54.7489 WS  7.4128 WD 162.0000
+1029   23:46:18  LO  AP43             con1-ce/AP43     9886   TD    4.5000 PA   0.0000 PR    0.0000
+1030   23:46:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1031   23:47:16  LO  con1-ce          con1-ce          6110   con1-ce:C!:11003, repeated 14 time(s) in 60 seconds.
+1032   23:47:28  PA  con1-ce          con1-ce          50003  SUPPORT DATA DIST TO MCP2 STARTED
+1033   23:48:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001       0.0001    -3.3395    0.3569   339
+1034   23:48:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1035   23:48:18  LO  AP43             con1-ce/AP43     9886   REF   0.1474 SQ  -0.1142
+1036   23:48:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  234818 280 2013
+1037   23:48:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1038   23:48:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1039   23:48:18  LO  AP43             con1-ce/AP43     9886   T    13.3889 P  941.6805 H    54.0860 WS  3.7064 WD 161.0000
+1040   23:48:18  LO  AP43             con1-ce/AP43     9886   TD    4.1667 PA   0.0000 PR    0.0000
+1041   23:48:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1042   23:49:29  PA  con1-ce          con1-ce          50003  SUPPORT DATA DIST TO MCP1 STARTED
+1043   23:50:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001       0.0005    -3.3395    0.3569   339
+1044   23:50:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1045   23:50:18  LO  AP43             con1-ce/AP43     9886   REF   0.1477 SQ  -0.1142
+1046   23:50:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  235018 280 2013
+1047   23:50:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1048   23:50:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1049   23:50:18  LO  AP43             con1-ce/AP43     9886   T    13.3889 P  941.7144 H    54.9193 WS  1.8532 WD 209.0000
+1050   23:50:18  LO  AP43             con1-ce/AP43     9886   TD    4.3889 PA   0.0000 PR    0.0000
+1051   23:50:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1052   23:52:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0003CCW  88.0001      -0.0001    -3.3401    0.3569   339
+1053   23:52:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1054   23:52:18  LO  AP43             con1-ce/AP43     9886   REF   0.1478 SQ  -0.1142
+1055   23:52:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  235218 280 2013
+1056   23:52:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1057   23:52:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1058   23:52:18  LO  AP43             con1-ce/AP43     9886   T    13.2778 P  941.7144 H    55.3145 WS  0.0000 WD 311.0000
+1059   23:52:18  LO  AP43             con1-ce/AP43     9886   TD    4.3889 PA   0.0000 PR    0.0000
+1060   23:52:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1061   23:53:14  PA  con1-ce          con1-ce          50003  SUPPORT DATA DIST TO MCP2 STARTED
+1062   23:54:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0003    -3.3398    0.3569   339
+1063   23:54:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1064   23:54:18  LO  AP43             con1-ce/AP43     9886   REF   0.1480 SQ  -0.1142
+1065   23:54:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  235418 280 2013
+1066   23:54:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1067   23:54:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1068   23:54:18  LO  AP43             con1-ce/AP43     9886   T    13.5556 P  941.7144 H    55.3790 WS  0.0000 WD 329.0000
+1069   23:54:18  LO  AP43             con1-ce/AP43     9886   TD    4.6667 PA   0.0000 PR    0.0000
+1070   23:54:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1071   23:56:05  PA  tdn-274209       con1-ce          400    TDN Initialize /nmcfs/ops/cdscc/nmc.rw/AA/tdn_start/All-TDNs/0_eSeries_sc1.xml
+1072   23:56:05  PA  con1-block2406   con1-ce          2      The 'Support TDN End' block is now loading.
+1073   23:56:05  PA  con1-block2405   con1-ce          2      The 'Support TDN Start' block is now loading.
+1074   23:56:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001       0.0004    -3.3397    0.3568   339
+1075   23:56:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1076   23:56:18  LO  AP43             con1-ce/AP43     9886   REF   0.1484 SQ  -0.1142
+1077   23:56:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  235618 280 2013
+1078   23:56:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1079   23:56:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1080   23:56:18  LO  AP43             con1-ce/AP43     9886   T    13.8889 P  941.7482 H    55.6674 WS  0.0000 WD 340.0000
+1081   23:56:18  LO  AP43             con1-ce/AP43     9886   TD    5.0556 PA   0.0000 PR    0.0000
+1082   23:56:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1083   23:56:27  PA  con1-block12725  con1-ce          2      The 'e'Log' block is now loading.
+1084   23:56:35  C!  con1-ce          WSS-nmc-aa2      11003  LOST CONTACT WITH WORKSTATION nmc-aa2 BECAUSE:  Did not receive Timestamp from WS
+1085   23:56:44  PA  con1-block12725  con1-ce          2      Block "e'Log" displayed message, { The Header has been designed as a "Double Checking" tool. } {} { The e'Log will attempt to retrieve data for the selected tabs and will overwrite any current information. } {  All retrieved data (coloured Yellow) needs to be checked by the LCO and other data filled in manually.}, with the following button(s), Continue  Cancel
+1086   23:56:47  PA  con1-block12725  con1-ce          2      Block "e'Log" received input, "Continue" (for subsystems ANT, UGC, DTT, UPL) for message, { The Header has been designed as a "Double Checking" tool. } {} { The e'Log will attempt to retrieve data for the selected tabs and will overwrite any current information. } {  All retrieved data (coloured Yellow) needs to be checked by the LCO and other data filled in manually.}.
+1087   23:56:53  PA  con1-block12725  con1-ce          2      e'Log will launch the e'Survey because it does not appear to be running.
+1088   23:56:53  PA  con1-block12739  con1-ce          2      The 'e'Survey' block is now loading.
+1089   23:56:57  PA  con1-block12739  con1-ce          2      Block "TDN-274209 e'Survey SCN 099" displayed advisory message, "{ Your participation in the "Service Provision Survey" is appreciated. } { This survey is being done in part as a response to the "DSN Operations Survey Report". } { Thank you in advance for your time and participation. }"
+1090   23:58:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0004    -3.3392    0.3567   339
+1091   23:58:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1092   23:58:18  LO  AP43             con1-ce/AP43     9886   REF   0.1481 SQ  -0.1142
+1093   23:58:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  235818 280 2013
+1094   23:58:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1095   23:58:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1096   23:58:18  LO  AP43             con1-ce/AP43     9886   T    14.5556 P  941.7482 H    53.7447 WS  1.8532 WD 157.0000
+1097   23:58:18  LO  AP43             con1-ce/AP43     9886   TD    5.1667 PA   0.0000 PR    0.0000
+1098   23:58:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1099   23:58:22  C!  con1-ce          WSS-nmc-ws11     11003  LOST CONTACT WITH WORKSTATION nmc-ws11 BECAUSE:  Did not receive Timestamp from WS
+1100   23:59:22  LO  con1-ce          con1-ce          6110   con1-ce:C!:11003, repeated 15 time(s) in 60 seconds.
+1101   23:59:41  C!  con1-ce          WSS-nmc-ws9      11003  LOST CONTACT WITH WORKSTATION nmc-ws9 BECAUSE:  Did not receive Timestamp from WS
+1102   00:00:14  LO  AP43             con1-ce/AP43     9890   Support Data purged from /acg/deliv/snXQ_srA_sc061_dss43_pn0278.dco
+1103   00:00:14  LO  AP43             con1-ce/AP43     9890   Support Data purged from /acg/deliv/snVD_srA_sc253_dss43_pn0278.dco
+1104   00:00:14  LO  AP43             con1-ce/AP43     9890   Support Data purged from /acg/deliv/snTD_srA_sc079_dss43_pn0278.dco
+1105   00:00:18  LO  AP43             con1-ce/AP43     9886   ENC  17.0000CCW  88.0001      -0.0006    -3.3392    0.3568   339
+1106   00:00:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1107   00:00:18  LO  AP43             con1-ce/AP43     9886   REF   0.1472 SQ  -0.1142
+1108   00:00:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  000018 281 2013
+1109   00:00:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1110   00:00:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1111   00:00:18  LO  AP43             con1-ce/AP43     9886   T    14.2778 P  941.7144 H    51.8685 WS  4.9419 WD 127.0000
+1112   00:00:18  LO  AP43             con1-ce/AP43     9886   TD    4.3889 PA   0.0000 PR    0.0000
+1113   00:00:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1114   00:00:18  LO  AP43             con1-ce/AP43     9890   Support Data purged from /acg/deliv/snTD_srA_sc079_dss43_pn0278.dco
+1115   00:00:18  LO  AP43             con1-ce/AP43     9890   Support Data purged from /acg/deliv/snVD_srA_sc253_dss43_pn0278.dco
+1116   00:00:18  LO  AP43             con1-ce/AP43     9890   Support Data purged from /acg/deliv/snXQ_srA_sc061_dss43_pn0278.dco
+1117   00:00:18  W!  AP43             con1-ce/AP43     2596   Unable to remove /sd/dcos//sd/dcos/snTD_srA_sc079_dss43_pn0278.dco
+1118   00:00:18  W!  AP43             con1-ce/AP43     2596   Unable to remove /sd/dcos//sd/dcos/snVD_srA_sc253_dss43_pn0278.dco
+1119   00:00:19  W!  AP43             con1-ce/AP43     2596   Unable to remove /sd/dcos//sd/dcos/snXQ_srA_sc061_dss43_pn0278.dco
+1120   00:00:41  LO  con1-ce          con1-ce          6110   con1-ce:C!:11003, repeated 7 time(s) in 60 seconds.
+1121   00:02:07  C!  con1-ce          WSS-nmc-ws11     11003  LOST CONTACT WITH WORKSTATION nmc-ws11 BECAUSE:  Did not receive Timestamp from WS
+1122   00:02:18  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0001    -3.3397    0.3568   339
+1123   00:02:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1124   00:02:18  LO  AP43             con1-ce/AP43     9886   REF   0.1468 SQ  -0.1142
+1125   00:02:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  000218 281 2013
+1126   00:02:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1127   00:02:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1128   00:02:18  LO  AP43             con1-ce/AP43     9886   T    14.2778 P  941.6805 H    51.0814 WS  6.1773 WD  92.0000
+1129   00:02:18  LO  AP43             con1-ce/AP43     9886   TD    4.1667 PA   0.0000 PR    0.0000
+1130   00:02:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1131   00:03:07  LO  con1-ce          con1-ce          6110   con1-ce:C!:11003, repeated 13 time(s) in 60 seconds.
+1132   00:04:18  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0008    -3.3400    0.3569   339
+1133   00:04:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1134   00:04:18  LO  AP43             con1-ce/AP43     9886   REF   0.1470 SQ  -0.1142
+1135   00:04:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  000418 281 2013
+1136   00:04:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1137   00:04:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1138   00:04:18  LO  AP43             con1-ce/AP43     9886   T    14.2778 P  941.6805 H    51.4736 WS  5.5596 WD 110.0000
+1139   00:04:18  LO  AP43             con1-ce/AP43     9886   TD    4.2778 PA   0.0000 PR    0.0000
+1140   00:04:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1141   00:06:18  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0001    -3.3403    0.3570   339
+1142   00:06:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1143   00:06:18  LO  AP43             con1-ce/AP43     9886   REF   0.1471 SQ  -0.1142
+1144   00:06:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  000618 281 2013
+1145   00:06:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1146   00:06:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1147   00:06:18  LO  AP43             con1-ce/AP43     9886   T    14.2778 P  941.6805 H    51.8685 WS  3.7064 WD 110.0000
+1148   00:06:18  LO  AP43             con1-ce/AP43     9886   TD    4.3889 PA   0.0000 PR    0.0000
+1149   00:06:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1150   00:07:05  C!  con1-ce          WSS-nmc-ws12     11003  LOST CONTACT WITH WORKSTATION nmc-ws12 BECAUSE:  Did not receive Timestamp from WS
+1151   00:08:05  LO  con1-ce          con1-ce          6110   con1-ce:C!:11003, repeated 13 time(s) in 60 seconds.
+1152   00:08:18  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0004    -3.3397    0.3569   339
+1153   00:08:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1154   00:08:18  LO  AP43             con1-ce/AP43     9886   REF   0.1470 SQ  -0.1142
+1155   00:08:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  000818 281 2013
+1156   00:08:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1157   00:08:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1158   00:08:18  LO  AP43             con1-ce/AP43     9886   T    14.2778 P  941.6805 H    51.4736 WS  1.8532 WD 113.0000
+1159   00:08:18  LO  AP43             con1-ce/AP43     9886   TD    4.2778 PA   0.0000 PR    0.0000
+1160   00:08:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1161   00:10:18  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0007    -3.3395    0.3569   339
+1162   00:10:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1163   00:10:18  LO  AP43             con1-ce/AP43     9886   REF   0.1471 SQ  -0.1142
+1164   00:10:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  001018 281 2013
+1165   00:10:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1166   00:10:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1167   00:10:18  LO  AP43             con1-ce/AP43     9886   T    14.1667 P  941.7144 H    51.8417 WS  0.0000 WD 125.0000
+1168   00:10:18  LO  AP43             con1-ce/AP43     9886   TD    4.2778 PA   0.0000 PR    0.0000
+1169   00:10:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1170   00:12:18  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0001    -3.3403    0.3568   339
+1171   00:12:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1172   00:12:18  LO  AP43             con1-ce/AP43     9886   REF   0.1483 SQ  -0.1142
+1173   00:12:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  001218 281 2013
+1174   00:12:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1175   00:12:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1176   00:12:18  LO  AP43             con1-ce/AP43     9886   T    14.7778 P  941.6805 H    53.7971 WS  0.0000 WD  63.0000
+1177   00:12:18  LO  AP43             con1-ce/AP43     9886   TD    5.3889 PA   0.0000 PR    0.0000
+1178   00:12:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1179   00:13:25  C!  con1-ce          WSS-nmc-ws12     11003  LOST CONTACT WITH WORKSTATION nmc-ws12 BECAUSE:  Did not receive Timestamp from WS
+1180   00:14:18  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0001    -3.3394    0.3568   339
+1181   00:14:18  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1182   00:14:18  LO  AP43             con1-ce/AP43     9886   REF   0.1472 SQ  -0.1142
+1183   00:14:18  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  001418 281 2013
+1184   00:14:18  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1185   00:14:18  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1186   00:14:18  LO  AP43             con1-ce/AP43     9886   T    14.5000 P  941.6466 H    51.5274 WS  3.7064 WD 139.0000
+1187   00:14:18  LO  AP43             con1-ce/AP43     9886   TD    4.5000 PA   0.0000 PR    0.0000
+1188   00:14:18  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1189   00:14:25  LO  con1-ce          con1-ce          6110   con1-ce:C!:11003, repeated 15 time(s) in 60 seconds.
+1190   00:14:25  C!  con1-ce          WSS-nmc-ws13     11003  LOST CONTACT WITH WORKSTATION nmc-ws13 BECAUSE:  Did not receive Timestamp from WS
+1191   00:15:25  LO  con1-ce          con1-ce          6110   con1-ce:C!:11003, repeated 11 time(s) in 60 seconds.
+1192   00:16:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0000    -3.3389    0.3568   339
+1193   00:16:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1194   00:16:19  LO  AP43             con1-ce/AP43     9886   REF   0.1474 SQ  -0.1142
+1195   00:16:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  001618 281 2013
+1196   00:16:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1197   00:16:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1198   00:16:19  LO  AP43             con1-ce/AP43     9886   T    14.5556 P  941.6127 H    51.9354 WS  8.6483 WD 147.0000
+1199   00:16:19  LO  AP43             con1-ce/AP43     9886   TD    4.6667 PA   0.0000 PR    0.0000
+1200   00:16:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1201   00:18:18  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0000    -3.3396    0.3567   339
+1202   00:18:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1203   00:18:19  LO  AP43             con1-ce/AP43     9886   REF   0.1468 SQ  -0.1142
+1204   00:18:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  001818 281 2013
+1205   00:18:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1206   00:18:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1207   00:18:19  LO  AP43             con1-ce/AP43     9886   T    14.5556 P  941.6127 H    50.5661 WS 11.1192 WD 133.0000
+1208   00:18:19  LO  AP43             con1-ce/AP43     9886   TD    4.2778 PA   0.0000 PR    0.0000
+1209   00:18:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1210   00:20:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0006    -3.3393    0.3567   339
+1211   00:20:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1212   00:20:19  LO  AP43             con1-ce/AP43     9886   REF   0.1471 SQ  -0.1142
+1213   00:20:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  002018 281 2013
+1214   00:20:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1215   00:20:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1216   00:20:19  LO  AP43             con1-ce/AP43     9886   T    14.2778 P  941.6466 H    51.8685 WS  8.6483 WD 167.0000
+1217   00:20:19  LO  AP43             con1-ce/AP43     9886   TD    4.3889 PA   0.0000 PR    0.0000
+1218   00:20:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1219   00:22:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0000    -3.3392    0.3568   339
+1220   00:22:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1221   00:22:19  LO  AP43             con1-ce/AP43     9886   REF   0.1466 SQ  -0.1142
+1222   00:22:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  002218 281 2013
+1223   00:22:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1224   00:22:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1225   00:22:19  LO  AP43             con1-ce/AP43     9886   T    14.0000 P  941.6466 H    51.0139 WS  0.0000 WD 199.0000
+1226   00:22:19  LO  AP43             con1-ce/AP43     9886   TD    3.8889 PA   0.0000 PR    0.0000
+1227   00:22:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1228   00:24:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0008    -3.3393    0.3568   339
+1229   00:24:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1230   00:24:19  LO  AP43             con1-ce/AP43     9886   REF   0.1468 SQ  -0.1142
+1231   00:24:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  002419 281 2013
+1232   00:24:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1233   00:24:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1234   00:24:19  LO  AP43             con1-ce/AP43     9886   T    13.7778 P  941.6805 H    51.7477 WS  5.5596 WD 204.0000
+1235   00:24:19  LO  AP43             con1-ce/AP43     9886   TD    3.8889 PA   0.0000 PR    0.0000
+1236   00:24:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1237   00:26:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0002    -3.3396    0.3570   339
+1238   00:26:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1239   00:26:19  LO  AP43             con1-ce/AP43     9886   REF   0.1470 SQ  -0.1142
+1240   00:26:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  002619 281 2013
+1241   00:26:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1242   00:26:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1243   00:26:19  LO  AP43             con1-ce/AP43     9886   T    13.7778 P  941.6466 H    52.3459 WS  7.4128 WD 192.0000
+1244   00:26:19  LO  AP43             con1-ce/AP43     9886   TD    4.0556 PA   0.0000 PR    0.0000
+1245   00:26:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1246   00:28:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0006    -3.3403    0.3569   339
+1247   00:28:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1248   00:28:19  LO  AP43             con1-ce/AP43     9886   REF   0.1467 SQ  -0.1142
+1249   00:28:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  002819 281 2013
+1250   00:28:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1251   00:28:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1252   00:28:19  LO  AP43             con1-ce/AP43     9886   T    13.7778 P  941.6466 H    51.7477 WS  3.7064 WD 194.0000
+1253   00:28:19  LO  AP43             con1-ce/AP43     9886   TD    3.8889 PA   0.0000 PR    0.0000
+1254   00:28:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1255   00:30:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0007    -3.3392    0.3569   339
+1256   00:30:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1257   00:30:19  LO  AP43             con1-ce/AP43     9886   REF   0.1468 SQ  -0.1142
+1258   00:30:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  003019 281 2013
+1259   00:30:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1260   00:30:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1261   00:30:19  LO  AP43             con1-ce/AP43     9886   T    14.0000 P  941.6466 H    51.4063 WS  1.8532 WD 192.0000
+1262   00:30:19  LO  AP43             con1-ce/AP43     9886   TD    4.0000 PA   0.0000 PR    0.0000
+1263   00:30:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1264   00:31:11  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+1265   00:32:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0001    -3.3388    0.3567   339
+1266   00:32:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1267   00:32:19  LO  AP43             con1-ce/AP43     9886   REF   0.1470 SQ  -0.1142
+1268   00:32:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  003219 281 2013
+1269   00:32:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1270   00:32:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1271   00:32:19  LO  AP43             con1-ce/AP43     9886   T    14.2778 P  941.6466 H    51.4736 WS  4.9419 WD 199.0000
+1272   00:32:19  LO  AP43             con1-ce/AP43     9886   TD    4.2778 PA   0.0000 PR    0.0000
+1273   00:32:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1274   00:34:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0013    -3.3395    0.3569   339
+1275   00:34:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1276   00:34:19  LO  AP43             con1-ce/AP43     9886   REF   0.1470 SQ  -0.1142
+1277   00:34:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  003419 281 2013
+1278   00:34:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1279   00:34:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1280   00:34:19  LO  AP43             con1-ce/AP43     9886   T    14.2778 P  941.6127 H    51.4736 WS  0.6177 WD 160.0000
+1281   00:34:19  LO  AP43             con1-ce/AP43     9886   TD    4.2778 PA   0.0000 PR    0.0000
+1282   00:34:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1283   00:36:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0003    -3.3392    0.3568   339
+1284   00:36:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1285   00:36:19  LO  AP43             con1-ce/AP43     9886   REF   0.1475 SQ  -0.1142
+1286   00:36:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  003619 281 2013
+1287   00:36:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1288   00:36:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1289   00:36:19  LO  AP43             con1-ce/AP43     9886   T    14.5556 P  941.6127 H    52.3327 WS  0.0000 WD 315.0000
+1290   00:36:19  LO  AP43             con1-ce/AP43     9886   TD    4.7778 PA   0.0000 PR    0.0000
+1291   00:36:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1292   00:38:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0001    -3.3398    0.3569   339
+1293   00:38:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1294   00:38:19  LO  AP43             con1-ce/AP43     9886   REF   0.1468 SQ  -0.1142
+1295   00:38:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  003819 281 2013
+1296   00:38:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1297   00:38:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1298   00:38:19  LO  AP43             con1-ce/AP43     9886   T    14.2778 P  941.6127 H    51.0814 WS  1.2355 WD 302.0000
+1299   00:38:19  LO  AP43             con1-ce/AP43     9886   TD    4.1667 PA   0.0000 PR    0.0000
+1300   00:38:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1301   00:40:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0003    -3.3396    0.3569   339
+1302   00:40:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1303   00:40:19  LO  AP43             con1-ce/AP43     9886   REF   0.1472 SQ  -0.1142
+1304   00:40:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  004019 281 2013
+1305   00:40:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1306   00:40:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1307   00:40:19  LO  AP43             con1-ce/AP43     9886   T    14.5000 P  941.6127 H    51.5274 WS  0.0000 WD 189.0000
+1308   00:40:19  LO  AP43             con1-ce/AP43     9886   TD    4.5000 PA   0.0000 PR    0.0000
+1309   00:40:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1310   00:40:23  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+1311   00:40:27  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+1312   00:41:26  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+1313   00:42:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0004    -3.3396    0.3568   339
+1314   00:42:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1315   00:42:19  LO  AP43             con1-ce/AP43     9886   REF   0.1471 SQ  -0.1142
+1316   00:42:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  004219 281 2013
+1317   00:42:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1318   00:42:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1319   00:42:19  LO  AP43             con1-ce/AP43     9886   T    14.7778 P  941.6466 H    50.8138 WS  0.0000 WD 153.0000
+1320   00:42:19  LO  AP43             con1-ce/AP43     9886   TD    4.5556 PA   0.0000 PR    0.0000
+1321   00:42:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1322   00:42:59  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+1323   00:44:07  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+1324   00:44:12  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+1325   00:44:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0009    -3.3399    0.3567   339
+1326   00:44:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1327   00:44:19  LO  AP43             con1-ce/AP43     9886   REF   0.1479 SQ  -0.1142
+1328   00:44:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  004419 281 2013
+1329   00:44:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1330   00:44:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1331   00:44:19  LO  AP43             con1-ce/AP43     9886   T    15.0556 P  941.5789 H    52.4524 WS  9.2660 WD 273.0000
+1332   00:44:19  LO  AP43             con1-ce/AP43     9886   TD    5.2778 PA   0.0000 PR    0.0000
+1333   00:44:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1334   00:44:43  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+1335   00:45:12  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+1336   00:45:33  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+1337   00:46:19  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+1338   00:46:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0004    -3.3385    0.3568   339
+1339   00:46:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1340   00:46:19  LO  AP43             con1-ce/AP43     9886   REF   0.1476 SQ  -0.1142
+1341   00:46:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  004619 281 2013
+1342   00:46:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1343   00:46:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1344   00:46:19  LO  AP43             con1-ce/AP43     9886   T    14.7778 P  941.6466 H    51.9889 WS  0.0000 WD 216.0000
+1345   00:46:19  LO  AP43             con1-ce/AP43     9886   TD    4.8889 PA   0.0000 PR    0.0000
+1346   00:46:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1347   00:47:14  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+1348   00:48:12  C!  US43             con1-ce/US43     1025   Interlock Open: DHATCH. Close Dish hatch.
+1349   00:48:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0000    -3.3395    0.3568   339
+1350   00:48:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1351   00:48:19  LO  AP43             con1-ce/AP43     9886   REF   0.1470 SQ  -0.1142
+1352   00:48:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  004819 281 2013
+1353   00:48:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1354   00:48:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1355   00:48:19  LO  AP43             con1-ce/AP43     9886   T    14.5000 P  941.6127 H    51.1354 WS  0.0000 WD 197.0000
+1356   00:48:19  LO  AP43             con1-ce/AP43     9886   TD    4.3889 PA   0.0000 PR    0.0000
+1357   00:48:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1358   00:49:17  DA  US43             con1-ce/US43     3001   Interlock Closed: DHATCH.
+1359   00:50:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0000    -3.3395    0.3570   339
+1360   00:50:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1361   00:50:19  LO  AP43             con1-ce/AP43     9886   REF   0.1477 SQ  -0.1142
+1362   00:50:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  005019 281 2013
+1363   00:50:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1364   00:50:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1365   00:50:19  LO  AP43             con1-ce/AP43     9886   T    14.7778 P  941.5789 H    52.3859 WS  1.2355 WD 113.0000
+1366   00:50:19  LO  AP43             con1-ce/AP43     9886   TD    5.0000 PA   0.0000 PR    0.0000
+1367   00:50:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1368   00:50:25  C!  US43             con1-ce/US43     1025   Interlock Open: MOD2B2D1. Close Mod II Bay 2 Door 1.
+1369   00:51:09  DA  US43             con1-ce/US43     3001   Interlock Closed: MOD2B2D1.
+1370   00:52:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0007    -3.3393    0.3568   339
+1371   00:52:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1372   00:52:19  LO  AP43             con1-ce/AP43     9886   REF   0.1471 SQ  -0.1142
+1373   00:52:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  005219 281 2013
+1374   00:52:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1375   00:52:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1376   00:52:19  LO  AP43             con1-ce/AP43     9886   T    14.8889 P  941.5450 H    50.8408 WS  0.0000 WD  81.0000
+1377   00:52:19  LO  AP43             con1-ce/AP43     9886   TD    4.6667 PA   0.0000 PR    0.0000
+1378   00:52:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1379   00:54:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0006    -3.3395    0.3568   339
+1380   00:54:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1381   00:54:19  LO  AP43             con1-ce/AP43     9886   REF   0.1474 SQ  -0.1142
+1382   00:54:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  005419 281 2013
+1383   00:54:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1384   00:54:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1385   00:54:19  LO  AP43             con1-ce/AP43     9886   T    15.3889 P  941.5112 H    50.5764 WS  5.5596 WD  53.0000
+1386   00:54:19  LO  AP43             con1-ce/AP43     9886   TD    5.0556 PA   0.0000 PR    0.0000
+1387   00:54:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1388   00:56:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0002    -3.3395    0.3568   339
+1389   00:56:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1390   00:56:19  LO  AP43             con1-ce/AP43     9886   REF   0.1474 SQ  -0.1142
+1391   00:56:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  005619 281 2013
+1392   00:56:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1393   00:56:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1394   00:56:19  LO  AP43             con1-ce/AP43     9886   T    15.0000 P  941.5112 H    51.2566 WS  6.1773 WD  53.0000
+1395   00:56:19  LO  AP43             con1-ce/AP43     9886   TD    4.8889 PA   0.0000 PR    0.0000
+1396   00:56:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1397   00:58:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0002    -3.3395    0.3567   339
+1398   00:58:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1399   00:58:19  LO  AP43             con1-ce/AP43     9886   REF   0.1471 SQ  -0.1142
+1400   00:58:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  005819 281 2013
+1401   00:58:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1402   00:58:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1403   00:58:19  LO  AP43             con1-ce/AP43     9886   T    14.7778 P  941.5112 H    50.8138 WS  7.4128 WD  78.0000
+1404   00:58:19  LO  AP43             con1-ce/AP43     9886   TD    4.5556 PA   0.0000 PR    0.0000
+1405   00:58:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1406   01:00:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0002    -3.3397    0.3569   339
+1407   01:00:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1408   01:00:19  LO  AP43             con1-ce/AP43     9886   REF   0.1471 SQ  -0.1142
+1409   01:00:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  010019 281 2013
+1410   01:00:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1411   01:00:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1412   01:00:19  LO  AP43             con1-ce/AP43     9886   T    14.5556 P  941.5112 H    51.3445 WS  2.4709 WD  89.0000
+1413   01:00:19  LO  AP43             con1-ce/AP43     9886   TD    4.5000 PA   0.0000 PR    0.0000
+1414   01:00:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1415   01:02:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0002    -3.3388    0.3569   339
+1416   01:02:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1417   01:02:19  LO  AP43             con1-ce/AP43     9886   REF   0.1470 SQ  -0.1142
+1418   01:02:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  010219 281 2013
+1419   01:02:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1420   01:02:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1421   01:02:19  LO  AP43             con1-ce/AP43     9886   T    14.5556 P  941.5450 H    50.9540 WS  4.9419 WD 101.0000
+1422   01:02:19  LO  AP43             con1-ce/AP43     9886   TD    4.3889 PA   0.0000 PR    0.0000
+1423   01:02:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1424   01:04:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0009    -3.3400    0.3568   339
+1425   01:04:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1426   01:04:19  LO  AP43             con1-ce/AP43     9886   REF   0.1471 SQ  -0.1142
+1427   01:04:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1428   01:04:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  010419 281 2013
+1429   01:04:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1430   01:04:19  LO  AP43             con1-ce/AP43     9886   T    14.5000 P  941.5112 H    51.5274 WS  3.7064 WD  88.0000
+1431   01:04:19  LO  AP43             con1-ce/AP43     9886   TD    4.5000 PA   0.0000 PR    0.0000
+1432   01:04:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1433   01:06:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0005    -3.3394    0.3569   339
+1434   01:06:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1435   01:06:19  LO  AP43             con1-ce/AP43     9886   REF   0.1465 SQ  -0.1142
+1436   01:06:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  010619 281 2013
+1437   01:06:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1438   01:06:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1439   01:06:19  LO  AP43             con1-ce/AP43     9886   T    14.5000 P  941.4774 H    49.9756 WS  7.4128 WD 108.0000
+1440   01:06:19  LO  AP43             con1-ce/AP43     9886   TD    4.0556 PA   0.0000 PR    0.0000
+1441   01:06:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1442   01:08:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0005    -3.3396    0.3570   339
+1443   01:08:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1444   01:08:19  LO  AP43             con1-ce/AP43     9886   REF   0.1465 SQ  -0.1142
+1445   01:08:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  010819 281 2013
+1446   01:08:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1447   01:08:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1448   01:08:19  LO  AP43             con1-ce/AP43     9886   T    14.5556 P  941.5112 H    49.7982 WS  0.0000 WD  60.0000
+1449   01:08:19  LO  AP43             con1-ce/AP43     9886   TD    4.0556 PA   0.0000 PR    0.0000
+1450   01:08:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1451   01:10:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0006    -3.3396    0.3570   339
+1452   01:10:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1453   01:10:19  LO  AP43             con1-ce/AP43     9886   REF   0.1468 SQ  -0.1142
+1454   01:10:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  011019 281 2013
+1455   01:10:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1456   01:10:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1457   01:10:19  LO  AP43             con1-ce/AP43     9886   T    14.5556 P  941.5112 H    50.5661 WS  0.0000 WD  24.0000
+1458   01:10:19  LO  AP43             con1-ce/AP43     9886   TD    4.2778 PA   0.0000 PR    0.0000
+1459   01:10:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1460   01:12:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0000    -3.3394    0.3569   339
+1461   01:12:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1462   01:12:19  LO  AP43             con1-ce/AP43     9886   REF   0.1466 SQ  -0.1142
+1463   01:12:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  011219 281 2013
+1464   01:12:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1465   01:12:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1466   01:12:19  LO  AP43             con1-ce/AP43     9886   T    14.5556 P  941.5112 H    50.1808 WS  0.0000 WD 109.0000
+1467   01:12:19  LO  AP43             con1-ce/AP43     9886   TD    4.1667 PA   0.0000 PR    0.0000
+1468   01:12:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1469   01:14:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0003    -3.3395    0.3570   339
+1470   01:14:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1471   01:14:19  LO  AP43             con1-ce/AP43     9886   REF   0.1471 SQ  -0.1142
+1472   01:14:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  011419 281 2013
+1473   01:14:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1474   01:14:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1475   01:14:19  LO  AP43             con1-ce/AP43     9886   T    14.8889 P  941.4774 H    50.8408 WS  2.4709 WD 210.0000
+1476   01:14:19  LO  AP43             con1-ce/AP43     9886   TD    4.6667 PA   0.0000 PR    0.0000
+1477   01:14:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1478   01:16:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0001    -3.3394    0.3568   339
+1479   01:16:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1480   01:16:19  LO  AP43             con1-ce/AP43     9886   REF   0.1468 SQ  -0.1142
+1481   01:16:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  011619 281 2013
+1482   01:16:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1483   01:16:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1484   01:16:19  LO  AP43             con1-ce/AP43     9886   T    14.7778 P  941.4774 H    50.2352 WS  1.8532 WD 220.0000
+1485   01:16:19  LO  AP43             con1-ce/AP43     9886   TD    4.3889 PA   0.0000 PR    0.0000
+1486   01:16:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1487   01:18:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0002    -3.3400    0.3569   339
+1488   01:18:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1489   01:18:19  LO  AP43             con1-ce/AP43     9886   REF   0.1469 SQ  -0.1142
+1490   01:18:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  011819 281 2013
+1491   01:18:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1492   01:18:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1493   01:18:19  LO  AP43             con1-ce/AP43     9886   T    15.0000 P  941.4096 H    50.0982 WS  3.0887 WD 130.0000
+1494   01:18:19  LO  AP43             con1-ce/AP43     9886   TD    4.5556 PA   0.0000 PR    0.0000
+1495   01:18:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1496   01:20:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0003    -3.3398    0.3569   339
+1497   01:20:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1498   01:20:19  LO  AP43             con1-ce/AP43     9886   REF   0.1464 SQ  -0.1142
+1499   01:20:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  012019 281 2013
+1500   01:20:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1501   01:20:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1502   01:20:19  LO  AP43             con1-ce/AP43     9886   T    15.0000 P  941.4096 H    48.7762 WS  0.0000 WD 241.0000
+1503   01:20:19  LO  AP43             con1-ce/AP43     9886   TD    4.1667 PA   0.0000 PR    0.0000
+1504   01:20:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1505   01:22:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0002    -3.3396    0.3569   339
+1506   01:22:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1507   01:22:19  LO  AP43             con1-ce/AP43     9886   REF   0.1472 SQ  -0.1142
+1508   01:22:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  012219 281 2013
+1509   01:22:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1510   01:22:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1511   01:22:19  LO  AP43             con1-ce/AP43     9886   T    15.2778 P  941.3757 H    50.3574 WS  1.8532 WD 132.0000
+1512   01:22:19  LO  AP43             con1-ce/AP43     9886   TD    4.8889 PA   0.0000 PR    0.0000
+1513   01:22:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1514   01:24:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0006    -3.3394    0.3567   339
+1515   01:24:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1516   01:24:19  LO  AP43             con1-ce/AP43     9886   REF   0.1467 SQ  -0.1142
+1517   01:24:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  012419 281 2013
+1518   01:24:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1519   01:24:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1520   01:24:19  LO  AP43             con1-ce/AP43     9886   T    15.3889 P  941.3419 H    48.8725 WS  3.0887 WD  98.0000
+1521   01:24:19  LO  AP43             con1-ce/AP43     9886   TD    4.5556 PA   0.0000 PR    0.0000
+1522   01:24:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9995 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1523   01:26:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0001    -3.3395    0.3568   339
+1524   01:26:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1525   01:26:19  LO  AP43             con1-ce/AP43     9886   REF   0.1467 SQ  -0.1142
+1526   01:26:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  012619 281 2013
+1527   01:26:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1528   01:26:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1529   01:26:19  LO  AP43             con1-ce/AP43     9886   T    15.3889 P  941.3419 H    48.8725 WS  4.9419 WD  19.0000
+1530   01:26:19  LO  AP43             con1-ce/AP43     9886   TD    4.5556 PA   0.0000 PR    0.0000
+1531   01:26:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9996 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1532   01:28:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0001    -3.3397    0.3568   339
+1533   01:28:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1534   01:28:19  LO  AP43             con1-ce/AP43     9886   REF   0.1468 SQ  -0.1142
+1535   01:28:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  012819 281 2013
+1536   01:28:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1537   01:28:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1538   01:28:19  LO  AP43             con1-ce/AP43     9886   T    15.6667 P  941.2742 H    48.7551 WS  2.4709 WD 316.0000
+1539   01:28:19  LO  AP43             con1-ce/AP43     9886   TD    4.7778 PA   0.0000 PR    0.0000
+1540   01:28:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    143.9996 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1541   01:29:45  C!  con1-ce          WSS-nmc-ws6      11003  LOST CONTACT WITH WORKSTATION nmc-ws6 BECAUSE:  Did not receive Timestamp from WS
+1542   01:30:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0002    -3.3395    0.3568   339
+1543   01:30:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1544   01:30:19  LO  AP43             con1-ce/AP43     9886   REF   0.1460 SQ  -0.1142
+1545   01:30:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  013019 281 2013
+1546   01:30:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1547   01:30:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1548   01:30:19  LO  AP43             con1-ce/AP43     9886   T    15.2778 P  941.2403 H    47.5551 WS  6.1773 WD 334.0000
+1549   01:30:19  LO  AP43             con1-ce/AP43     9886   TD    4.0556 PA   0.0000 PR    0.0000
+1550   01:30:19  LO  AP43             con1-ce/AP43     9886   ME  359.9999    143.9996 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1551   01:30:45  LO  con1-ce          con1-ce          6110   con1-ce:C!:11003, repeated 17 time(s) in 60 seconds.
+1552   01:30:59  C!  con1-ce          WSS-nmc-ws11     11003  LOST CONTACT WITH WORKSTATION nmc-ws11 BECAUSE:  Did not receive Timestamp from WS
+1553   01:31:59  LO  con1-ce          con1-ce          6110   con1-ce:C!:11003, repeated 13 time(s) in 60 seconds.
+1554   01:32:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0003    -3.3395    0.3569   339
+1555   01:32:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1556   01:32:19  LO  AP43             con1-ce/AP43     9886   REF   0.1465 SQ  -0.1142
+1557   01:32:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  013219 281 2013
+1558   01:32:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1559   01:32:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1560   01:32:19  LO  AP43             con1-ce/AP43     9886   T    15.5000 P  941.2742 H    48.3436 WS  6.7951 WD  45.0000
+1561   01:32:19  LO  AP43             con1-ce/AP43     9886   TD    4.5000 PA   0.0000 PR    0.0000
+1562   01:32:19  LO  AP43             con1-ce/AP43     9886   ME  359.9999    143.9996 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1563   01:34:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001       0.0002    -3.3396    0.3569   339
+1564   01:34:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1565   01:34:19  LO  AP43             con1-ce/AP43     9886   REF   0.1458 SQ  -0.1142
+1566   01:34:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  013419 281 2013
+1567   01:34:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1568   01:34:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1569   01:34:19  LO  AP43             con1-ce/AP43     9886   T    15.8889 P  941.2742 H    46.0960 WS  5.5596 WD  33.0000
+1570   01:34:19  LO  AP43             con1-ce/AP43     9886   TD    4.1667 PA   0.0000 PR    0.0000
+1571   01:34:19  LO  AP43             con1-ce/AP43     9886   ME  359.9999    143.9996 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1572   01:36:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0003    -3.3401    0.3570   339
+1573   01:36:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1574   01:36:19  LO  AP43             con1-ce/AP43     9886   REF   0.1453 SQ  -0.1142
+1575   01:36:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  013619 281 2013
+1576   01:36:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1577   01:36:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1578   01:36:19  LO  AP43             con1-ce/AP43     9886   T    15.3889 P  941.2742 H    45.6179 WS  1.8532 WD  87.0000
+1579   01:36:19  LO  AP43             con1-ce/AP43     9886   TD    3.5556 PA   0.0000 PR    0.0000
+1580   01:36:19  LO  AP43             con1-ce/AP43     9886   ME  359.9999    143.9996 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1581   01:38:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0007    -3.3380    0.3566   339
+1582   01:38:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1583   01:38:19  LO  AP43             con1-ce/AP43     9886   REF   0.1456 SQ  -0.1142
+1584   01:38:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  013819 281 2013
+1585   01:38:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1586   01:38:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1587   01:38:19  LO  AP43             con1-ce/AP43     9886   T    15.6667 P  941.2065 H    45.8638 WS  4.9419 WD 163.0000
+1588   01:38:19  LO  AP43             con1-ce/AP43     9886   TD    3.8889 PA   0.0000 PR    0.0000
+1589   01:38:19  LO  AP43             con1-ce/AP43     9886   ME  359.9999    143.9996 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1590   01:40:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0001      -0.0001    -3.3394    0.3566   339
+1591   01:40:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1592   01:40:19  LO  AP43             con1-ce/AP43     9886   REF   0.1457 SQ  -0.1142
+1593   01:40:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  014019 281 2013
+1594   01:40:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1595   01:40:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1596   01:40:19  LO  AP43             con1-ce/AP43     9886   T    15.6667 P  941.2065 H    46.2166 WS  5.5596 WD 324.0000
+1597   01:40:19  LO  AP43             con1-ce/AP43     9886   TD    4.0000 PA   0.0000 PR    0.0000
+1598   01:40:19  LO  AP43             con1-ce/AP43     9886   ME  359.9999    143.9996 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1599   01:40:52  OD  cdscc/nmc-ws1    dss43-aca        124    ap stow
+1600   01:40:52  DR  AP43             cdscc/nmc-ws1    124    RESP_STARTED: stow
+1601   01:40:53  PA  AP43             con1-ce/AP43     6543   ME drive / torquer power on
+1602   01:41:30  PA  AP43             con1-ce/AP43     6531   ANT drives on
+1603   01:41:31  PR  AP43             con1-ce/AP43     9904   Make safety page, then enter RESM STOW
+1604   01:41:54  OD  cdscc/nmc-ws1    dss43-aca        125    ap move r p1
+1605   01:41:55  DR  AP43             cdscc/nmc-ws1    125    RESP_REJECTED: Invalid command while
+1606   01:42:00  OD  cdscc/nmc-ws1    dss43-aca        126    ap move r p3
+1607   01:42:00  DR  AP43             cdscc/nmc-ws1    126    RESP_REJECTED: Invalid command while
+1608   01:42:18  OD  cdscc/nmc-ws1    dss43-aca        127    ap move r 240
+1609   01:42:18  DR  AP43             cdscc/nmc-ws1    127    RESP_REJECTED: Invalid command while
+1610   01:42:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0005      -0.0003    -3.3395    0.3568   339
+1611   01:42:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1612   01:42:19  LO  AP43             con1-ce/AP43     9886   REF   0.1459 SQ  -0.1142
+1613   01:42:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  014219 281 2013
+1614   01:42:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1615   01:42:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1616   01:42:19  LO  AP43             con1-ce/AP43     9886   T    16.0000 P  941.1725 H    46.1240 WS 14.8256 WD  18.0000
+1617   01:42:19  LO  AP43             con1-ce/AP43     9886   TD    4.2778 PA   0.0000 PR    0.0000
+1618   01:42:19  LO  AP43             con1-ce/AP43     9886   ME  359.9999    144.0000 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1619   01:42:22  OD  cdscc/nmc-ws1    dss43-aca        128    ap stop
+1620   01:42:22  DR  AP43             cdscc/nmc-ws1    128    RESP_STARTED: stop
+1621   01:42:27  CA  AP43             con1-ce/AP43     8073   STOP completed
+1622   01:42:30  OD  cdscc/nmc-ws1    dss43-aca        129    ap move r 240
+1623   01:42:30  DR  AP43             cdscc/nmc-ws1    129    RESP_STARTED: move r 240
+1624   01:42:32  PA  AP43             con1-ce/AP43     6548   Rotation brake released
+1625   01:42:39  OD  cdscc/nmc-ws1    dss43-aca        130    ap move r p3
+1626   01:42:39  DR  AP43             cdscc/nmc-ws1    130    RESP_STARTED: move r p3
+1627   01:42:44  PA  AP43             con1-ce/AP43     6568   R axis at SR index pin position
+1628   01:42:44  PA  US43             con1-ce/US43     4004   Switch SUBRFTR has moved to position E.
+1629   01:43:01  PA  US43             con1-ce/US43     4004   Switch SUBRFTR has moved to position B.
+1630   01:43:02  PA  AP43             con1-ce/AP43     6568   R axis at SR index pin position
+1631   01:43:20  PA  AP43             con1-ce/AP43     6570   SR index pin inserted
+1632   01:43:20  PA  AP43             con1-ce/AP43     6549   Rotation brake set
+1633   01:43:20  CA  AP43             con1-ce/AP43     8014   MOVE R  completed
+1634   01:43:29  OD  cdscc/nmc-ws1    dss43-aca        131    ap stow
+1635   01:43:29  DR  AP43             cdscc/nmc-ws1    131    RESP_STARTED: stow
+1636   01:43:35  PR  AP43             con1-ce/AP43     9904   Make safety page, then enter RESM STOW
+1637   01:43:43  OD  cdscc/nmc-ws1    dss43-aca        132    ap resm stow
+1638   01:43:44  DR  AP43             cdscc/nmc-ws1    132    COMPLETED. resm stow
+1639   01:43:58  PA  AP43             con1-ce/AP43     6540   HA "brake" released
+1640   01:43:58  PA  AP43             con1-ce/AP43     6536   DEC "brake" released
+1641   01:44:01  C!  AP43             con1-ce/AP43     277    EL brake failed: #4
+1642   01:44:03  C!  AP43             con1-ce/AP43     398    REL AZ failed to complete
+1643   01:44:03  C!  AP43             con1-ce/AP43     399    REL EL failed to complete
+1644   01:44:03  CA  AP43             con1-ce/AP43     8028   REL SR completed
+1645   01:44:03  CA  AP43             con1-ce/AP43     8027   REL ME completed
+1646   01:44:19  LO  AP43             con1-ce/AP43     9886   ENC  16.9996CCW  88.0005      -0.1082    -2.9492    0.1101   240
+1647   01:44:19  LO  AP43             con1-ce/AP43     9886   PRE 302.2486      5.8654 MOF   0.0000     0.0000
+1648   01:44:19  LO  AP43             con1-ce/AP43     9886   REF   0.1451 SQ  -0.1009
+1649   01:44:19  LO  AP43             con1-ce/AP43     9886   SYS  -0.0450      0.0100 TIME  014419 281 2013
+1650   01:44:19  LO  AP43             con1-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1651   01:44:19  LO  AP43             con1-ce/AP43     9886   TLC  -0.0000     -0.0000
+1652   01:44:19  LO  AP43             con1-ce/AP43     9886   T    15.5556 P  941.2403 H    44.9640 WS  4.3241 WD 339.0000
+1653   01:44:19  LO  AP43             con1-ce/AP43     9886   TD    3.5000 PA   0.0000 PR    0.0000
+1654   01:44:19  LO  AP43             con1-ce/AP43     9886   ME  360.0000    144.0000 AC    0.000000   0.000000  MODE 	«”Øÿ¾ôˆ ()
+1655   01:44:26  PA  con1-block12725  con1-ce          4      The 'e'Log' block has completed execution.
+1656   01:44:28  PA  con1-block12739  con1-ce          2      Block "TDN-274209 e'Survey SCN 099 Close" displayed message, "{ You have not answered the question 'Did you have non-DR hardware/software problems?'. } {} { You also have not answered the question 'Did the pass require any changes/communications below?'. } {} { It would be nice if you would complete the survey before closing it. }" with the following button(s), "{Close it Anyway} Cancel"
+1657   01:44:32  PA  con1-block12739  con1-ce          2      Block "TDN-274209 e'Survey SCN 099 Close" received input, "Close it Anyway" for message, "{ You have not answered the question 'Did you have non-DR hardware/software problems?'. } {} { You also have not answered the question 'Did the pass require any changes/communications below?'. } {} { It would be nice if you would complete the survey before closing it. }"
+1658   01:44:32  PA  con1-block12739  con1-ce          4      The 'e'Survey' block has completed execution.
+1659   01:45:24  OD  cdscc/nmc-ws1    con1-ce          133    rls all
+1660   01:45:24  DR  con1-ce          cdscc/nmc-ws1    133    COMPLETED. ALL EQUIPMENT RELEASED.
+1661   01:45:34  PA  con1-ce          con1-ce          50006  AP43 IS UNASSIGNED
+1662   01:45:44  PA  con1-ce          con1-ce          50006  U43 IS UNASSIGNED
+1663   01:45:49  PA  con1-ce          con1-ce          50006  US43 IS UNASSIGNED
+1664   01:45:50  PA  con1-ce          con1-ce          52000  Closed connection log file: 132802054.L01.4309900999.0

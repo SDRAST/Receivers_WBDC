@@ -1,0 +1,1186 @@
+1      02:16:16  PA  con5-ce          con5-ce          52002  Opened connection log file with package ID 0: 132950216.L05.4305000001.0
+2      02:16:16  EQ  con5-ce          con5-ce          1      EQUIPMENT:  PCI DC01 AP43 U43 US43
+3      02:16:16  W!  con5-ce          con5-ce          20004  FAILED TO SEND SUPPORT DATA DIST REQUEST: SC50 FRANZCODE NOT PRESENT
+4      02:16:16  PR  PCI              con5-ce/PCI      21     Received ASSIGN CCN, new fa /fa/cdscc/con5-pci
+5      02:16:16  PA  con5-ce          con5-ce          50005  PCI IS ASSIGNED
+6      02:16:16  W!  PCI              con5-ce/PCI      17     DDC link list NOT VALID
+7      02:16:16  W!  PCI              con5-ce/PCI      17     DDC link list NOT VALID
+8      02:16:17  PR  PCI              con5-ce/PCI      25     Weather data state NOVALID
+9      02:16:17  PA  con5-ce          con5-ce          50005  US43 IS ASSIGNED
+10     02:16:17  LO  US43             con5-ce/US43     6000   UWV is UWV-6222-OP CV3.1.0, Build B1 of May 20 2008 11:54:24.
+11     02:16:17  PA  US43             con5-ce/US43     4002   Maintenance disabled. Control Mode = NMC.
+12     02:16:17  LO  U43              con5-ce/U43      6001   UPL on dss43upa1 is UPL-6167-OP JV10.7.1, Build 10.7.1 of Aug  1 2013 10:39:55.
+13     02:16:17  W!  U43              con5-ce/U43      2020   No Uplink S/C (UPL_SC) table for S/C 50; mission ID unknown.
+14     02:16:17  C!  U43              con5-ce/U43      11025  CMD Config Error: No CMD service table for S/C 50, SET='DEFAULT'.
+15     02:16:17  C!  U43              con5-ce/U43      21012  ETX Config Error: S/C 50 has no valid ETX spacecraft table named 'DEFAULT'.
+16     02:16:17  PA  con5-ce          con5-ce          50005  AP43 IS ASSIGNED
+17     02:16:17  CA  U43              con5-ce/U43      5046   RNG configured for activity: In Service.
+18     02:16:17  LO  AP43             con5-ce/AP43     9884   APC is now in ASSIGNED mode
+19     02:16:17  W!  AP43             con5-ce/AP43     2509   Unable to read sem file for encoder mode. Using def43.sem.
+20     02:16:17  W!  AP43             con5-ce/AP43     2509   Unable to read sem file for autocollimator 2 mode. Using def43.ac2.
+21     02:16:17  PR  AP43             con5-ce/AP43     9905   No predicts. Specify predicts, then enter TRK
+22     02:16:18  PA  con5-ce          con5-ce          50005  U43 IS ASSIGNED
+23     02:16:18  PA  US43             con5-ce/US43     4001   Auto configuration in progress for SC 50
+24     02:16:19  W!  US43             con5-ce/US43     2010   Auto configuration ignored. No support data found.
+25     02:16:22  PA  con5-ce          con5-ce          50005  DC01 IS ASSIGNED
+26     02:16:22  W!  DC01             con5-ce/DC01     2124   Rng ref ratio mismatch. DCC: 221/23968, UPL: 0/0. May need to INIT.
+27     02:16:24  LO  DC01             con5-ce/DC01     3417   DCC1 BOOT TIME: 293 09:17:16
+28     02:16:24  PA  DC01             con5-ce/DC01     3408   Dcc version is DTT-6090-OPK V11.1.3
+29     02:16:24  W!  DC01             con5-ce/DC01     2120   UPL mon data Band U-up disagrees with cfg Rng Band S-up. May need to INIT.
+30     02:16:25  LO  DC01             con5-ce/DC01     3601   NAME:0050.scap CREATED=10/218 14:00:00 MOD_NSS=11/297 16:22:54
+31     02:16:25  DA  DC01             con5-ce/DC01     3160   M3_VEC_SET invalid value! set to default (0=NONE)
+32     02:16:25  LO  DC01             con5-ce/DC01     3606   MEM USED FOR REC43 IS  0.00%
+33     02:16:25  LO  DC01             con5-ce/DC01     3404   REC1 BOOT TIME: 288 21:47:01
+34     02:16:25  DA  DC01             con5-ce/DC01     3215   UPL exciter ratio data not available using num 221 den 23968
+35     02:16:26  PA  DC01             con5-ce/DC01     3409   SPACECRAFT FILE LOADED. NAME:0050.scap
+36     02:16:27  CA  AP43             con5-ce/AP43     8010   MOVE AZ 140.0000 completed
+37     02:16:27  LO  DC01             con5-ce/DC01     3404   REC1 BOOT TIME: 288 21:47:01
+38     02:16:28  LO  DC01             con5-ce/DC01     1418   RRP1 BOOT TIME: 157 05:43:58
+39     02:16:30  LO  DC01             con5-ce/DC01     3601   NAME:70msc50xx.cfg CREATED=02/301 08:19:03 MOD_NSS=11/297 16:02:25
+40     02:16:32  LO  DC01             con5-ce/DC01     3604   Configured DCC for SCN 50 Mission 254 Bands X-up X-dn
+41     02:16:33  LO  DC01             con5-ce/DC01     3603   SYNC CHECK FAILED FOR REC43. RETRYING ...
+42     02:16:33  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+43     02:16:33  LO  DC01             con5-ce/DC01     3603   SYNC CHECK FAILED FOR REC43. RETRYING ...
+44     02:16:33  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+45     02:16:34  C!  DC01             con5-ce/DC01     3001   DCC LOST CONNECTION WITH RRP STATE DATA
+46     02:16:34  W!  DC01             con5-ce/DC01     2101   MISMATCHED CNF: RNG UGC POL U BUT RCV UGC POL R. Accepting RCV UGC.
+47     02:16:34  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+48     02:16:36  PA  DC01             con5-ce/DC01     5069   DCC: TLP Configuration Started
+49     02:16:37  PA  DC01             con5-ce/DC01     3402   DCC REGAINED CONNECTION TO RRP - NEED TO 'INIT RCV'
+50     02:16:37  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+51     02:16:38  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+52     02:16:38  LO  DC01             con5-ce/DC01     5193   TLP1 BOOT TIME: 253 05:29:11
+53     02:16:38  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+54     02:16:39  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+55     02:16:39  PA  DC01             con5-ce/DC01     5120   TLP: TLP TIME: YR=2013 DAY=295 HR=2 MIN=16 SEC=36
+56     02:16:40  PA  DC01             con5-ce/DC01     1603   SYMBOL IQ CHANGED TO D_ARM
+57     02:16:41  PA  DC01             con5-ce/DC01     5182   TLP: TLP FM DTT-6096-OPK V11.1.3  Nov  8 2012
+58     02:16:41  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+59     02:16:41  DA  DC01             con5-ce/DC01     1125   Pc and Pt Inconsistent - Using Pt
+60     02:16:41  LR  DC01             con5-ce/DC01     31001  DTT-6090-OPK V11.1.3
+61     02:16:41  LR  DC01             con5-ce/DC01     31001  DTT-6090-OPK V11.1.3
+62     02:16:41  PA  DC01             con5-ce/DC01     1401   RCV/TLM CFG FILE IS LOADED. NAME:70msc50xx
+63     02:16:41  PA  DC01             con5-ce/DC01     5248   TLP: HL DCD (Dcd_cdscc_TisServer) ONLINE
+64     02:16:41  LO  DC01             con5-ce/DC01     1601   DDM: config file successfully loaded with status = 0
+65     02:16:41  LO  DC01             con5-ce/DC01     1601   DDM: config file load. tick count = 714624585, complete flag = 1, status = 0
+66     02:16:41  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+67     02:16:42  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+68     02:16:42  W!  DC01             con5-ce/DC01     3183   Missing rng cfg file: /nmcfs/nsp/support_data/0050/rngcfg/0050.rngcfg
+69     02:16:42  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+70     02:16:42  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+71     02:16:42  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+72     02:16:43  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+73     02:16:43  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+74     02:16:43  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+75     02:16:43  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+76     02:16:44  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+77     02:16:44  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+78     02:16:44  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+79     02:16:44  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+80     02:16:45  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+81     02:16:45  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+82     02:16:45  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+83     02:16:45  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+84     02:16:45  W!  DC01             con5-ce/DC01     2120   UPL mon data Band X-up disagrees with cfg Rng Band S-up. May need to INIT.
+85     02:16:45  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+86     02:16:46  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+87     02:16:46  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+88     02:16:46  LO  DC01             con5-ce/DC01     2600   Rngif task received INIT OD
+89     02:16:46  LO  DC01             con5-ce/DC01     2603   Configured Rng for SCN 50 Mission 254 Bands X-up X-dn turnaround 880 / 749
+90     02:16:46  LO  DC01             con5-ce/DC01     2607   Configured with uplink rng reference ratio 221 / 23968
+91     02:16:46  C!  con5-ce          WSS-nmc-ws13     11003  LOST CONTACT WITH WORKSTATION nmc-ws13 BECAUSE:  Did not receive Timestamp from WS
+92     02:16:46  LO  DC01             con5-ce/DC01     2600   retrying Data Server init after 19397 seconds
+93     02:16:46  LO  DC01             con5-ce/DC01     2600   Cnf for DCD Data server output
+94     02:16:47  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+95     02:16:47  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+96     02:16:47  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+97     02:16:47  PA  DC01             con5-ce/DC01     3405   RNG CAL FILE LOADED
+98     02:16:47  DA  DC01             con5-ce/DC01     3200   Missing rng cfg file: /nmcfs/nsp/support_data/0050/rngcfg/0050.rngcfg
+99     02:16:47  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+100    02:16:47  DA  DC01             con5-ce/DC01     3208   Open error: pdx dir: directory /nmcfs/nsp/support_data/0050/trk/
+101    02:16:47  DA  DC01             con5-ce/DC01     3208   Open error: pdx dir: directory /nmcfs/nsp/support_data/0050/tlm/
+102    02:16:47  W!  DC01             con5-ce/DC01     2124   Rng ref ratio mismatch. DCC: 221/23968, UPL: 0/0. May need to INIT.
+103    02:16:48  W!  DC01             con5-ce/DC01     3111   LINK CFG ERROR: LNA NOT IN UGC DATA: X-BAND RCP
+104    02:16:48  DA  DC01             con5-ce/DC01     3201   DEFAULTING LNA FOR DOWNLINK CHANNEL 1 TO NONE
+105    02:16:48  PA  DC01             con5-ce/DC01     3400   CNF LNA
+106    02:16:48  PA  DC01             con5-ce/DC01     3414   USING DEFAULT TIME TAG OFFSET OF 2500.000000 ns.
+107    02:16:48  PA  DC01             con5-ce/DC01     3400   INIT: waiting for TLP to finish initializing
+108    02:16:48  W!  DC01             con5-ce/DC01     2120   UPL mon data Band U-up disagrees with cfg Rng Band X-up. May need to INIT.
+109    02:16:48  DA  DC01             con5-ce/DC01     3200   Missing rng cfg file: /nmcfs/nsp/support_data/0050/rngcfg/0050.rngcfg
+110    02:16:48  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+111    02:16:48  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+112    02:16:48  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+113    02:16:48  W!  DC01             con5-ce/DC01     2124   Rng ref ratio mismatch. DCC: 221/23968, UPL: 0/0. May need to INIT.
+114    02:16:48  W!  DC01             con5-ce/DC01     2120   UPL mon data Band U-up disagrees with cfg Rng Band X-up. May need to INIT.
+115    02:16:48  DA  DC01             con5-ce/DC01     2203   RANGE CFG BLOCK exec_sendMsg FAIL, STS -1
+116    02:16:48  W!  DC01             con5-ce/DC01     2124   Rng ref ratio mismatch. DCC: 221/23968, UPL: 0/0. May need to INIT.
+117    02:16:48  W!  DC01             con5-ce/DC01     2120   UPL mon data Band U-up disagrees with cfg Rng Band X-up. May need to INIT.
+118    02:16:48  W!  DC01             con5-ce/DC01     2124   Rng ref ratio mismatch. DCC: 221/23968, UPL: 0/0. May need to INIT.
+119    02:16:48  W!  DC01             con5-ce/DC01     2120   UPL mon data Band U-up disagrees with cfg Rng Band X-up. May need to INIT.
+120    02:16:49  DA  DC01             con5-ce/DC01     3200   DR TIMEOUT (ALL) INIT: Missing rng cfg file: /nmcfs/nsp/support_data/0050/rng
+121    02:16:49  PA  DC01             con5-ce/DC01     3400   INITIALIZING RPB
+122    02:16:49  PA  DC01             con5-ce/DC01     3400   INITIALIZING RPB
+123    02:16:56  PA  DC01             con5-ce/DC01     5262   TLP: RECEIVED TIMETAG OFFSET(TTO) VALUE=0
+124    02:16:57  DA  DC01             con5-ce/DC01     3214   Default LO Frequency of 8100000000.000000 used
+125    02:16:58  CA  DC01             con5-ce/DC01     5025   DCC: TLP Configuration Completed
+126    02:17:03  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+127    02:17:03  C!  DC01             con5-ce/DC01     3023   BAND MISMATCH: IFS has NONE and RCV has X
+128    02:17:03  W!  DC01             con5-ce/DC01     3157   DCC CCN Q ERR: TIME OUT ON ASSIGN CCN IN QUEUE IN CTL TASK
+129    02:17:03  W!  DC01             con5-ce/DC01     2101   MISMATCHED CNF: RNG UGC POL R BUT RCV UGC POL U. Accepting RCV UGC.
+130    02:17:04  LO  AP43             con5-ce/AP43     9801   AZ CCW cable wrap
+131    02:17:05  PA  DC01             con5-ce/DC01     5810   DCC: Configuring TLP for SRT value 2000.000000
+132    02:17:06  PA  DC01             con5-ce/DC01     5262   TLP: RECEIVED TIMETAG OFFSET(TTO) VALUE=2500
+133    02:17:14  LO  AP43             con5-ce/AP43     9886   ENC 131.8009CCW  88.0001       0.0003     0.0036    0.0015   240
+134    02:17:14  LO  AP43             con5-ce/AP43     9886   PRE 299.3716     18.2613 MOF   0.0000     0.0000
+135    02:17:14  LO  AP43             con5-ce/AP43     9886   REF   0.0572 SQ   0.0001
+136    02:17:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0373      0.0105 TIME  021714 295 2013
+137    02:17:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+138    02:17:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+139    02:17:14  LO  AP43             con5-ce/AP43     9886   T    17.7778 P  940.1907 H    92.2840 WS  9.2660 WD 344.0000
+140    02:17:14  LO  AP43             con5-ce/AP43     9886   TD   16.5000 PA   1.5000 PR    0.0000
+141    02:17:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+142    02:17:23  OD  cdscc/nmc-ws4    con5-ce          195    D CTRL
+143    02:17:23  DR  con5-ce          cdscc/nmc-ws4    195    Processing. Sending request to workstation cdscc/nmc-ws4.
+144    02:17:24  DR  cdscc/nmc-ws4    cdscc/nmc-ws4    195    Completed. Display started on workstation cdscc/nmc-ws4
+145    02:17:25  OD  cdscc/nmc-ws4    con5-ce          196    D LOG
+146    02:17:25  DR  con5-ce          cdscc/nmc-ws4    196    Processing. Sending request to workstation cdscc/nmc-ws4.
+147    02:17:25  DR  cdscc/nmc-ws4    cdscc/nmc-ws4    196    Completed. Display started on workstation cdscc/nmc-ws4
+148    02:17:46  LO  con5-ce          con5-ce          6110   con5-ce:C!:11003, repeated 6 time(s) in 60 seconds.
+149    02:18:18  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+150    02:19:14  LO  AP43             con5-ce/AP43     9886   ENC 102.7002CCW  88.0001       0.0003     0.0039    0.0015   240
+151    02:19:14  LO  AP43             con5-ce/AP43     9886   PRE 299.0164     17.9053 MOF   0.0000     0.0000
+152    02:19:14  LO  AP43             con5-ce/AP43     9886   REF   0.0585 SQ   0.0001
+153    02:19:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0372      0.0106 TIME  021914 295 2013
+154    02:19:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+155    02:19:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+156    02:19:14  LO  AP43             con5-ce/AP43     9886   T    17.7778 P  940.2922 H    92.6081 WS 11.1192 WD 335.0000
+157    02:19:14  LO  AP43             con5-ce/AP43     9886   TD   16.5556 PA   1.5000 PR    0.0000
+158    02:19:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+159    02:19:33  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+160    02:20:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+161    02:20:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+162    02:20:11  OD  cdscc/nmc-ws4    dss43-aca        6      ap d cnf 2
+163    02:20:11  DR  AP43             cdscc/nmc-ws4    6      Processing. Sending request to workstation cdscc/nmc-ws4.
+164    02:20:11  DR  AP43             cdscc/nmc-ws4    6      Completed. Display started on workstation cdscc/nmc-ws4
+165    02:20:31  OD  cdscc/nmc-ws4    dss43-aca        3      AP43 D ME
+166    02:20:31  DR  dss43-aca        cdscc/nmc-ws4    3      Processing. Sending request to workstation cdscc/nmc-ws4.
+167    02:20:31  DR  AP43             cdscc/nmc-ws4    3      Completed. Display started on workstation cdscc/nmc-ws4
+168    02:20:33  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+169    02:20:35  OD  cdscc/nmc-ws4    dss43-aca        5      AP43 D SR
+170    02:20:35  DR  dss43-aca        cdscc/nmc-ws4    5      Processing. Sending request to workstation cdscc/nmc-ws4.
+171    02:20:35  DR  AP43             cdscc/nmc-ws4    5      Completed. Display started on workstation cdscc/nmc-ws4
+172    02:20:48  OD  cdscc/nmc-ws4    dss43-aca        7      AP43 D TRK
+173    02:20:48  DR  dss43-aca        cdscc/nmc-ws4    7      Processing. Sending request to workstation cdscc/nmc-ws4.
+174    02:20:48  DR  AP43             cdscc/nmc-ws4    7      Completed. Display started on workstation cdscc/nmc-ws4
+175    02:21:14  LO  AP43             con5-ce/AP43     9886   ENC  73.5998CCW  88.0001      -0.0001     0.0039    0.0014   240
+176    02:21:14  LO  AP43             con5-ce/AP43     9886   PRE 298.6632     17.5481 MOF   0.0000     0.0000
+177    02:21:14  LO  AP43             con5-ce/AP43     9886   REF   0.0596 SQ   0.0001
+178    02:21:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0372      0.0107 TIME  022114 295 2013
+179    02:21:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+180    02:21:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+181    02:21:14  LO  AP43             con5-ce/AP43     9886   T    17.7778 P  940.1907 H    91.6388 WS  8.6483 WD 336.0000
+182    02:21:14  LO  AP43             con5-ce/AP43     9886   TD   16.3889 PA   1.5000 PR    0.0000
+183    02:21:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+184    02:21:48  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+185    02:23:03  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+186    02:23:14  LO  AP43             con5-ce/AP43     9886   ENC  44.4998CCW  88.0001       0.0001     0.0039    0.0014   240
+187    02:23:14  LO  AP43             con5-ce/AP43     9886   PRE 298.3121     17.1896 MOF   0.0000     0.0000
+188    02:23:14  LO  AP43             con5-ce/AP43     9886   REF   0.0610 SQ   0.0001
+189    02:23:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0371      0.0108 TIME  022314 295 2013
+190    02:23:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+191    02:23:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+192    02:23:14  LO  AP43             con5-ce/AP43     9886   T    17.7778 P  940.1907 H    92.2840 WS 11.1192 WD 326.0000
+193    02:23:14  LO  AP43             con5-ce/AP43     9886   TD   16.5000 PA   1.5000 PR    0.0000
+194    02:23:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+195    02:24:18  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+196    02:25:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+197    02:25:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+198    02:25:14  LO  AP43             con5-ce/AP43     9886   ENC  16.9965CCW  88.0001       0.0001     0.0038    0.0014   240
+199    02:25:14  LO  AP43             con5-ce/AP43     9886   PRE 297.9630     16.8300 MOF   0.0000     0.0000
+200    02:25:14  LO  AP43             con5-ce/AP43     9886   REF   0.0622 SQ   0.0001
+201    02:25:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0371      0.0109 TIME  022514 295 2013
+202    02:25:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+203    02:25:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+204    02:25:14  LO  AP43             con5-ce/AP43     9886   T    17.6667 P  940.1907 H    92.2784 WS 11.1192 WD 337.0000
+205    02:25:14  LO  AP43             con5-ce/AP43     9886   TD   16.3889 PA   1.5000 PR    0.0000
+206    02:25:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+207    02:25:17  CA  AP43             con5-ce/AP43     8010   MOVE AZ  17.0000 completed
+208    02:25:19  LO  DC01             con5-ce/DC01     3603   SYNC CHECK FAILED FOR REC43. RETRYING ...
+209    02:25:29  PA  AP43             con5-ce/AP43     6535   AZ brake set
+210    02:25:33  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+211    02:25:35  LO  AP43             con5-ce/AP43     9837   COMPLETED: ctrl nmc
+212    02:25:35  PA  AP43             con5-ce/AP43     1359   NMC control enabled
+213    02:25:37  CA  AP43             con5-ce/AP43     8040   SET AZ completed
+214    02:26:48  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+215    02:27:14  LO  AP43             con5-ce/AP43     9886   ENC  16.9993CCW  88.0001      -0.0001     0.0036    0.0014   240
+216    02:27:14  LO  AP43             con5-ce/AP43     9886   PRE 297.6159     16.4692 MOF   0.0000     0.0000
+217    02:27:14  LO  AP43             con5-ce/AP43     9886   REF   0.0637 SQ   0.0001
+218    02:27:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0370      0.0110 TIME  022714 295 2013
+219    02:27:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+220    02:27:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+221    02:27:14  LO  AP43             con5-ce/AP43     9886   T    17.7778 P  940.1907 H    92.2840 WS 12.3547 WD 337.0000
+222    02:27:14  LO  AP43             con5-ce/AP43     9886   TD   16.5000 PA   1.5000 PR    0.0000
+223    02:27:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+224    02:28:03  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+225    02:29:14  LO  AP43             con5-ce/AP43     9886   ENC  16.9993CCW  88.0001      -0.0001     0.0037    0.0014   240
+226    02:29:14  LO  AP43             con5-ce/AP43     9886   PRE 297.2708     16.1073 MOF   0.0000     0.0000
+227    02:29:14  LO  AP43             con5-ce/AP43     9886   REF   0.0655 SQ   0.0001
+228    02:29:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0370      0.0111 TIME  022914 295 2013
+229    02:29:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+230    02:29:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+231    02:29:14  LO  AP43             con5-ce/AP43     9886   T    17.7778 P  940.1229 H    93.9148 WS 12.3547 WD 346.0000
+232    02:29:14  LO  AP43             con5-ce/AP43     9886   TD   16.7778 PA   1.5000 PR    0.0000
+233    02:29:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+234    02:29:18  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+235    02:30:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+236    02:30:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+237    02:30:33  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+238    02:31:14  LO  AP43             con5-ce/AP43     9886   ENC  16.9993CCW  88.0001      -0.0003     0.0037    0.0014   240
+239    02:31:14  LO  AP43             con5-ce/AP43     9886   PRE 296.9275     15.7443 MOF   0.0000     0.0000
+240    02:31:14  LO  AP43             con5-ce/AP43     9886   REF   0.0670 SQ   0.0001
+241    02:31:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0369      0.0112 TIME  023114 295 2013
+242    02:31:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+243    02:31:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+244    02:31:14  LO  AP43             con5-ce/AP43     9886   T    17.7778 P  940.0891 H    93.9148 WS 17.9143 WD 351.0000
+245    02:31:14  LO  AP43             con5-ce/AP43     9886   TD   16.7778 PA   1.5000 PR    0.0000
+246    02:31:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+247    02:31:48  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+248    02:33:03  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+249    02:33:14  LO  AP43             con5-ce/AP43     9886   ENC  16.9993CCW  88.0001      -0.0003     0.0033    0.0013   240
+250    02:33:14  LO  AP43             con5-ce/AP43     9886   PRE 296.5861     15.3801 MOF   0.0000     0.0000
+251    02:33:14  LO  AP43             con5-ce/AP43     9886   REF   0.0684 SQ   0.0001
+252    02:33:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0369      0.0113 TIME  023314 295 2013
+253    02:33:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+254    02:33:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+255    02:33:14  LO  AP43             con5-ce/AP43     9886   T    17.7778 P  940.0552 H    92.6081 WS 17.2965 WD 339.0000
+256    02:33:14  LO  AP43             con5-ce/AP43     9886   TD   16.5556 PA   1.5000 PR    0.0000
+257    02:33:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+258    02:33:28  OD  cdscc/nmc-ws4    dss43-aca        11     ap move r p1r
+259    02:33:28  DR  AP43             cdscc/nmc-ws4    11     RESP_STARTED: move r p1r
+260    02:33:31  PA  AP43             con5-ce/AP43     6569   SR index pin retracted
+261    02:33:31  PA  AP43             con5-ce/AP43     6548   Rotation brake released
+262    02:34:01  PA  US43             con5-ce/US43     4004   Switch SUBRFTR has moved to position A.
+263    02:34:02  PA  AP43             con5-ce/AP43     6568   R axis at SR index pin position
+264    02:34:16  PA  AP43             con5-ce/AP43     6570   SR index pin inserted
+265    02:34:16  PA  AP43             con5-ce/AP43     6549   Rotation brake set
+266    02:34:16  CA  AP43             con5-ce/AP43     8014   MOVE R  completed
+267    02:34:16  W!  AP43             con5-ce/AP43     2509   Unable to read sem file for autocollimator 2 mode. Using def43.ac2.
+268    02:34:18  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+269    02:35:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+270    02:35:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+271    02:35:14  LO  AP43             con5-ce/AP43     9886   ENC  16.9993CCW  88.0001      -0.0903     0.7937    0.0713   336
+272    02:35:14  LO  AP43             con5-ce/AP43     9886   PRE 296.2466     15.0149 MOF   0.0000     0.0000
+273    02:35:14  LO  AP43             con5-ce/AP43     9886   REF   0.0700 SQ   0.0271
+274    02:35:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0368      0.0114 TIME  023514 295 2013
+275    02:35:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+276    02:35:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+277    02:35:14  LO  AP43             con5-ce/AP43     9886   T    17.7778 P  940.0213 H    92.2840 WS 11.7369 WD 342.0000
+278    02:35:14  LO  AP43             con5-ce/AP43     9886   TD   16.5000 PA   1.5000 PR    0.0000
+279    02:35:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+280    02:35:21  OD  cdscc/nmc-ws4    dss43-aca        12     ap move r 339.029
+281    02:35:21  DR  AP43             cdscc/nmc-ws4    12     RESP_STARTED: move r 339.029
+282    02:35:24  PA  AP43             con5-ce/AP43     6569   SR index pin retracted
+283    02:35:33  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+284    02:35:39  PA  AP43             con5-ce/AP43     6548   Rotation brake released
+285    02:35:41  CA  AP43             con5-ce/AP43     8014   MOVE R 339.0290 completed
+286    02:35:41  W!  AP43             con5-ce/AP43     2509   Unable to read sem file for autocollimator 2 mode. Using def43.ac2.
+287    02:36:39  C!  US43             con5-ce/US43     1014   Fuse Burned, Cable Disconnected or Switch SUBRFTR is malfunctioning.
+288    02:36:48  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+289    02:37:14  LO  AP43             con5-ce/AP43     9886   ENC  16.9993CCW  88.0001      -0.0903     0.7943    0.0713   339
+290    02:37:14  LO  AP43             con5-ce/AP43     9886   PRE 295.9089     14.6486 MOF   0.0000     0.0000
+291    02:37:14  LO  AP43             con5-ce/AP43     9886   REF   0.0718 SQ   0.0272
+292    02:37:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0368      0.0115 TIME  023714 295 2013
+293    02:37:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+294    02:37:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+295    02:37:14  LO  AP43             con5-ce/AP43     9886   T    17.7778 P  939.9536 H    92.2840 WS 14.2079 WD 337.0000
+296    02:37:14  LO  AP43             con5-ce/AP43     9886   TD   16.5000 PA   1.5000 PR    0.0000
+297    02:37:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+298    02:38:03  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+299    02:39:14  LO  AP43             con5-ce/AP43     9886   ENC  16.9993CCW  88.0001      -0.0905     0.7932    0.0713   339
+300    02:39:14  LO  AP43             con5-ce/AP43     9886   PRE 295.5729     14.2812 MOF   0.0000     0.0000
+301    02:39:14  LO  AP43             con5-ce/AP43     9886   REF   0.0737 SQ   0.0271
+302    02:39:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0368      0.0116 TIME  023914 295 2013
+303    02:39:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+304    02:39:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+305    02:39:14  LO  AP43             con5-ce/AP43     9886   T    17.8889 P  939.9198 H    91.9668 WS  8.0305 WD 336.0000
+306    02:39:14  LO  AP43             con5-ce/AP43     9886   TD   16.5556 PA   1.5000 PR    0.0000
+307    02:39:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+308    02:39:19  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+309    02:40:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+310    02:40:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+311    02:40:34  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+312    02:41:14  LO  AP43             con5-ce/AP43     9886   ENC  16.9993CCW  88.0001      -0.0902     0.7929    0.0712   339
+313    02:41:14  LO  AP43             con5-ce/AP43     9886   PRE 295.2387     13.9129 MOF   0.0000     0.0000
+314    02:41:14  LO  AP43             con5-ce/AP43     9886   REF   0.0756 SQ   0.0271
+315    02:41:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0367      0.0117 TIME  024114 295 2013
+316    02:41:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+317    02:41:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+318    02:41:14  LO  AP43             con5-ce/AP43     9886   T    17.8889 P  939.8859 H    91.6450 WS  9.2660 WD 332.0000
+319    02:41:14  LO  AP43             con5-ce/AP43     9886   TD   16.5000 PA   1.5000 PR    0.0000
+320    02:41:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+321    02:41:19  LO  DC01             con5-ce/DC01     3603   SYNC CHECK FAILED FOR REC43. RETRYING ...
+322    02:41:49  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+323    02:43:04  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+324    02:43:14  LO  AP43             con5-ce/AP43     9886   ENC  16.9993CCW  88.0001      -0.0900     0.7930    0.0713   339
+325    02:43:14  LO  AP43             con5-ce/AP43     9886   PRE 294.9063     13.5435 MOF   0.0000     0.0000
+326    02:43:14  LO  AP43             con5-ce/AP43     9886   REF   0.0775 SQ   0.0271
+327    02:43:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0367      0.0117 TIME  024314 295 2013
+328    02:43:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+329    02:43:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+330    02:43:14  LO  AP43             con5-ce/AP43     9886   T    17.8889 P  939.8521 H    91.0042 WS 10.5015 WD 340.0000
+331    02:43:14  LO  AP43             con5-ce/AP43     9886   TD   16.3889 PA   1.5000 PR    0.0000
+332    02:43:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+333    02:44:19  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+334    02:45:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+335    02:45:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+336    02:45:14  LO  AP43             con5-ce/AP43     9886   ENC  16.9993CCW  88.0001      -0.0901     0.7931    0.0713   339
+337    02:45:14  LO  AP43             con5-ce/AP43     9886   PRE 294.5755     13.1731 MOF   0.0000     0.0000
+338    02:45:14  LO  AP43             con5-ce/AP43     9886   REF   0.0795 SQ   0.0271
+339    02:45:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0367      0.0118 TIME  024514 295 2013
+340    02:45:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+341    02:45:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+342    02:45:14  LO  AP43             con5-ce/AP43     9886   T    17.7778 P  939.8182 H    90.9977 WS  7.4128 WD 338.0000
+343    02:45:14  LO  AP43             con5-ce/AP43     9886   TD   16.2778 PA   1.5000 PR    0.0000
+344    02:45:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+345    02:45:19  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+346    02:46:34  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+347    02:46:55  OD  pci              con5-dcc1        80     SNT E
+348    02:46:55  DR  DC01             pci              80     RESP_REJECTED: (RCV) SNT E: REC1 (DSS43): REJECTED CFG CHANGE FROM DCC1! INVALID LNA ID (0)
+349    02:47:14  LO  AP43             con5-ce/AP43     9886   ENC  16.9993CCW  88.0001      -0.0902     0.7929    0.0712   339
+350    02:47:14  LO  AP43             con5-ce/AP43     9886   PRE 294.2464     12.8017 MOF   0.0000     0.0000
+351    02:47:14  LO  AP43             con5-ce/AP43     9886   REF   0.0819 SQ   0.0271
+352    02:47:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0366      0.0119 TIME  024714 295 2013
+353    02:47:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+354    02:47:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+355    02:47:14  LO  AP43             con5-ce/AP43     9886   T    17.8889 P  939.6827 H    91.0042 WS  4.9419 WD 329.0000
+356    02:47:14  LO  AP43             con5-ce/AP43     9886   TD   16.3889 PA   1.5000 PR    0.0000
+357    02:47:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+358    02:47:49  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+359    02:48:09  OD  pci              con5-dcc1        81     SNT D
+360    02:48:09  DR  DC01             pci              81     RESP_REJECTED: (RCV) SNT D: REC1 (DSS43): REJECTED CFG CHANGE FROM DCC1! INVALID LNA ID (0)
+361    02:49:04  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+362    02:49:14  LO  AP43             con5-ce/AP43     9886   ENC  16.9993CCW  88.0001      -0.0902     0.7929    0.0712   339
+363    02:49:14  LO  AP43             con5-ce/AP43     9886   PRE 293.9189     12.4294 MOF   0.0000     0.0000
+364    02:49:14  LO  AP43             con5-ce/AP43     9886   REF   0.0850 SQ   0.0271
+365    02:49:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0366      0.0120 TIME  024914 295 2013
+366    02:49:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+367    02:49:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+368    02:49:14  LO  AP43             con5-ce/AP43     9886   T    18.0556 P  939.6150 H    92.9463 WS  0.6177 WD 329.0000
+369    02:49:14  LO  AP43             con5-ce/AP43     9886   TD   16.8889 PA   1.5000 PR    0.0000
+370    02:49:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+371    02:49:23  C!  AP43             con5-ce/AP43     380    Invalid wind speed. If wind speed becomes high, STOW
+372    02:49:33  PA  AP43             con5-ce/AP43     1380   Wind speed OK
+373    02:50:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+374    02:50:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+375    02:50:14  OD  pci              con5-dcc1        82     SNT E
+376    02:50:14  DR  DC01             pci              82     RESP_REJECTED: (RCV) SNT E: REC1 (DSS43): REJECTED CFG CHANGE FROM DCC1! INVALID LNA ID (0)
+377    02:50:19  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+378    02:51:14  LO  AP43             con5-ce/AP43     9886   ENC  16.9993CCW  88.0001      -0.0901     0.7928    0.0712   339
+379    02:51:14  LO  AP43             con5-ce/AP43     9886   PRE 293.5930     12.0561 MOF   0.0000     0.0000
+380    02:51:14  LO  AP43             con5-ce/AP43     9886   REF   0.0871 SQ   0.0271
+381    02:51:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0366      0.0121 TIME  025114 295 2013
+382    02:51:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+383    02:51:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+384    02:51:14  LO  AP43             con5-ce/AP43     9886   T    17.8889 P  939.6489 H    91.6450 WS  2.4709 WD 331.0000
+385    02:51:14  LO  AP43             con5-ce/AP43     9886   TD   16.5000 PA   1.5000 PR    0.0000
+386    02:51:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+387    02:51:34  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+388    02:51:36  OD  pci              con5-dcc1        83     SNT D
+389    02:51:36  DR  DC01             pci              83     RESP_REJECTED: (RCV) SNT D: REC1 (DSS43): REJECTED CFG CHANGE FROM DCC1! INVALID LNA ID (0)
+390    02:52:19  C!  con5-ce          WSS-nmc-ws13     11003  LOST CONTACT WITH WORKSTATION nmc-ws13 BECAUSE:  Did not receive Timestamp from WS
+391    02:52:49  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+392    02:53:14  LO  AP43             con5-ce/AP43     9886   ENC  16.9993CCW  88.0001      -0.0902     0.7927    0.0711   339
+393    02:53:14  LO  AP43             con5-ce/AP43     9886   PRE 293.2687     11.6819 MOF   0.0000     0.0000
+394    02:53:14  LO  AP43             con5-ce/AP43     9886   REF   0.0898 SQ   0.0271
+395    02:53:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0366      0.0122 TIME  025314 295 2013
+396    02:53:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+397    02:53:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+398    02:53:14  LO  AP43             con5-ce/AP43     9886   T    18.0000 P  939.6489 H    91.3304 WS  4.3241 WD 337.0000
+399    02:53:14  LO  AP43             con5-ce/AP43     9886   TD   16.5556 PA   1.5000 PR    0.0000
+400    02:53:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+401    02:53:19  LO  con5-ce          con5-ce          6110   con5-ce:C!:11003, repeated 10 time(s) in 60 seconds.
+402    02:54:04  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+403    02:54:13  C!  con5-ce          WSS-nmc-ws10     11003  LOST CONTACT WITH WORKSTATION nmc-ws10 BECAUSE:  Did not receive Timestamp from WS
+404    02:55:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+405    02:55:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+406    02:55:13  LO  con5-ce          con5-ce          6110   con5-ce:C!:11003, repeated 8 time(s) in 60 seconds.
+407    02:55:14  LO  AP43             con5-ce/AP43     9886   ENC  16.9993CCW  88.0001      -0.0901     0.7938    0.0711   339
+408    02:55:14  LO  AP43             con5-ce/AP43     9886   PRE 292.9459     11.3068 MOF   0.0000     0.0000
+409    02:55:14  LO  AP43             con5-ce/AP43     9886   REF   0.0927 SQ   0.0271
+410    02:55:14  LO  AP43             con5-ce/AP43     9886   SYS  -0.0366      0.0123 TIME  025514 295 2013
+411    02:55:14  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+412    02:55:14  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+413    02:55:14  LO  AP43             con5-ce/AP43     9886   T    18.0000 P  939.6489 H    91.3304 WS  1.8532 WD 345.0000
+414    02:55:14  LO  AP43             con5-ce/AP43     9886   TD   16.5556 PA   1.5000 PR    0.0000
+415    02:55:14  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+416    02:55:19  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+417    02:56:34  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+418    02:57:14  LO  AP43             con5-ce/AP43     9886   ENC  16.9993CCW  88.0001      -0.0900     0.7927    0.0711   339
+419    02:57:14  LO  AP43             con5-ce/AP43     9886   PRE 292.6246     10.9308 MOF   0.0000     0.0000
+420    02:57:14  LO  AP43             con5-ce/AP43     9886   REF   0.0957 SQ   0.0271
+421    02:57:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0365      0.0124 TIME  025714 295 2013
+422    02:57:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+423    02:57:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+424    02:57:15  LO  AP43             con5-ce/AP43     9886   T    18.0000 P  939.6489 H    91.0108 WS  7.4128 WD   7.0000
+425    02:57:15  LO  AP43             con5-ce/AP43     9886   TD   16.5000 PA   1.5000 PR    0.0000
+426    02:57:15  LO  AP43             con5-ce/AP43     9886   ME    0.0000    143.9998 AC    0.000000   0.000000  MODE  ()
+427    02:57:19  LO  DC01             con5-ce/DC01     3603   SYNC CHECK FAILED FOR REC43. RETRYING ...
+428    02:57:36  LO  AP43             con5-ce/AP43     9889   Support Data delivered to /acg/deliv/snZA_srA_sc050_dss43_pn0001.dco
+429    02:57:49  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+430    02:57:50  OD  cdscc/nmc-ws4    dss43-aca        13     ap dcos ZA
+431    02:57:50  DR  AP43             cdscc/nmc-ws4    13     COMPLETED. dcos ZA
+432    02:57:51  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+433    02:57:51  W!  AP43             con5-ce/AP43     2576   No autocollimator acquisition: #2
+434    02:57:53  OD  cdscc/nmc-ws4    dss43-aca        14     ap band k
+435    02:57:53  DR  AP43             cdscc/nmc-ws4    14     RESP_REJECTED: k IS NOT A VALID VALUE
+436    02:58:07  OD  cdscc/nmc-ws4    dss43-aca        15     ap semn 4kpna.ac2
+437    02:58:07  DR  AP43             cdscc/nmc-ws4    15     COMPLETED. semn 4kpna.ac2
+438    02:58:14  OD  cdscc/nmc-ws4    dss43-aca        16     ap band ku
+439    02:58:14  DR  AP43             cdscc/nmc-ws4    16     COMPLETED. band ku
+440    02:58:21  OD  cdscc/nmc-ws4    dss43-aca        17     ap mode ac2
+441    02:58:21  DR  AP43             cdscc/nmc-ws4    17     COMPLETED. mode ac2
+442    02:58:25  OD  cdscc/nmc-ws4    dss43-aca        18     ap trk
+443    02:58:25  DR  AP43             cdscc/nmc-ws4    18     RESP_STARTED: trk
+444    02:58:26  PA  AP43             con5-ce/AP43     6543   ME drive / torquer power on
+445    02:58:37  PR  AP43             con5-ce/AP43     9900   Make safety page, then enter RESM TRK
+446    02:59:04  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+447    02:59:15  LO  AP43             con5-ce/AP43     9886   ENC  16.9993CCW  88.0001      -0.0901     0.7939    0.0711   339
+448    02:59:15  LO  AP43             con5-ce/AP43     9886   PRE 307.8802     48.6595 MOF   0.0000     0.0000
+449    02:59:15  LO  AP43             con5-ce/AP43     9886   REF   0.0167 SQ   0.0272
+450    02:59:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0680      0.0073 TIME  025914 295 2013
+451    02:59:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+452    02:59:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+453    02:59:15  LO  AP43             con5-ce/AP43     9886   T    18.0000 P  939.6150 H    90.3745 WS  5.5596 WD   4.0000
+454    02:59:15  LO  AP43             con5-ce/AP43     9886   TD   16.3889 PA   1.5000 PR    0.0000
+455    02:59:15  LO  AP43             con5-ce/AP43     9886   ME    0.0000    144.0001 AC    0.000000   0.000000  MODE ENC (AC2)
+456    02:59:30  OD  cdscc/nmc-ws4    dss43-aca        19     ap resm trk
+457    02:59:31  DR  AP43             cdscc/nmc-ws4    19     COMPLETED. resm trk
+458    02:59:34  PA  AP43             con5-ce/AP43     6534   AZ brake released
+459    02:59:34  PA  AP43             con5-ce/AP43     6538   EL brake released
+460    02:59:34  PA  AP43             con5-ce/AP43     6540   HA "brake" released
+461    02:59:34  PA  AP43             con5-ce/AP43     6536   DEC "brake" released
+462    02:59:34  PA  AP43             con5-ce/AP43     6556   Y2 brake released
+463    02:59:34  PA  AP43             con5-ce/AP43     6555   Y1 brake released
+464    02:59:34  PA  AP43             con5-ce/AP43     6552   X brake released
+465    02:59:34  PA  AP43             con5-ce/AP43     6566   Z3 brake released
+466    02:59:34  PA  AP43             con5-ce/AP43     6564   Z2 brake released
+467    02:59:34  PA  AP43             con5-ce/AP43     6562   Z1 brake released
+468    02:59:52  CA  AP43             con5-ce/AP43     8095   TRK completed
+469    02:59:52  C!  AP43             con5-ce/AP43     356    EL TRK error is out of tolerance
+470    02:59:52  W!  AP43             con5-ce/AP43     2576   No autocollimator acquisition: #2
+471    02:59:52  PA  AP43             con5-ce/AP43     6504   Current time before 1st predict point
+472    02:59:53  C!  AP43             con5-ce/AP43     358    XEL TRK error is out of tolerance
+473    03:00:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+474    03:00:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+475    03:00:19  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+476    03:00:45  W!  AP43             con5-ce/AP43     2581   DEC encoder glitch @ 45.080595 vs. 20.888872
+477    03:00:45  PA  AP43             con5-ce/AP43     3581   DEC encoder OK
+478    03:00:54  LO  AP43             con5-ce/AP43     9803   DEC S cable wrap
+479    03:01:15  LO  AP43             con5-ce/AP43     9886   ENC 357.4323CCW  68.4232       0.0121    -1.7339    0.2662   339
+480    03:01:15  LO  AP43             con5-ce/AP43     9886   PRE 307.8802     48.6595 MOF   0.0000     0.0000
+481    03:01:15  LO  AP43             con5-ce/AP43     9886   REF   0.0168 SQ  -0.0593
+482    03:01:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0678      0.0073 TIME  030114 295 2013
+483    03:01:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+484    03:01:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+485    03:01:15  LO  AP43             con5-ce/AP43     9886   T    18.0556 P  939.4796 H    90.6955 WS  6.1773 WD  22.0000
+486    03:01:15  LO  AP43             con5-ce/AP43     9886   TD   16.5000 PA   1.5000 PR    0.0000
+487    03:01:15  LO  AP43             con5-ce/AP43     9886   ME   31.6794    353.9849 AC    0.000000   0.000000  MODE ENC (AC2)
+488    03:01:34  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+489    03:02:43  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+490    03:02:45  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+491    03:02:49  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+492    03:03:15  LO  AP43             con5-ce/AP43     9886   ENC 328.3316CCW  48.6749      -0.0001    -0.2501   -0.0258   339
+493    03:03:15  LO  AP43             con5-ce/AP43     9886   PRE 307.8802     48.6595 MOF   0.0000     0.0000
+494    03:03:15  LO  AP43             con5-ce/AP43     9886   REF   0.0166 SQ  -0.0086
+495    03:03:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0679      0.0073 TIME  030314 295 2013
+496    03:03:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+497    03:03:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+498    03:03:15  LO  AP43             con5-ce/AP43     9886   T    18.0556 P  939.3780 H    88.1828 WS  9.8837 WD  33.0000
+499    03:03:15  LO  AP43             con5-ce/AP43     9886   TD   16.0556 PA   1.5000 PR    0.0000
+500    03:03:15  LO  AP43             con5-ce/AP43     9886   ME   31.6459    353.9492 AC    0.000000   0.000000  MODE ENC (AC2)
+501    03:04:05  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+502    03:04:39  PA  AP43             con5-ce/AP43     3576   Autocollimator acquisition: #2
+503    03:04:42  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+504    03:04:43  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+505    03:04:45  PA  AP43             con5-ce/AP43     1358   XEL TRK error is within tolerance
+506    03:05:00  PA  AP43             con5-ce/AP43     7504   Current time after 1st predict point
+507    03:05:01  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+508    03:05:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+509    03:05:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+510    03:05:02  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+511    03:05:03  PA  AP43             con5-ce/AP43     3495   XEL TRK error is within tolerance
+512    03:05:03  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+513    03:05:15  LO  AP43             con5-ce/AP43     9886   ENC 307.7095CCW  48.5551      -0.0003    -0.2447   -0.0272   339
+514    03:05:15  LO  AP43             con5-ce/AP43     9886   PRE 307.8133     48.5547 MOF   0.0000     0.0000
+515    03:05:15  LO  AP43             con5-ce/AP43     9886   REF   0.0168 SQ  -0.0084
+516    03:05:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0938      0.0185 TIME  030514 295 2013
+517    03:05:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+518    03:05:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+519    03:05:15  LO  AP43             con5-ce/AP43     9886   T    18.1667 P  939.2764 H    90.0687 WS  8.6483 WD  33.0000
+520    03:05:15  LO  AP43             con5-ce/AP43     9886   TD   16.5000 PA   1.5000 PR    0.0000
+521    03:05:15  LO  AP43             con5-ce/AP43     9886   ME   31.7481    354.0002 AC    0.000465   0.000119  MODE AC2 (AC2)
+522    03:05:20  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+523    03:06:02  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+524    03:06:08  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+525    03:06:08  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+526    03:06:08  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+527    03:06:09  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+528    03:06:09  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+529    03:06:10  PA  AP43             con5-ce/AP43     3495   XEL TRK error is within tolerance
+530    03:06:12  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+531    03:06:13  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+532    03:06:14  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+533    03:06:15  PA  AP43             con5-ce/AP43     3495   XEL TRK error is within tolerance
+534    03:06:15  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+535    03:06:16  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+536    03:06:17  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+537    03:06:19  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+538    03:06:24  OD  cdscc/nmc-ws4    dss43-aca        20     ap po el -11
+539    03:06:24  DR  AP43             cdscc/nmc-ws4    20     COMPLETED. po el -11
+540    03:06:25  C!  AP43             con5-ce/AP43     355    EL RESID error is out of tolerance
+541    03:06:25  C!  AP43             con5-ce/AP43     356    EL TRK error is out of tolerance
+542    03:06:26  PA  AP43             con5-ce/AP43     1356   EL TRK error is within tolerance
+543    03:06:35  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+544    03:07:15  LO  AP43             con5-ce/AP43     9886   ENC 306.9398CCW  48.1208       0.0003    -0.2139   -0.0359   339
+545    03:07:15  LO  AP43             con5-ce/AP43     9886   PRE 307.0421     48.1298 MOF   0.0000    -0.0110
+546    03:07:15  LO  AP43             con5-ce/AP43     9886   REF   0.0169 SQ  -0.0073
+547    03:07:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0938      0.0186 TIME  030715 295 2013
+548    03:07:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+549    03:07:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+550    03:07:15  LO  AP43             con5-ce/AP43     9886   T    18.1667 P  939.3102 H    86.6535 WS  4.3241 WD  21.0000
+551    03:07:15  LO  AP43             con5-ce/AP43     9886   TD   15.8889 PA   1.5000 PR    0.0000
+552    03:07:15  LO  AP43             con5-ce/AP43     9886   ME   32.4231    353.9959 AC    -0.000755   0.000397  MODE AC2 (AC2)
+553    03:07:26  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+554    03:07:26  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+555    03:07:26  OD  cdscc/nmc-ws4    dss43-aca        21     ap po xel 15
+556    03:07:26  DR  AP43             cdscc/nmc-ws4    21     COMPLETED. po xel 15
+557    03:07:27  C!  AP43             con5-ce/AP43     357    XEL RESID error is out of tolerance
+558    03:07:27  C!  AP43             con5-ce/AP43     358    XEL TRK error is out of tolerance
+559    03:07:28  PA  AP43             con5-ce/AP43     1358   XEL TRK error is within tolerance
+560    03:07:28  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+561    03:07:29  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+562    03:07:33  PA  AP43             con5-ce/AP43     3495   XEL TRK error is within tolerance
+563    03:07:38  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+564    03:07:38  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+565    03:07:40  PA  AP43             con5-ce/AP43     3495   XEL TRK error is within tolerance
+566    03:07:40  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+567    03:07:50  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+568    03:08:42  OD  pci              dss43-aca        84     PO EL 0
+569    03:08:43  DR  AP43             pci              84     COMPLETED. PO EL 0
+570    03:08:43  OD  pci              dss43-aca        85     PO XEL 0
+571    03:08:44  PA  AP43             con5-ce/AP43     1355   EL RESID error is within tolerance
+572    03:08:44  DR  AP43             pci              85     COMPLETED. PO XEL 0
+573    03:08:44  C!  AP43             con5-ce/AP43     358    XEL TRK error is out of tolerance
+574    03:08:44  C!  AP43             con5-ce/AP43     356    EL TRK error is out of tolerance
+575    03:08:44  OD  pci              dss43-aca        86     STOP
+576    03:08:45  DR  AP43             pci              86     RESP_STARTED: STOP
+577    03:08:46  PA  AP43             con5-ce/AP43     1357   XEL RESID error is within tolerance
+578    03:08:46  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+579    03:08:46  PA  AP43             con5-ce/AP43     1356   EL TRK error is within tolerance
+580    03:08:50  CA  AP43             con5-ce/AP43     8073   STOP completed
+581    03:08:50  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+582    03:09:15  LO  AP43             con5-ce/AP43     9886   ENC 306.8911CCW  47.8372      -0.0004    -0.1852   -0.0434   339
+583    03:09:15  LO  AP43             con5-ce/AP43     9886   PRE 306.7376     47.8033 MOF   0.0000     0.0000
+584    03:09:15  LO  AP43             con5-ce/AP43     9886   REF   0.0170 SQ  -0.0063
+585    03:09:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0667      0.0077 TIME  030915 295 2013
+586    03:09:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+587    03:09:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+588    03:09:15  LO  AP43             con5-ce/AP43     9886   T    18.1667 P  939.3442 H    85.4405 WS  6.1773 WD 340.0000
+589    03:09:15  LO  AP43             con5-ce/AP43     9886   TD   15.6667 PA   1.5000 PR    0.0000
+590    03:09:15  LO  AP43             con5-ce/AP43     9886   ME   32.6364    354.1844 AC    0.000000   0.000000  MODE  ()
+591    03:10:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+592    03:10:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+593    03:10:05  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+594    03:10:20  C!  con5-ce          WSS-nmc-ws13     11003  LOST CONTACT WITH WORKSTATION nmc-ws13 BECAUSE:  Did not receive Timestamp from WS
+595    03:11:03  OD  pci              con5-dcc1        87     SNT E
+596    03:11:03  DR  DC01             pci              87     RESP_REJECTED: (RCV) SNT E: REC1 (DSS43): REJECTED CFG CHANGE FROM DCC1! INVALID LNA ID (0)
+597    03:11:15  LO  AP43             con5-ce/AP43     9886   ENC 306.8911CCW  47.8372      -0.0001    -0.1863   -0.0432   339
+598    03:11:15  LO  AP43             con5-ce/AP43     9886   PRE 306.1240     47.3447 MOF   0.0000     0.0000
+599    03:11:15  LO  AP43             con5-ce/AP43     9886   REF   0.0173 SQ  -0.0064
+600    03:11:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0660      0.0078 TIME  031115 295 2013
+601    03:11:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+602    03:11:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+603    03:11:15  LO  AP43             con5-ce/AP43     9886   T    18.1667 P  939.2426 H    86.0451 WS  7.4128 WD   8.0000
+604    03:11:15  LO  AP43             con5-ce/AP43     9886   TD   15.7778 PA   1.5000 PR    0.0000
+605    03:11:15  LO  AP43             con5-ce/AP43     9886   ME   32.6363    354.1845 AC    0.000000   0.000000  MODE  ()
+606    03:11:20  LO  con5-ce          con5-ce          6110   con5-ce:C!:11003, repeated 12 time(s) in 60 seconds.
+607    03:11:20  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+608    03:12:35  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+609    03:12:38  OD  pci              con5-dcc1        88     SNT D
+610    03:12:38  DR  DC01             pci              88     RESP_REJECTED: (RCV) SNT D: REC1 (DSS43): REJECTED CFG CHANGE FROM DCC1! INVALID LNA ID (0)
+611    03:12:45  OD  pci              con5-dcc1        89     SNT E
+612    03:12:45  DR  DC01             pci              89     RESP_REJECTED: (RCV) SNT E: REC1 (DSS43): REJECTED CFG CHANGE FROM DCC1! INVALID LNA ID (0)
+613    03:13:15  LO  AP43             con5-ce/AP43     9886   ENC 306.8911CCW  47.8372       0.0000    -0.1868   -0.0434   339
+614    03:13:15  LO  AP43             con5-ce/AP43     9886   PRE 305.5741     47.1863 MOF   0.0000     0.0000
+615    03:13:15  LO  AP43             con5-ce/AP43     9886   REF   0.0174 SQ  -0.0064
+616    03:13:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0658      0.0080 TIME  031315 295 2013
+617    03:13:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+618    03:13:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+619    03:13:15  LO  AP43             con5-ce/AP43     9886   T    18.1667 P  939.1748 H    85.4405 WS  4.9419 WD   8.0000
+620    03:13:15  LO  AP43             con5-ce/AP43     9886   TD   15.6667 PA   1.7500 PR   18.0000
+621    03:13:15  LO  AP43             con5-ce/AP43     9886   ME   32.6363    354.1845 AC    0.000000   0.000000  MODE  ()
+622    03:13:19  LO  DC01             con5-ce/DC01     3603   SYNC CHECK FAILED FOR REC43. RETRYING ...
+623    03:13:50  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+624    03:13:58  C!  con5-ce          WSS-nmc-ws13     11003  LOST CONTACT WITH WORKSTATION nmc-ws13 BECAUSE:  Did not receive Timestamp from WS
+625    03:14:11  OD  pci              con5-dcc1        90     SNT D
+626    03:14:11  DR  DC01             pci              90     RESP_REJECTED: (RCV) SNT D: REC1 (DSS43): REJECTED CFG CHANGE FROM DCC1! INVALID LNA ID (0)
+627    03:14:58  LO  con5-ce          con5-ce          6110   con5-ce:C!:11003, repeated 6 time(s) in 60 seconds.
+628    03:15:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+629    03:15:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+630    03:15:05  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+631    03:15:15  LO  AP43             con5-ce/AP43     9886   ENC 306.8911CCW  47.8372       0.0001    -0.1848   -0.0434   339
+632    03:15:15  LO  AP43             con5-ce/AP43     9886   PRE 304.9254     46.8935 MOF   0.0000     0.0000
+633    03:15:15  LO  AP43             con5-ce/AP43     9886   REF   0.0177 SQ  -0.0063
+634    03:15:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0654      0.0082 TIME  031515 295 2013
+635    03:15:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+636    03:15:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+637    03:15:15  LO  AP43             con5-ce/AP43     9886   T    18.1667 P  939.1410 H    87.2657 WS  3.7064 WD   8.0000
+638    03:15:15  LO  AP43             con5-ce/AP43     9886   TD   16.0000 PA   1.7500 PR    0.0000
+639    03:15:15  LO  AP43             con5-ce/AP43     9886   ME   32.6363    354.1844 AC    0.000000   0.000000  MODE  ()
+640    03:15:20  OD  cdscc/nmc-ws4    dss43-aca        25     ap dcos ZA
+641    03:15:21  LO  AP43             con5-ce/AP43     9889   Support Data delivered to /acg/deliv/snZA_srA_sc050_dss43_pn0001.dco
+642    03:15:21  DR  AP43             cdscc/nmc-ws4    25     COMPLETED. dcos ZA
+643    03:15:22  OD  cdscc/nmc-ws4    dss43-aca        26     ap trk
+644    03:15:22  DR  AP43             cdscc/nmc-ws4    26     RESP_STARTED: trk
+645    03:15:23  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+646    03:15:27  CA  AP43             con5-ce/AP43     8095   TRK completed
+647    03:15:27  PA  AP43             con5-ce/AP43     6504   Current time before 1st predict point
+648    03:15:27  W!  AP43             con5-ce/AP43     2576   No autocollimator acquisition: #2
+649    03:15:28  C!  AP43             con5-ce/AP43     358    XEL TRK error is out of tolerance
+650    03:15:28  C!  AP43             con5-ce/AP43     356    EL TRK error is out of tolerance
+651    03:15:31  LO  AP43             con5-ce/AP43     9802   DEC N cable wrap
+652    03:15:43  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+653    03:15:44  PA  AP43             con5-ce/AP43     3495   XEL TRK error is within tolerance
+654    03:16:00  PA  AP43             con5-ce/AP43     7504   Current time after 1st predict point
+655    03:16:09  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+656    03:16:10  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+657    03:16:12  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+658    03:16:13  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+659    03:16:14  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+660    03:16:15  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+661    03:16:16  PA  AP43             con5-ce/AP43     3576   Autocollimator acquisition: #2
+662    03:16:17  C!  AP43             con5-ce/AP43     358    XEL TRK error is out of tolerance
+663    03:16:18  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+664    03:16:19  C!  AP43             con5-ce/AP43     358    XEL TRK error is out of tolerance
+665    03:16:20  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+666    03:16:20  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+667    03:16:21  PA  AP43             con5-ce/AP43     3495   XEL TRK error is within tolerance
+668    03:16:22  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+669    03:16:23  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+670    03:17:08  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+671    03:17:08  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+672    03:17:09  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+673    03:17:10  PA  AP43             con5-ce/AP43     3495   XEL TRK error is within tolerance
+674    03:17:13  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+675    03:17:13  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+676    03:17:14  PA  AP43             con5-ce/AP43     3495   XEL TRK error is within tolerance
+677    03:17:14  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+678    03:17:15  LO  AP43             con5-ce/AP43     9886   ENC 304.9386CCW  36.1677       0.0008     0.5554   -0.2951   339
+679    03:17:15  LO  AP43             con5-ce/AP43     9886   PRE 305.0194     36.1241 MOF   0.0000     0.0000
+680    03:17:15  LO  AP43             con5-ce/AP43     9886   REF   0.0258 SQ   0.0190
+681    03:17:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0823      0.0192 TIME  031715 295 2013
+682    03:17:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+683    03:17:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+684    03:17:15  LO  AP43             con5-ce/AP43     9886   T    18.1667 P  939.0732 H    87.2657 WS  5.5596 WD  18.0000
+685    03:17:15  LO  AP43             con5-ce/AP43     9886   TD   16.0000 PA   1.7500 PR    0.0000
+686    03:17:15  LO  AP43             con5-ce/AP43     9886   ME   41.4539      1.9875 AC    -0.001912   -0.002125  MODE AC2 (AC2)
+687    03:17:35  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+688    03:18:10  OD  cdscc/nmc-ws4    dss43-aca        27     ap po el -90
+689    03:18:11  DR  AP43             cdscc/nmc-ws4    27     COMPLETED. po el -90
+690    03:18:12  C!  AP43             con5-ce/AP43     355    EL RESID error is out of tolerance
+691    03:18:12  C!  AP43             con5-ce/AP43     356    EL TRK error is out of tolerance
+692    03:18:13  PA  AP43             con5-ce/AP43     1356   EL TRK error is within tolerance
+693    03:18:14  C!  AP43             con5-ce/AP43     356    EL TRK error is out of tolerance
+694    03:18:18  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+695    03:18:20  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+696    03:18:26  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+697    03:18:26  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+698    03:18:26  OD  cdscc/nmc-ws4    dss43-aca        28     ap man e
+699    03:18:26  DR  AP43             cdscc/nmc-ws4    28     COMPLETED. man e
+700    03:18:28  PA  AP43             con5-ce/AP43     3495   XEL TRK error is within tolerance
+701    03:18:28  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+702    03:18:29  OD  cdscc/nmc-ws4    dss43-aca        29     ap trk
+703    03:18:29  DR  AP43             cdscc/nmc-ws4    29     RESP_STARTED: trk
+704    03:18:34  CA  AP43             con5-ce/AP43     8095   TRK completed
+705    03:18:34  PA  AP43             con5-ce/AP43     7504   Current time after 1st predict point
+706    03:18:37  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+707    03:18:37  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+708    03:18:39  PA  AP43             con5-ce/AP43     3495   XEL TRK error is within tolerance
+709    03:18:39  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+710    03:18:50  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+711    03:19:15  LO  AP43             con5-ce/AP43     9886   ENC 304.2866CCW  35.7207       0.0006     0.5717   -0.3018   339
+712    03:19:15  LO  AP43             con5-ce/AP43     9886   PRE 304.3705     35.7685 MOF   0.0000    -0.0900
+713    03:19:15  LO  AP43             con5-ce/AP43     9886   REF   0.0260 SQ   0.0196
+714    03:19:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0824      0.0194 TIME  031915 295 2013
+715    03:19:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+716    03:19:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+717    03:19:15  LO  AP43             con5-ce/AP43     9886   T    18.1667 P  939.0394 H    85.4405 WS  6.7951 WD   3.0000
+718    03:19:15  LO  AP43             con5-ce/AP43     9886   TD   15.6667 PA   1.7500 PR    0.0000
+719    03:19:15  LO  AP43             con5-ce/AP43     9886   ME   42.1431      1.9649 AC    0.000292   0.000328  MODE AC2 (AC2)
+720    03:19:43  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+721    03:19:44  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+722    03:19:45  PA  AP43             con5-ce/AP43     3495   XEL TRK error is within tolerance
+723    03:19:45  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+724    03:19:45  OD  cdscc/nmc-ws4    dss43-aca        30     ap po el -95
+725    03:19:46  DR  AP43             cdscc/nmc-ws4    30     COMPLETED. po el -95
+726    03:19:47  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+727    03:19:48  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+728    03:19:49  PA  AP43             con5-ce/AP43     3495   XEL TRK error is within tolerance
+729    03:19:49  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+730    03:20:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+731    03:20:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+732    03:20:05  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+733    03:21:02  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+734    03:21:02  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+735    03:21:02  OD  cdscc/nmc-ws4    dss43-aca        31     ap po xel 20
+736    03:21:03  DR  AP43             cdscc/nmc-ws4    31     COMPLETED. po xel 20
+737    03:21:04  C!  AP43             con5-ce/AP43     357    XEL RESID error is out of tolerance
+738    03:21:04  C!  AP43             con5-ce/AP43     358    XEL TRK error is out of tolerance
+739    03:21:04  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+740    03:21:04  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+741    03:21:05  PA  AP43             con5-ce/AP43     1358   XEL TRK error is within tolerance
+742    03:21:06  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+743    03:21:09  PA  AP43             con5-ce/AP43     3495   XEL TRK error is within tolerance
+744    03:21:10  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+745    03:21:12  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+746    03:21:12  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+747    03:21:13  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+748    03:21:14  PA  AP43             con5-ce/AP43     3495   XEL TRK error is within tolerance
+749    03:21:15  LO  AP43             con5-ce/AP43     9886   ENC 303.8513CCW  35.5367       0.0002     0.5843   -0.3070   339
+750    03:21:15  LO  AP43             con5-ce/AP43     9886   PRE 303.9119     35.5907 MOF   0.0246    -0.0950
+751    03:21:15  LO  AP43             con5-ce/AP43     9886   REF   0.0263 SQ   0.0200
+752    03:21:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0825      0.0195 TIME  032115 295 2013
+753    03:21:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+754    03:21:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+755    03:21:15  LO  AP43             con5-ce/AP43     9886   T    18.1667 P  939.0056 H    86.6535 WS  6.1773 WD 353.0000
+756    03:21:15  LO  AP43             con5-ce/AP43     9886   TD   15.8889 PA   1.7500 PR    0.0000
+757    03:21:15  LO  AP43             con5-ce/AP43     9886   ME   42.5281      1.8613 AC    0.000521   0.000964  MODE AC2 (AC2)
+758    03:21:16  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+759    03:21:17  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+760    03:21:20  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+761    03:21:20  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+762    03:21:21  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+763    03:21:22  LO  PCI              con5-ce/PCI      127    The PCI has received a signal SIGPIPE
+764    03:22:18  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+765    03:22:18  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+766    03:22:19  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+767    03:22:20  PA  AP43             con5-ce/AP43     3495   XEL TRK error is within tolerance
+768    03:22:22  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+769    03:22:22  OD  cdscc/nmc-ws4    dss43-aca        32     ap po el 90
+770    03:22:22  DR  AP43             cdscc/nmc-ws4    32     COMPLETED. po el 90
+771    03:22:23  W!  AP43             con5-ce/AP43     2576   No autocollimator acquisition: #2
+772    03:22:23  C!  AP43             con5-ce/AP43     358    XEL TRK error is out of tolerance
+773    03:22:23  C!  AP43             con5-ce/AP43     356    EL TRK error is out of tolerance
+774    03:22:23  PA  AP43             con5-ce/AP43     3576   Autocollimator acquisition: #2
+775    03:22:23  W!  AP43             con5-ce/AP43     2576   No autocollimator acquisition: #2
+776    03:22:24  PA  AP43             con5-ce/AP43     3576   Autocollimator acquisition: #2
+777    03:22:24  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+778    03:22:25  PA  AP43             con5-ce/AP43     3495   XEL TRK error is within tolerance
+779    03:22:25  PA  AP43             con5-ce/AP43     1356   EL TRK error is within tolerance
+780    03:22:26  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+781    03:22:26  C!  AP43             con5-ce/AP43     356    EL TRK error is out of tolerance
+782    03:22:27  C!  AP43             con5-ce/AP43     358    XEL TRK error is out of tolerance
+783    03:22:29  PA  AP43             con5-ce/AP43     1358   XEL TRK error is within tolerance
+784    03:22:31  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+785    03:22:33  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+786    03:22:35  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+787    03:23:15  LO  AP43             con5-ce/AP43     9886   ENC 303.2917CCW  35.2404      -0.0004     0.6014   -0.3143   339
+788    03:23:15  LO  AP43             con5-ce/AP43     9886   PRE 303.3496     35.1066 MOF   0.0244     0.0900
+789    03:23:15  LO  AP43             con5-ce/AP43     9886   REF   0.0267 SQ   0.0206
+790    03:23:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0826      0.0196 TIME  032315 295 2013
+791    03:23:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+792    03:23:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+793    03:23:15  LO  AP43             con5-ce/AP43     9886   T    18.3889 P  939.0056 H    85.4611 WS  3.7064 WD 351.0000
+794    03:23:15  LO  AP43             con5-ce/AP43     9886   TD   15.8889 PA   1.7500 PR    0.0000
+795    03:23:15  LO  AP43             con5-ce/AP43     9886   ME   43.0650      1.7679 AC    0.000179   -0.000032  MODE AC2 (AC2)
+796    03:23:36  W!  AP43             con5-ce/AP43     2493   EL TRK error is out of tolerance
+797    03:23:37  W!  AP43             con5-ce/AP43     2495   XEL TRK error is out of tolerance
+798    03:23:38  PA  AP43             con5-ce/AP43     3495   XEL TRK error is within tolerance
+799    03:23:38  PA  AP43             con5-ce/AP43     3493   EL TRK error is within tolerance
+800    03:23:46  OD  pci              dss43-aca        91     PO EL 0
+801    03:23:46  DR  AP43             pci              91     COMPLETED. PO EL 0
+802    03:23:46  OD  pci              dss43-aca        92     PO XEL 0
+803    03:23:47  PA  AP43             con5-ce/AP43     1355   EL RESID error is within tolerance
+804    03:23:47  C!  AP43             con5-ce/AP43     358    XEL TRK error is out of tolerance
+805    03:23:47  C!  AP43             con5-ce/AP43     356    EL TRK error is out of tolerance
+806    03:23:47  DR  AP43             pci              92     COMPLETED. PO XEL 0
+807    03:23:47  OD  pci              dss43-aca        93     STOP
+808    03:23:48  PA  AP43             con5-ce/AP43     1357   XEL RESID error is within tolerance
+809    03:23:48  DR  AP43             pci              93     RESP_STARTED: STOP
+810    03:23:50  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+811    03:24:10  CA  AP43             con5-ce/AP43     8073   STOP completed
+812    03:24:30  W!  DC01             con5-ce/DC01     4102   NDC IF failed: NO RESPONSE FROM NDC
+813    03:24:30  W!  DC01             con5-ce/DC01     4102   NDC IF failed: NDC2 SIM 2 PWR READ FAILED
+814    03:24:31  W!  DC01             con5-ce/DC01     4114   DSS43: NDC2 CH1 NDA OVEN TEMPERATURE OUT OF TOL ( 0.00 degC)
+815    03:24:31  W!  DC01             con5-ce/DC01     4114   DSS43: NDC2 CH2 NDA OVEN TEMPERATURE OUT OF TOL ( 0.00 degC)
+816    03:25:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+817    03:25:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+818    03:25:05  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+819    03:25:15  LO  AP43             con5-ce/AP43     9886   ENC 302.9600CCW  35.1995       0.0015     0.6005   -0.3138   339
+820    03:25:15  LO  AP43             con5-ce/AP43     9886   PRE 303.1077     34.7648 MOF   0.0000     0.0000
+821    03:25:15  LO  AP43             con5-ce/AP43     9886   REF   0.0270 SQ   0.0205
+822    03:25:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0534      0.0091 TIME  032515 295 2013
+823    03:25:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+824    03:25:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+825    03:25:15  LO  AP43             con5-ce/AP43     9886   T    18.3889 P  938.9378 H    84.8611 WS  2.4709 WD 344.0000
+826    03:25:15  LO  AP43             con5-ce/AP43     9886   TD   15.7778 PA   1.7500 PR    0.0000
+827    03:25:15  LO  AP43             con5-ce/AP43     9886   ME   43.1123      4.2789 AC    0.000000   0.000000  MODE  ()
+828    03:26:20  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+829    03:26:22  OD  cdscc/nmc-ws4    dss43-aca        33     ap move el 7
+830    03:26:23  DR  AP43             cdscc/nmc-ws4    33     RESP_STARTED: move el 7
+831    03:26:41  OD  cdscc/nmc-ws4    dss43-aca        34     ap move az 17
+832    03:26:41  DR  AP43             cdscc/nmc-ws4    34     RESP_STARTED: move az 17
+833    03:27:15  LO  AP43             con5-ce/AP43     9886   ENC 310.8224CCW  22.8928       0.0021     0.6005   -0.3139   339
+834    03:27:15  LO  AP43             con5-ce/AP43     9886   PRE 302.5711     34.3253 MOF   0.0000     0.0000
+835    03:27:15  LO  AP43             con5-ce/AP43     9886   REF   0.0275 SQ   0.0205
+836    03:27:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0531      0.0093 TIME  032715 295 2013
+837    03:27:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+838    03:27:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+839    03:27:15  LO  AP43             con5-ce/AP43     9886   T    18.1667 P  938.9378 H    86.0451 WS  1.8532 WD 349.0000
+840    03:27:15  LO  AP43             con5-ce/AP43     9886   TD   15.7778 PA   1.7500 PR    0.0000
+841    03:27:15  LO  AP43             con5-ce/AP43     9886   ME   43.1124      4.2793 AC    0.000000   0.000000  MODE  ()
+842    03:27:36  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+843    03:28:08  W!  U43              con5-ce/U43      22402  Exciter switch SEXCIL is DRV_INTRP .
+844    03:28:08  W!  U43              con5-ce/U43      22402  Exciter switch XEXCIL is DRV_INTRP .
+845    03:28:09  C!  US43             con5-ce/US43     1025   Interlock Open: ABOVE10. Above 10 Degrees Elevation Error.
+846    03:28:32  CA  AP43             con5-ce/AP43     8012   MOVE EL  7.0000 completed
+847    03:28:51  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+848    03:29:15  LO  AP43             con5-ce/AP43     9886   ENC 339.9225CCW   7.0000       0.0015     0.6008   -0.3138   339
+849    03:29:15  LO  AP43             con5-ce/AP43     9886   PRE 302.1318     34.1480 MOF   0.0000     0.0000
+850    03:29:15  LO  AP43             con5-ce/AP43     9886   REF   0.0278 SQ   0.0205
+851    03:29:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0530      0.0094 TIME  032915 295 2013
+852    03:29:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+853    03:29:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+854    03:29:15  LO  AP43             con5-ce/AP43     9886   T    18.3889 P  939.0056 H    86.0649 WS  5.5596 WD 349.0000
+855    03:29:15  LO  AP43             con5-ce/AP43     9886   TD   16.0000 PA   1.7500 PR    0.0000
+856    03:29:15  LO  AP43             con5-ce/AP43     9886   ME   43.1124      4.2790 AC    0.000000   0.000000  MODE  ()
+857    03:29:47  OD  cdscc/nmc-ws4    dss43-aca        35     ap move el 88
+858    03:29:48  DR  AP43             cdscc/nmc-ws4    35     RESP_STARTED: move el 88
+859    03:30:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+860    03:30:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+861    03:30:02  CA  U43              con5-ce/U43      25401  Exciter switch SEXCIL is now OK. Was previously DRV_INTRP.
+862    03:30:02  CA  U43              con5-ce/U43      25401  Exciter switch XEXCIL is now OK. Was previously DRV_INTRP.
+863    03:30:03  DA  US43             con5-ce/US43     3001   Interlock Closed: ABOVE10.
+864    03:30:06  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+865    03:31:15  LO  AP43             con5-ce/AP43     9886   ENC   9.0232CCW  27.8198       0.0012     0.6015   -0.3138   339
+866    03:31:15  LO  AP43             con5-ce/AP43     9886   PRE 301.5594     33.7645 MOF   0.0000     0.0000
+867    03:31:15  LO  AP43             con5-ce/AP43     9886   REF   0.0283 SQ   0.0206
+868    03:31:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0527      0.0096 TIME  033115 295 2013
+869    03:31:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+870    03:31:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+871    03:31:15  LO  AP43             con5-ce/AP43     9886   T    18.3889 P  939.0056 H    87.5910 WS  6.1773 WD 350.0000
+872    03:31:15  LO  AP43             con5-ce/AP43     9886   TD   16.2778 PA   1.7500 PR    0.0000
+873    03:31:15  LO  AP43             con5-ce/AP43     9886   ME   43.1125      4.2791 AC    0.000000   0.000000  MODE  ()
+874    03:31:21  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+875    03:31:58  CA  AP43             con5-ce/AP43     8010   MOVE AZ  17.0000 completed
+876    03:32:36  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+877    03:33:15  LO  AP43             con5-ce/AP43     9886   ENC  17.0000CCW  56.9188       0.0017     0.6005   -0.3140   339
+878    03:33:15  LO  AP43             con5-ce/AP43     9886   PRE 301.2699     33.3806 MOF   0.0000     0.0000
+879    03:33:15  LO  AP43             con5-ce/AP43     9886   REF   0.0286 SQ   0.0205
+880    03:33:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0525      0.0096 TIME  033315 295 2013
+881    03:33:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+882    03:33:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+883    03:33:15  LO  AP43             con5-ce/AP43     9886   T    18.3889 P  938.9717 H    86.3682 WS  6.7951 WD 354.0000
+884    03:33:15  LO  AP43             con5-ce/AP43     9886   TD   16.0556 PA   1.7500 PR    0.0000
+885    03:33:15  LO  AP43             con5-ce/AP43     9886   ME   43.1124      4.2793 AC    0.000000   0.000000  MODE  ()
+886    03:33:36  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+887    03:34:51  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+888    03:35:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+889    03:35:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+890    03:35:08  OD  cdscc/nmc-ws4    dss43-aca        36     ap move el 85
+891    03:35:08  DR  AP43             cdscc/nmc-ws4    36     RESP_STARTED: move el 85
+892    03:35:15  LO  AP43             con5-ce/AP43     9886   ENC  17.0000CCW  85.0225       0.0016     0.6013   -0.3139   339
+893    03:35:15  LO  AP43             con5-ce/AP43     9886   PRE 301.0027     33.0065 MOF   0.0000     0.0000
+894    03:35:15  LO  AP43             con5-ce/AP43     9886   REF   0.0290 SQ   0.0206
+895    03:35:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0523      0.0097 TIME  033515 295 2013
+896    03:35:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+897    03:35:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+898    03:35:15  LO  AP43             con5-ce/AP43     9886   T    18.2778 P  938.9378 H    86.6630 WS  4.9419 WD 348.0000
+899    03:35:15  LO  AP43             con5-ce/AP43     9886   TD   16.0000 PA   1.7500 PR    0.0000
+900    03:35:15  LO  AP43             con5-ce/AP43     9886   ME   43.1124      4.2790 AC    0.000000   0.000000  MODE  ()
+901    03:35:22  CA  AP43             con5-ce/AP43     8012   MOVE EL 85.0000 completed
+902    03:35:59  OD  cdscc/nmc-ws4    dss43-aca        37     ap move el 7
+903    03:36:00  DR  AP43             cdscc/nmc-ws4    37     RESP_STARTED: move el 7
+904    03:36:06  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+905    03:36:22  PR  AP43             con5-ce/AP43     9906   Current time after last predict point. Enter STOW
+906    03:37:15  LO  AP43             con5-ce/AP43     9886   ENC  17.0003CCW  67.0770       0.0015     0.6021   -0.3140   339
+907    03:37:15  LO  AP43             con5-ce/AP43     9886   PRE 300.4302     32.8373 MOF   0.0000     0.0000
+908    03:37:15  LO  AP43             con5-ce/AP43     9886   REF   0.0292 SQ   0.0206
+909    03:37:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0522      0.0099 TIME  033715 295 2013
+910    03:37:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+911    03:37:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+912    03:37:15  LO  AP43             con5-ce/AP43     9886   T    18.3889 P  938.8701 H    86.9777 WS  6.1773 WD 352.0000
+913    03:37:15  LO  AP43             con5-ce/AP43     9886   TD   16.1667 PA   1.7500 PR    0.0000
+914    03:37:15  LO  AP43             con5-ce/AP43     9886   ME   43.1124      4.2793 AC    0.000000   0.000000  MODE  ()
+915    03:37:21  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+916    03:38:36  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+917    03:39:15  LO  AP43             con5-ce/AP43     9886   ENC  17.0000CCW  37.9780       0.0016     0.6016   -0.3139   339
+918    03:39:15  LO  AP43             con5-ce/AP43     9886   PRE 300.4302     32.8373 MOF   0.0000     0.0000
+919    03:39:15  LO  AP43             con5-ce/AP43     9886   REF   0.0292 SQ   0.0206
+920    03:39:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0522      0.0099 TIME  033915 295 2013
+921    03:39:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+922    03:39:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+923    03:39:15  LO  AP43             con5-ce/AP43     9886   T    18.3889 P  938.8362 H    86.9777 WS  5.5596 WD 342.0000
+924    03:39:15  LO  AP43             con5-ce/AP43     9886   TD   16.1667 PA   1.7500 PR    0.0000
+925    03:39:15  LO  AP43             con5-ce/AP43     9886   ME   43.1124      4.2790 AC    0.000000   0.000000  MODE  ()
+926    03:39:51  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+927    03:40:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+928    03:40:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+929    03:40:19  LO  DC01             con5-ce/DC01     3603   SYNC CHECK FAILED FOR REC43. RETRYING ...
+930    03:41:06  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+931    03:41:10  W!  U43              con5-ce/U43      22402  Exciter switch SEXCIL is DRV_INTRP .
+932    03:41:10  W!  U43              con5-ce/U43      22402  Exciter switch XEXCIL is DRV_INTRP .
+933    03:41:11  C!  US43             con5-ce/US43     1025   Interlock Open: ABOVE10. Above 10 Degrees Elevation Error.
+934    03:41:15  LO  AP43             con5-ce/AP43     9886   ENC  17.0000CCW   8.8773       0.0008     0.6015   -0.3139   339
+935    03:41:15  LO  AP43             con5-ce/AP43     9886   PRE 300.4302     32.8373 MOF   0.0000     0.0000
+936    03:41:15  LO  AP43             con5-ce/AP43     9886   REF   0.0292 SQ   0.0206
+937    03:41:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0522      0.0099 TIME  034115 295 2013
+938    03:41:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+939    03:41:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+940    03:41:15  LO  AP43             con5-ce/AP43     9886   T    18.1667 P  938.7347 H    87.2657 WS  8.6483 WD 349.0000
+941    03:41:15  LO  AP43             con5-ce/AP43     9886   TD   16.0000 PA   1.7500 PR    0.0000
+942    03:41:15  LO  AP43             con5-ce/AP43     9886   ME   43.1125      4.2791 AC    0.000000   0.000000  MODE  ()
+943    03:41:34  CA  AP43             con5-ce/AP43     8012   MOVE EL  7.0000 completed
+944    03:42:21  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+945    03:42:50  OD  cdscc/nmc-ws4    dss43-aca        38     ap move el 85
+946    03:42:50  DR  AP43             cdscc/nmc-ws4    38     RESP_STARTED: move el 85
+947    03:43:05  CA  U43              con5-ce/U43      25401  Exciter switch SEXCIL is now OK. Was previously DRV_INTRP.
+948    03:43:05  CA  U43              con5-ce/U43      25401  Exciter switch XEXCIL is now OK. Was previously DRV_INTRP.
+949    03:43:05  DA  US43             con5-ce/US43     3001   Interlock Closed: ABOVE10.
+950    03:43:15  LO  AP43             con5-ce/AP43     9886   ENC  17.0000CCW  12.6291       0.0013     0.6010   -0.3140   339
+951    03:43:15  LO  AP43             con5-ce/AP43     9886   PRE 300.4302     32.8373 MOF   0.0000     0.0000
+952    03:43:15  LO  AP43             con5-ce/AP43     9886   REF   0.0292 SQ   0.0206
+953    03:43:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0522      0.0099 TIME  034315 295 2013
+954    03:43:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+955    03:43:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+956    03:43:15  LO  AP43             con5-ce/AP43     9886   T    18.1667 P  938.7008 H    87.5733 WS  6.7951 WD 347.0000
+957    03:43:15  LO  AP43             con5-ce/AP43     9886   TD   16.0556 PA   1.7500 PR    0.0000
+958    03:43:15  LO  AP43             con5-ce/AP43     9886   ME   43.1124      4.2793 AC    0.000000   0.000000  MODE  ()
+959    03:43:36  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+960    03:44:51  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+961    03:45:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+962    03:45:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+963    03:45:15  LO  AP43             con5-ce/AP43     9886   ENC  17.0000CCW  41.7288       0.0010     0.6011   -0.3137   339
+964    03:45:15  LO  AP43             con5-ce/AP43     9886   PRE 300.4302     32.8373 MOF   0.0000     0.0000
+965    03:45:15  LO  AP43             con5-ce/AP43     9886   REF   0.0292 SQ   0.0206
+966    03:45:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0522      0.0099 TIME  034515 295 2013
+967    03:45:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+968    03:45:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+969    03:45:15  LO  AP43             con5-ce/AP43     9886   T    18.1667 P  938.7347 H    87.5733 WS  4.9419 WD   3.0000
+970    03:45:15  LO  AP43             con5-ce/AP43     9886   TD   16.0556 PA   1.7500 PR    0.0000
+971    03:45:15  LO  AP43             con5-ce/AP43     9886   ME   43.1124      4.2790 AC    0.000000   0.000000  MODE  ()
+972    03:46:00  OD  cdscc/nmc-ws4    con5-ce          39     17
+973    03:46:00  DR  con5-ce          cdscc/nmc-ws4    39     Rejected. Invalid DDC or unknown directive.
+974    03:46:06  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+975    03:47:15  LO  AP43             con5-ce/AP43     9886   ENC  17.0000CCW  70.8289       0.0017     0.6012   -0.3139   339
+976    03:47:15  LO  AP43             con5-ce/AP43     9886   PRE 300.4302     32.8373 MOF   0.0000     0.0000
+977    03:47:15  LO  AP43             con5-ce/AP43     9886   REF   0.0292 SQ   0.0206
+978    03:47:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0522      0.0099 TIME  034715 295 2013
+979    03:47:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+980    03:47:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+981    03:47:15  LO  AP43             con5-ce/AP43     9886   T    18.1667 P  938.7686 H    87.5733 WS  8.0305 WD 338.0000
+982    03:47:15  LO  AP43             con5-ce/AP43     9886   TD   16.0556 PA   1.7500 PR    0.0000
+983    03:47:15  LO  AP43             con5-ce/AP43     9886   ME   43.1125      4.2790 AC    0.000000   0.000000  MODE  ()
+984    03:47:21  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+985    03:48:24  CA  AP43             con5-ce/AP43     8012   MOVE EL 85.0000 completed
+986    03:48:36  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+987    03:48:59  OD  cdscc/nmc-ws4    dss43-aca        40     ap move el 7
+988    03:48:59  DR  AP43             cdscc/nmc-ws4    40     RESP_STARTED: move el 7
+989    03:49:15  LO  AP43             con5-ce/AP43     9886   ENC  17.0000CCW  81.4973       0.0002     0.6008   -0.3139   339
+990    03:49:15  LO  AP43             con5-ce/AP43     9886   PRE 300.4302     32.8373 MOF   0.0000     0.0000
+991    03:49:15  LO  AP43             con5-ce/AP43     9886   REF   0.0293 SQ   0.0205
+992    03:49:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0522      0.0099 TIME  034915 295 2013
+993    03:49:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+994    03:49:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+995    03:49:15  LO  AP43             con5-ce/AP43     9886   T    18.1667 P  938.7008 H    88.1913 WS  6.1773 WD   7.0000
+996    03:49:15  LO  AP43             con5-ce/AP43     9886   TD   16.1667 PA   1.7500 PR    0.0000
+997    03:49:15  LO  AP43             con5-ce/AP43     9886   ME   43.1124      4.2791 AC    0.000000   0.000000  MODE  ()
+998    03:49:51  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+999    03:50:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+1000   03:50:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+1001   03:51:06  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+1002   03:51:15  LO  AP43             con5-ce/AP43     9886   ENC  17.0000CCW  52.3962       0.0011     0.6022   -0.3140   339
+1003   03:51:15  LO  AP43             con5-ce/AP43     9886   PRE 300.4302     32.8373 MOF   0.0000     0.0000
+1004   03:51:15  LO  AP43             con5-ce/AP43     9886   REF   0.0292 SQ   0.0206
+1005   03:51:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0522      0.0099 TIME  035115 295 2013
+1006   03:51:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1007   03:51:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+1008   03:51:15  LO  AP43             con5-ce/AP43     9886   T    18.1667 P  938.6669 H    87.2657 WS  5.5596 WD   7.0000
+1009   03:51:15  LO  AP43             con5-ce/AP43     9886   TD   16.0000 PA   1.7500 PR    0.0000
+1010   03:51:15  LO  AP43             con5-ce/AP43     9886   ME   43.1124      4.2791 AC    0.000000   0.000000  MODE  ()
+1011   03:52:22  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+1012   03:53:15  LO  AP43             con5-ce/AP43     9886   ENC  17.0000CCW  23.2958       0.0007     0.6010   -0.3139   339
+1013   03:53:15  LO  AP43             con5-ce/AP43     9886   PRE 300.4302     32.8373 MOF   0.0000     0.0000
+1014   03:53:15  LO  AP43             con5-ce/AP43     9886   REF   0.0293 SQ   0.0206
+1015   03:53:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0522      0.0099 TIME  035315 295 2013
+1016   03:53:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1017   03:53:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+1018   03:53:15  LO  AP43             con5-ce/AP43     9886   T    18.1667 P  938.5992 H    88.1913 WS  9.2660 WD  12.0000
+1019   03:53:15  LO  AP43             con5-ce/AP43     9886   TD   16.1667 PA   1.7500 PR    0.0000
+1020   03:53:15  LO  AP43             con5-ce/AP43     9886   ME   43.1124      4.2790 AC    0.000000   0.000000  MODE  ()
+1021   03:53:37  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+1022   03:54:09  W!  U43              con5-ce/U43      22402  Exciter switch SEXCIL is DRV_INTRP .
+1023   03:54:09  W!  U43              con5-ce/U43      22402  Exciter switch XEXCIL is DRV_INTRP .
+1024   03:54:10  C!  US43             con5-ce/US43     1025   Interlock Open: ABOVE10. Above 10 Degrees Elevation Error.
+1025   03:54:33  CA  AP43             con5-ce/AP43     8012   MOVE EL  7.0000 completed
+1026   03:54:35  OD  cdscc/nmc-ws4    dss43-aca        41     ap move r p3
+1027   03:54:35  DR  AP43             cdscc/nmc-ws4    41     RESP_STARTED: move r p3
+1028   03:54:39  PA  AP43             con5-ce/AP43     6568   R axis at SR index pin position
+1029   03:54:39  PA  AP43             con5-ce/AP43     6548   Rotation brake released
+1030   03:54:48  OD  cdscc/nmc-ws1    con5-ce          47     D CTRL
+1031   03:54:48  DR  con5-ce          cdscc/nmc-ws1    47     Processing. Sending request to workstation cdscc/nmc-ws1.
+1032   03:54:48  DR  cdscc/nmc-ws1    cdscc/nmc-ws1    47     Completed. Display started on workstation cdscc/nmc-ws1
+1033   03:54:49  PA  US43             con5-ce/US43     4004   Switch SUBRFTR has moved to position E.
+1034   03:54:52  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+1035   03:54:56  OD  cdscc/nmc-ws4    dss43-aca        44     ap stow
+1036   03:54:57  DR  AP43             cdscc/nmc-ws4    44     RESP_REJECTED: ILLEGAL COMMAND WHILE MOVING
+1037   03:55:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+1038   03:55:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+1039   03:55:06  PA  US43             con5-ce/US43     4004   Switch SUBRFTR has moved to position B.
+1040   03:55:07  PA  AP43             con5-ce/AP43     6568   R axis at SR index pin position
+1041   03:55:15  LO  AP43             con5-ce/AP43     9886   ENC  17.0000CCW   7.0000      -0.0508    -0.1966   -0.4926   240
+1042   03:55:15  LO  AP43             con5-ce/AP43     9886   PRE 300.4302     32.8373 MOF   0.0000     0.0000
+1043   03:55:15  LO  AP43             con5-ce/AP43     9886   REF   0.0292 SQ  -0.0067
+1044   03:55:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0521      0.0099 TIME  035515 295 2013
+1045   03:55:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1046   03:55:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+1047   03:55:15  LO  AP43             con5-ce/AP43     9886   T    18.0556 P  938.5992 H    88.1828 WS  6.7951 WD  18.0000
+1048   03:55:15  LO  AP43             con5-ce/AP43     9886   TD   16.0556 PA   1.7500 PR    0.0000
+1049   03:55:15  LO  AP43             con5-ce/AP43     9886   ME   43.1124      4.2793 AC    0.000000   0.000000  MODE  ()
+1050   03:55:15  OD  cdscc/nmc-ws1    dss43-ulc        4      u d ests
+1051   03:55:15  DR  U43              cdscc/nmc-ws1    4      Processing. Sending request to workstation cdscc/nmc-ws1.
+1052   03:55:15  DR  U43              cdscc/nmc-ws1    4      Completed. Display started on workstation cdscc/nmc-ws1
+1053   03:55:19  OD  cdscc/nmc-ws4    dss43-aca        46     ap stow
+1054   03:55:20  DR  AP43             cdscc/nmc-ws4    46     RESP_REJECTED: ILLEGAL COMMAND WHILE MOVING
+1055   03:55:25  OD  cdscc/nmc-ws1    dss43-ulc        6      u warm
+1056   03:55:25  DR  U43              cdscc/nmc-ws1    6      RESP_PROCESSING: ETX is processing warm OD.
+1057   03:55:26  PA  AP43             con5-ce/AP43     6570   SR index pin inserted
+1058   03:55:26  PA  AP43             con5-ce/AP43     6549   Rotation brake set
+1059   03:55:26  DR  U43              cdscc/nmc-ws1    6      RESP_STARTED: WARM IN PROGRESS.
+1060   03:55:26  CA  AP43             con5-ce/AP43     8014   MOVE R  completed
+1061   03:55:28  OD  cdscc/nmc-ws4    dss43-aca        47     ap stow
+1062   03:55:28  DR  AP43             cdscc/nmc-ws4    47     RESP_STARTED: stow
+1063   03:55:29  CA  US43             con5-ce/US43     5006   TXR +28VDC Status State is now OK.
+1064   03:55:29  C!  U43              con5-ce/U43      21125  Open Interlock: MICROWAVE.
+1065   03:55:29  C!  U43              con5-ce/U43      21127  Open Interlock: POWER AMPLIFIER DOOR.
+1066   03:55:29  C!  U43              con5-ce/U43      21128  Open Interlock: FILAMENT AIRFLOW.
+1067   03:55:29  C!  U43              con5-ce/U43      21129  Open Interlock: BODY FLOW.
+1068   03:55:29  C!  U43              con5-ce/U43      21130  Open Interlock: MAGNET FLOW.
+1069   03:55:29  C!  U43              con5-ce/U43      21131  Open Interlock: WAVEGUIDE FLOW.
+1070   03:55:29  C!  U43              con5-ce/U43      21132  Open Interlock: COLLECTOR LOAD FLOW.
+1071   03:55:29  C!  U43              con5-ce/U43      21133  Open Interlock: COLLECTOR OVER TEMP.
+1072   03:55:29  C!  U43              con5-ce/U43      21134  Open Interlock: MAGNET UNDER CURRENT.
+1073   03:55:29  C!  U43              con5-ce/U43      21135  Open Interlock: COLLECTOR UNDER PRESSURE.
+1074   03:55:29  C!  U43              con5-ce/U43      21138  Open Interlock: WAVEGUIDE ARC.
+1075   03:55:29  C!  U43              con5-ce/U43      21139  Open Interlock: KLYSTRON REFLECTED POWER.
+1076   03:55:29  C!  U43              con5-ce/U43      21141  Open Interlock: VACUUM OVER CURRENT.
+1077   03:55:29  C!  U43              con5-ce/U43      21142  Open Interlock: FILAMENT UNDER CURRENT.
+1078   03:55:29  W!  U43              con5-ce/U43      22203  Warning: Power supply airflow.
+1079   03:55:33  CA  US43             con5-ce/US43     5008   TXR Ok-To-Beam ON Status State is now TRUE.
+1080   03:55:33  DA  US43             con5-ce/US43     3001   Interlock Closed: XFLOW.
+1081   03:55:33  CA  U43              con5-ce/U43      25118  Cleared Interlock: MICROWAVE.
+1082   03:55:43  CA  U43              con5-ce/U43      25401  Exciter switch SEXCIL is now OK. Was previously DRV_INTRP.
+1083   03:55:43  CA  U43              con5-ce/U43      25401  Exciter switch XEXCIL is now OK. Was previously DRV_INTRP.
+1084   03:55:43  DA  US43             con5-ce/US43     3001   Interlock Closed: ABOVE10.
+1085   03:55:48  CA  U43              con5-ce/U43      25131  Cleared Interlock: WAVEGUIDE ARC.
+1086   03:55:48  CA  U43              con5-ce/U43      25132  Cleared Interlock: KLYSTRON REFLECTED POWER.
+1087   03:55:48  CA  U43              con5-ce/U43      25134  Cleared Interlock: VACUUM OVER CURRENT.
+1088   03:55:50  CA  U43              con5-ce/U43      25120  Cleared Interlock: POWER AMP. DOOR.
+1089   03:55:50  CA  U43              con5-ce/U43      25121  Cleared Interlock: FILAMENT AIRFLOW.
+1090   03:55:50  CA  U43              con5-ce/U43      25122  Cleared Interlock: BODY FLOW.
+1091   03:55:50  CA  U43              con5-ce/U43      25123  Cleared Interlock: MAGNET FLOW.
+1092   03:55:50  CA  U43              con5-ce/U43      25124  Cleared Interlock: WAVEGUIDE FLOW.
+1093   03:55:50  CA  U43              con5-ce/U43      25125  Cleared Interlock: COLLECTOR LOAD FLOW.
+1094   03:55:50  CA  U43              con5-ce/U43      25126  Cleared Interlock: COLLECTOR OVER TEMP.
+1095   03:55:50  CA  U43              con5-ce/U43      25128  Cleared Interlock: COLLECTOR UNDER PRESSURE.
+1096   03:55:50  C!  U43              con5-ce/U43      21138  Open Interlock: WAVEGUIDE ARC.
+1097   03:55:51  CA  U43              con5-ce/U43      25135  Cleared Interlock: FILAMENT UNDER CURRENT.
+1098   03:55:52  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+1099   03:55:58  CA  U43              con5-ce/U43      25127  Cleared Interlock: MAGNET UNDER CURRENT.
+1100   03:56:19  LO  DC01             con5-ce/DC01     3603   SYNC CHECK FAILED FOR REC43. RETRYING ...
+1101   03:57:07  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+1102   03:57:15  LO  AP43             con5-ce/AP43     9886   ENC  17.0000CCW  32.4759      -0.0007     0.0002   -0.0001   240
+1103   03:57:15  LO  AP43             con5-ce/AP43     9886   PRE 300.4302     32.8373 MOF   0.0000     0.0000
+1104   03:57:15  LO  AP43             con5-ce/AP43     9886   REF   0.0294 SQ   0.0000
+1105   03:57:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0522      0.0099 TIME  035715 295 2013
+1106   03:57:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1107   03:57:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+1108   03:57:15  LO  AP43             con5-ce/AP43     9886   T    18.1667 P  938.5992 H    89.4389 WS  6.7951 WD   6.0000
+1109   03:57:15  LO  AP43             con5-ce/AP43     9886   TD   16.3889 PA   1.7500 PR    0.0000
+1110   03:57:15  LO  AP43             con5-ce/AP43     9886   ME  360.0000    144.0000 AC    0.000000   0.000000  MODE  ()
+1111   03:57:48  CA  U43              con5-ce/U43      25131  Cleared Interlock: WAVEGUIDE ARC.
+1112   03:58:22  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+1113   03:59:15  LO  AP43             con5-ce/AP43     9886   ENC  17.0000CCW  61.5756       0.0009     0.0000   -0.0001   240
+1114   03:59:15  LO  AP43             con5-ce/AP43     9886   PRE 300.4302     32.8373 MOF   0.0000     0.0000
+1115   03:59:15  LO  AP43             con5-ce/AP43     9886   REF   0.0292 SQ   0.0000
+1116   03:59:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0522      0.0099 TIME  035915 295 2013
+1117   03:59:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1118   03:59:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+1119   03:59:15  LO  AP43             con5-ce/AP43     9886   T    18.0556 P  938.5654 H    88.1828 WS  4.9419 WD 354.0000
+1120   03:59:15  LO  AP43             con5-ce/AP43     9886   TD   16.0556 PA   1.7500 PR    0.0000
+1121   03:59:15  LO  AP43             con5-ce/AP43     9886   ME  360.0000    143.9999 AC    0.000000   0.000000  MODE  ()
+1122   03:59:37  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+1123   04:00:01  LO  DC01             con5-ce/DC01     2405   Carrier 8415000000.00 Res -0.00 Noise 2994945.25
+1124   04:00:01  PA  DC01             con5-ce/DC01     2406   Sts OFF Time 000000 DCD OUT OF SERV Block 0
+1125   04:00:44  OD  cdscc/nmc-ws4    con5-dcc1        48     d1 disc
+1126   04:00:44  DR  DC01             cdscc/nmc-ws4    48     COMPLETED. (DEM) disc: No IFS connection to disconnect
+1127   04:00:47  OD  cdscc/nmc-ws4    con5-dcc1        49     d1 data d
+1128   04:00:47  DR  DC01             cdscc/nmc-ws4    49     COMPLETED. (ALL) data d
+1129   04:00:52  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+1130   04:01:14  PA  AP43             con5-ce/AP43     6541   HA "brake" set
+1131   04:01:14  PA  AP43             con5-ce/AP43     6537   DEC "brake" set
+1132   04:01:15  PA  AP43             con5-ce/AP43     6535   AZ brake set
+1133   04:01:15  PA  AP43             con5-ce/AP43     6539   EL brake set
+1134   04:01:15  LO  AP43             con5-ce/AP43     9886   ENC  17.0000CCW  88.0005       0.0004    -0.0001   -0.0001   240
+1135   04:01:15  LO  AP43             con5-ce/AP43     9886   PRE 300.4302     32.8373 MOF   0.0000     0.0000
+1136   04:01:15  LO  AP43             con5-ce/AP43     9886   REF   0.0290 SQ  -0.0000
+1137   04:01:15  LO  AP43             con5-ce/AP43     9886   SYS  -0.0522      0.0099 TIME  040115 295 2013
+1138   04:01:15  LO  AP43             con5-ce/AP43     9886   CON   0.0000      0.0000 ACC   0.0000     0.0000 EST  0.0000   0.0000
+1139   04:01:15  LO  AP43             con5-ce/AP43     9886   TLC  -0.0000     -0.0000
+1140   04:01:15  LO  AP43             con5-ce/AP43     9886   T    18.1667 P  938.5654 H    84.5408 WS  2.4709 WD 332.0000
+1141   04:01:15  LO  AP43             con5-ce/AP43     9886   TD   15.5000 PA   1.7500 PR    0.0000
+1142   04:01:15  LO  AP43             con5-ce/AP43     9886   ME    0.0000    144.0000 AC    0.000000   0.000000  MODE  ()
+1143   04:01:21  PA  AP43             con5-ce/AP43     7541   HA "brake" set
+1144   04:01:21  PA  AP43             con5-ce/AP43     7537   DEC "brake" set
+1145   04:01:24  W!  AP43             con5-ce/AP43     2551   STOW failed to complete
+1146   04:01:25  CA  AP43             con5-ce/AP43     8045   SET ME completed
+1147   04:01:26  PA  AP43             con5-ce/AP43     6542   ME drive / torquer power off
+1148   04:01:26  CA  AP43             con5-ce/AP43     8045   SET ME completed
+1149   04:01:27  CA  AP43             con5-ce/AP43     8045   SET ME completed
+1150   04:01:30  PA  AP43             con5-ce/AP43     6559   Y2 brake set
+1151   04:01:30  PA  AP43             con5-ce/AP43     6558   Y1 brake set
+1152   04:01:30  PA  AP43             con5-ce/AP43     6553   X brake set
+1153   04:01:30  PA  AP43             con5-ce/AP43     6567   Z3 brake set
+1154   04:01:30  PA  AP43             con5-ce/AP43     6565   Z2 brake set
+1155   04:01:30  PA  AP43             con5-ce/AP43     6563   Z1 brake set
+1156   04:01:30  CA  AP43             con5-ce/AP43     8057   SHDN ME completed
+1157   04:01:35  CA  AP43             con5-ce/AP43     8089   STOW completed
+1158   04:01:38  OD  cdscc/nmc-ws4    con5-ce          50     rls all
+1159   04:01:38  DR  con5-ce          cdscc/nmc-ws4    50     COMPLETED. ALL EQUIPMENT RELEASED.
+1160   04:02:07  W!  DC01             con5-ce/DC01     3112   IF SWITCH: CONNECTION WAS NOT FOUND
+1161   04:03:12  CA  DC01             con5-ce/DC01     1306   CAR loop acquisition halted
+1162   04:03:12  CA  DC01             con5-ce/DC01     1306   SUB loop acquisition halted
+1163   04:03:12  CA  DC01             con5-ce/DC01     1306   SYM loop acquisition halted
+1164   04:03:12  LO  DC01             con5-ce/DC01     2600   Rngif task received END OD
+1165   04:03:13  CA  DC01             con5-ce/DC01     3300   DR COMPLETED (DEM) HALT ALL
+1166   04:03:15  LO  DC01             con5-ce/DC01     2600   retrying Data Server init after 6390 seconds
+1167   04:03:15  PA  DC01             con5-ce/DC01     3400   HALTING RPB
+1168   04:03:15  PA  DC01             con5-ce/DC01     3400   HALTING RPB
+1169   04:03:15  LO  DC01             con5-ce/DC01     2600   Cnf for DCD Data server output
+1170   04:03:15  PA  DC01             con5-ce/DC01     3400   INITIALIZING RPB
+1171   04:03:15  PA  DC01             con5-ce/DC01     3400   INITIALIZING RPB
+1172   04:03:15  PA  DC01             con5-ce/DC01     3400   No IFS connection to disconnect
+1173   04:03:15  PA  DC01             con5-ce/DC01     3400   No IFS connection to disconnect
+1174   04:03:16  PA  DC01             con5-ce/DC01     3400   LINK DESTROY COMPLETE
+1175   04:03:16  PA  DC01             con5-ce/DC01     3400   LINK DESTROY COMPLETE
+1176   04:03:16  W!  DC01             con5-ce/DC01     5247   TLP: HL DCD OFFLINE
+1177   04:03:16  PA  DC01             con5-ce/DC01     5162   TLP: FAILSAFE DSK CNT: 0
+1178   04:03:16  W!  DC01             con5-ce/DC01     2101   MISMATCHED CNF: RNG UGC POL L BUT RCV UGC POL U. Accepting RCV UGC.
+1179   04:03:22  PA  con5-ce          con5-ce          50006  PCI IS UNASSIGNED
+1180   04:03:32  C!  con5-ce          WSS-nmc-ws6      11003  LOST CONTACT WITH WORKSTATION nmc-ws6 BECAUSE:  Did not receive Timestamp from WS
+1181   04:03:38  PA  con5-ce          con5-ce          50006  DC01 IS UNASSIGNED
+1182   04:03:42  PA  con5-ce          con5-ce          50006  AP43 IS UNASSIGNED
+1183   04:03:57  PA  con5-ce          con5-ce          50006  U43 IS UNASSIGNED
+1184   04:04:12  PA  con5-ce          con5-ce          50006  US43 IS UNASSIGNED
+1185   04:04:12  LO  con5-ce          con5-ce          6110   con5-ce:C!:11003, repeated 12 time(s) in 40 seconds.
+1186   04:04:12  PA  con5-ce          con5-ce          52000  Closed connection log file: 132950216.L05.4305000001.0
